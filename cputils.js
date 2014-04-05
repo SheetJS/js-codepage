@@ -1,6 +1,16 @@
-if(typeof cptable === "undefined" && typeof require !== "undefined") var cptable = require('./cptable');
-
-(function(cpt){
+(function(root, factory){
+    "use strict";
+    if(typeof cptable === "undefined" && typeof require !== "undefined"){
+        var cpt = require('./cptable');
+        if (typeof module !== 'undefined' && module.exports){
+            module.exports = factory(cpt);
+        }else{
+            root.cptable = factory(cpt);
+        }
+    }else{
+        throw "cptable not found";
+    }
+}(this, function(cpt){
   var magic = {
     "1200":"utf16le",
     "1201":"utf16be",
@@ -72,6 +82,6 @@ if(typeof cptable === "undefined" && typeof require !== "undefined") var cptable
     return cpt[cp] || magic[cp];
   };
   cpt.utils = { decode: decode, encode: encode, hascp: hascp, magic: magic };
-})(cptable);
+  return cpt;
+}));
 
-if(typeof module !== "undefined") module.exports = cptable;
