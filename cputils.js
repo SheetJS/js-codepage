@@ -372,7 +372,7 @@
           }
           if(tt.length % 2 == 1) tt.length--;
           o64 = decode(1201, tt);
-          for(var l = 0; l < o64.length; ++l) out[k++] = o64[l];
+          for(l = 0; l < o64.length; ++l) out[k++] = o64[l];
         }
         break;
       default: throw new Error("Unsupported magic: " + cp + " " + magic[cp]);
