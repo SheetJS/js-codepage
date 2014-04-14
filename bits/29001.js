@@ -1,0 +1,2 @@
+if(typeof cptable === 'undefined') cptable = {};
+cptable[29001] = (function(){ var d = "ΈΉΊΌΎ°◘○◙♂♀♪♬☼▶◀↕‼¶§£Ώ↑↓→←Ë↔▲▼ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùΑÖÜøαØάΒáíóúñÑβΓγΔδΕεέΖζΗηή│ªÁÂÀΘθ║╗╝ΙΪ┐└º¡¿─΄ãÃ╚╔ιίϊ═ΐΚκΛÊλΜμÍΝν┘┌ΞξΟοόÓßÔΠõÕπΡρÚΣςσΤτΥΫυύϋΰΦφΧχΨ·ψΩωώ".split(""), e = {}; for(var i=0;i!=d.length;++i) if(d[i].charCodeAt(0) !== 0xFFFD)e[d[i]] = i; return {"enc": e, "dec": d }; })();

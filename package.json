@@ -1,6 +1,6 @@
 {
   "name": "codepage",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -9,6 +9,7 @@
   "devDependencies": { "mocha":"" },
   "scripts": { "build": "make js", "test": "make test" },
   "repository": {"type":"git","url":"git://github.com/SheetJS/js-codepage.git"},
+  "config": { "blanket": { "pattern": "[cptable.js,cputils.js]" } },
   "bugs": { "url": "https://github.com/SheetJS/js-codepage/issues" },
   "license": "Apache-2.0",
   "engines": { "node": ">=0.8" }

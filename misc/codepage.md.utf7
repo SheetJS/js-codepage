@@ -1,0 +1,735 @@
++ACM Getting Codepages
+
+The fields of the pages.csv manifest are +AGA-codepage,url,bytes+AGA (SBCS+AD0-1, DBCS+AD0-2)
+
++AGAAYABgAD4-pages.csv
+37,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP037.TXT,1
+437,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP437.TXT,1
+500,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP500.TXT,1
+737,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP737.TXT,1
+775,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP775.TXT,1
+850,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP850.TXT,1
+852,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP852.TXT,1
+855,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP855.TXT,1
+857,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP857.TXT,1
+860,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP860.TXT,1
+861,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP861.TXT,1
+862,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP862.TXT,1
+863,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP863.TXT,1
+864,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP864.TXT,1
+865,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP865.TXT,1
+866,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP866.TXT,1
+869,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP869.TXT,1
+874,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP874.TXT,1
+875,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP875.TXT,1
+932,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP932.TXT,2
+936,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP936.TXT,2
+949,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP949.TXT,2
+950,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP950.TXT,2
+1026,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP1026.TXT,1
+1250,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1250.TXT,1
+1251,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1251.TXT,1
+1252,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1252.TXT,1
+1253,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1253.TXT,1
+1254,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1254.TXT,1
+1255,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1255.TXT,1
+1256,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1256.TXT,1
+1257,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1257.TXT,1
+1258,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1258.TXT,1
++AGAAYABg
+
+Note that the Windows rendering is used for the Mac code pages.  The primary
+difference is the use of the private +AGA-0xF8FF+AGA code (which renders as an Apple
+logo on macs but as garbage on other operating systems).  It may be desirable
+to fall back to the behavior, in which case the files are under APPLE and not
+MICSFT.  Codepages are an absolute pain :/
+
++AGAAYABgAD4-pages.csv
+10000,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/MAC/ROMAN.TXT,1
+10006,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/MAC/GREEK.TXT,1
+10007,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/MAC/CYRILLIC.TXT,1
+10029,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/MAC/LATIN2.TXT,1
+10079,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/MAC/ICELAND.TXT,1
+10081,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/MAC/TURKISH.TXT,1
++AGAAYABg
+
+The numbering scheme for the +AGA-ISO-8859-X+AGA series is +AGA-28590 +- X+AGA:
+
++AGAAYABgAD4-pages.csv
+28591,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-1.TXT,1
+28592,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-2.TXT,1
+28593,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-3.TXT,1
+28594,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-4.TXT,1
+28595,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-5.TXT,1
+28596,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-6.TXT,1
+28597,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-7.TXT,1
+28598,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-8.TXT,1
+28599,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-9.TXT,1
+28600,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-10.TXT,1
+28601,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-11.TXT,1
+28603,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-13.TXT,1
+28604,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-14.TXT,1
+28605,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-15.TXT,1
+28606,http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-16.TXT,1
++AGAAYABg
+
++ACMAIw Generated Codepages
+
+The following codepages are available in .NET on Windows:
+
+- 708   Arabic (ASMO 708)
+- 720   Arabic (Transparent ASMO)+ADs Arabic (DOS)
+- 858   OEM Multilingual Latin 1 +- Euro symbol
+- 870   IBM EBCDIC Multilingual/ROECE (Latin 2)+ADs IBM EBCDIC Multilingual Latin 2
+- 1047  IBM EBCDIC Latin 1/Open System
+- 1140  IBM EBCDIC US-Canada (037 +- Euro symbol)+ADs IBM EBCDIC (US-Canada-Euro)
+- 1141  IBM EBCDIC Germany (20273 +- Euro symbol)+ADs IBM EBCDIC (Germany-Euro)
+- 1142  IBM EBCDIC Denmark-Norway (20277 +- Euro symbol)+ADs IBM EBCDIC (Denmark-Norway-Euro)
+- 1143  IBM EBCDIC Finland-Sweden (20278 +- Euro symbol)+ADs IBM EBCDIC (Finland-Sweden-Euro)
+- 1144  IBM EBCDIC Italy (20280 +- Euro symbol)+ADs IBM EBCDIC (Italy-Euro)
+- 1145  IBM EBCDIC Latin America-Spain (20284 +- Euro symbol)+ADs IBM EBCDIC (Spain-Euro)
+- 1146  IBM EBCDIC United Kingdom (20285 +- Euro symbol)+ADs IBM EBCDIC (UK-Euro)
+- 1147  IBM EBCDIC France (20297 +- Euro symbol)+ADs IBM EBCDIC (France-Euro)
+- 1148  IBM EBCDIC International (500 +- Euro symbol)+ADs IBM EBCDIC (International-Euro)
+- 1149  IBM EBCDIC Icelandic (20871 +- Euro symbol)+ADs IBM EBCDIC (Icelandic-Euro)
+- 1361  Korean (Johab)
+- 10001 Japanese (Mac)
+- 10002 MAC Traditional Chinese (Big5)+ADs Chinese Traditional (Mac)
+- 10003 Korean (Mac)
+- 10004 Arabic (Mac)
+- 10005 Hebrew (Mac)
+- 10008 MAC Simplified Chinese (GB 2312)+ADs Chinese Simplified (Mac)
+- 10010 Romanian (Mac)
+- 10017 Ukrainian (Mac)
+- 10021 Thai (Mac)
+- 10082 Croatian (Mac)
+- 20000 CNS Taiwan+ADs Chinese Traditional (CNS)
+- 20001 TCA Taiwan
+- 20002 Eten Taiwan+ADs Chinese Traditional (Eten)
+- 20003 IBM5550 Taiwan
+- 20004 TeleText Taiwan
+- 20005 Wang Taiwan
+- 20105 IA5 (IRV International Alphabet No. 5, 7-bit)+ADs Western European (IA5)
+- 20106 IA5 German (7-bit)
+- 20107 IA5 Swedish (7-bit)
+- 20108 IA5 Norwegian (7-bit)
+- 20261 T.61
+- 20269 ISO 6937 Non-Spacing Accent
+- 20273 IBM EBCDIC Germany
+- 20277 IBM EBCDIC Denmark-Norway
+- 20278 IBM EBCDIC Finland-Sweden
+- 20280 IBM EBCDIC Italy
+- 20284 IBM EBCDIC Latin America-Spain
+- 20285 IBM EBCDIC United Kingdom
+- 20290 IBM EBCDIC Japanese Katakana Extended
+- 20297 IBM EBCDIC France
+- 20420 IBM EBCDIC Arabic
+- 20423 IBM EBCDIC Greek
+- 20424 IBM EBCDIC Hebrew
+- 20833 IBM EBCDIC Korean Extended
+- 20838 IBM EBCDIC Thai
+- 20866 Russian (KOI8-R)+ADs Cyrillic (KOI8-R)
+- 20871 IBM EBCDIC Icelandic
+- 20880 IBM EBCDIC Cyrillic Russian
+- 20905 IBM EBCDIC Turkish
+- 20924 IBM EBCDIC Latin 1/Open System (1047 +- Euro symbol)
+- 20932 Japanese (JIS 0208-1990 and 0212-1990)
+- 20936 Simplified Chinese (GB2312)+ADs Chinese Simplified (GB2312-80)
+- 20949 Korean Wansung
+- 21025 IBM EBCDIC Cyrillic Serbian-Bulgarian
+- 21866 Ukrainian (KOI8-U)+ADs Cyrillic (KOI8-U)
+- 29001 Europa 3
+- 38598 ISO 8859-8 Hebrew+ADs Hebrew (ISO-Logical)
+- 50220 ISO 2022 Japanese with no halfwidth Katakana+ADs Japanese (JIS)
+- 50221 ISO 2022 Japanese with halfwidth Katakana+ADs Japanese (JIS-Allow 1 byte Kana)
+- 50222 ISO 2022 Japanese JIS X 0201-1989+ADs Japanese (JIS-Allow 1 byte Kana - SO/SI)
+- 50225 ISO 2022 Korean
+- 50227 ISO 2022 Simplified Chinese+ADs Chinese Simplified (ISO 2022)
+- 51932 EUC Japanese
+- 51936 EUC Simplified Chinese+ADs Chinese Simplified (EUC)
+- 51949 EUC Korean
+- 52936 HZ-GB2312 Simplified Chinese+ADs Chinese Simplified (HZ)
+- 54936 Windows XP and later: GB18030 Simplified Chinese (4 byte)+ADs Chinese Simplified (GB18030)
+- 57002 ISCII Devanagari
+- 57003 ISCII Bengali
+- 57004 ISCII Tamil
+- 57005 ISCII Telugu
+- 57006 ISCII Assamese
+- 57007 ISCII Oriya
+- 57008 ISCII Kannada
+- 57009 ISCII Malayalam
+- 57010 ISCII Gujarati
+- 57011 ISCII Punjabi
+
++AGAAYABgAD4-pages.csv
+708,,1
+720,,1
+858,,1
+870,,1
+1047,,1
+1140,,1
+1141,,1
+1142,,1
+1143,,1
+1144,,1
+1145,,1
+1146,,1
+1147,,1
+1148,,1
+1149,,1
+1361,,2
+10001,,2
+10002,,2
+10003,,2
+10004,,1
+10005,,1
+10008,,2
+10010,,1
+10017,,1
+10021,,1
+10082,,1
+20000,,2
+20001,,2
+20002,,2
+20003,,2
+20004,,2
+20005,,2
+20105,,1
+20106,,1
+20107,,1
+20108,,1
+20261,,2
+20269,,1
+20273,,1
+20277,,1
+20278,,1
+20280,,1
+20284,,1
+20285,,1
+20290,,1
+20297,,1
+20420,,1
+20423,,1
+20424,,1
+20833,,1
+20838,,1
+20866,,1
+20871,,1
+20880,,1
+20905,,1
+20924,,1
+20932,,2
+20936,,2
+20949,,2
+21025,,1
+21866,,1
+29001,,1
+38598,,1
+50220,,2
+50221,,2
+50222,,2
+50225,,2
+50227,,2
+51932,,2
+51936,,2
+51949,,2
+52936,,2
+54936,,2
+57002,,2
+57003,,2
+57004,,2
+57005,,2
+57006,,2
+57007,,2
+57008,,2
+57009,,2
+57010,,2
+57011,,2
++AGAAYABg
+
+The known missing codepages are enumerated in the README.
+
++ACMAIw Building Notes
+
+The script +AGA-make.sh+AGA (described later) will get these files and massage the data
+(printing code-unicode pairs).  The eventual tables are dropped in the paths
++AGA./codepages/+ADw-CODEPAGE+AD4.TBL+AGA.  For example, the last 10 lines of +AGA-10000.TBL+AGA are
+
++AGAAYABgAD4
+0xF6	0x02C6
+0xF7	0x02DC
+0xF8	0x00AF
+0xF9	0x02D8
+0xFA	0x02D9
+0xFB	0x02DA
+0xFC	0x00B8
+0xFD	0x02DD
+0xFE	0x02DB
+0xFF	0x02C7
++AGAAYABg
+
+which implies that code 0xF6 is +AGA-String.fromCharCode(0x02C6)+AGA and vice versa.
+
++ACMAIw Windows-dependent build step
+
+To build the sources on windows, consult +AGA-dotnet/MakeEncoding.cs+AGA.
+
+After saving the standard output to +AGA-out+AGA, a simple awk script (+AGA-dotnet.sh+AGA) takes care of the rest:
+
++AGAAYABgAD4-dotnet.sh
++ACMAIQ-/bin/bash
+if +AFs +ACE -e dotnet/out +AF0AOw then exit+ADs fi
++ADw-dotnet/out tr -s ' ' '+AFw-t' +AHw awk 'NF+AD4-2 +AHs-if(outfile) close(outfile)+ADs outfile+AD0AIg-codepages/+ACI +ACQ-1 +ACI.TBL+ACIAfQ NF+AD0APQ-2 +AHs-print +AD4 outfile+AH0'
++AGAAYABg
+
++ACM Building the script
+
++AGA-make.njs+AGA takes a codepage argument, reads the corresponding table file and
+generates JS code for encoding and decoding:
+
++ACMAIw Raw Codepages
+
++AGAAYABgAD4-make.njs
++ACMAIQ-/usr/bin/env node
+var argv +AD0 process.argv.slice(1), fs +AD0 require('fs')+ADs
+if(argv.length +ADw 2) +AHs
+    console.error(+ACI-usage: make.njs +ADw-codepage+AF8-index+AD4 +AFs-variable+AF0AIg)+ADs
+    process.exit(22)+ADs /+ACo EINVAL +ACo-/
++AH0
+
+var cp +AD0 argv+AFs-1+AF0AOw
+var jsvar +AD0 argv+AFs-2+AF0 +AHwAfA +ACI-cptable+ACIAOw
+var x +AD0 fs.readFileSync(+ACI-codepages/+ACI +- cp +- +ACI.TBL+ACI,+ACI-utf8+ACI)+ADs
+var maxcp +AD0 0+ADs
+
+var y +AD0 x.split(+ACIAXA-n+ACI).map(function(z) +AHs
+    var w +AD0 z.split(+ACIAXA-t+ACI)+ADs
+    if(w.length +ADw 2) return w+ADs
+    return +AFs-Number(w+AFs-0+AF0), Number(w+AFs-1+AF0)+AF0AOw
++AH0).filter(function(z) +AHs return z.length +AD4 1+ADs +AH0)+ADs
++AGAAYABg
+
+The DBCS and SBCS code generation strategies are different.  The maximum code is
+used to distinguish (max 0xFF for SBCS).
+
++AGAAYABg
+for(var i +AD0 0+ADs i +ACEAPQ y.length+ADs +-+-i) if(y+AFs-i+AF0AWw-0+AF0 +AD4 maxcp) maxcp +AD0 y+AFs-i+AF0AWw-0+AF0AOw
+
+var enc +AD0 +AHsAfQ, dec +AD0 (maxcp +ADw 256 ? +AFsAXQ : +AHsAfQ)+ADs
+for(var i +AD0 0+ADs i +ACEAPQ y.length+ADs +-+-i) +AHs
+    dec+AFs-y+AFs-i+AF0AWw-0+AF0AXQ +AD0 String.fromCharCode(y+AFs-i+AF0AWw-1+AF0)+ADs
+    enc+AFs-String.fromCharCode(y+AFs-i+AF0AWw-1+AF0)+AF0 +AD0 y+AFs-i+AF0AWw-0+AF0AOw
++AH0
+
+var odec, oenc, outstr+ADs
+if(maxcp +ADw 256) +AHs
++AGAAYABg
+
+The unicode character +AGA-0xFFFD+AGA (REPLACEMENT CHARACTER) is used as a placeholder
+for characters that are not specified in the map (for example, +AGA-0xF0+AGA is not in
+code page 10000).
+
+For SBCS, the idea is to embed a raw string with the contents of the 256 codes.
+The +AGA-dec+AGA field is merely a split of the string, and +AGA-enc+AGA is an eversion:
+
++AGAAYABg
+    for(var i +AD0 0+ADs i +ACEAPQ 256+ADs +-+-i) if(typeof dec+AFs-i+AF0 +AD0APQA9 +ACI-undefined+ACI) dec+AFs-i+AF0 +AD0 String.fromCharCode(0xFFFD)+ADs
+    odec +AD0 JSON.stringify(dec.join(+ACIAIg)) +- '.split(+ACIAIg)'
+    outstr +AD0 '(function()+AHs var d +AD0 ' +- odec +- ', e +AD0 +AHsAfQA7 for(var i+AD0-0+ADs-i+ACEAPQ-d.length+ADsAKwAr-i) if(d+AFs-i+AF0.charCodeAt(0) +ACEAPQA9 0xFFFD)e+AFs-d+AFs-i+AF0AXQ +AD0 i+ADs return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: d +AH0AOw +AH0)()+ADs'+ADs
++AH0 else +AHs
++AGAAYABg
+
+DBCS is similar, except that the space is sliced into 256-byte chunks (strings
+are only generated for those high-bytes represented in the codepage).
+
+The strategy is to construct an array-of-arrays so that +AGA-dd+AFs-high+AF0AWw-low+AF0AYA is the
+character associated with the code.  This array is combined at runtime to yield
+the complete decoding object (and the encoding object is an eversion):
+
++AGAAYABg
+    var dd +AD0 +AFsAXQA7
+    for(var i in dec) if(dec.hasOwnProperty(i)) +AHs
+        if(typeof dd+AFs-i +AD4APg 8+AF0 +AD0APQA9 +ACI-undefined+ACI) dd+AFs-i +AD4APg 8+AF0 +AD0 +AFsAXQA7
+        dd+AFs-i +AD4APg 8+AF0AWw-i +ACU 256+AF0 +AD0 dec+AFs-i+AF0AOw
+    +AH0
+    outstr +AD0 '(function()+AHs var d +AD0 +AHsAfQ, e +AD0 +AHsAfQ, D +AD0 +AFsAXQ, j+ADsAXA-n'+ADs
+    for(var i +AD0 0+ADs i +ACEAPQ 256+ADs +-+-i) if(dd+AFs-i+AF0) +AHs
+        for(var j +AD0 0+ADs j +ACEAPQ 256+ADs +-+-j) if(typeof dd+AFs-i+AF0AWw-j+AF0 +AD0APQA9 +ACI-undefined+ACI) dd+AFs-i+AF0AWw-j+AF0 +AD0 String.fromCharCode(0xFFFD)+ADs
+        outstr +-+AD0 'D+AFs' +- i +- '+AF0 +AD0 ' +- JSON.stringify(dd+AFs-i+AF0.join(+ACIAIg)) +- '.split(+ACIAIg)+ADsAXA-n'+ADs
+        outstr +-+AD0 'for(j +AD0 0+ADs j +ACEAPQ D+AFs' +- i +- '+AF0.length+ADs +-+-j) if(D+AFs' +- i +- '+AF0AWw-j+AF0.charCodeAt(0) +ACEAPQA9 0xFFFD) +AHs e+AFs-D+AFs' +- i +- '+AF0AWw-j+AF0AXQ +AD0 ' +- i +- ' +ACo 256 +- j+ADs d+AFs' +- i +- ' +ACo 256 +- j+AF0 +AD0 D+AFs' +- i +- '+AF0AWw-j+AF0AOwB9AFw-n'
+    +AH0
+    outstr +-+AD0 'return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: d +AH0AOw +AH0)()+ADs'+ADs
++AH0
+console.log(jsvar +- +ACIAWwAi +- cp +- +ACIAXQ +AD0 +ACI +- outstr)+ADs
+
++AGAAYABg
+
++AGA-make.sh+AGA generates the tables used by +AGA-make.njs+AGA.  The raw unicode TXT files
+are columnar: +AGA-code unicode +ACM-comments+AGA.  For example, the last 10 lines of the
+text file ROMAN.TXT (for CP 10000) are:
+
++AGAAYABgAD4
+0xF6	0x02C6	+ACM-MODIFIER LETTER CIRCUMFLEX ACCENT
+0xF7	0x02DC	+ACM-SMALL TILDE
+0xF8	0x00AF	+ACM-MACRON
+0xF9	0x02D8	+ACM-BREVE
+0xFA	0x02D9	+ACM-DOT ABOVE
+0xFB	0x02DA	+ACM-RING ABOVE
+0xFC	0x00B8	+ACM-CEDILLA
+0xFD	0x02DD	+ACM-DOUBLE ACUTE ACCENT
+0xFE	0x02DB	+ACM-OGONEK
+0xFF	0x02C7	+ACM-CARON
++AGAAYABg
+
+In processing the data, the comments (after the +AGAAIwBg) are stripped and undefined
+elements (like +AGA-0x7F+AGA for CP 10000) are removed.
+
++AGAAYABgAD4-make.sh
++ACMAIQ-/bin/bash
+INFILE+AD0AJAB7-1:-pages.csv+AH0
+OUTFILE+AD0AJAB7-2:-cptable.js+AH0
+JSVAR+AD0AJAB7-3:-cptable+AH0
+
+mkdir -p codepages bits
+rm -f +ACQ-OUTFILE +ACQ-OUTFILE.tmp
+echo +ACI-/+ACo +ACQ-OUTFILE (C) 2013-2014 SheetJS -- http://sheetjs.com +ACo-/+ACI +AD4 +ACQ-OUTFILE.tmp
+echo +ACI-/+ACo-jshint -W100 +ACo-/+ACI +AD4APg +ACQ-OUTFILE.tmp
+echo +ACI-var +ACQ-JSVAR +AD0 +AHsAfQA7ACI +AD4APg +ACQ-OUTFILE.tmp
+if +AFs -e dotnet.sh +AF0AOw then bash dotnet.sh+ADs fi
+awk -F, '+AHs-print +ACQ-1, +ACQ-2, +ACQ-3+AH0' +ACQ-INFILE +AHw while read cp url cptype+ADs do
+    echo +ACQ-cp +ACQ-url
+    if +AFs +ACE -e codepages/+ACQ-cp.TBL +AF0AOw then
+        curl +ACQ-url +AHw sed 's/+ACM.+ACo-//g' +AHw awk 'NF+AD0APQ-2' +AD4 codepages/+ACQ-cp.TBL
+    fi
+    echo +ACI-if(typeof +ACQ-JSVAR +AD0APQA9 'undefined') +ACQ-JSVAR +AD0 +AHsAfQA7ACI +AD4 bits/+ACQ-cp.js.tmp
+    node make.njs +ACQ-cp +ACQ-JSVAR +AHw tee -a bits/+ACQ-cp.js.tmp +AD4APg +ACQ-OUTFILE.tmp
+    sed 's/+ACIAXA(+AFs-0-9+AF0AKwBc)+ACI:/+AFw-1:/g' +ADw-bits/+ACQ-cp.js.tmp +AD4-bits/+ACQ-cp.js
+    rm -f bits/+ACQ-cp.js.tmp
+done
+echo +ACI-if (typeof module +ACEAPQA9 'undefined' +ACYAJg module.exports) module.exports +AD0 +ACQ-JSVAR+ADsAIg +AD4APg +ACQ-OUTFILE.tmp
+sed 's/+ACIAXA(+AFs-0-9+AF0AKwBc)+ACI:/+AFw-1:/g' +ADwAJA-OUTFILE.tmp +AD4AJA-OUTFILE
+rm -f +ACQ-OUTFILE.tmp
++AGAAYABg
+
++ACMAIw Utilities
+
+The encode and decode functions are kept in a separate script (cputils.js).
+
+Both encode and decode deal with data represented as:
+
+- String (encode expects JS string, decode interprets UCS2 chars as codes)
+- Array (encode expects array of JS String characters, decode expects numbers)
+- Buffer (encode expects UTF-8 string, decode expects codepoints/bytes).
+
+The +AGA-ofmt+AGA variable controls +AGA-encode+AGA output (+AGA-str+AGA, +AGA-arr+AGA respectively)
+while the input format is automatically determined.
+
++ACM Tests
+
+The tests include JS validity tests (requiring or eval'ing code):
+
++AGAAYABgAD4-test.js
+var fs +AD0 require('fs'), assert +AD0 require('assert'), vm +AD0 require('vm')+ADs
+var cptable, sbcs+ADs
+describe('source', function() +AHs
+  it('should load node', function() +AHs cptable +AD0 require('./')+ADs +AH0)+ADs
+  it('should load sbcs', function() +AHs sbcs +AD0 require('./sbcs')+ADs +AH0)+ADs
+  it('should load excel', function() +AHs excel +AD0 require('./cpexcel')+ADs +AH0)+ADs
+  it('should process bits', function() +AHs
+    var files +AD0 fs.readdirSync('bits').filter(function(x)+AHs-return x.substr(-3)+AD0APQAi.js+ACIAOwB9)+ADs
+    files.forEach(function(x) +AHs
+      vm.runInThisContext(fs.readFileSync('./bits/' +- x))+ADs
+    +AH0)+ADs
+  +AH0)+ADs
++AH0)+ADs
++AGAAYABg
+
+The README tests verify the snippets in the README:
+
++AGAAYABgAD4-test.js
+describe('README', function() +AHs
+  var readme +AD0 function() +AHs
+    var unicode+AF8-cp10000+AF8-255 +AD0 cptable+AFs-10000+AF0.dec+AFs-255+AF0AOw // +Asc
+    assert.equal(unicode+AF8-cp10000+AF8-255, +ACICxwAi)+ADs
+
+    var cp10000+AF8-711 +AD0 cptable+AFs-10000+AF0.enc+AFs-String.fromCharCode(711)+AF0AOw // 255
+    assert.equal(cp10000+AF8-711, 255)+ADs
+
+    var b1 +AD0 +AFs-0xbb,0xe3,0xd7,0xdc+AF0AOw
+    var +bEdgOw +AD0 cptable.utils.decode(936, b1)+ADs
+    var buf +AD0  cptable.utils.encode(936,  +bEdgOw)+ADs
+    assert.equal(+bEdgOw,+ACJsR2A7ACI)+ADs
+    assert.equal(buf.length, 4)+ADs
+    for(var i +AD0 0+ADs i +ACEAPQ 4+ADs +-+-i) assert.equal(b1+AFs-i+AF0, buf+AFs-i+AF0)+ADs
+  +AH0AOw
+  it('should be correct', function() +AHs
+    cptable.utils.cache.encache()+ADs
+    readme()+ADs
+    cptable.utils.cache.decache()+ADs
+    readme()+ADs
+  +AH0)+ADs
++AH0)+ADs
++AGAAYABg
+
+The consistency tests make sure that encoding and decoding are pseudo inverses:
+
++AGAAYABgAD4-test.js
+describe('consistency', function() +AHs
+  cptable +AD0 require('./')+ADs
+  U +AD0 cptable.utils+ADs
+  var chk +AD0 function(cptable, cacheit) +AHs return function(x) +AHs
+    it('should consistently process CP ' +- x, function() +AHs
+      var cp +AD0 cptable+AFs-x+AF0, D +AD0 cp.dec, E +AD0 cp.enc+ADs
+      if(cacheit) cptable.utils.cache.encache()+ADs
+      else cptable.utils.cache.decache()+ADs
+      Object.keys(D).forEach(function(d) +AHs
+        if(E+AFs-D+AFs-d+AF0AXQ +ACEAPQ d) +AHs
+          if(typeof E+AFs-D+AFs-d+AF0AXQ +ACEAPQA9 +ACI-undefined+ACI) return+ADs
+          if(D+AFs-d+AF0.charCodeAt(0) +AD0APQ 0xFFFD) return+ADs
+          if(D+AFs-E+AFs-D+AFs-d+AF0AXQBd +AD0APQA9 D+AFs-d+AF0) return+ADs
+          throw new Error(x +- +ACI e.d+AFsAIg +- d +- +ACIAXQ +AD0 +ACI +- E+AFs-D+AFs-d+AF0AXQ +- +ACIAOw d+AFsAIg +- d +- +ACIAXQA9ACI +- D+AFs-d+AF0 +- +ACIAOw d.e.d+AFsAIg +- d +- +ACIAXQ +AD0 +ACI +- D+AFs-E+AFs-D+AFs-d+AF0AXQBd)+ADs
+        +AH0
+      +AH0)+ADs
+      Object.keys(E).forEach(function(e) +AHs
+        if(D+AFs-E+AFs-e+AF0AXQ +ACEAPQ e) +AHs
+          throw new Error(x +- +ACI d.e+AFsAIg +- e +- +ACIAXQ +AD0 +ACI +- D+AFs-E+AFs-e+AF0AXQ +- +ACIAOw e+AFsAIg +- e +- +ACIAXQA9ACI +- E+AFs-e+AF0 +- +ACIAOw e.d.e+AFsAIg +- e +- +ACIAXQ +AD0 +ACI +- E+AFs-D+AFs-E+AFs-e+AF0AXQBd)+ADs
+        +AH0
+      +AH0)+ADs
+      var corpus +AD0 +AFsAIg-foobar+ACIAXQA7
+      corpus.forEach(function(w)+AHs
+        assert.equal(U.decode(x,U.encode(x,w)),w)+ADs
+      +AH0)+ADs
+      cptable.utils.cache.encache()+ADs
+    +AH0)+ADs
+  +AH0AOw +AH0AOw
+  Object.keys(cptable).filter(function(w) +AHs return w +ACEAPQ +ACI-utils+ACIAOw +AH0).forEach(chk(cptable, true))+ADs
+  Object.keys(cptable).filter(function(w) +AHs return w +ACEAPQ +ACI-utils+ACIAOw +AH0).forEach(chk(cptable, false))+ADs
++AH0)+ADs
++AGAAYABg
+
+The next tests look at possible entry conditions:
+
++AGAAYABg
+describe('entry conditions', function() +AHs
+  it('should fail to load utils if cptable unavailable', function() +AHs
+    var sandbox +AD0 +AHsAfQA7
+    var ctx +AD0 vm.createContext(sandbox)+ADs
+    assert.throws(function() +AHs
+      vm.runInContext(fs.readFileSync('cputils.js','utf8'),ctx)+ADs
+    +AH0)+ADs
+  +AH0)+ADs
+  it('should load utils if cptable is available', function() +AHs
+    var sandbox +AD0 +AHsAfQA7
+    var ctx +AD0 vm.createContext(sandbox)+ADs
+    vm.runInContext(fs.readFileSync('cpexcel.js','utf8'),ctx)+ADs
+    vm.runInContext(fs.readFileSync('cputils.js','utf8'),ctx)+ADs
+  +AH0)+ADs
+  var chken +AD0 function(cp, i) +AHs
+    var c +AD0 function(cp, i, e) +AHs
+      var str +AD0 cptable.utils.encode(cp,i,e)+ADs
+      var arr +AD0 cptable.utils.encode(cp,i.split(+ACIAIg),e)+ADs
+      assert.deepEqual(str,arr)+ADs
+      if(typeof Buffer +AD0APQA9 'undefined') return+ADs
+      var buf +AD0 cptable.utils.encode(cp,new Buffer(i),e)+ADs
+      assert.deepEqual(str,buf)+ADs
+    +AH0AOw
+    cptable.utils.cache.encache()+ADs
+    c(cp,i)+ADs
+    c(cp,i,'buf')+ADs
+    c(cp,i,'arr')+ADs
+    c(cp,i,'str')+ADs
+    cptable.utils.cache.decache()+ADs
+    c(cp,i)+ADs
+    c(cp,i,'buf')+ADs
+    c(cp,i,'arr')+ADs
+    c(cp,i,'str')+ADs
+  +AH0AOw
+  describe('encode', function() +AHs
+    it('CP  1252 : sbcs', function() +AHs chken(1252,+ACI-foobar+ACI)+ADs +AH0)+ADs
+    it('CP   708 : sbcs', function() +AHs chken(708,+ACIGKg and +Bis smiley faces+ACI)+ADsAfQ)+ADs
+    it('CP   936 : dbcs', function() +AHs chken(936, +ACKP2WYvTi1lh1tXeyZtS4vVACI)+ADsAfQ)+ADs
+  +AH0)+ADs
+  var chkde +AD0 function(cp, i) +AHs
+    var c +AD0 function(cp, i) +AHs
+      var s+ADs
+      if(typeof Buffer +ACEAPQA9 'undefined' +ACYAJg i instanceof Buffer) s +AD0 +AFsAXQ.map.call(i, function(s)+AHs-return String.fromCharCode(s)+ADs +AH0)+ADs
+      else s+AD0(i.map) ? i.map(function(s)+AHs-return String.fromCharCode(s)+ADs +AH0) : i+ADs
+      var str +AD0 cptable.utils.decode(cp,i)+ADs
+      var arr +AD0 cptable.utils.decode(cp,s.join?s.join(+ACIAIg):s)+ADs
+      assert.deepEqual(str,arr)+ADs
+      if(typeof Buffer +AD0APQA9 'undefined') return+ADs
+      var buf +AD0 cptable.utils.decode(cp,new Buffer(i))+ADs
+      assert.deepEqual(str,buf)+ADs
+    +AH0AOw
+    cptable.utils.cache.encache()+ADs
+    c(cp,i)+ADs
+    cptable.utils.cache.decache()+ADs
+    c(cp,i)+ADs
+  +AH0AOw
+  describe('decode', function() +AHs
+    it('CP  1252 : sbcs', function() +AHs chkde(1252,+AFs-0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72+AF0)+ADs +AH0)+ADs /+ACo +ACI-foobar+ACI +ACo-/
+    if(typeof Buffer +ACEAPQA9 'undefined') it('CP   708 : sbcs', function() +AHs chkde(708, new Buffer(+AFs-0xca, 0x20, 0x61, 0x6e, 0x64, 0x20, 0xcb, 0x20, 0x73, 0x6d, 0x69, 0x6c, 0x65, 0x79, 0x20, 0x66, 0x61, 0x63, 0x65, 0x73+AF0))+ADs +AH0)+ADs /+ACo (+ACIGKg and +Bis smiley faces+ACI) +ACo-/
+    it('CP   936 : dbcs', function() +AHs chkde(936, +AFs-0xd5, 0xe2, 0xca, 0xc7, 0xd6, 0xd0, 0xce, 0xc4, 0xd7, 0xd6, 0xb7, 0xfb, 0xb2, 0xe2, 0xca, 0xd4+AF0)+ADsAfQ)+ADs /+ACo +ACKP2WYvTi1lh1tXeyZtS4vVACI +ACo-/
+  +AH0)+ADs
++AH0)+ADs
++AGAAYABg
+
+The +AGA-testfile+AGA helper function reads a file and compares to node's read facilities:
+
++AGAAYABgAD4-test.js
+function testfile(f,cp,type,skip) +AHs
+  var d +AD0 fs.readFileSync(f)+ADs
+  var x +AD0 fs.readFileSync(f, type)+ADs
+  var a +AD0 x.split(+ACIAIg)+ADs
+  var chk +AD0 function(cp) +AHs
+    var y +AD0 cptable.utils.decode(cp, d)+ADs
+    assert.equal(x,y)+ADs
+    var z +AD0 cptable.utils.encode(cp, x)+ADs
+    if(z.length +ACEAPQ d.length) throw new Error(f +- +ACI +ACI +- JSON.stringify(z) +- +ACI +ACEAPQ +ACI +- JSON.stringify(d) +- +ACI : +ACI +- z.length +- +ACI +ACI +- d.length)+ADs
+    for(var i +AD0 0+ADs i +ACEAPQ d.length+ADs +-+-i) if(d+AFs-i+AF0 +ACEAPQA9 z+AFs-i+AF0) throw new Error(+ACIAIg +- i +- +ACI +ACI +- d+AFs-i+AF0 +- +ACIAIQA9ACI +- z+AFs-i+AF0)+ADs
+    if(skip) return+ADs
+    z +AD0 cptable.utils.encode(cp, a)+ADs
+    if(z.length +ACEAPQ d.length) throw new Error(f +- +ACI +ACI +- JSON.stringify(z) +- +ACI +ACEAPQ +ACI +- JSON.stringify(d) +- +ACI : +ACI +- z.length +- +ACI +ACI +- d.length)+ADs
+    for(var i +AD0 0+ADs i +ACEAPQ d.length+ADs +-+-i) if(d+AFs-i+AF0 +ACEAPQA9 z+AFs-i+AF0) throw new Error(+ACIAIg +- i +- +ACI +ACI +- d+AFs-i+AF0 +- +ACIAIQA9ACI +- z+AFs-i+AF0)+ADs
+  +AH0
+  cptable.utils.cache.encache()+ADs
+  chk(cp)+ADs
+  if(skip) return+ADs
+  cptable.utils.cache.decache()+ADs
+  chk(cp)+ADs
+  cptable.utils.cache.encache()+ADs
++AH0
++AGAAYABg
+
+The +AGA-utf8+AGA tests verify utf8 encoding of the actual JS sources:
+
++AGAAYABgAD4-test.js
+describe('node natives', function() +AHs
+  var node +AD0 +AFsAWw-65001, 'utf8',1+AF0, +AFs-1200, 'utf16le',1+AF0, +AFs-20127, 'ascii',0+AF0AXQA7
+  var unicodefiles +AD0 +AFs'codepage.md','README.md','cptable.js'+AF0AOw
+  var asciifiles +AD0 +AFs'cputils.js'+AF0AOw
+  node.forEach(function(w) +AHs
+    describe(w+AFs-1+AF0, function() +AHs
+      cptable +AD0 require('./')+ADs
+      asciifiles.forEach(function(f) +AHs
+        it('should process ' +- f, function() +AHs testfile('./misc/'+-f+-'.'+-w+AFs-1+AF0,w+AFs-0+AF0,w+AFs-1+AF0)+ADs +AH0)+ADs
+      +AH0)+ADs
+      if(+ACE-w+AFs-2+AF0) return+ADs
+      unicodefiles.forEach(function(f) +AHs
+        it('should process ' +- f, function() +AHs testfile('./misc/'+-f+-'.'+-w+AFs-1+AF0,w+AFs-0+AF0,w+AFs-1+AF0)+ADs +AH0)+ADs
+      +AH0)+ADs
+      if(w+AFs-1+AF0 +AD0APQA9 'utf8') it('should process bits', function() +AHs
+        var files +AD0 fs.readdirSync('bits').filter(function(x)+AHs-return x.substr(-3)+AD0APQAi.js+ACIAOwB9)+ADs
+        files.forEach(function(f) +AHs testfile('./bits/' +- f,w+AFs-0+AF0,w+AFs-1+AF0,true)+ADs +AH0)+ADs
+      +AH0)+ADs
+    +AH0)+ADs
+  +AH0)+ADs
++AH0)+ADs
++AGAAYABg
+
+The utf+ACo and ascii tests attempt to test other magic formats:
+
++AGAAYABgAD4-test.js
+var m +AD0 cptable.utils.magic+ADs
+function cmp(x,z) +AHs
+  assert.equal(x.length, z.length)+ADs
+  for(var i +AD0 0+ADs i +ACEAPQ z.length+ADs +-+-i) assert.equal(i+-+ACI-/+ACIAKw-x.length+-+ACIAIgAr-x+AFs-i+AF0, i+-+ACI-/+ACIAKw-z.length+-+ACIAIgAr-z+AFs-i+AF0)+ADs
++AH0
+Object.keys(m).forEach(function(t)+AHs-if(t +ACEAPQ 16969) describe(m+AFs-t+AF0, function() +AHs
+  it(+ACI-should process codepage.md.+ACI +- m+AFs-t+AF0, fs.existsSync('./misc/codepage.md.' +- m+AFs-t+AF0) ?
+    function() +AHs
+      var b +AD0 fs.readFileSync('./misc/codepage.md.utf8', +ACI-utf8+ACI)+ADs
+      if(m+AFs-t+AF0 +AD0APQA9 +ACI-ascii+ACI) b +AD0 b.replace(/+AFsAXA-u0080-+AFw-uffff+AF0AKg-/g,+ACIAIg)+ADs
+      var x +AD0 fs.readFileSync('./misc/codepage.md.' +- m+AFs-t+AF0)+ADs
+      var y, z+ADs
+      cptable.utils.cache.encache()+ADs
+      y +AD0 cptable.utils.decode(t, x)+ADs
+      assert.equal(y,b)+ADs
+      z +AD0 cptable.utils.encode(t, y)+ADs
+      if(t +ACEAPQ 65000) cmp(x,z)+ADs
+      else +AHs assert.equal(y, cptable.utils.decode(t, z))+ADs +AH0
+      cptable.utils.cache.decache()+ADs
+      y +AD0 cptable.utils.decode(t, x)+ADs
+      assert.equal(y,b)+ADs
+      z +AD0 cptable.utils.encode(t, y)+ADs
+      if(t +ACEAPQ 65000) cmp(x,z)+ADs
+      else +AHs assert.equal(y, cptable.utils.decode(t, z))+ADs +AH0
+      cptable.utils.cache.encache()+ADs
+    +AH0
+  : null)+ADs
+  it(+ACI-should process README.md.+ACI +- m+AFs-t+AF0, fs.existsSync('./misc/README.md.' +- m+AFs-t+AF0) ?
+    function() +AHs
+      var b +AD0 fs.readFileSync('./misc/README.md.utf8', +ACI-utf8+ACI)+ADs
+      if(m+AFs-t+AF0 +AD0APQA9 +ACI-ascii+ACI) b +AD0 b.replace(/+AFsAXA-u0080-+AFw-uffff+AF0AKg-/g,+ACIAIg)+ADs
+      var x +AD0 fs.readFileSync('./misc/README.md.' +- m+AFs-t+AF0)+ADs
+      x +AD0 +AFsAXQ.slice.call(x)+ADs
+      cptable.utils.cache.encache()+ADs
+      var y +AD0 cptable.utils.decode(t, x)+ADs
+      assert.equal(y,b)+ADs
+      cptable.utils.cache.decache()+ADs
+      var y +AD0 cptable.utils.decode(t, x)+ADs
+      assert.equal(y,b)+ADs
+      cptable.utils.cache.encache()+ADs
+    +AH0
+  : null)+ADs
++AH0)+ADsAfQ)+ADs
++AGAAYABg
+
+The codepage +AGA-6969+AGA is not defined, so operations should fail:
+
++AGAAYABgAD4-test.js
+describe('failures', function() +AHs
+  it('should fail to find CP 6969', function() +AHs
+    assert.throws(function()+AHs-cptable+AFs-6969+AF0.dec+AH0)+ADs
+    assert.throws(function()+AHs-cptable+AFs-6969+AF0.enc+AH0)+ADs
+  +AH0)+ADs
+  it('should fail using utils', function() +AHs
+    assert(+ACE-cptable.utils.hascp(6969))+ADs
+    assert.throws(function()+AHs-return cptable.utils.encode(6969, +ACI-foobar+ACI)+ADs +AH0)+ADs
+    assert.throws(function()+AHs-return cptable.utils.decode(6969, +AFs-0x20+AF0)+ADs +AH0)+ADs
+  +AH0)+ADs
+  it('should fail with black magic', function() +AHs
+    assert(cptable.utils.hascp(16969))+ADs
+    assert.throws(function()+AHs-return cptable.utils.encode(16969, +ACI-foobar+ACI)+ADs +AH0)+ADs
+    assert.throws(function()+AHs-return cptable.utils.decode(16969, +AFs-0x20+AF0)+ADs +AH0)+ADs
+  +AH0)+ADs
+  it('should fail when presented with invalid char codes', function() +AHs
+    assert.throws(function()+AHs-cptable.utils.cache.decache()+ADs return cptable.utils.encode(20127, +AFs-String.fromCharCode(0xAA)+AF0)+ADsAfQ)+ADs
+  +AH0)+ADs
++AH0)+ADs
++AGAAYABg
+
++ACM Nitty Gritty
+
++AGAAYABg-json+AD4-package.json
++AHs
+  +ACI-name+ACI: +ACI-codepage+ACI,
+  +ACI-version+ACI: +ACI-0.6.0+ACI,
+  +ACI-author+ACI: +ACI-SheetJS+ACI,
+  +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
+  +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
+  +ACI-main+ACI: +ACI-cputils.js+ACI,
+  +ACI-dependencies+ACI: +AHs +ACI-voc+ACI:+ACIAIg +AH0,
+  +ACI-devDependencies+ACI: +AHs +ACI-mocha+ACI:+ACIAIg +AH0,
+  +ACI-scripts+ACI: +AHs +ACI-build+ACI: +ACI-make js+ACI, +ACI-test+ACI: +ACI-make test+ACI +AH0,
+  +ACI-repository+ACI: +AHsAIg-type+ACI:+ACI-git+ACI,+ACI-url+ACI:+ACI-git://github.com/SheetJS/js-codepage.git+ACIAfQ,
+  +ACI-config+ACI: +AHs +ACI-blanket+ACI: +AHs +ACI-pattern+ACI: +ACIAWw-cptable.js,cputils.js+AF0AIg +AH0 +AH0,
+  +ACI-bugs+ACI: +AHs +ACI-url+ACI: +ACI-https://github.com/SheetJS/js-codepage/issues+ACI +AH0,
+  +ACI-license+ACI: +ACI-Apache-2.0+ACI,
+  +ACI-engines+ACI: +AHs +ACI-node+ACI: +ACIAPgA9-0.8+ACI +AH0
++AH0
++AGAAYABg
+
++AGAAYABgAD4.vocrc
++AHs +ACI-post+ACI: +ACI-make js+ACI +AH0
++AGAAYABg
+
++AGAAYABgAD4.gitignore
+.gitignore
+codepages/
+.vocrc
+node+AF8-modules/
+make.sh
+make.njs
+misc/coverage.html
++AGAAYABg

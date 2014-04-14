@@ -4,5 +4,9 @@ node_js:
   - "0.8"
 before_install:
   - "npm install -g mocha voc"
+  - "npm install blanket"
+  - "npm install coveralls mocha-lcov-reporter"
 before_script:
   - "voc codepage.md"
+after_success:
+  - "make coveralls-spin"

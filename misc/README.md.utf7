@@ -1,0 +1,261 @@
++ACM Codepages for JS
+
++AFs-Codepages+AF0(https://en.wikipedia.org/wiki/Codepage) are character encodings.  In
+many contexts, single-byte character sets are used in lieu of standard multibyte
+Unicode encodings.  They use 256 characters with a simple mapping.
+
++AFs-unicode.org+AF0(http://www.unicode.org/Public/MAPPINGS/) hosts lists of mappings.
+The build script automatically downloads and parses the mappings in order to
+generate the full script.  The +AGA-pages.csv+AGA description in +AGA-codepage.md+AGA controls
+which codepages are used.
+
++ACMAIw Setup
+
+In the browser:
+
+    +ADw-script src+AD0AIg-cptable.js+ACIAPgA8-/script+AD4
+    +ADw-script src+AD0AIg-cputils.js+ACIAPgA8-/script+AD4
+
+The complete set of codepages is large due to some Double Byte Character Set
+encodings.  A much smaller file that just includes SBCS codepages is provided in
+this repo (+AGA-sbcs.js+AGA), as well as a file for other projects (+AGA-cpexcel.js+AGA)
+
+If you know which codepages you need, you can include individual scripts for
+each codepage.  The individual files are provided in the +AGA-bits/+AGA directory.
+For example, to include only the Mac codepages:
+
+    +ADw-script src+AD0AIg-bits/10000.js+ACIAPgA8-/script+AD4
+    +ADw-script src+AD0AIg-bits/10006.js+ACIAPgA8-/script+AD4
+    +ADw-script src+AD0AIg-bits/10007.js+ACIAPgA8-/script+AD4
+    +ADw-script src+AD0AIg-bits/10029.js+ACIAPgA8-/script+AD4
+    +ADw-script src+AD0AIg-bits/10079.js+ACIAPgA8-/script+AD4
+    +ADw-script src+AD0AIg-bits/10081.js+ACIAPgA8-/script+AD4
+
+All of the browser scripts define and append to the +AGA-cptable+AGA object.  To rename
+the object, edit the +AGA-JSVAR+AGA shell variable in +AGA-make.sh+AGA and run the script.
+
+The utilities functions are contained in +AGA-cputils.js+AGA, which assumes that the
+appropriate codepage scripts were loaded.
+
+In node:
+
+    var cptable +AD0 require('codepage')+ADs
+
++ACMAIw Usage
+
+The codepages are indexed by number.  To get the unicode character for a given
+codepoint, use the +AGA-dec+AGA property:
+
+    var unicode+AF8-cp10000+AF8-255 +AD0 cptable+AFs-10000+AF0.dec+AFs-255+AF0AOw // +Asc
+
+To get the codepoint for a given character, use the +AGA-enc+AGA property:
+
+    var cp10000+AF8-711 +AD0 cptable+AFs-10000+AF0.enc+AFs-String.fromCharCode(711)+AF0AOw // 255
+
+There are a few utilities that deal with strings and buffers:
+
+    var +bEdgOw +AD0 cptable.utils.decode(936, +AFs-0xbb,0xe3,0xd7,0xdc+AF0)+ADs
+    var buf +AD0  cptable.utils.encode(936,  +bEdgOw)+ADs
+
++AGA-cptable.utils.encode(CP, data, ofmt)+AGA accepts a String or Array of characters
+and returns a representation controlled by +AGA-ofmt+AGA:
+
+- Default output is a Buffer (or Array) of bytes (integers between 0 and 255).
+- If +AGA-ofmt +AD0APQ 'str'+AGA, return a String where +AGA-o.charCodeAt(i)+AGA is the ith byte
+- If +AGA-ofmt +AD0APQ 'arr'+AGA, return an Array of bytes
+
++ACMAIw Building the script
+
+This script uses +AFs-voc+AF0(npm.im/voc).  The script to build the codepage tables and
+the JS source is +AGA-codepage.md+AGA, so building is as simple as +AGA-voc codepage.md+AGA.
+
++ACMAIw Generated Codepages
+
+The complete list of hardcoded codepages can be found in the file +AGA-pages.csv+AGA.
+
+Some codepages are easier to implement algorithmically.  Since these are
+hardcoded in utils, there is no corresponding entry (they are +ACI-magic+ACI)
+
++AHw CP+ACM +AHw  Information  +AHw Description +AHw
++AHw --: +AHw  -----------  +AHw ----------- +AHw
++AHw   37+AHw  unicode.org  +AHw-IBM EBCDIC US-Canada
++AHw  437+AHw  unicode.org  +AHw-OEM United States
++AHw  500+AHw  unicode.org  +AHw-IBM EBCDIC International
++AHw  708+AHw-MakeEncoding.cs+AHw-Arabic (ASMO 708)
++AHw  720+AHw-MakeEncoding.cs+AHw-Arabic (Transparent ASMO)+ADs Arabic (DOS)
++AHw  737+AHw  unicode.org  +AHw-OEM Greek (formerly 437G)+ADs Greek (DOS)
++AHw  775+AHw  unicode.org  +AHw-OEM Baltic+ADs Baltic (DOS)
++AHw  850+AHw  unicode.org  +AHw-OEM Multilingual Latin 1+ADs Western European (DOS)
++AHw  852+AHw  unicode.org  +AHw-OEM Latin 2+ADs Central European (DOS)
++AHw  855+AHw  unicode.org  +AHw-OEM Cyrillic (primarily Russian)
++AHw  857+AHw  unicode.org  +AHw-OEM Turkish+ADs Turkish (DOS)
++AHw  858+AHw-MakeEncoding.cs+AHw-OEM Multilingual Latin 1 +- Euro symbol
++AHw  860+AHw  unicode.org  +AHw-OEM Portuguese+ADs Portuguese (DOS)
++AHw  861+AHw  unicode.org  +AHw-OEM Icelandic+ADs Icelandic (DOS)
++AHw  862+AHw  unicode.org  +AHw-OEM Hebrew+ADs Hebrew (DOS)
++AHw  863+AHw  unicode.org  +AHw-OEM French Canadian+ADs French Canadian (DOS)
++AHw  864+AHw  unicode.org  +AHw-OEM Arabic+ADs Arabic (864)
++AHw  865+AHw  unicode.org  +AHw-OEM Nordic+ADs Nordic (DOS)
++AHw  866+AHw  unicode.org  +AHw-OEM Russian+ADs Cyrillic (DOS)
++AHw  869+AHw  unicode.org  +AHw-OEM Modern Greek+ADs Greek, Modern (DOS)
++AHw  870+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Multilingual/ROECE (Latin 2)
++AHw  874+AHw  unicode.org  +AHw-Windows Thai
++AHw  875+AHw  unicode.org  +AHw-IBM EBCDIC Greek Modern
++AHw  932+AHw  unicode.org  +AHw-Japanese Shift-JIS
++AHw  936+AHw  unicode.org  +AHw-Simplified Chinese GBK
++AHw  949+AHw  unicode.org  +AHw-Korean
++AHw  950+AHw  unicode.org  +AHw-Traditional Chinese Big5
++AHw 1026+AHw  unicode.org  +AHw-IBM EBCDIC Turkish (Latin 5)
++AHw 1047+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Latin 1/Open System
++AHw 1140+AHw-MakeEncoding.cs+AHw-IBM EBCDIC US-Canada (037 +- Euro symbol)
++AHw 1141+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Germany (20273 +- Euro symbol)
++AHw 1142+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Denmark-Norway (20277 +- Euro symbol)
++AHw 1143+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Finland-Sweden (20278 +- Euro symbol)
++AHw 1144+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Italy (20280 +- Euro symbol)
++AHw 1145+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Latin America-Spain (20284 +- Euro symbol)
++AHw 1146+AHw-MakeEncoding.cs+AHw-IBM EBCDIC United Kingdom (20285 +- Euro symbol)
++AHw 1147+AHw-MakeEncoding.cs+AHw-IBM EBCDIC France (20297 +- Euro symbol)
++AHw 1148+AHw-MakeEncoding.cs+AHw-IBM EBCDIC International (500 +- Euro symbol)
++AHw 1149+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Icelandic (20871 +- Euro symbol)
++AHw 1200+AHw     magic     +AHw-Unicode UTF-16, little endian (BMP of ISO 10646)
++AHw 1201+AHw     magic     +AHw-Unicode UTF-16, big endian
++AHw 1250+AHw  unicode.org  +AHw-Windows Central Europe
++AHw 1251+AHw  unicode.org  +AHw-Windows Cyrillic
++AHw 1252+AHw  unicode.org  +AHw-Windows Latin I
++AHw 1253+AHw  unicode.org  +AHw-Windows Green
++AHw 1254+AHw  unicode.org  +AHw-Windows Turkish
++AHw 1255+AHw  unicode.org  +AHw-Windows Hebrew
++AHw 1256+AHw  unicode.org  +AHw-Windows Arabic
++AHw 1257+AHw  unicode.org  +AHw-Windows Baltic
++AHw 1258+AHw  unicode.org  +AHw-Windows Vietnam
++AHw 1361+AHw-MakeEncoding.cs+AHw-Korean (Johab)
++AHw-10000+AHw  unicode.org  +AHw-MAC Roman
++AHw-10001+AHw-MakeEncoding.cs+AHw-Japanese (Mac)
++AHw-10002+AHw-MakeEncoding.cs+AHw-MAC Traditional Chinese (Big5)
++AHw-10003+AHw-MakeEncoding.cs+AHw-Korean (Mac)
++AHw-10004+AHw-MakeEncoding.cs+AHw-Arabic (Mac)
++AHw-10005+AHw-MakeEncoding.cs+AHw-Hebrew (Mac)
++AHw-10006+AHw  unicode.org  +AHw-Greek (Mac)
++AHw-10007+AHw  unicode.org  +AHw-Cyrillic (Mac)
++AHw-10008+AHw-MakeEncoding.cs+AHw-MAC Simplified Chinese (GB 2312)
++AHw-10010+AHw-MakeEncoding.cs+AHw-Romanian (Mac)
++AHw-10017+AHw-MakeEncoding.cs+AHw-Ukrainian (Mac)
++AHw-10021+AHw-MakeEncoding.cs+AHw-Thai (Mac)
++AHw-10029+AHw  unicode.org  +AHw-MAC Latin 2 (Central European)
++AHw-10079+AHw  unicode.org  +AHw-Icelandic (Mac)
++AHw-10081+AHw  unicode.org  +AHw-Turkish (Mac)
++AHw-10082+AHw-MakeEncoding.cs+AHw-Croatian (Mac)
++AHw-12000+AHw     magic     +AHw-Unicode UTF-32, little endian byte order
++AHw-12001+AHw     magic     +AHw-Unicode UTF-32, big endian byte order
++AHw-20000+AHw-MakeEncoding.cs+AHw-CNS Taiwan (Chinese Traditional)
++AHw-20001+AHw-MakeEncoding.cs+AHw-TCA Taiwan
++AHw-20002+AHw-MakeEncoding.cs+AHw-Eten Taiwan (Chinese Traditional)
++AHw-20003+AHw-MakeEncoding.cs+AHw-IBM5550 Taiwan
++AHw-20004+AHw-MakeEncoding.cs+AHw-TeleText Taiwan
++AHw-20005+AHw-MakeEncoding.cs+AHw-Wang Taiwan
++AHw-20105+AHw-MakeEncoding.cs+AHw-Western European IA5 (IRV International Alphabet 5) 7-bit
++AHw-20106+AHw-MakeEncoding.cs+AHw-IA5 German (7-bit)
++AHw-20107+AHw-MakeEncoding.cs+AHw-IA5 Swedish (7-bit)
++AHw-20108+AHw-MakeEncoding.cs+AHw-IA5 Norwegian (7-bit)
++AHw-20127+AHw     magic     +AHw-US-ASCII (7-bit)
++AHw-20261+AHw-MakeEncoding.cs+AHw-T.61
++AHw-20269+AHw-MakeEncoding.cs+AHw-ISO 6937 Non-Spacing Accent
++AHw-20273+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Germany
++AHw-20277+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Denmark-Norway
++AHw-20278+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Finland-Sweden
++AHw-20280+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Italy
++AHw-20284+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Latin America-Spain
++AHw-20285+AHw-MakeEncoding.cs+AHw-IBM EBCDIC United Kingdom
++AHw-20290+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Japanese Katakana Extended
++AHw-20297+AHw-MakeEncoding.cs+AHw-IBM EBCDIC France
++AHw-20420+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Arabic
++AHw-20423+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Greek
++AHw-20424+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Hebrew
++AHw-20833+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Korean Extended
++AHw-20838+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Thai
++AHw-20866+AHw-MakeEncoding.cs+AHw-Russian Cyrillic (KOI8-R)
++AHw-20871+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Icelandic
++AHw-20880+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Cyrillic Russian
++AHw-20905+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Turkish
++AHw-20924+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Latin 1/Open System (1047 +- Euro symbol)
++AHw-20932+AHw-MakeEncoding.cs+AHw-Japanese (JIS 0208-1990 and 0212-1990)
++AHw-20936+AHw-MakeEncoding.cs+AHw-Simplified Chinese (GB2312-80)
++AHw-20949+AHw-MakeEncoding.cs+AHw-Korean Wansung
++AHw-21025+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Cyrillic Serbian-Bulgarian
++AHw-21866+AHw-MakeEncoding.cs+AHw-Ukrainian Cyrillic (KOI8-U)
++AHw-28591+AHw  unicode.org  +AHw-ISO 8859-1 Latin 1 (Western European)
++AHw-28592+AHw  unicode.org  +AHw-ISO 8859-2 Latin 2 (Central European)
++AHw-28593+AHw  unicode.org  +AHw-ISO 8859-3 Latin 3
++AHw-28594+AHw  unicode.org  +AHw-ISO 8859-4 Baltic
++AHw-28595+AHw  unicode.org  +AHw-ISO 8859-5 Cyrillic
++AHw-28596+AHw  unicode.org  +AHw-ISO 8859-6 Arabic
++AHw-28597+AHw  unicode.org  +AHw-ISO 8859-7 Greek
++AHw-28598+AHw  unicode.org  +AHw-ISO 8859-8 Hebrew (ISO-Visual)
++AHw-28599+AHw  unicode.org  +AHw-ISO 8859-9 Turkish
++AHw-28600+AHw  unicode.org  +AHw-ISO 8859-10 Latin 6
++AHw-28601+AHw  unicode.org  +AHw-ISO 8859-11 Latin (Thai)
++AHw-28603+AHw  unicode.org  +AHw-ISO 8859-13 Latin 7 (Estonian)
++AHw-28604+AHw  unicode.org  +AHw-ISO 8859-14 Latin 8 (Celtic)
++AHw-28605+AHw  unicode.org  +AHw-ISO 8859-15 Latin 9
++AHw-28606+AHw  unicode.org  +AHw-ISO 8859-15 Latin 10
++AHw-29001+AHw-MakeEncoding.cs+AHw-Europa 3
++AHw-38598+AHw-MakeEncoding.cs+AHw-ISO 8859-8 Hebrew (ISO-Logical)
++AHw-50220+AHw-MakeEncoding.cs+AHw-ISO 2022 JIS Japanese with no halfwidth Katakana
++AHw-50221+AHw-MakeEncoding.cs+AHw-ISO 2022 JIS Japanese with halfwidth Katakana
++AHw-50222+AHw-MakeEncoding.cs+AHw-ISO 2022 Japanese JIS X 0201-1989 (1 byte Kana-SO/SI)
++AHw-50225+AHw-MakeEncoding.cs+AHw-ISO 2022 Korean
++AHw-50227+AHw-MakeEncoding.cs+AHw-ISO 2022 Simplified Chinese
++AHw-51932+AHw-MakeEncoding.cs+AHw-EUC Japanese
++AHw-51936+AHw-MakeEncoding.cs+AHw-EUC Simplified Chinese
++AHw-51949+AHw-MakeEncoding.cs+AHw-EUC Korean
++AHw-52936+AHw-MakeEncoding.cs+AHw-HZ-GB2312 Simplified Chinese
++AHw-54936+AHw-MakeEncoding.cs+AHw-GB18030 Simplified Chinese (4 byte)
++AHw-57002+AHw-MakeEncoding.cs+AHw-ISCII Devanagari
++AHw-57003+AHw-MakeEncoding.cs+AHw-ISCII Bengali
++AHw-57004+AHw-MakeEncoding.cs+AHw-ISCII Tamil
++AHw-57005+AHw-MakeEncoding.cs+AHw-ISCII Telugu
++AHw-57006+AHw-MakeEncoding.cs+AHw-ISCII Assamese
++AHw-57007+AHw-MakeEncoding.cs+AHw-ISCII Oriya
++AHw-57008+AHw-MakeEncoding.cs+AHw-ISCII Kannada
++AHw-57009+AHw-MakeEncoding.cs+AHw-ISCII Malayalam
++AHw-57010+AHw-MakeEncoding.cs+AHw-ISCII Gujarati
++AHw-57011+AHw-MakeEncoding.cs+AHw-ISCII Punjabi
++AHw-65000+AHw     magic     +AHw-Unicode (UTF-7)
++AHw-65001+AHw     magic     +AHw-Unicode (UTF-8)
+
+Note that MakeEncoding.cs deviates from unicode.org for some codepages.  In the
+case of direct conflicts, unicode.org takes precedence.  In cases where the
+unicode.org listing does not prescribe a value, MakeEncoding.cs value is used.
+
++ACMAIw Missing Codepages
+
+The following codepages are not implemented. Normative references may not be
+available in all cases.  Furthermore, other software packages are known to hack
+certain codepages (for example, Mozilla treats ASMO-708 as an alias of Arabic
+ISO-8869-6 when in fact there are many differences), so all implementations
++ACo-should+ACo be cleanroom when possible.
+
+- 709   Arabic (ASMO-449+-, BCON V4)
+- 710   Arabic - Transparent Arabic
+- 21027 (deprecated) +ADw--- is this necessary?
+- 50229 ISO 2022 Traditional Chinese
+- 50930 EBCDIC Japanese (Katakana) Extended
+- 50931 EBCDIC US-Canada and Japanese
+- 50933 EBCDIC Korean Extended and Korean
+- 50935 EBCDIC Simplified Chinese Extended and Simplified Chinese
+- 50936 EBCDIC Simplified Chinese
+- 50937 EBCDIC US-Canada and Traditional Chinese
+- 50939 EBCDIC Japanese (Latin) Extended and Japanese
+- 51950 EUC Traditional Chinese
+
++ACMAIw Sources
+
+- +AFs-Unicode Consortium Public Mappings+AF0(http://www.unicode.org/Public/MAPPINGS/)
+- +AFs-Code Page Enumeration+AF0(http://msdn.microsoft.com/en-us/library/cc195051.aspx)
+- +AFs-Code Page Identifiers+AF0(http://msdn.microsoft.com/en-us/library/windows/desktop/dd317756.aspx)
+
++ACMAIw Badges
+
++AFsAIQBb-githalytics.com alpha+AF0(https://cruel-carlota.pagodabox.com/afa29a5e8495a01059ee5b353f9042cb +ACI-githalytics.com+ACI)+AF0(http://githalytics.com/SheetJS/js-codepage)
++AFsAIQBb-Build Status+AF0(https://travis-ci.org/SheetJS/js-codepage.svg?branch+AD0-master)+AF0(https://travis-ci.org/SheetJS/js-codepage)
++AFsAIQBb-Coverage Status+AF0(https://coveralls.io/repos/SheetJS/js-codepage/badge.png)+AF0(https://coveralls.io/r/SheetJS/js-codepage)
