@@ -11,10 +11,18 @@ which codepages are used.
 
 ## Setup
 
+In node:
+
+    var cptable = require('codepage');
+
 In the browser:
 
     <script src="cptable.js"></script>
     <script src="cputils.js"></script>
+
+Alternatively, use the full version in the dist folder:
+
+    <script src="cptable.full.js"></script>
 
 The complete set of codepages is large due to some Double Byte Character Set
 encodings.  A much smaller file that just includes SBCS codepages is provided in
@@ -36,10 +44,6 @@ the object, edit the `JSVAR` shell variable in `make.sh` and run the script.
 
 The utilities functions are contained in `cputils.js`, which assumes that the
 appropriate codepage scripts were loaded.
-
-In node:
-
-    var cptable = require('codepage');
 
 ## Usage
 

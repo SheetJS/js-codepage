@@ -6,7 +6,7 @@ TARGETS=cptable.js cputils.js cpexcel.js sbcs.js
 voc test.js: codepage.md
 	$(VOC) codepage.md
 
-$(TARGETS) js: make.sh codepage.md
+js: make.sh codepage.md
 	bash make.sh <(awk -F, '$$3=="1"' pages.csv) sbcs.js cptable
 	bash make.sh excel.csv cpexcel.js cptable
 	bash make.sh
@@ -41,3 +41,12 @@ coveralls:
 
 coveralls-spin:
 	make coveralls & bash misc/spin.sh $$!
+
+.PHONY: dist
+dist: dist/cpexcel.full.js dist/cptable.full.js dist/sbcs.full.js
+	cp $(TARGETS) dist/
+	cp LICENSE dist/
+
+.PHONY: dist/cpexcel.full.js dist/cptable.full.js dist/sbcs.full.js
+dist/cpexcel.full.js dist/cptable.full.js dist/sbcs.full.js : dist/%.full.js: %.js cputils.js
+	cat $^ > $@
