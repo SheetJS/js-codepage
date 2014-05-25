@@ -11,10 +11,18 @@ which codepages are used.
 
 ## Setup
 
+In node:
+
+    var cptable = require('codepage');
+
 In the browser:
 
     <script src="cptable.js"></script>
     <script src="cputils.js"></script>
+
+Alternatively, use the full version in the dist folder:
+
+    <script src="cptable.full.js"></script>
 
 The complete set of codepages is large due to some Double Byte Character Set
 encodings.  A much smaller file that just includes SBCS codepages is provided in
@@ -36,10 +44,6 @@ the object, edit the `JSVAR` shell variable in `make.sh` and run the script.
 
 The utilities functions are contained in `cputils.js`, which assumes that the
 appropriate codepage scripts were loaded.
-
-In node:
-
-    var cptable = require('codepage');
 
 ## Usage
 
@@ -63,6 +67,17 @@ and returns a representation controlled by `ofmt`:
 - Default output is a Buffer (or Array) of bytes (integers between 0 and 255).
 - If `ofmt == 'str'`, return a String where `o.charCodeAt(i)` is the ith byte
 - If `ofmt == 'arr'`, return an Array of bytes
+
+## Known Excel Codepages
+
+A much smaller script, including only the codepages known to be used in Excel,
+is available under the name `cpexcel`.  It exposes the same variable `cptable`
+and is suitable as a drop-in replacement when the full codepage tables are not
+needed.
+
+In node:
+
+    var cptable = require('codepage/dist/cpexcel.full');
 
 ## Building the script
 

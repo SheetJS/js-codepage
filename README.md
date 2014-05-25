@@ -68,6 +68,17 @@ and returns a representation controlled by `ofmt`:
 - If `ofmt == 'str'`, return a String where `o.charCodeAt(i)` is the ith byte
 - If `ofmt == 'arr'`, return an Array of bytes
 
+## Known Excel Codepages
+
+A much smaller script, including only the codepages known to be used in Excel,
+is available under the name `cpexcel`.  It exposes the same variable `cptable`
+and is suitable as a drop-in replacement when the full codepage tables are not
+needed.
+
+In node:
+
+    var cptable = require('codepage/dist/cpexcel.full');
+
 ## Building the script
 
 This script uses [voc](npm.im/voc).  The script to build the codepage tables and

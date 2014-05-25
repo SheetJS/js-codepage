@@ -161,10 +161,12 @@
   var encache = function(cp) {
     if(typeof Buffer !== 'undefined') {
       sbcs_cache.forEach(function(s) {
+        if(!cpt[s]) return;
         cpdcache[s] = sbcs_decode(s);
         cpecache[s] = sbcs_encode(s);
       });
       dbcs_cache.forEach(function(s) {
+        if(!cpt[s]) return;
         cpdcache[s] = dbcs_decode(s);
         cpecache[s] = dbcs_encode(s);
       });
@@ -372,7 +374,7 @@
           }
           if(tt.length % 2 == 1) tt.length--;
           o64 = decode(1201, tt);
-          for(var l = 0; l < o64.length; ++l) out[k++] = o64[l];
+          for(l = 0; l < o64.length; ++l) out[k++] = o64[l];
         }
         break;
       default: throw new Error("Unsupported magic: " + cp + " " + magic[cp]);

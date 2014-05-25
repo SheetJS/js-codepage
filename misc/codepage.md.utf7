@@ -478,7 +478,7 @@ describe('consistency', function() +AHs
   cptable +AD0 require('./')+ADs
   U +AD0 cptable.utils+ADs
   var chk +AD0 function(cptable, cacheit) +AHs return function(x) +AHs
-    it('should consistently process CP ' +- x, function() +AHs
+    it('should consistently process CP ' +- x +- ' ' +- cacheit, function() +AHs
       var cp +AD0 cptable+AFs-x+AF0, D +AD0 cp.dec, E +AD0 cp.enc+ADs
       if(cacheit) cptable.utils.cache.encache()+ADs
       else cptable.utils.cache.decache()+ADs
@@ -704,16 +704,32 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-0.6.0+ACI,
+  +ACI-version+ACI: +ACI-1.1.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
+  +ACI-bin+ACI: +AHs
+    +ACI-codepage+ACI: +ACI./bin/codepage.njs+ACI
+  +AH0,
   +ACI-main+ACI: +ACI-cputils.js+ACI,
-  +ACI-dependencies+ACI: +AHs +ACI-voc+ACI:+ACIAIg +AH0,
-  +ACI-devDependencies+ACI: +AHs +ACI-mocha+ACI:+ACIAIg +AH0,
-  +ACI-scripts+ACI: +AHs +ACI-build+ACI: +ACI-make js+ACI, +ACI-test+ACI: +ACI-make test+ACI +AH0,
-  +ACI-repository+ACI: +AHsAIg-type+ACI:+ACI-git+ACI,+ACI-url+ACI:+ACI-git://github.com/SheetJS/js-codepage.git+ACIAfQ,
-  +ACI-config+ACI: +AHs +ACI-blanket+ACI: +AHs +ACI-pattern+ACI: +ACIAWw-cptable.js,cputils.js+AF0AIg +AH0 +AH0,
+  +ACI-dependencies+ACI: +AHs
+    +ACI-voc+ACI:+ACIAIg,
+    +ACI-commander+ACI:+ACIAIg
+  +AH0,
+  +ACI-devDependencies+ACI: +AHs
+    +ACI-mocha+ACI:+ACIAIg
+  +AH0,
+  +ACI-repository+ACI: +AHs +ACI-type+ACI:+ACI-git+ACI, +ACI-url+ACI:+ACI-git://github.com/SheetJS/js-codepage.git+ACIAfQ,
+  +ACI-scripts+ACI: +AHs
+    +ACI-pretest+ACI: +ACI-git submodule init +ACYAJg git submodule update+ACI,
+    +ACI-test+ACI: +ACI-make test+ACI,
+    +ACI-build+ACI: +ACI-make js+ACI
+  +AH0,
+  +ACI-config+ACI: +AHs
+    +ACI-blanket+ACI: +AHs
+      +ACI-pattern+ACI: +ACIAWw-cptable.js,cputils.js,cpexcel.js+AF0AIg
+    +AH0
+  +AH0,
   +ACI-bugs+ACI: +AHs +ACI-url+ACI: +ACI-https://github.com/SheetJS/js-codepage/issues+ACI +AH0,
   +ACI-license+ACI: +ACI-Apache-2.0+ACI,
   +ACI-engines+ACI: +AHs +ACI-node+ACI: +ACIAPgA9-0.8+ACI +AH0

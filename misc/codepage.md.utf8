@@ -478,7 +478,7 @@ describe('consistency', function() {
   cptable = require('./');
   U = cptable.utils;
   var chk = function(cptable, cacheit) { return function(x) {
-    it('should consistently process CP ' + x, function() {
+    it('should consistently process CP ' + x + ' ' + cacheit, function() {
       var cp = cptable[x], D = cp.dec, E = cp.enc;
       if(cacheit) cptable.utils.cache.encache();
       else cptable.utils.cache.decache();
@@ -704,16 +704,32 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "0.6.0",
+  "version": "1.1.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
+  "bin": {
+    "codepage": "./bin/codepage.njs"
+  },
   "main": "cputils.js",
-  "dependencies": { "voc":"" },
-  "devDependencies": { "mocha":"" },
-  "scripts": { "build": "make js", "test": "make test" },
-  "repository": {"type":"git","url":"git://github.com/SheetJS/js-codepage.git"},
-  "config": { "blanket": { "pattern": "[cptable.js,cputils.js]" } },
+  "dependencies": {
+    "voc":"",
+    "commander":""
+  },
+  "devDependencies": {
+    "mocha":""
+  },
+  "repository": { "type":"git", "url":"git://github.com/SheetJS/js-codepage.git"},
+  "scripts": {
+    "pretest": "git submodule init && git submodule update",
+    "test": "make test",
+    "build": "make js"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "[cptable.js,cputils.js,cpexcel.js]"
+    }
+  },
   "bugs": { "url": "https://github.com/SheetJS/js-codepage/issues" },
   "license": "Apache-2.0",
   "engines": { "node": ">=0.8" }

@@ -23,7 +23,7 @@ describe('README', function() {
 describe('consistency', function() {
   U = cptable.utils;
   var chk = function(cptable, cacheit) { return function(x) {
-    it('should consistently process CP ' + x, function() {
+    it('should consistently process CP ' + x + ' ' + cacheit, function() {
       var cp = cptable[x], D = cp.dec, E = cp.enc;
       if(cacheit) cptable.utils.cache.encache();
       else cptable.utils.cache.decache();

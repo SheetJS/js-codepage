@@ -161,10 +161,12 @@
   var encache +AD0 function(cp) +AHs
     if(typeof Buffer +ACEAPQA9 'undefined') +AHs
       sbcs+AF8-cache.forEach(function(s) +AHs
+        if(+ACE-cpt+AFs-s+AF0) return+ADs
         cpdcache+AFs-s+AF0 +AD0 sbcs+AF8-decode(s)+ADs
         cpecache+AFs-s+AF0 +AD0 sbcs+AF8-encode(s)+ADs
       +AH0)+ADs
       dbcs+AF8-cache.forEach(function(s) +AHs
+        if(+ACE-cpt+AFs-s+AF0) return+ADs
         cpdcache+AFs-s+AF0 +AD0 dbcs+AF8-decode(s)+ADs
         cpecache+AFs-s+AF0 +AD0 dbcs+AF8-encode(s)+ADs
       +AH0)+ADs
@@ -372,7 +374,7 @@
           +AH0
           if(tt.length +ACU 2 +AD0APQ 1) tt.length--+ADs
           o64 +AD0 decode(1201, tt)+ADs
-          for(var l +AD0 0+ADs l +ADw o64.length+ADs +-+-l) out+AFs-k+-+-+AF0 +AD0 o64+AFs-l+AF0AOw
+          for(l +AD0 0+ADs l +ADw o64.length+ADs +-+-l) out+AFs-k+-+-+AF0 +AD0 o64+AFs-l+AF0AOw
         +AH0
         break+ADs
       default: throw new Error(+ACI-Unsupported magic: +ACI +- cp +- +ACI +ACI +- magic+AFs-cp+AF0)+ADs

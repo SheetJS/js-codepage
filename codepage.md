@@ -478,7 +478,7 @@ describe('consistency', function() {
   cptable = require('./');
   U = cptable.utils;
   var chk = function(cptable, cacheit) { return function(x) {
-    it('should consistently process CP ' + x, function() {
+    it('should consistently process CP ' + x + ' ' + cacheit, function() {
       var cp = cptable[x], D = cp.dec, E = cp.enc;
       if(cacheit) cptable.utils.cache.encache();
       else cptable.utils.cache.decache();
@@ -704,7 +704,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -727,7 +727,7 @@ describe('failures', function() {
   },
   "config": {
     "blanket": {
-      "pattern": "[cptable.js,cputils.js]"
+      "pattern": "[cptable.js,cputils.js,cpexcel.js]"
     }
   },
   "bugs": { "url": "https://github.com/SheetJS/js-codepage/issues" },

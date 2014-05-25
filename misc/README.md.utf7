@@ -11,10 +11,18 @@ which codepages are used.
 
 +ACMAIw Setup
 
+In node:
+
+    var cptable +AD0 require('codepage')+ADs
+
 In the browser:
 
     +ADw-script src+AD0AIg-cptable.js+ACIAPgA8-/script+AD4
     +ADw-script src+AD0AIg-cputils.js+ACIAPgA8-/script+AD4
+
+Alternatively, use the full version in the dist folder:
+
+    +ADw-script src+AD0AIg-cptable.full.js+ACIAPgA8-/script+AD4
 
 The complete set of codepages is large due to some Double Byte Character Set
 encodings.  A much smaller file that just includes SBCS codepages is provided in
@@ -36,10 +44,6 @@ the object, edit the +AGA-JSVAR+AGA shell variable in +AGA-make.sh+AGA and run t
 
 The utilities functions are contained in +AGA-cputils.js+AGA, which assumes that the
 appropriate codepage scripts were loaded.
-
-In node:
-
-    var cptable +AD0 require('codepage')+ADs
 
 +ACMAIw Usage
 
@@ -63,6 +67,17 @@ and returns a representation controlled by +AGA-ofmt+AGA:
 - Default output is a Buffer (or Array) of bytes (integers between 0 and 255).
 - If +AGA-ofmt +AD0APQ 'str'+AGA, return a String where +AGA-o.charCodeAt(i)+AGA is the ith byte
 - If +AGA-ofmt +AD0APQ 'arr'+AGA, return an Array of bytes
+
++ACMAIw Known Excel Codepages
+
+A much smaller script, including only the codepages known to be used in Excel,
+is available under the name +AGA-cpexcel+AGA.  It exposes the same variable +AGA-cptable+AGA
+and is suitable as a drop-in replacement when the full codepage tables are not
+needed.
+
+In node:
+
+    var cptable +AD0 require('codepage/dist/cpexcel.full')+ADs
 
 +ACMAIw Building the script
 
