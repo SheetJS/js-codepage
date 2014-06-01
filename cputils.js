@@ -28,16 +28,18 @@
   var magic_decode = {};
   var magic_encode = {};
   var cpecache = {};
-  var cpdcache = [];
+  var cpdcache = {};
 
   if(typeof Buffer !== 'undefined') {
     var sbcs_encode = function(cp) {
       var E = cpt[cp].enc;
-      var EE = new Buffer(256*256);
-      for(var i = 0; i != 256*256;++i) EE[i] = 0;
-      Object.keys(E).forEach(function(e) {
+      var EE = new Buffer(65536);
+      for(var i = 0; i != 65536;++i) EE[i] = 0;
+      var keys = Object.keys(E), len = keys.length;
+      for(var ee = 0, e = keys[ee]; ee != len; ++ee) {
+        if(!(e = keys[ee])) continue;
         EE[e.charCodeAt(0)] = E[e];
-      });
+      };
       return function(data, ofmt) {
         if(data instanceof Buffer) data = data.toString('utf8');
         var out = new Buffer(data.length), i;
@@ -55,13 +57,14 @@
     };
     var sbcs_decode = function(cp) {
       var D = cpt[cp].dec;
-      var DD = new Buffer(2*256*256);
-      Object.keys(D).forEach(function(d) {
-        var w = D[d].charCodeAt(0);
+      var DD = new Buffer(131072), d=0, c;
+      for(d=0;d!=D.length;++d) {
+        if(!(c=D[d])) continue;
+        var w = c.charCodeAt(0);
         DD[2*d] = w%256; DD[2*d+1] = w>>8;
-      });
+      }
       return function(data) {
-        var out = new Buffer(2*data.length), w, i, j;
+        var out = new Buffer(2*data.length), w, i=0, j;
         if(data instanceof Buffer) {
           for(i = 0; i < data.length; i++) {
             j = 2*data[i];
@@ -83,12 +86,14 @@
     };
     var dbcs_encode = function(cp) {
       var E = cpt[cp].enc;
-      var EE = new Buffer(2*256*256);
-      for(var i = 0; i != 2*256*256;++i) EE[i] = 0;
-      Object.keys(E).forEach(function(e) {
-        EE[2*e.charCodeAt(0)] = E[e] & 255;
-        EE[2*e.charCodeAt(0)+1] = E[e]>>8;
-      });
+      var EE = new Buffer(131072);
+      for(var i = 0; i != 131072; ++i) EE[i] = 0;
+      var keys = Object.keys(E);
+      for(var ee = 0, e = keys[ee]; ee != keys.length; ++ee) {
+        if(!(e = keys[ee])) continue;
+        var f = e.charCodeAt(0);
+        EE[2*f] = E[e] & 255; EE[2*f+1] = E[e]>>8;
+      };
       return function(data, ofmt) {
         if(data instanceof Buffer) data = data.toString('utf8');
         var out = new Buffer(2*data.length), i, j, k;
@@ -113,12 +118,14 @@
     };
     var dbcs_decode = function(cp) {
       var D = cpt[cp].dec;
-      var DD = new Buffer(2*256*256);
-      for(var i = 0; i != 256*256;++i) { DD[2*i] = 0xFF; DD[2*i+1] = 0xFD;}
-      Object.keys(D).forEach(function(d) {
-        var w = D[d].charCodeAt(0);
-        DD[2*d] = w%256; DD[2*d+1] = w>>8;
-      });
+      var DD = new Buffer(131072), d=0, c, w=0, j=0, dd=0, i=0;
+      for(i = 0; i != 65536; ++i) { DD[2*i] = 0xFF; DD[2*i+1] = 0xFD;}
+      for(d=0;d!=D.length;++d) {
+        if(!(c=D[d])) continue;
+        w = c.charCodeAt(0);
+        j = 2*d;
+        DD[j] = w%256; DD[j+1] = w>>8;
+      };
       return function(data) {
         var out = new Buffer(2*data.length), w, i, j, k=0;
         if(data instanceof Buffer) {
@@ -160,6 +167,7 @@
 
   var encache = function(cp) {
     if(typeof Buffer !== 'undefined') {
+      if(cpdcache[sbcs_cache[0]]) return;
       sbcs_cache.forEach(function(s) {
         if(!cpt[s]) return;
         cpdcache[s] = sbcs_decode(s);
@@ -179,6 +187,7 @@
   var cp_decache = function(cp) { delete cpdcache[cp]; delete cpecache[cp]; };
   var decache = function() {
     if(typeof Buffer !== 'undefined') {
+      if(!cpdcache[sbcs_cache[0]]) return;
       sbcs_cache.forEach(cp_decache);
       dbcs_cache.forEach(cp_decache);
       magic_cache.forEach(cp_decache);

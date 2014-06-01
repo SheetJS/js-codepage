@@ -334,8 +334,8 @@ The `dec` field is merely a split of the string, and `enc` is an eversion:
 
 ```
     for(var i = 0; i != 256; ++i) if(typeof dec[i] === "undefined") dec[i] = String.fromCharCode(0xFFFD);
-    odec = JSON.stringify(dec.join("")) + '.split("")'
-    outstr = '(function(){ var d = ' + odec + ', e = {}; for(var i=0;i!=d.length;++i) if(d[i].charCodeAt(0) !== 0xFFFD)e[d[i]] = i; return {"enc": e, "dec": d }; })();';
+    odec = JSON.stringify(dec.join(""));
+    outstr = '(function(){ var d = ' + odec + ', e = {}; for(var i=0;i!=d.length;++i) if(d.charCodeAt(i) !== 0xFFFD)e[d[i]] = i; return {"enc": e, "dec": d.split("") }; })();';
 } else {
 ```
 
@@ -352,11 +352,11 @@ the complete decoding object (and the encoding object is an eversion):
         if(typeof dd[i >> 8] === "undefined") dd[i >> 8] = [];
         dd[i >> 8][i % 256] = dec[i];
     }
-    outstr = '(function(){ var d = {}, e = {}, D = [], j;\n';
+    outstr = '(function(){ var d = [], e = {}, D = [], j;\n';
     for(var i = 0; i != 256; ++i) if(dd[i]) {
         for(var j = 0; j != 256; ++j) if(typeof dd[i][j] === "undefined") dd[i][j] = String.fromCharCode(0xFFFD);
         outstr += 'D[' + i + '] = ' + JSON.stringify(dd[i].join("")) + '.split("");\n';
-        outstr += 'for(j = 0; j != D[' + i + '].length; ++j) if(D[' + i + '][j].charCodeAt(0) !== 0xFFFD) { e[D[' + i + '][j]] = ' + i + ' * 256 + j; d[' + i + ' * 256 + j] = D[' + i + '][j];}\n'
+        outstr += 'for(j = 0; j != D[' + i + '].length; ++j) if(D[' + i + '][j].charCodeAt(0) !== 0xFFFD) { e[D[' + i + '][j]] = ' + (i*256) + ' + j; d[' + (i*256) + ' + j] = D[' + i + '][j];}\n'
     }
     outstr += 'return {"enc": e, "dec": d }; })();';
 }
@@ -704,7 +704,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
