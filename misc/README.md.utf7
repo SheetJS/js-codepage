@@ -60,6 +60,8 @@ There are a few utilities that deal with strings and buffers:
 
     var +bEdgOw +AD0 cptable.utils.decode(936, +AFs-0xbb,0xe3,0xd7,0xdc+AF0)+ADs
     var buf +AD0  cptable.utils.encode(936,  +bEdgOw)+ADs
+    var sushi+AD0 cptable.utils.decode(65001, +AFs-0xf0,0x9f,0x8d,0xa3+AF0)+ADs // +2DzfYw
+    var sbuf +AD0 cptable.utils.encode(65001, sushi)+ADs
 
 +AGA-cptable.utils.encode(CP, data, ofmt)+AGA accepts a String or Array of characters
 and returns a representation controlled by +AGA-ofmt+AGA:

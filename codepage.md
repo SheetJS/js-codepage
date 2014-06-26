@@ -335,7 +335,7 @@ The `dec` field is merely a split of the string, and `enc` is an eversion:
 ```
     for(var i = 0; i != 256; ++i) if(typeof dec[i] === "undefined") dec[i] = String.fromCharCode(0xFFFD);
     odec = JSON.stringify(dec.join(""));
-    outstr = '(function(){ var d = ' + odec + ', e = {}; for(var i=0;i!=d.length;++i) if(d.charCodeAt(i) !== 0xFFFD)e[d[i]] = i; return {"enc": e, "dec": d.split("") }; })();';
+    outstr = '(function(){ var d = ' + odec + ', D = [], e = {}; for(var i=0;i!=d.length;++i) { if(d.charCodeAt(i) !== 0xFFFD) e[d[i]] = i; D[i] = d.charAt(i); } return {"enc": e, "dec": D }; })();';
 } else {
 ```
 
@@ -461,6 +461,14 @@ describe('README', function() {
     assert.equal(汇总,"汇总");
     assert.equal(buf.length, 4);
     for(var i = 0; i != 4; ++i) assert.equal(b1[i], buf[i]);
+
+    var b2 = [0xf0,0x9f,0x8d,0xa3];
+    var sushi= cptable.utils.decode(65001, b2);
+    var sbuf = cptable.utils.encode(65001, sushi);
+    assert.equal(sushi,"🍣");
+    assert.equal(sbuf.length, 4);
+    for(var i = 0; i != 4; ++i) assert.equal(b2[i], sbuf[i]);
+
   };
   it('should be correct', function() {
     cptable.utils.cache.encache();
@@ -704,7 +712,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],

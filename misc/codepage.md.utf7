@@ -334,8 +334,8 @@ The +AGA-dec+AGA field is merely a split of the string, and +AGA-enc+AGA is an e
 
 +AGAAYABg
     for(var i +AD0 0+ADs i +ACEAPQ 256+ADs +-+-i) if(typeof dec+AFs-i+AF0 +AD0APQA9 +ACI-undefined+ACI) dec+AFs-i+AF0 +AD0 String.fromCharCode(0xFFFD)+ADs
-    odec +AD0 JSON.stringify(dec.join(+ACIAIg)) +- '.split(+ACIAIg)'
-    outstr +AD0 '(function()+AHs var d +AD0 ' +- odec +- ', e +AD0 +AHsAfQA7 for(var i+AD0-0+ADs-i+ACEAPQ-d.length+ADsAKwAr-i) if(d+AFs-i+AF0.charCodeAt(0) +ACEAPQA9 0xFFFD)e+AFs-d+AFs-i+AF0AXQ +AD0 i+ADs return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: d +AH0AOw +AH0)()+ADs'+ADs
+    odec +AD0 JSON.stringify(dec.join(+ACIAIg))+ADs
+    outstr +AD0 '(function()+AHs var d +AD0 ' +- odec +- ', e +AD0 +AHsAfQA7 for(var i+AD0-0+ADs-i+ACEAPQ-d.length+ADsAKwAr-i) if(d.charCodeAt(i) +ACEAPQA9 0xFFFD)e+AFs-d+AFs-i+AF0AXQ +AD0 i+ADs return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: d.split(+ACIAIg) +AH0AOw +AH0)()+ADs'+ADs
 +AH0 else +AHs
 +AGAAYABg
 
@@ -352,11 +352,11 @@ the complete decoding object (and the encoding object is an eversion):
         if(typeof dd+AFs-i +AD4APg 8+AF0 +AD0APQA9 +ACI-undefined+ACI) dd+AFs-i +AD4APg 8+AF0 +AD0 +AFsAXQA7
         dd+AFs-i +AD4APg 8+AF0AWw-i +ACU 256+AF0 +AD0 dec+AFs-i+AF0AOw
     +AH0
-    outstr +AD0 '(function()+AHs var d +AD0 +AHsAfQ, e +AD0 +AHsAfQ, D +AD0 +AFsAXQ, j+ADsAXA-n'+ADs
+    outstr +AD0 '(function()+AHs var d +AD0 +AFsAXQ, e +AD0 +AHsAfQ, D +AD0 +AFsAXQ, j+ADsAXA-n'+ADs
     for(var i +AD0 0+ADs i +ACEAPQ 256+ADs +-+-i) if(dd+AFs-i+AF0) +AHs
         for(var j +AD0 0+ADs j +ACEAPQ 256+ADs +-+-j) if(typeof dd+AFs-i+AF0AWw-j+AF0 +AD0APQA9 +ACI-undefined+ACI) dd+AFs-i+AF0AWw-j+AF0 +AD0 String.fromCharCode(0xFFFD)+ADs
         outstr +-+AD0 'D+AFs' +- i +- '+AF0 +AD0 ' +- JSON.stringify(dd+AFs-i+AF0.join(+ACIAIg)) +- '.split(+ACIAIg)+ADsAXA-n'+ADs
-        outstr +-+AD0 'for(j +AD0 0+ADs j +ACEAPQ D+AFs' +- i +- '+AF0.length+ADs +-+-j) if(D+AFs' +- i +- '+AF0AWw-j+AF0.charCodeAt(0) +ACEAPQA9 0xFFFD) +AHs e+AFs-D+AFs' +- i +- '+AF0AWw-j+AF0AXQ +AD0 ' +- i +- ' +ACo 256 +- j+ADs d+AFs' +- i +- ' +ACo 256 +- j+AF0 +AD0 D+AFs' +- i +- '+AF0AWw-j+AF0AOwB9AFw-n'
+        outstr +-+AD0 'for(j +AD0 0+ADs j +ACEAPQ D+AFs' +- i +- '+AF0.length+ADs +-+-j) if(D+AFs' +- i +- '+AF0AWw-j+AF0.charCodeAt(0) +ACEAPQA9 0xFFFD) +AHs e+AFs-D+AFs' +- i +- '+AF0AWw-j+AF0AXQ +AD0 ' +- (i+ACo-256) +- ' +- j+ADs d+AFs' +- (i+ACo-256) +- ' +- j+AF0 +AD0 D+AFs' +- i +- '+AF0AWw-j+AF0AOwB9AFw-n'
     +AH0
     outstr +-+AD0 'return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: d +AH0AOw +AH0)()+ADs'+ADs
 +AH0
@@ -461,6 +461,14 @@ describe('README', function() +AHs
     assert.equal(+bEdgOw,+ACJsR2A7ACI)+ADs
     assert.equal(buf.length, 4)+ADs
     for(var i +AD0 0+ADs i +ACEAPQ 4+ADs +-+-i) assert.equal(b1+AFs-i+AF0, buf+AFs-i+AF0)+ADs
+
+    var b2 +AD0 +AFs-0xf0,0x9f,0x8d,0xa3+AF0AOw
+    var sushi+AD0 cptable.utils.decode(65001, b2)+ADs
+    var sbuf +AD0 cptable.utils.encode(65001, sushi)+ADs
+    assert.equal(sushi,+ACLYPN9jACI)+ADs
+    assert.equal(sbuf.length, 4)+ADs
+    for(var i +AD0 0+ADs i +ACEAPQ 4+ADs +-+-i) assert.equal(b2+AFs-i+AF0, sbuf+AFs-i+AF0)+ADs
+
   +AH0AOw
   it('should be correct', function() +AHs
     cptable.utils.cache.encache()+ADs
@@ -704,7 +712,7 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.1.0+ACI,
+  +ACI-version+ACI: +ACI-1.3.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,

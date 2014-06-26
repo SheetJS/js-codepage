@@ -28,16 +28,18 @@
   var magic+AF8-decode +AD0 +AHsAfQA7
   var magic+AF8-encode +AD0 +AHsAfQA7
   var cpecache +AD0 +AHsAfQA7
-  var cpdcache +AD0 +AFsAXQA7
+  var cpdcache +AD0 +AHsAfQA7
 
   if(typeof Buffer +ACEAPQA9 'undefined') +AHs
     var sbcs+AF8-encode +AD0 function(cp) +AHs
       var E +AD0 cpt+AFs-cp+AF0.enc+ADs
-      var EE +AD0 new Buffer(256+ACo-256)+ADs
-      for(var i +AD0 0+ADs i +ACEAPQ 256+ACo-256+ADsAKwAr-i) EE+AFs-i+AF0 +AD0 0+ADs
-      Object.keys(E).forEach(function(e) +AHs
+      var EE +AD0 new Buffer(65536)+ADs
+      for(var i +AD0 0+ADs i +ACEAPQ 65536+ADsAKwAr-i) EE+AFs-i+AF0 +AD0 0+ADs
+      var keys +AD0 Object.keys(E), len +AD0 keys.length+ADs
+      for(var ee +AD0 0, e +AD0 keys+AFs-ee+AF0AOw ee +ACEAPQ len+ADs +-+-ee) +AHs
+        if(+ACE(e +AD0 keys+AFs-ee+AF0)) continue+ADs
         EE+AFs-e.charCodeAt(0)+AF0 +AD0 E+AFs-e+AF0AOw
-      +AH0)+ADs
+      +AH0AOw
       return function(data, ofmt) +AHs
         if(data instanceof Buffer) data +AD0 data.toString('utf8')+ADs
         var out +AD0 new Buffer(data.length), i+ADs
@@ -55,13 +57,14 @@
     +AH0AOw
     var sbcs+AF8-decode +AD0 function(cp) +AHs
       var D +AD0 cpt+AFs-cp+AF0.dec+ADs
-      var DD +AD0 new Buffer(2+ACo-256+ACo-256)+ADs
-      Object.keys(D).forEach(function(d) +AHs
-        var w +AD0 D+AFs-d+AF0.charCodeAt(0)+ADs
+      var DD +AD0 new Buffer(131072), d+AD0-0, c+ADs
+      for(d+AD0-0+ADs-d+ACEAPQ-D.length+ADsAKwAr-d) +AHs
+        if(+ACE(c+AD0-D+AFs-d+AF0)) continue+ADs
+        var w +AD0 c.charCodeAt(0)+ADs
         DD+AFs-2+ACo-d+AF0 +AD0 w+ACU-256+ADs DD+AFs-2+ACo-d+-1+AF0 +AD0 w+AD4APg-8+ADs
-      +AH0)+ADs
+      +AH0
       return function(data) +AHs
-        var out +AD0 new Buffer(2+ACo-data.length), w, i, j+ADs
+        var out +AD0 new Buffer(2+ACo-data.length), w, i+AD0-0, j+ADs
         if(data instanceof Buffer) +AHs
           for(i +AD0 0+ADs i +ADw data.length+ADs i+-+-) +AHs
             j +AD0 2+ACo-data+AFs-i+AF0AOw
@@ -83,12 +86,14 @@
     +AH0AOw
     var dbcs+AF8-encode +AD0 function(cp) +AHs
       var E +AD0 cpt+AFs-cp+AF0.enc+ADs
-      var EE +AD0 new Buffer(2+ACo-256+ACo-256)+ADs
-      for(var i +AD0 0+ADs i +ACEAPQ 2+ACo-256+ACo-256+ADsAKwAr-i) EE+AFs-i+AF0 +AD0 0+ADs
-      Object.keys(E).forEach(function(e) +AHs
-        EE+AFs-2+ACo-e.charCodeAt(0)+AF0 +AD0 E+AFs-e+AF0 +ACY 255+ADs
-        EE+AFs-2+ACo-e.charCodeAt(0)+-1+AF0 +AD0 E+AFs-e+AF0APgA+-8+ADs
-      +AH0)+ADs
+      var EE +AD0 new Buffer(131072)+ADs
+      for(var i +AD0 0+ADs i +ACEAPQ 131072+ADs +-+-i) EE+AFs-i+AF0 +AD0 0+ADs
+      var keys +AD0 Object.keys(E)+ADs
+      for(var ee +AD0 0, e +AD0 keys+AFs-ee+AF0AOw ee +ACEAPQ keys.length+ADs +-+-ee) +AHs
+        if(+ACE(e +AD0 keys+AFs-ee+AF0)) continue+ADs
+        var f +AD0 e.charCodeAt(0)+ADs
+        EE+AFs-2+ACo-f+AF0 +AD0 E+AFs-e+AF0 +ACY 255+ADs EE+AFs-2+ACo-f+-1+AF0 +AD0 E+AFs-e+AF0APgA+-8+ADs
+      +AH0AOw
       return function(data, ofmt) +AHs
         if(data instanceof Buffer) data +AD0 data.toString('utf8')+ADs
         var out +AD0 new Buffer(2+ACo-data.length), i, j, k+ADs
@@ -113,12 +118,14 @@
     +AH0AOw
     var dbcs+AF8-decode +AD0 function(cp) +AHs
       var D +AD0 cpt+AFs-cp+AF0.dec+ADs
-      var DD +AD0 new Buffer(2+ACo-256+ACo-256)+ADs
-      for(var i +AD0 0+ADs i +ACEAPQ 256+ACo-256+ADsAKwAr-i) +AHs DD+AFs-2+ACo-i+AF0 +AD0 0xFF+ADs DD+AFs-2+ACo-i+-1+AF0 +AD0 0xFD+ADsAfQ
-      Object.keys(D).forEach(function(d) +AHs
-        var w +AD0 D+AFs-d+AF0.charCodeAt(0)+ADs
-        DD+AFs-2+ACo-d+AF0 +AD0 w+ACU-256+ADs DD+AFs-2+ACo-d+-1+AF0 +AD0 w+AD4APg-8+ADs
-      +AH0)+ADs
+      var DD +AD0 new Buffer(131072), d+AD0-0, c, w+AD0-0, j+AD0-0, dd+AD0-0, i+AD0-0+ADs
+      for(i +AD0 0+ADs i +ACEAPQ 65536+ADs +-+-i) +AHs DD+AFs-2+ACo-i+AF0 +AD0 0xFF+ADs DD+AFs-2+ACo-i+-1+AF0 +AD0 0xFD+ADsAfQ
+      for(d+AD0-0+ADs-d+ACEAPQ-D.length+ADsAKwAr-d) +AHs
+        if(+ACE(c+AD0-D+AFs-d+AF0)) continue+ADs
+        w +AD0 c.charCodeAt(0)+ADs
+        j +AD0 2+ACo-d+ADs
+        DD+AFs-j+AF0 +AD0 w+ACU-256+ADs DD+AFs-j+-1+AF0 +AD0 w+AD4APg-8+ADs
+      +AH0AOw
       return function(data) +AHs
         var out +AD0 new Buffer(2+ACo-data.length), w, i, j, k+AD0-0+ADs
         if(data instanceof Buffer) +AHs
@@ -150,8 +157,13 @@
         j +AD0 1+ADs
         if(data+AFs-i+AF0 +ADw 128) w +AD0 data+AFs-i+AF0AOw
         else if(data+AFs-i+AF0 +ADw 224) +AHs w +AD0 (data+AFs-i+AF0AJg-31)+ACo-64+-(data+AFs-i+-1+AF0AJg-63)+ADs j+AD0-2+ADs +AH0
-        else +AHs w+AD0(data+AFs-i+AF0AJg-15)+ACo-4096+-(data+AFs-i+-1+AF0AJg-63)+ACo-64+-(data+AFs-i+-2+AF0AJg-63)+ADs j+AD0-3+ADs +AH0
-        out+AFs-k+-+-+AF0 +AD0 w+ACU-256+ADs out+AFs-k+-+-+AF0 +AD0 w+AD4APg-8+ADs
+        else if(data+AFs-i+AF0 +ADw 240) +AHs w+AD0(data+AFs-i+AF0AJg-15)+ACo-4096+-(data+AFs-i+-1+AF0AJg-63)+ACo-64+-(data+AFs-i+-2+AF0AJg-63)+ADs j+AD0-3+ADs +AH0
+        else +AHs w+AD0(data+AFs-i+AF0AJg-7)+ACo-262144+-(data+AFs-i+-1+AF0AJg-63)+ACo-4096+-(data+AFs-i+-2+AF0AJg-63)+ACo-64+-(data+AFs-i+-3+AF0AJg-63)+ADs j+AD0-4+ADs +AH0
+        if(w +ADw 65536) +AHs out+AFs-k+-+-+AF0 +AD0 w+ACY-255+ADs out+AFs-k+-+-+AF0 +AD0 w+AD4APg-8+ADs +AH0
+        else +AHs
+          w -+AD0 65536+ADs ww +AD0 0xD800 +- ((w+AD4APg-10)+ACY-1023)+ADs w +AD0 0xDC00 +- (w+ACY-1023)+ADs
+          out+AFs-k+-+-+AF0 +AD0 ww+ACY-255+ADs out+AFs-k+-+-+AF0 +AD0 ww+AD4APg-8+ADs out+AFs-k+-+-+AF0 +AD0 w+ACY-255+ADs out+AFs-k+-+-+AF0 +AD0 w+AD4APg-8+ADs
+        +AH0
       +AH0
       out.length +AD0 k+ADs
       return out.toString('ucs2')+ADs
@@ -160,6 +172,7 @@
 
   var encache +AD0 function(cp) +AHs
     if(typeof Buffer +ACEAPQA9 'undefined') +AHs
+      if(cpdcache+AFs-sbcs+AF8-cache+AFs-0+AF0AXQ) return+ADs
       sbcs+AF8-cache.forEach(function(s) +AHs
         if(+ACE-cpt+AFs-s+AF0) return+ADs
         cpdcache+AFs-s+AF0 +AD0 sbcs+AF8-decode(s)+ADs
@@ -179,6 +192,7 @@
   var cp+AF8-decache +AD0 function(cp) +AHs delete cpdcache+AFs-cp+AF0AOw delete cpecache+AFs-cp+AF0AOw +AH0AOw
   var decache +AD0 function() +AHs
     if(typeof Buffer +ACEAPQA9 'undefined') +AHs
+      if(+ACE-cpdcache+AFs-sbcs+AF8-cache+AFs-0+AF0AXQ) return+ADs
       sbcs+AF8-cache.forEach(cp+AF8-decache)+ADs
       dbcs+AF8-cache.forEach(cp+AF8-decache)+ADs
       magic+AF8-cache.forEach(cp+AF8-decache)+ADs

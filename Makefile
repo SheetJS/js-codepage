@@ -23,9 +23,15 @@ clean:
 test mocha: test.js
 	mocha -R spec
 
+.PHONY: prof
+prof:
+	cat misc/prof.js test.js > prof.js
+	node --prof prof.js
+
 .PHONY: lint
 lint:
 	jshint --show-non-errors $(TARGETS)
+	jscs $(TARGETS)
 
 .PHONY: cov cov-spin
 cov: misc/coverage.html

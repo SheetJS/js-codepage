@@ -60,6 +60,8 @@ There are a few utilities that deal with strings and buffers:
 
     var 汇总 = cptable.utils.decode(936, [0xbb,0xe3,0xd7,0xdc]);
     var buf =  cptable.utils.encode(936,  汇总);
+    var sushi= cptable.utils.decode(65001, [0xf0,0x9f,0x8d,0xa3]); // 🍣
+    var sbuf = cptable.utils.encode(65001, sushi);
 
 `cptable.utils.encode(CP, data, ofmt)` accepts a String or Array of characters
 and returns a representation controlled by `ofmt`:

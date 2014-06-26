@@ -25,6 +25,14 @@ describe('README', function() {
     assert.equal(汇总,"汇总");
     assert.equal(buf.length, 4);
     for(var i = 0; i != 4; ++i) assert.equal(b1[i], buf[i]);
+
+    var b2 = [0xf0,0x9f,0x8d,0xa3];
+    var sushi= cptable.utils.decode(65001, b2);
+    var sbuf = cptable.utils.encode(65001, sushi);
+    assert.equal(sushi,"🍣");
+    assert.equal(sbuf.length, 4);
+    for(var i = 0; i != 4; ++i) assert.equal(b2[i], sbuf[i]);
+
   };
   it('should be correct', function() {
     cptable.utils.cache.encache();
