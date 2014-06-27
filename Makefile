@@ -33,6 +33,10 @@ lint:
 	jshint --show-non-errors $(TARGETS)
 	jscs $(TARGETS)
 
+.PHONY: ctest
+ctest:
+	bash ctest/fixtures.sh
+
 .PHONY: cov cov-spin
 cov: misc/coverage.html
 cov-spin:
