@@ -712,13 +712,21 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
   "bin": {
     "codepage": "./bin/codepage.njs"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "bin",
+    "cptable.js",
+    "cputils.js",
+    "dist/cpexcel.full.js"
+  ],
   "main": "cputils.js",
   "dependencies": {
     "voc":"",
