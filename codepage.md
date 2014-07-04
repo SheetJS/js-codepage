@@ -712,7 +712,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
