@@ -137,6 +137,7 @@ The following codepages are available in .NET on Windows:
 - 20936 Simplified Chinese (GB2312); Chinese Simplified (GB2312-80)
 - 20949 Korean Wansung
 - 21025 IBM EBCDIC Cyrillic Serbian-Bulgarian
+- 21027 Extended/Ext Alpha Lowercase
 - 21866 Ukrainian (KOI8-U); Cyrillic (KOI8-U)
 - 29001 Europa 3
 - 38598 ISO 8859-8 Hebrew; Hebrew (ISO-Logical)
@@ -222,6 +223,7 @@ The following codepages are available in .NET on Windows:
 20936,,2
 20949,,2
 21025,,1
+21027,,1
 21866,,1
 29001,,1
 38598,,1
@@ -389,12 +391,13 @@ elements (like `0x7F` for CP 10000) are removed.
 INFILE=${1:-pages.csv}
 OUTFILE=${2:-cptable.js}
 JSVAR=${3:-cptable}
+VERSION=$(cat package.json | grep version | tr -dc [0-9.])
 
 mkdir -p codepages bits
 rm -f $OUTFILE $OUTFILE.tmp
 echo "/* $OUTFILE (C) 2013-2014 SheetJS -- http://sheetjs.com */" > $OUTFILE.tmp
 echo "/*jshint -W100 */" >> $OUTFILE.tmp
-echo "var $JSVAR = {};" >> $OUTFILE.tmp
+echo "var $JSVAR = {version:\"$VERSION\"};" >> $OUTFILE.tmp
 if [ -e dotnet.sh ]; then bash dotnet.sh; fi
 awk -F, '{print $1, $2, $3}' $INFILE | while read cp url cptype; do
     echo $cp $url
@@ -510,8 +513,8 @@ describe('consistency', function() {
       cptable.utils.cache.encache();
     });
   }; };
-  Object.keys(cptable).filter(function(w) { return w != "utils"; }).forEach(chk(cptable, true));
-  Object.keys(cptable).filter(function(w) { return w != "utils"; }).forEach(chk(cptable, false));
+  Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, true));
+  Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, false));
 });
 ```
 
@@ -712,7 +715,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],

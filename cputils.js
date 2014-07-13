@@ -189,7 +189,9 @@
       var len = data.length, w = 0, ww = 0;
       if(4 * len > mdl) { mdl = 4 * len; mdb = new Buffer(mdl); }
       mdb.length = 0;
-      for(var i = 0, j = 1, k = 0, D = 0; i < len; i+=j) {
+      var i = 0;
+      if(len >= 3 && data[0] == 0xEF) if(data[1] == 0xBB && data[2] == 0xBF) i = 3;
+      for(var j = 1, k = 0, D = 0; i < len; i+=j) {
         j = 1; D = data[i];
         if(D < 128) w = D;
         else if(D < 224) { w=(D&31)*64+(data[i+1]&63); j=2; }
@@ -404,7 +406,9 @@
     }
     else if((M=magic[cp])) switch(M) {
       case "utf8":
-        for(i = 0; i < len; i+=j) {
+        i = 0;
+        if(len >= 3 && data[0] == 0xEF) if(data[1] == 0xBB && data[2] == 0xBF) i = 3;
+        for(; i < len; i+=j) {
           j = 1;
           if(data[i] < 128) w = data[i];
           else if(data[i] < 224) { w=(data[i]&31)*64+(data[i+1]&63); j=2; }
@@ -422,21 +426,27 @@
         for(i = 0; i < len; i++) out[i] = String.fromCharCode(data[i]);
         k = len; break;
       case "utf16le":
+        i = 0;
+        if(len >= 2 && data[0] == 0xFF) if(data[1] == 0xFE) i = 2;
         if(typeof Buffer !== 'undefined' && Buffer.isBuffer(data)) return data.toString(M);
         j = 2;
-        for(i = 0; i < len; i+=j) {
+        for(; i < len; i+=j) {
           out[k++] = String.fromCharCode((data[i+1]<<8) + data[i]);
         }
         break;
       case "utf16be":
+        i = 0;
+        if(len >= 2 && data[0] == 0xFE) if(data[1] == 0xFF) i = 2;
         j = 2;
-        for(i = 0; i < len; i+=j) {
+        for(; i < len; i+=j) {
           out[k++] = String.fromCharCode((data[i]<<8) + data[i+1]);
         }
         break;
       case "utf32le":
+        i = 0;
+        if(len >= 4 && data[0] == 0xFF) if(data[1] == 0xFE && data[2] == 0 && data[3] == 0) i = 4;
         j = 4;
-        for(i = 0; i < len; i+=j) {
+        for(; i < len; i+=j) {
           w = (data[i+3]<<24) + (data[i+2]<<16) + (data[i+1]<<8) + (data[i]);
           if(w > 0xFFFF) {
             w -= 0x10000;
@@ -447,8 +457,10 @@
         }
         break;
       case "utf32be":
+        i = 0;
+        if(len >= 4 && data[3] == 0xFF) if(data[2] == 0xFE && data[1] == 0 && data[0] == 0) i = 4;
         j = 4;
-        for(i = 0; i < len; i+=j) {
+        for(; i < len; i+=j) {
           w = (data[i]<<24) + (data[i+1]<<16) + (data[i+2]<<8) + (data[i+3]);
           if(w > 0xFFFF) {
             w -= 0x10000;
@@ -459,7 +471,12 @@
         }
         break;
       case "utf7":
-        for(i = 0; i < len; i+=j) {
+        i = 0;
+        if(len >= 4 && data[0] == 0x2B && data[1] == 0x2F && data[2] == 0x76) {
+          if(len >= 5 && data[3] == 0x38 && data[4] == 0x2D) i = 5;
+          else if(data[3] == 0x38 || data[3] == 0x39 || data[3] == 0x2B || data[3] == 0x2F) i = 4;
+        }
+        for(; i < len; i+=j) {
           if(data[i] !== 0x2b) { j=1; out[k++] = String.fromCharCode(data[i]); continue; }
           j=1;
           if(data[i+1] === 0x2d) { j = 2; out[k++] = "+"; continue; }

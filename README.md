@@ -199,6 +199,7 @@ hardcoded in utils, there is no corresponding entry (they are "magic")
 |20936|MakeEncoding.cs|Simplified Chinese (GB2312-80)
 |20949|MakeEncoding.cs|Korean Wansung
 |21025|MakeEncoding.cs|IBM EBCDIC Cyrillic Serbian-Bulgarian
+|21027|      NLS      |Extended/Ext Alpha Lowercase
 |21866|MakeEncoding.cs|Ukrainian Cyrillic (KOI8-U)
 |28591|  unicode.org  |ISO 8859-1 Latin 1 (Western European)
 |28592|  unicode.org  |ISO 8859-2 Latin 2 (Central European)
@@ -254,7 +255,6 @@ ISO-8869-6 when in fact there are many differences), so all implementations
 
 - 709   Arabic (ASMO-449+, BCON V4)
 - 710   Arabic - Transparent Arabic
-- 21027 (deprecated) <-- is this necessary?
 - 50229 ISO 2022 Traditional Chinese
 - 50930 EBCDIC Japanese (Katakana) Extended
 - 50931 EBCDIC US-Canada and Japanese

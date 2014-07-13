@@ -69,8 +69,8 @@ describe('consistency', function() {
       cptable.utils.cache.encache();
     });
   }; };
-  Object.keys(cptable).filter(function(w) { return w != "utils"; }).forEach(chk(cptable, true));
-  Object.keys(cptable).filter(function(w) { return w != "utils"; }).forEach(chk(cptable, false));
+  Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, true));
+  Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, false));
 });
 describe('entry conditions', function() {
   it('should fail to load utils if cptable unavailable', function() {
