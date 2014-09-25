@@ -139,7 +139,7 @@ hardcoded in utils, there is no corresponding entry (they are "magic")
 | 1250|  unicode.org  |Windows Central Europe
 | 1251|  unicode.org  |Windows Cyrillic
 | 1252|  unicode.org  |Windows Latin I
-| 1253|  unicode.org  |Windows Green
+| 1253|  unicode.org  |Windows Greek
 | 1254|  unicode.org  |Windows Turkish
 | 1255|  unicode.org  |Windows Hebrew
 | 1256|  unicode.org  |Windows Arabic
