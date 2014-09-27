@@ -489,7 +489,7 @@ describe('consistency', function() {
   cptable = require('./');
   U = cptable.utils;
   var chk = function(cptable, cacheit) { return function(x) {
-    it('should consistently process CP ' + x + ' ' + cacheit, function() {
+    it('should consistently process CP ' + x, function() {
       var cp = cptable[x], D = cp.dec, E = cp.enc;
       if(cacheit) cptable.utils.cache.encache();
       else cptable.utils.cache.decache();
@@ -513,8 +513,12 @@ describe('consistency', function() {
       cptable.utils.cache.encache();
     });
   }; };
-  Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, true));
-  Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, false));
+  describe('cached', function() {
+    Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, true));
+  });
+  describe('direct', function() {
+    Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, false));
+  });
 });
 ```
 
@@ -715,7 +719,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -733,6 +737,7 @@ describe('failures', function() {
   "main": "cputils.js",
   "dependencies": {
     "voc":"",
+    "concat-stream":"",
     "commander":""
   },
   "devDependencies": {
