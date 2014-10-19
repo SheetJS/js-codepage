@@ -10,6 +10,7 @@ program
 	.option('-t, --to-code <code>', 'codepage of output (default 65001 utf8)')
 	.option('-o, --output <file>', 'output file (<file>.<to> if specified)')
 	.option('-B, --bom', 'write BOM (for unicode codepages)')
+	.option('-F, --force', 'force writing to stdout for non-utf8 codepages')
 	.option('-l, --list', 'List supported codepages');
 
 program.on('--help', function() {
@@ -25,8 +26,8 @@ if(program.list) {
 	process.exit();
 }
 
-var fr = program.fromCode || 65001;
-var to = program.toCode || 65001;
+var fr = +program.fromCode || 65001;
+var to = +program.toCode || 65001;
 var f = program.args[0];
 var o = program.output;
 
@@ -53,10 +54,31 @@ function process_text(text) {
 		65001: new Buffer([0xEF, 0xBB, 0xBF])
 	}
 
-	if(!program.toCode && !o) console.log(dec.toString('utf8'));
-	else if(!program.bom || !bom[fr]) fs.writeFileSync(o || (f + "." + to), codepage.utils.encode(to, dec));
+	var mybom = (program.bom && bom[fr] ? bom[fr] : "");
+	var out = to === 65001 ? dec.toString('utf8') : codepage.utils.encode(to, dec);
+
+	/* if output file is specified */
+	if(o) writefile(o, out, mybom);
+	/* utf8 -> print to stdout */
+	else if(to === 65001) logit(out, mybom);
+	/* stdout piped to process -> print */
+	else if(!process.stdout.isTTY) logit(out, mybom);
+	/* forced */
+	else if(program.force) logit(out, mybom);
+	/* input file specified -> write to file */
+	else if(f !== "-") writefile(f + "." + to, out, mybom);
 	else {
-		fs.writeFileSync(o || (f + "." + to), bom[fr]);
-		fs.appendFileSync(o || (f + "." + to), codepage.utils.encode(to, dec));
+		console.error('codepage: use force (-F, --force) to print ' + to + ' codes');
+		process.exit(14);
 	}
+}
+
+function logit(out, bom) {
+	process.stdout.write(bom);
+	process.stdout.write(out);
+}
+
+function writefile(o, out, bom) {
+	fs.writeFileSync(o, bom);
+	fs.appendFileSync(o, out);
 }

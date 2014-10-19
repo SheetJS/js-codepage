@@ -245,25 +245,9 @@ Note that MakeEncoding.cs deviates from unicode.org for some codepages.  In the
 case of direct conflicts, unicode.org takes precedence.  In cases where the
 unicode.org listing does not prescribe a value, MakeEncoding.cs value is used.
 
-## Missing Codepages
-
-The following codepages are not implemented. Normative references may not be
-available in all cases.  Furthermore, other software packages are known to hack
-certain codepages (for example, Mozilla treats ASMO-708 as an alias of Arabic
-ISO-8869-6 when in fact there are many differences), so all implementations
-*should* be cleanroom when possible.
-
-- 709   Arabic (ASMO-449+, BCON V4)
-- 710   Arabic - Transparent Arabic
-- 50229 ISO 2022 Traditional Chinese
-- 50930 EBCDIC Japanese (Katakana) Extended
-- 50931 EBCDIC US-Canada and Japanese
-- 50933 EBCDIC Korean Extended and Korean
-- 50935 EBCDIC Simplified Chinese Extended and Simplified Chinese
-- 50936 EBCDIC Simplified Chinese
-- 50937 EBCDIC US-Canada and Traditional Chinese
-- 50939 EBCDIC Japanese (Latin) Extended and Japanese
-- 51950 EUC Traditional Chinese
+NLS refers to the National Language Support files supplied in various versions of
+Windows.  In older versions of Windows (e.g. Windows 98) these files followed the
+pattern `CP_#.NLS`, but newer versions use the pattern `C_#.NLS`.
 
 ## Sources
 
