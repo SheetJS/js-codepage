@@ -249,6 +249,16 @@ The following codepages are available in .NET on Windows:
 57011,,2
 ```
 
+The following codepages are dependencies for Visual FoxPro:
+
+- 620 Mazovia (Polish) MS-DOS
+- 895 Kamenický (Czech) MS-DOS
+
+```>pages.csv
+620,,1
+895,,1
+```
+
 The known missing codepages are enumerated in the README.
 
 ## Building Notes
@@ -719,7 +729,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
