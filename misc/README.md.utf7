@@ -1,8 +1,8 @@
 +ACM Codepages for JS
 
 +AFs-Codepages+AF0(https://en.wikipedia.org/wiki/Codepage) are character encodings.  In
-many contexts, single-byte character sets are used in lieu of standard multibyte
-Unicode encodings.  They use 256 characters with a simple mapping.
+many contexts, single- or double-byte character sets are used in lieu of Unicode
+encodings.  The codepages map between characters and numbers.
 
 +AFs-unicode.org+AF0(http://www.unicode.org/Public/MAPPINGS/) hosts lists of mappings.
 The build script automatically downloads and parses the mappings in order to
@@ -81,7 +81,35 @@ In node:
 
     var cptable +AD0 require('codepage/dist/cpexcel.full')+ADs
 
-+ACMAIw Building the script
++ACMAIw Rolling your own script
+
+The +AGA-make.sh+AGA script in the repo can take a manifest and generate JS source.
+
+Usage:
+
+    bash make.sh path+AF8-to+AF8-manifest output+AF8-file+AF8-name JSVAR
+
+where
+
+- +AGA-JSVAR+AGA is the name of the exported variable (generally +AGA-cptable+AGA)
+- +AGA-output+AF8-file+AF8-name+AGA is the output file (e.g. +AGA-cpexcel.js+AGA, +AGA-cptable.js+AGA)
+- +AGA-path+AF8-to+AF8-manifest+AGA is the path to the manifest file.
+
+The manifest file is expected to be a CSV with 3 columns:
+
+    +ADw-codepage number+AD4,+ADw-source+AD4,+ADw-size+AD4
+
+If a source is specified, it will try to download the specified file and parse.
+The file format is expected to follow the format from the unicode.org site.
+The size should be +AGA-1+AGA for a single-byte codepage and +AGA-2+AGA for a double-byte
+codepage.  For mixed codepages (which use some single- and some double-byte
+codes), the script assumes the mapping is a prefix code and generates efficient
+JS code.
+
+Generated scripts only include the mapping.  +AGA-cat+AGA a mapping with +AGA-cputils.js+AGA
+to produce a complete script like +AGA-cpexcel.full.js+AGA.
+
++ACMAIw Building the complete script
 
 This script uses +AFs-voc+AF0(npm.im/voc).  The script to build the codepage tables and
 the JS source is +AGA-codepage.md+AGA, so building is as simple as +AGA-voc codepage.md+AGA.
@@ -94,10 +122,11 @@ Some codepages are easier to implement algorithmically.  Since these are
 hardcoded in utils, there is no corresponding entry (they are +ACI-magic+ACI)
 
 +AHw CP+ACM +AHw  Information  +AHw Description +AHw
-+AHw --: +AHw  -----------  +AHw ----------- +AHw
++AHw --: +AHw  :----------: +AHw :---------- +AHw
 +AHw   37+AHw  unicode.org  +AHw-IBM EBCDIC US-Canada
 +AHw  437+AHw  unicode.org  +AHw-OEM United States
 +AHw  500+AHw  unicode.org  +AHw-IBM EBCDIC International
++AHw  620+AHw      NLS      +AHw-Mazovia (Polish) MS-DOS
 +AHw  708+AHw-MakeEncoding.cs+AHw-Arabic (ASMO 708)
 +AHw  720+AHw-MakeEncoding.cs+AHw-Arabic (Transparent ASMO)+ADs Arabic (DOS)
 +AHw  737+AHw  unicode.org  +AHw-OEM Greek (formerly 437G)+ADs Greek (DOS)
@@ -118,6 +147,7 @@ hardcoded in utils, there is no corresponding entry (they are +ACI-magic+ACI)
 +AHw  870+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Multilingual/ROECE (Latin 2)
 +AHw  874+AHw  unicode.org  +AHw-Windows Thai
 +AHw  875+AHw  unicode.org  +AHw-IBM EBCDIC Greek Modern
++AHw  895+AHw      NLS      +AHw-Kamenick+AP0 (Czech) MS-DOS
 +AHw  932+AHw  unicode.org  +AHw-Japanese Shift-JIS
 +AHw  936+AHw  unicode.org  +AHw-Simplified Chinese GBK
 +AHw  949+AHw  unicode.org  +AHw-Korean
@@ -139,7 +169,7 @@ hardcoded in utils, there is no corresponding entry (they are +ACI-magic+ACI)
 +AHw 1250+AHw  unicode.org  +AHw-Windows Central Europe
 +AHw 1251+AHw  unicode.org  +AHw-Windows Cyrillic
 +AHw 1252+AHw  unicode.org  +AHw-Windows Latin I
-+AHw 1253+AHw  unicode.org  +AHw-Windows Green
++AHw 1253+AHw  unicode.org  +AHw-Windows Greek
 +AHw 1254+AHw  unicode.org  +AHw-Windows Turkish
 +AHw 1255+AHw  unicode.org  +AHw-Windows Hebrew
 +AHw 1256+AHw  unicode.org  +AHw-Windows Arabic
@@ -199,6 +229,7 @@ hardcoded in utils, there is no corresponding entry (they are +ACI-magic+ACI)
 +AHw-20936+AHw-MakeEncoding.cs+AHw-Simplified Chinese (GB2312-80)
 +AHw-20949+AHw-MakeEncoding.cs+AHw-Korean Wansung
 +AHw-21025+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Cyrillic Serbian-Bulgarian
++AHw-21027+AHw      NLS      +AHw-Extended/Ext Alpha Lowercase
 +AHw-21866+AHw-MakeEncoding.cs+AHw-Ukrainian Cyrillic (KOI8-U)
 +AHw-28591+AHw  unicode.org  +AHw-ISO 8859-1 Latin 1 (Western European)
 +AHw-28592+AHw  unicode.org  +AHw-ISO 8859-2 Latin 2 (Central European)
@@ -244,26 +275,9 @@ Note that MakeEncoding.cs deviates from unicode.org for some codepages.  In the
 case of direct conflicts, unicode.org takes precedence.  In cases where the
 unicode.org listing does not prescribe a value, MakeEncoding.cs value is used.
 
-+ACMAIw Missing Codepages
-
-The following codepages are not implemented. Normative references may not be
-available in all cases.  Furthermore, other software packages are known to hack
-certain codepages (for example, Mozilla treats ASMO-708 as an alias of Arabic
-ISO-8869-6 when in fact there are many differences), so all implementations
-+ACo-should+ACo be cleanroom when possible.
-
-- 709   Arabic (ASMO-449+-, BCON V4)
-- 710   Arabic - Transparent Arabic
-- 21027 (deprecated) +ADw--- is this necessary?
-- 50229 ISO 2022 Traditional Chinese
-- 50930 EBCDIC Japanese (Katakana) Extended
-- 50931 EBCDIC US-Canada and Japanese
-- 50933 EBCDIC Korean Extended and Korean
-- 50935 EBCDIC Simplified Chinese Extended and Simplified Chinese
-- 50936 EBCDIC Simplified Chinese
-- 50937 EBCDIC US-Canada and Traditional Chinese
-- 50939 EBCDIC Japanese (Latin) Extended and Japanese
-- 51950 EUC Traditional Chinese
+NLS refers to the National Language Support files supplied in various versions of
+Windows.  In older versions of Windows (e.g. Windows 98) these files followed the
+pattern +AGA-CP+AF8AIw.NLS+AGA, but newer versions use the pattern +AGA-C+AF8AIw.NLS+AGA.
 
 +ACMAIw Sources
 

@@ -137,6 +137,7 @@ The following codepages are available in .NET on Windows:
 - 20936 Simplified Chinese (GB2312); Chinese Simplified (GB2312-80)
 - 20949 Korean Wansung
 - 21025 IBM EBCDIC Cyrillic Serbian-Bulgarian
+- 21027 Extended/Ext Alpha Lowercase
 - 21866 Ukrainian (KOI8-U); Cyrillic (KOI8-U)
 - 29001 Europa 3
 - 38598 ISO 8859-8 Hebrew; Hebrew (ISO-Logical)
@@ -222,6 +223,7 @@ The following codepages are available in .NET on Windows:
 20936,,2
 20949,,2
 21025,,1
+21027,,1
 21866,,1
 29001,,1
 38598,,1
@@ -245,6 +247,16 @@ The following codepages are available in .NET on Windows:
 57009,,2
 57010,,2
 57011,,2
+```
+
+The following codepages are dependencies for Visual FoxPro:
+
+- 620 Mazovia (Polish) MS-DOS
+- 895 Kamenick (Czech) MS-DOS
+
+```>pages.csv
+620,,1
+895,,1
 ```
 
 The known missing codepages are enumerated in the README.
@@ -335,7 +347,7 @@ The `dec` field is merely a split of the string, and `enc` is an eversion:
 ```
     for(var i = 0; i != 256; ++i) if(typeof dec[i] === "undefined") dec[i] = String.fromCharCode(0xFFFD);
     odec = JSON.stringify(dec.join(""));
-    outstr = '(function(){ var d = ' + odec + ', e = {}; for(var i=0;i!=d.length;++i) if(d.charCodeAt(i) !== 0xFFFD)e[d[i]] = i; return {"enc": e, "dec": d.split("") }; })();';
+    outstr = '(function(){ var d = ' + odec + ', D = [], e = {}; for(var i=0;i!=d.length;++i) { if(d.charCodeAt(i) !== 0xFFFD) e[d[i]] = i; D[i] = d.charAt(i); } return {"enc": e, "dec": D }; })();';
 } else {
 ```
 
@@ -389,12 +401,13 @@ elements (like `0x7F` for CP 10000) are removed.
 INFILE=${1:-pages.csv}
 OUTFILE=${2:-cptable.js}
 JSVAR=${3:-cptable}
+VERSION=$(cat package.json | grep version | tr -dc [0-9.])
 
 mkdir -p codepages bits
 rm -f $OUTFILE $OUTFILE.tmp
 echo "/* $OUTFILE (C) 2013-2014 SheetJS -- http://sheetjs.com */" > $OUTFILE.tmp
 echo "/*jshint -W100 */" >> $OUTFILE.tmp
-echo "var $JSVAR = {};" >> $OUTFILE.tmp
+echo "var $JSVAR = {version:\"$VERSION\"};" >> $OUTFILE.tmp
 if [ -e dotnet.sh ]; then bash dotnet.sh; fi
 awk -F, '{print $1, $2, $3}' $INFILE | while read cp url cptype; do
     echo $cp $url
@@ -486,7 +499,7 @@ describe('consistency', function() {
   cptable = require('./');
   U = cptable.utils;
   var chk = function(cptable, cacheit) { return function(x) {
-    it('should consistently process CP ' + x + ' ' + cacheit, function() {
+    it('should consistently process CP ' + x, function() {
       var cp = cptable[x], D = cp.dec, E = cp.enc;
       if(cacheit) cptable.utils.cache.encache();
       else cptable.utils.cache.decache();
@@ -510,8 +523,12 @@ describe('consistency', function() {
       cptable.utils.cache.encache();
     });
   }; };
-  Object.keys(cptable).filter(function(w) { return w != "utils"; }).forEach(chk(cptable, true));
-  Object.keys(cptable).filter(function(w) { return w != "utils"; }).forEach(chk(cptable, false));
+  describe('cached', function() {
+    Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, true));
+  });
+  describe('direct', function() {
+    Object.keys(cptable).filter(function(w) { return w == +w; }).forEach(chk(cptable, false));
+  });
 });
 ```
 
@@ -712,16 +729,25 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.3.0",
+  "version": "1.3.8",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
   "bin": {
     "codepage": "./bin/codepage.njs"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "bin",
+    "cptable.js",
+    "cputils.js",
+    "dist/cpexcel.full.js"
+  ],
   "main": "cputils.js",
   "dependencies": {
     "voc":"",
+    "concat-stream":"",
     "commander":""
   },
   "devDependencies": {

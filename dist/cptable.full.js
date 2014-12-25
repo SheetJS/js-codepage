@@ -6373,7 +6373,9 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
 
   var sfcc = function sfcc(x) { return String.fromCharCode(x); };
   var cca = function cca(x){ return x.charCodeAt(0); };
-  if(typeof Buffer !== 'undefined') {
+
+  var has_buf = (typeof Buffer !== 'undefined');
+  if(has_buf) {
     var mdl = 1024, mdb = new Buffer(mdl);
     var make_EE = function make_EE(E){
       var EE = new Buffer(65536);
@@ -6408,6 +6410,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
             }
           }
           out.length = j;
+          out = out.slice(0,j);
         } else {
           out = Buffer(len);
           for(i = 0; i < len; ++i) out[i] = EE[data[i].charCodeAt(0)];
@@ -6466,6 +6469,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
             out[k++] = EE[j+1] || EE[j]; if(EE[j+1] > 0) out[k++] = EE[j];
           }
           out.length = k;
+          out = out.slice(0,k);
         } else if(Buffer.isBuffer(data)) {
           for(i = k = 0; i < len; ++i) {
             D = data[i];
@@ -6480,6 +6484,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
             }
           }
           out.length = k;
+          out = out.slice(0,k);
         } else {
           for(i = k = 0; i < len; i++) {
             j = data[i].charCodeAt(0)*2;
@@ -6578,7 +6583,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
   }
 
   var encache = function encache() {
-    if(typeof Buffer !== 'undefined') {
+    if(has_buf) {
       if(cpdcache[sbcs_cache[0]]) return;
       var i, s;
       for(i = 0; i < sbcs_cache.length; ++i) {
@@ -6604,7 +6609,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
   };
   var cp_decache = function cp_decache(cp) { cpdcache[cp] = cpecache[cp] = undefined; };
   var decache = function decache() {
-    if(typeof Buffer !== 'undefined') {
+    if(has_buf) {
       if(!cpdcache[sbcs_cache[0]]) return;
       sbcs_cache.forEach(cp_decache);
       dbcs_cache.forEach(cp_decache);
@@ -6627,9 +6632,9 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
   var encode = function encode(cp, data, ofmt) {
     if(cp === last_cp) { return last_enc(data, ofmt); }
     if(cpecache[cp] !== undefined) { last_enc = cpecache[last_cp=cp]; return last_enc(data, ofmt); }
-    if(typeof Buffer !== 'undefined' && Buffer.isBuffer(data)) data = data.toString('utf8');
+    if(has_buf && Buffer.isBuffer(data)) data = data.toString('utf8');
     var len = data.length;
-    var out = typeof Buffer !== 'undefined' ? new Buffer(4*len) : [], w, i, j = 0, c, tt, ww;
+    var out = has_buf ? new Buffer(4*len) : [], w, i, j = 0, c, tt, ww;
     var C = cpt[cp], E, M;
     if(C && (E=C.enc)) for(i = 0; i < len; ++i, ++j) {
       w = E[data[i]];
@@ -6641,7 +6646,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
     }
     else if((M=magic[cp])) switch(M) {
       case "utf8":
-        if(typeof Buffer !== 'undefined' && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
+        if(has_buf && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i, ++j) {
           w = data[i].charCodeAt(0);
           if(w <= 0x007F) out[j] = w;
@@ -6663,7 +6668,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
         }
         break;
       case "ascii":
-        if(typeof Buffer !== 'undefined' && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
+        if(has_buf && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i, ++j) {
           w = data[i].charCodeAt(0);
           if(w <= 0x007F) out[j] = w;
@@ -6671,7 +6676,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
         }
         break;
       case "utf16le":
-        if(typeof Buffer !== 'undefined' && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
+        if(has_buf && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i) {
           w = data[i].charCodeAt(0);
           out[j++] = w&255;
@@ -6723,6 +6728,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
     }
     else throw new Error("Unrecognized CP: " + cp);
     out.length = j;
+    out = out.slice(0,j);
     if(typeof Buffer === 'undefined') return (ofmt == 'str') ? out.map(sfcc).join("") : out;
     if(ofmt === undefined || ofmt === 'buf') return out;
     if(ofmt !== 'arr') return out.toString('binary');
@@ -6763,13 +6769,13 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
         }
         break;
       case "ascii":
-        if(typeof Buffer !== 'undefined' && Buffer.isBuffer(data)) return data.toString(M);
+        if(has_buf && Buffer.isBuffer(data)) return data.toString(M);
         for(i = 0; i < len; i++) out[i] = String.fromCharCode(data[i]);
         k = len; break;
       case "utf16le":
         i = 0;
         if(len >= 2 && data[0] == 0xFF) if(data[1] == 0xFE) i = 2;
-        if(typeof Buffer !== 'undefined' && Buffer.isBuffer(data)) return data.toString(M);
+        if(has_buf && Buffer.isBuffer(data)) return data.toString(M);
         j = 2;
         for(; i < len; i+=j) {
           out[k++] = String.fromCharCode((data[i+1]<<8) + data[i]);

@@ -137,6 +137,7 @@ The following codepages are available in .NET on Windows:
 - 20936 Simplified Chinese (GB2312)+ADs Chinese Simplified (GB2312-80)
 - 20949 Korean Wansung
 - 21025 IBM EBCDIC Cyrillic Serbian-Bulgarian
+- 21027 Extended/Ext Alpha Lowercase
 - 21866 Ukrainian (KOI8-U)+ADs Cyrillic (KOI8-U)
 - 29001 Europa 3
 - 38598 ISO 8859-8 Hebrew+ADs Hebrew (ISO-Logical)
@@ -222,6 +223,7 @@ The following codepages are available in .NET on Windows:
 20936,,2
 20949,,2
 21025,,1
+21027,,1
 21866,,1
 29001,,1
 38598,,1
@@ -245,6 +247,16 @@ The following codepages are available in .NET on Windows:
 57009,,2
 57010,,2
 57011,,2
++AGAAYABg
+
+The following codepages are dependencies for Visual FoxPro:
+
+- 620 Mazovia (Polish) MS-DOS
+- 895 Kamenick+AP0 (Czech) MS-DOS
+
++AGAAYABgAD4-pages.csv
+620,,1
+895,,1
 +AGAAYABg
 
 The known missing codepages are enumerated in the README.
@@ -335,7 +347,7 @@ The +AGA-dec+AGA field is merely a split of the string, and +AGA-enc+AGA is an e
 +AGAAYABg
     for(var i +AD0 0+ADs i +ACEAPQ 256+ADs +-+-i) if(typeof dec+AFs-i+AF0 +AD0APQA9 +ACI-undefined+ACI) dec+AFs-i+AF0 +AD0 String.fromCharCode(0xFFFD)+ADs
     odec +AD0 JSON.stringify(dec.join(+ACIAIg))+ADs
-    outstr +AD0 '(function()+AHs var d +AD0 ' +- odec +- ', e +AD0 +AHsAfQA7 for(var i+AD0-0+ADs-i+ACEAPQ-d.length+ADsAKwAr-i) if(d.charCodeAt(i) +ACEAPQA9 0xFFFD)e+AFs-d+AFs-i+AF0AXQ +AD0 i+ADs return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: d.split(+ACIAIg) +AH0AOw +AH0)()+ADs'+ADs
+    outstr +AD0 '(function()+AHs var d +AD0 ' +- odec +- ', D +AD0 +AFsAXQ, e +AD0 +AHsAfQA7 for(var i+AD0-0+ADs-i+ACEAPQ-d.length+ADsAKwAr-i) +AHs if(d.charCodeAt(i) +ACEAPQA9 0xFFFD) e+AFs-d+AFs-i+AF0AXQ +AD0 i+ADs D+AFs-i+AF0 +AD0 d.charAt(i)+ADs +AH0 return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: D +AH0AOw +AH0)()+ADs'+ADs
 +AH0 else +AHs
 +AGAAYABg
 
@@ -389,12 +401,13 @@ elements (like +AGA-0x7F+AGA for CP 10000) are removed.
 INFILE+AD0AJAB7-1:-pages.csv+AH0
 OUTFILE+AD0AJAB7-2:-cptable.js+AH0
 JSVAR+AD0AJAB7-3:-cptable+AH0
+VERSION+AD0AJA(cat package.json +AHw grep version +AHw tr -dc +AFs-0-9.+AF0)
 
 mkdir -p codepages bits
 rm -f +ACQ-OUTFILE +ACQ-OUTFILE.tmp
 echo +ACI-/+ACo +ACQ-OUTFILE (C) 2013-2014 SheetJS -- http://sheetjs.com +ACo-/+ACI +AD4 +ACQ-OUTFILE.tmp
 echo +ACI-/+ACo-jshint -W100 +ACo-/+ACI +AD4APg +ACQ-OUTFILE.tmp
-echo +ACI-var +ACQ-JSVAR +AD0 +AHsAfQA7ACI +AD4APg +ACQ-OUTFILE.tmp
+echo +ACI-var +ACQ-JSVAR +AD0 +AHs-version:+AFwAIgAk-VERSION+AFwAIgB9ADsAIg +AD4APg +ACQ-OUTFILE.tmp
 if +AFs -e dotnet.sh +AF0AOw then bash dotnet.sh+ADs fi
 awk -F, '+AHs-print +ACQ-1, +ACQ-2, +ACQ-3+AH0' +ACQ-INFILE +AHw while read cp url cptype+ADs do
     echo +ACQ-cp +ACQ-url
@@ -486,7 +499,7 @@ describe('consistency', function() +AHs
   cptable +AD0 require('./')+ADs
   U +AD0 cptable.utils+ADs
   var chk +AD0 function(cptable, cacheit) +AHs return function(x) +AHs
-    it('should consistently process CP ' +- x +- ' ' +- cacheit, function() +AHs
+    it('should consistently process CP ' +- x, function() +AHs
       var cp +AD0 cptable+AFs-x+AF0, D +AD0 cp.dec, E +AD0 cp.enc+ADs
       if(cacheit) cptable.utils.cache.encache()+ADs
       else cptable.utils.cache.decache()+ADs
@@ -510,8 +523,12 @@ describe('consistency', function() +AHs
       cptable.utils.cache.encache()+ADs
     +AH0)+ADs
   +AH0AOw +AH0AOw
-  Object.keys(cptable).filter(function(w) +AHs return w +ACEAPQ +ACI-utils+ACIAOw +AH0).forEach(chk(cptable, true))+ADs
-  Object.keys(cptable).filter(function(w) +AHs return w +ACEAPQ +ACI-utils+ACIAOw +AH0).forEach(chk(cptable, false))+ADs
+  describe('cached', function() +AHs
+    Object.keys(cptable).filter(function(w) +AHs return w +AD0APQ +-w+ADs +AH0).forEach(chk(cptable, true))+ADs
+  +AH0)+ADs
+  describe('direct', function() +AHs
+    Object.keys(cptable).filter(function(w) +AHs return w +AD0APQ +-w+ADs +AH0).forEach(chk(cptable, false))+ADs
+  +AH0)+ADs
 +AH0)+ADs
 +AGAAYABg
 
@@ -712,16 +729,25 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.3.0+ACI,
+  +ACI-version+ACI: +ACI-1.3.8+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
   +ACI-bin+ACI: +AHs
     +ACI-codepage+ACI: +ACI./bin/codepage.njs+ACI
   +AH0,
+  +ACI-files+ACI: +AFs
+    +ACI-LICENSE+ACI,
+    +ACI-README.md+ACI,
+    +ACI-bin+ACI,
+    +ACI-cptable.js+ACI,
+    +ACI-cputils.js+ACI,
+    +ACI-dist/cpexcel.full.js+ACI
+  +AF0,
   +ACI-main+ACI: +ACI-cputils.js+ACI,
   +ACI-dependencies+ACI: +AHs
     +ACI-voc+ACI:+ACIAIg,
+    +ACI-concat-stream+ACI:+ACIAIg,
     +ACI-commander+ACI:+ACIAIg
   +AH0,
   +ACI-devDependencies+ACI: +AHs
