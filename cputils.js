@@ -106,7 +106,6 @@
             mdb[2*i] = DD[j]; mdb[2*i+1] = DD[j+1];
           }
         }
-        mdb.length = 2 * len;
         return mdb.toString('ucs2');
       };
     };
