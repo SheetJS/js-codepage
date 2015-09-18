@@ -386,7 +386,6 @@
       default: throw new Error("Unsupported magic: " + cp + " " + magic[cp]);
     }
     else throw new Error("Unrecognized CP: " + cp);
-    out.length = j;
     out = out.slice(0,j);
     if(typeof Buffer === 'undefined') return (ofmt == 'str') ? out.map(sfcc).join("") : out;
     if(ofmt === undefined || ofmt === 'buf') return out;
