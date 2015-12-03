@@ -6447,7 +6447,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
             mdb[2*i] = DD[j]; mdb[2*i+1] = DD[j+1];
           }
         }
-        mdb.length = 2 * len;
+        mdb = mdb.slice(0, 2 * len);
         return mdb.toString('ucs2');
       };
     };
@@ -6534,7 +6534,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
     magic_decode[65001] = function utf8_d(data) {
       var len = data.length, w = 0, ww = 0;
       if(4 * len > mdl) { mdl = 4 * len; mdb = new Buffer(mdl); }
-      mdb.length = 0;
+      mdb = mdb.slice(0);
       var i = 0;
       if(len >= 3 && data[0] == 0xEF) if(data[1] == 0xBB && data[2] == 0xBF) i = 3;
       for(var j = 1, k = 0, D = 0; i < len; i+=j) {
@@ -6549,7 +6549,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
           mdb[k++] = ww&255; mdb[k++] = ww>>>8; mdb[k++] = w&255; mdb[k++] = (w>>>8)&255;
         }
       }
-      mdb.length = k;
+      mdb = mdb.slice(0, k);
       return mdb.toString('ucs2');
     };
     magic_encode[65001] = function utf8_e(data, ofmt) {
@@ -6575,7 +6575,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
           mdb[j++] = 128 + (w&63);
         }
       }
-      mdb.length = j;
+      mdb = mdb.slice(0, j);
       if(ofmt === undefined || ofmt === 'buf') return mdb;
       if(ofmt !== 'arr') return mdb.toString('binary');
       return [].slice.call(mdb);
