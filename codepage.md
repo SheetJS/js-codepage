@@ -748,6 +748,7 @@ describe('failures', function() {
   "dependencies": {
     "voc":"",
     "concat-stream":"",
+    "exit-on-epipe":"",
     "commander":""
   },
   "devDependencies": {

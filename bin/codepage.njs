@@ -2,6 +2,7 @@
 /* js-codepage (C) 2014-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2 ft=javascript: */
 var codepage = require('../');
+require('exit-on-epipe');
 var fs = require('fs'), program = require('commander');
 program
 	.version(codepage.version)
