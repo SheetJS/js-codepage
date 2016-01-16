@@ -372,7 +372,7 @@ the complete decoding object (and the encoding object is an eversion):
     }
     outstr += 'return {"enc": e, "dec": d }; })();';
 }
-console.log(jsvar + "[" + cp + "] = " + outstr);
+process.stdout.write(jsvar + "[" + cp + "] = " + outstr + "\n");
 
 ```
 
@@ -405,7 +405,7 @@ VERSION=$(cat package.json | grep version | tr -dc [0-9.])
 
 mkdir -p codepages bits
 rm -f $OUTFILE $OUTFILE.tmp
-echo "/* $OUTFILE (C) 2013-2014 SheetJS -- http://sheetjs.com */" > $OUTFILE.tmp
+echo "/* $OUTFILE (C) 2013-present SheetJS -- http://sheetjs.com */" > $OUTFILE.tmp
 echo "/*jshint -W100 */" >> $OUTFILE.tmp
 echo "var $JSVAR = {version:\"$VERSION\"};" >> $OUTFILE.tmp
 if [ -e dotnet.sh ]; then bash dotnet.sh; fi
@@ -729,7 +729,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.3.8",
+  "version": "1.4.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],

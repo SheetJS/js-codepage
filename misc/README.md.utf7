@@ -287,6 +287,6 @@ pattern +AGA-CP+AF8AIw.NLS+AGA, but newer versions use the pattern +AGA-C+AF8AIw
 
 +ACMAIw Badges
 
-+AFsAIQBb-githalytics.com alpha+AF0(https://cruel-carlota.pagodabox.com/afa29a5e8495a01059ee5b353f9042cb +ACI-githalytics.com+ACI)+AF0(http://githalytics.com/SheetJS/js-codepage)
 +AFsAIQBb-Build Status+AF0(https://travis-ci.org/SheetJS/js-codepage.svg?branch+AD0-master)+AF0(https://travis-ci.org/SheetJS/js-codepage)
 +AFsAIQBb-Coverage Status+AF0(https://coveralls.io/repos/SheetJS/js-codepage/badge.png)+AF0(https://coveralls.io/r/SheetJS/js-codepage)
++AFsAIQBb-Analytics+AF0(https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/js-codepage?pixel)+AF0(https://github.com/SheetJS/js-codepage)

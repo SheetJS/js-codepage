@@ -1,6 +1,6 @@
-/* sbcs.js (C) 2013-2014 SheetJS -- http://sheetjs.com */
+/* sbcs.js (C) 2013-present SheetJS -- http://sheetjs.com */
 /*jshint -W100 */
-var cptable = {version:"1.3.7"};
+var cptable = {version:"1.4.0"};
 cptable[37] = (function(){ var d = "\u0000\u0001\u0002\u0003\t\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\b\u0018\u0019\u001c\u001d\u001e\u001f\n\u0017\u001b\u0005\u0006\u0007\u0016\u0004\u0014\u0015\u001a  âäàáãåçñ¢.<(+|&éêëèíîïìß!$*);¬-/ÂÄÀÁÃÅÇÑ¦,%_>?øÉÊËÈÍÎÏÌ`:#@'=\"Øabcdefghi«»ðýþ±°jklmnopqrªºæ¸Æ¤µ~stuvwxyz¡¿ÐÝÞ®^£¥·©§¶¼½¾[]¯¨´×{ABCDEFGHI­ôöòóõ}JKLMNOPQR¹ûüùúÿ\\÷STUVWXYZ²ÔÖÒÓÕ0123456789³ÛÜÙÚ", D = [], e = {}; for(var i=0;i!=d.length;++i) { if(d.charCodeAt(i) !== 0xFFFD) e[d[i]] = i; D[i] = d.charAt(i); } return {"enc": e, "dec": D }; })();
 cptable[437] = (function(){ var d = "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈°∙·√ⁿ²■ ", D = [], e = {}; for(var i=0;i!=d.length;++i) { if(d.charCodeAt(i) !== 0xFFFD) e[d[i]] = i; D[i] = d.charAt(i); } return {"enc": e, "dec": D }; })();
 cptable[500] = (function(){ var d = "\u0000\u0001\u0002\u0003\t\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\b\u0018\u0019\u001c\u001d\u001e\u001f\n\u0017\u001b\u0005\u0006\u0007\u0016\u0004\u0014\u0015\u001a  âäàáãåçñ[.<(+!&éêëèíîïìß]$*);^-/ÂÄÀÁÃÅÇÑ¦,%_>?øÉÊËÈÍÎÏÌ`:#@'=\"Øabcdefghi«»ðýþ±°jklmnopqrªºæ¸Æ¤µ~stuvwxyz¡¿ÐÝÞ®¢£¥·©§¶¼½¾¬|¯¨´×{ABCDEFGHI­ôöòóõ}JKLMNOPQR¹ûüùúÿ\\÷STUVWXYZ²ÔÖÒÓÕ0123456789³ÛÜÙÚ", D = [], e = {}; for(var i=0;i!=d.length;++i) { if(d.charCodeAt(i) !== 0xFFFD) e[d[i]] = i; D[i] = d.charAt(i); } return {"enc": e, "dec": D }; })();
@@ -103,7 +103,7 @@ cptable[38598] = (function(){ var d = "\u0002\u0003\u0004\u0005\u0006\u000
 cptable[620] = (function(){ var d = "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ÇüéâäàąçêëèïîćÄĄĘęłôöĆûùŚÖÜ¢Ł¥śƒŹŻóÓńŃźż¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈°∙·√ⁿ²■ ", D = [], e = {}; for(var i=0;i!=d.length;++i) { if(d.charCodeAt(i) !== 0xFFFD) e[d[i]] = i; D[i] = d.charAt(i); } return {"enc": e, "dec": D }; })();
 cptable[895] = (function(){ var d = "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ČüéďäĎŤčěĚĹÍľǪÄÁÉžŽôöÓůÚýÖÜŠĽÝŘťáíóúňŇŮÔšřŕŔ¼§«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈°∙·√ⁿ²■ ", D = [], e = {}; for(var i=0;i!=d.length;++i) { if(d.charCodeAt(i) !== 0xFFFD) e[d[i]] = i; D[i] = d.charAt(i); } return {"enc": e, "dec": D }; })();
 if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
-/* cputils.js (C) 2013-2014 SheetJS -- http://sheetjs.com */
+/* cputils.js (C) 2013-present SheetJS -- http://sheetjs.com */
 /*jshint newcap: false */
 (function(root, factory){
   "use strict";
@@ -173,7 +173,6 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
               else { w -= 65536; out[j++] = EE[0xD800 + ((w>>10)&1023)]; out[j++] = EE[0xDC00 + (w&1023)]; }
             }
           }
-          out.length = j;
           out = out.slice(0,j);
         } else {
           out = Buffer(len);
@@ -211,8 +210,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
             mdb[2*i] = DD[j]; mdb[2*i+1] = DD[j+1];
           }
         }
-        mdb.length = 2 * len;
-        return mdb.toString('ucs2');
+        return mdb.slice(0, 2 * len).toString('ucs2');
       };
     };
     var dbcs_encode = function make_dbcs_encode(cp) {
@@ -232,7 +230,6 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
             j = data.charCodeAt(i)*2;
             out[k++] = EE[j+1] || EE[j]; if(EE[j+1] > 0) out[k++] = EE[j];
           }
-          out.length = k;
           out = out.slice(0,k);
         } else if(Buffer.isBuffer(data)) {
           for(i = k = 0; i < len; ++i) {
@@ -247,7 +244,6 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
               j=2*(0xDC00 + (jj&1023)); out[k++] = EE[j+1] || EE[j]; if(EE[j+1] > 0) out[k++] = EE[j];
             }
           }
-          out.length = k;
           out = out.slice(0,k);
         } else {
           for(i = k = 0; i < len; i++) {
@@ -291,14 +287,12 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
             out[k++] = DD[j]; out[k++] = DD[j+1];
           }
         }
-        out.length = k;
-        return out.toString('ucs2');
+        return out.slice(0,k).toString('ucs2');
       };
     };
     magic_decode[65001] = function utf8_d(data) {
       var len = data.length, w = 0, ww = 0;
       if(4 * len > mdl) { mdl = 4 * len; mdb = new Buffer(mdl); }
-      mdb.length = 0;
       var i = 0;
       if(len >= 3 && data[0] == 0xEF) if(data[1] == 0xBB && data[2] == 0xBF) i = 3;
       for(var j = 1, k = 0, D = 0; i < len; i+=j) {
@@ -313,8 +307,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
           mdb[k++] = ww&255; mdb[k++] = ww>>>8; mdb[k++] = w&255; mdb[k++] = (w>>>8)&255;
         }
       }
-      mdb.length = k;
-      return mdb.toString('ucs2');
+      return mdb.slice(0,k).toString('ucs2');
     };
     magic_encode[65001] = function utf8_e(data, ofmt) {
       var len = data.length, w = 0, ww = 0, j = 0;
@@ -339,10 +332,9 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
           mdb[j++] = 128 + (w&63);
         }
       }
-      mdb.length = j;
-      if(ofmt === undefined || ofmt === 'buf') return mdb;
-      if(ofmt !== 'arr') return mdb.toString('binary');
-      return [].slice.call(mdb);
+      if(ofmt === undefined || ofmt === 'buf') return mdb.slice(0,j);
+      if(ofmt !== 'arr') return mdb.slice(0,j).toString('binary');
+      return [].slice.call(mdb, 0, j);
     };
   }
 
@@ -491,7 +483,6 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
       default: throw new Error("Unsupported magic: " + cp + " " + magic[cp]);
     }
     else throw new Error("Unrecognized CP: " + cp);
-    out.length = j;
     out = out.slice(0,j);
     if(typeof Buffer === 'undefined') return (ofmt == 'str') ? out.map(sfcc).join("") : out;
     if(ofmt === undefined || ofmt === 'buf') return out;
@@ -555,7 +546,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
         break;
       case "utf32le":
         i = 0;
-        if(len >= 4 && data[0] == 0xFF) if(data[1] == 0xFE && data[2] == 0 && data[3] == 0) i = 4;
+        if(len >= 4 && data[0] == 0xFF) if(data[1] == 0xFE && data[2] === 0 && data[3] === 0) i = 4;
         j = 4;
         for(; i < len; i+=j) {
           w = (data[i+3]<<24) + (data[i+2]<<16) + (data[i+1]<<8) + (data[i]);
@@ -569,7 +560,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
         break;
       case "utf32be":
         i = 0;
-        if(len >= 4 && data[3] == 0xFF) if(data[2] == 0xFE && data[1] == 0 && data[0] == 0) i = 4;
+        if(len >= 4 && data[3] == 0xFF) if(data[2] == 0xFE && data[1] === 0 && data[0] === 0) i = 4;
         j = 4;
         for(; i < len; i+=j) {
           w = (data[i]<<24) + (data[i+1]<<16) + (data[i+2]<<8) + (data[i+3]);
@@ -620,8 +611,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = cptable;
       default: throw new Error("Unsupported magic: " + cp + " " + magic[cp]);
     }
     else throw new Error("Unrecognized CP: " + cp);
-    out.length = k;
-    return out.join("");
+    return out.slice(0,k).join("");
   };
   var hascp = function hascp(cp) { return cpt[cp] || magic[cp]; };
   cpt.utils = { decode: decode, encode: encode, hascp: hascp, magic: magic, cache:cache };

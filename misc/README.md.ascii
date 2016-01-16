@@ -287,6 +287,6 @@ pattern `CP_#.NLS`, but newer versions use the pattern `C_#.NLS`.
 
 ## Badges
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/afa29a5e8495a01059ee5b353f9042cb "githalytics.com")](http://githalytics.com/SheetJS/js-codepage)
 [![Build Status](https://travis-ci.org/SheetJS/js-codepage.svg?branch=master)](https://travis-ci.org/SheetJS/js-codepage)
 [![Coverage Status](https://coveralls.io/repos/SheetJS/js-codepage/badge.png)](https://coveralls.io/r/SheetJS/js-codepage)
+[![Analytics](https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/js-codepage?pixel)](https://github.com/SheetJS/js-codepage)

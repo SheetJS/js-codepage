@@ -372,7 +372,7 @@ the complete decoding object (and the encoding object is an eversion):
     +AH0
     outstr +-+AD0 'return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: d +AH0AOw +AH0)()+ADs'+ADs
 +AH0
-console.log(jsvar +- +ACIAWwAi +- cp +- +ACIAXQ +AD0 +ACI +- outstr)+ADs
+process.stdout.write(jsvar +- +ACIAWwAi +- cp +- +ACIAXQ +AD0 +ACI +- outstr +- +ACIAXA-n+ACI)+ADs
 
 +AGAAYABg
 
@@ -405,7 +405,7 @@ VERSION+AD0AJA(cat package.json +AHw grep version +AHw tr -dc +AFs-0-9.+AF0)
 
 mkdir -p codepages bits
 rm -f +ACQ-OUTFILE +ACQ-OUTFILE.tmp
-echo +ACI-/+ACo +ACQ-OUTFILE (C) 2013-2014 SheetJS -- http://sheetjs.com +ACo-/+ACI +AD4 +ACQ-OUTFILE.tmp
+echo +ACI-/+ACo +ACQ-OUTFILE (C) 2013-present SheetJS -- http://sheetjs.com +ACo-/+ACI +AD4 +ACQ-OUTFILE.tmp
 echo +ACI-/+ACo-jshint -W100 +ACo-/+ACI +AD4APg +ACQ-OUTFILE.tmp
 echo +ACI-var +ACQ-JSVAR +AD0 +AHs-version:+AFwAIgAk-VERSION+AFwAIgB9ADsAIg +AD4APg +ACQ-OUTFILE.tmp
 if +AFs -e dotnet.sh +AF0AOw then bash dotnet.sh+ADs fi
@@ -729,7 +729,7 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.3.8+ACI,
+  +ACI-version+ACI: +ACI-1.4.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,

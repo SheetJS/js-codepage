@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* js-codepage (C) 2014 SheetJS -- http://sheetjs.com */
+/* js-codepage (C) 2014-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2 ft=javascript: */
 /* nls2tbl: read windows NLS (c:\windows\system32\C_<cp>.NLS files, make TBL */
 var fs = require('fs');

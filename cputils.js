@@ -1,4 +1,4 @@
-/* cputils.js (C) 2013-2014 SheetJS -- http://sheetjs.com */
+/* cputils.js (C) 2013-present SheetJS -- http://sheetjs.com */
 /*jshint newcap: false */
 (function(root, factory){
   "use strict";
@@ -68,7 +68,6 @@
               else { w -= 65536; out[j++] = EE[0xD800 + ((w>>10)&1023)]; out[j++] = EE[0xDC00 + (w&1023)]; }
             }
           }
-          out.length = j;
           out = out.slice(0,j);
         } else {
           out = Buffer(len);
@@ -106,8 +105,7 @@
             mdb[2*i] = DD[j]; mdb[2*i+1] = DD[j+1];
           }
         }
-        mdb.length = 2 * len;
-        return mdb.toString('ucs2');
+        return mdb.slice(0, 2 * len).toString('ucs2');
       };
     };
     var dbcs_encode = function make_dbcs_encode(cp) {
@@ -127,7 +125,6 @@
             j = data.charCodeAt(i)*2;
             out[k++] = EE[j+1] || EE[j]; if(EE[j+1] > 0) out[k++] = EE[j];
           }
-          out.length = k;
           out = out.slice(0,k);
         } else if(Buffer.isBuffer(data)) {
           for(i = k = 0; i < len; ++i) {
@@ -142,7 +139,6 @@
               j=2*(0xDC00 + (jj&1023)); out[k++] = EE[j+1] || EE[j]; if(EE[j+1] > 0) out[k++] = EE[j];
             }
           }
-          out.length = k;
           out = out.slice(0,k);
         } else {
           for(i = k = 0; i < len; i++) {
@@ -186,14 +182,12 @@
             out[k++] = DD[j]; out[k++] = DD[j+1];
           }
         }
-        out.length = k;
-        return out.toString('ucs2');
+        return out.slice(0,k).toString('ucs2');
       };
     };
     magic_decode[65001] = function utf8_d(data) {
       var len = data.length, w = 0, ww = 0;
       if(4 * len > mdl) { mdl = 4 * len; mdb = new Buffer(mdl); }
-      mdb.length = 0;
       var i = 0;
       if(len >= 3 && data[0] == 0xEF) if(data[1] == 0xBB && data[2] == 0xBF) i = 3;
       for(var j = 1, k = 0, D = 0; i < len; i+=j) {
@@ -208,8 +202,7 @@
           mdb[k++] = ww&255; mdb[k++] = ww>>>8; mdb[k++] = w&255; mdb[k++] = (w>>>8)&255;
         }
       }
-      mdb.length = k;
-      return mdb.toString('ucs2');
+      return mdb.slice(0,k).toString('ucs2');
     };
     magic_encode[65001] = function utf8_e(data, ofmt) {
       var len = data.length, w = 0, ww = 0, j = 0;
@@ -234,10 +227,9 @@
           mdb[j++] = 128 + (w&63);
         }
       }
-      mdb.length = j;
-      if(ofmt === undefined || ofmt === 'buf') return mdb;
-      if(ofmt !== 'arr') return mdb.toString('binary');
-      return [].slice.call(mdb);
+      if(ofmt === undefined || ofmt === 'buf') return mdb.slice(0,j);
+      if(ofmt !== 'arr') return mdb.slice(0,j).toString('binary');
+      return [].slice.call(mdb, 0, j);
     };
   }
 
@@ -386,7 +378,6 @@
       default: throw new Error("Unsupported magic: " + cp + " " + magic[cp]);
     }
     else throw new Error("Unrecognized CP: " + cp);
-    out.length = j;
     out = out.slice(0,j);
     if(typeof Buffer === 'undefined') return (ofmt == 'str') ? out.map(sfcc).join("") : out;
     if(ofmt === undefined || ofmt === 'buf') return out;
@@ -450,7 +441,7 @@
         break;
       case "utf32le":
         i = 0;
-        if(len >= 4 && data[0] == 0xFF) if(data[1] == 0xFE && data[2] == 0 && data[3] == 0) i = 4;
+        if(len >= 4 && data[0] == 0xFF) if(data[1] == 0xFE && data[2] === 0 && data[3] === 0) i = 4;
         j = 4;
         for(; i < len; i+=j) {
           w = (data[i+3]<<24) + (data[i+2]<<16) + (data[i+1]<<8) + (data[i]);
@@ -464,7 +455,7 @@
         break;
       case "utf32be":
         i = 0;
-        if(len >= 4 && data[3] == 0xFF) if(data[2] == 0xFE && data[1] == 0 && data[0] == 0) i = 4;
+        if(len >= 4 && data[3] == 0xFF) if(data[2] == 0xFE && data[1] === 0 && data[0] === 0) i = 4;
         j = 4;
         for(; i < len; i+=j) {
           w = (data[i]<<24) + (data[i+1]<<16) + (data[i+2]<<8) + (data[i+3]);
@@ -515,8 +506,7 @@
       default: throw new Error("Unsupported magic: " + cp + " " + magic[cp]);
     }
     else throw new Error("Unrecognized CP: " + cp);
-    out.length = k;
-    return out.join("");
+    return out.slice(0,k).join("");
   };
   var hascp = function hascp(cp) { return cpt[cp] || magic[cp]; };
   cpt.utils = { decode: decode, encode: encode, hascp: hascp, magic: magic, cache:cache };

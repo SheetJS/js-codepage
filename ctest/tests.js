@@ -12,6 +12,15 @@ describe('README', function() {
     assert.equal(汇总,"汇总");
     assert.equal(buf.length, 4);
     for(var i = 0; i != 4; ++i) assert.equal(b1[i], buf[i]);
+// dafuq
+
+    var b2 = [0xf0,0x9f,0x8d,0xa3];
+    var sushi= cptable.utils.decode(65001, b2);
+    var sbuf = cptable.utils.encode(65001, sushi);
+    assert.equal(sushi,"🍣");
+    assert.equal(sbuf.length, 4);
+    for(var i = 0; i != 4; ++i) assert.equal(b2[i], sbuf[i]);
+
   };
   it('should be correct', function() {
     cptable.utils.cache.encache();
@@ -105,11 +114,11 @@ function cmp(x,z) {
   for(var i = 0; i != z.length; ++i) assert.equal(i+"/"+x.length+""+x[i], i+"/"+z.length+""+z[i]);
 }
 Object.keys(m).forEach(function(t){if(t != 16969) describe(m[t], function() {
-  it("should process README.md." + m[t], function() {
+  it("should process README.md." + m[t],
+    function() {
       var b = README["str"];
       if(m[t] === "ascii") b = b.replace(/[\u0080-\uffff]*/g,"");
-      var x = README[m[t]];
-      x = [].slice.call(x);
+      var x = README[m[t]].data;
       cptable.utils.cache.encache();
       var y = cptable.utils.decode(t, x);
       assert.equal(y,b);

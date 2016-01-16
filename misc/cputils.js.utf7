@@ -1,4 +1,4 @@
-/+ACo cputils.js (C) 2013-2014 SheetJS -- http://sheetjs.com +ACo-/
+/+ACo cputils.js (C) 2013-present SheetJS -- http://sheetjs.com +ACo-/
 /+ACo-jshint newcap: false +ACo-/
 (function(root, factory)+AHs
   +ACI-use strict+ACIAOw
@@ -68,7 +68,6 @@
               else +AHs w -+AD0 65536+ADs out+AFs-j+-+-+AF0 +AD0 EE+AFs-0xD800 +- ((w+AD4APg-10)+ACY-1023)+AF0AOw out+AFs-j+-+-+AF0 +AD0 EE+AFs-0xDC00 +- (w+ACY-1023)+AF0AOw +AH0
             +AH0
           +AH0
-          out.length +AD0 j+ADs
           out +AD0 out.slice(0,j)+ADs
         +AH0 else +AHs
           out +AD0 Buffer(len)+ADs
@@ -106,8 +105,7 @@
             mdb+AFs-2+ACo-i+AF0 +AD0 DD+AFs-j+AF0AOw mdb+AFs-2+ACo-i+-1+AF0 +AD0 DD+AFs-j+-1+AF0AOw
           +AH0
         +AH0
-        mdb.length +AD0 2 +ACo len+ADs
-        return mdb.toString('ucs2')+ADs
+        return mdb.slice(0, 2 +ACo len).toString('ucs2')+ADs
       +AH0AOw
     +AH0AOw
     var dbcs+AF8-encode +AD0 function make+AF8-dbcs+AF8-encode(cp) +AHs
@@ -127,7 +125,6 @@
             j +AD0 data.charCodeAt(i)+ACo-2+ADs
             out+AFs-k+-+-+AF0 +AD0 EE+AFs-j+-1+AF0 +AHwAfA EE+AFs-j+AF0AOw if(EE+AFs-j+-1+AF0 +AD4 0) out+AFs-k+-+-+AF0 +AD0 EE+AFs-j+AF0AOw
           +AH0
-          out.length +AD0 k+ADs
           out +AD0 out.slice(0,k)+ADs
         +AH0 else if(Buffer.isBuffer(data)) +AHs
           for(i +AD0 k +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
@@ -142,7 +139,6 @@
               j+AD0-2+ACo(0xDC00 +- (jj+ACY-1023))+ADs out+AFs-k+-+-+AF0 +AD0 EE+AFs-j+-1+AF0 +AHwAfA EE+AFs-j+AF0AOw if(EE+AFs-j+-1+AF0 +AD4 0) out+AFs-k+-+-+AF0 +AD0 EE+AFs-j+AF0AOw
             +AH0
           +AH0
-          out.length +AD0 k+ADs
           out +AD0 out.slice(0,k)+ADs
         +AH0 else +AHs
           for(i +AD0 k +AD0 0+ADs i +ADw len+ADs i+-+-) +AHs
@@ -186,14 +182,12 @@
             out+AFs-k+-+-+AF0 +AD0 DD+AFs-j+AF0AOw out+AFs-k+-+-+AF0 +AD0 DD+AFs-j+-1+AF0AOw
           +AH0
         +AH0
-        out.length +AD0 k+ADs
-        return out.toString('ucs2')+ADs
+        return out.slice(0,k).toString('ucs2')+ADs
       +AH0AOw
     +AH0AOw
     magic+AF8-decode+AFs-65001+AF0 +AD0 function utf8+AF8-d(data) +AHs
       var len +AD0 data.length, w +AD0 0, ww +AD0 0+ADs
       if(4 +ACo len +AD4 mdl) +AHs mdl +AD0 4 +ACo len+ADs mdb +AD0 new Buffer(mdl)+ADs +AH0
-      mdb.length +AD0 0+ADs
       var i +AD0 0+ADs
       if(len +AD4APQ 3 +ACYAJg data+AFs-0+AF0 +AD0APQ 0xEF) if(data+AFs-1+AF0 +AD0APQ 0xBB +ACYAJg data+AFs-2+AF0 +AD0APQ 0xBF) i +AD0 3+ADs
       for(var j +AD0 1, k +AD0 0, D +AD0 0+ADs i +ADw len+ADs i+-+AD0-j) +AHs
@@ -208,8 +202,7 @@
           mdb+AFs-k+-+-+AF0 +AD0 ww+ACY-255+ADs mdb+AFs-k+-+-+AF0 +AD0 ww+AD4APgA+-8+ADs mdb+AFs-k+-+-+AF0 +AD0 w+ACY-255+ADs mdb+AFs-k+-+-+AF0 +AD0 (w+AD4APgA+-8)+ACY-255+ADs
         +AH0
       +AH0
-      mdb.length +AD0 k+ADs
-      return mdb.toString('ucs2')+ADs
+      return mdb.slice(0,k).toString('ucs2')+ADs
     +AH0AOw
     magic+AF8-encode+AFs-65001+AF0 +AD0 function utf8+AF8-e(data, ofmt) +AHs
       var len +AD0 data.length, w +AD0 0, ww +AD0 0, j +AD0 0+ADs
@@ -234,10 +227,9 @@
           mdb+AFs-j+-+-+AF0 +AD0 128 +- (w+ACY-63)+ADs
         +AH0
       +AH0
-      mdb.length +AD0 j+ADs
-      if(ofmt +AD0APQA9 undefined +AHwAfA ofmt +AD0APQA9 'buf') return mdb+ADs
-      if(ofmt +ACEAPQA9 'arr') return mdb.toString('binary')+ADs
-      return +AFsAXQ.slice.call(mdb)+ADs
+      if(ofmt +AD0APQA9 undefined +AHwAfA ofmt +AD0APQA9 'buf') return mdb.slice(0,j)+ADs
+      if(ofmt +ACEAPQA9 'arr') return mdb.slice(0,j).toString('binary')+ADs
+      return +AFsAXQ.slice.call(mdb, 0, j)+ADs
     +AH0AOw
   +AH0
 
@@ -386,7 +378,6 @@
       default: throw new Error(+ACI-Unsupported magic: +ACI +- cp +- +ACI +ACI +- magic+AFs-cp+AF0)+ADs
     +AH0
     else throw new Error(+ACI-Unrecognized CP: +ACI +- cp)+ADs
-    out.length +AD0 j+ADs
     out +AD0 out.slice(0,j)+ADs
     if(typeof Buffer +AD0APQA9 'undefined') return (ofmt +AD0APQ 'str') ? out.map(sfcc).join(+ACIAIg) : out+ADs
     if(ofmt +AD0APQA9 undefined +AHwAfA ofmt +AD0APQA9 'buf') return out+ADs
@@ -450,7 +441,7 @@
         break+ADs
       case +ACI-utf32le+ACI:
         i +AD0 0+ADs
-        if(len +AD4APQ 4 +ACYAJg data+AFs-0+AF0 +AD0APQ 0xFF) if(data+AFs-1+AF0 +AD0APQ 0xFE +ACYAJg data+AFs-2+AF0 +AD0APQ 0 +ACYAJg data+AFs-3+AF0 +AD0APQ 0) i +AD0 4+ADs
+        if(len +AD4APQ 4 +ACYAJg data+AFs-0+AF0 +AD0APQ 0xFF) if(data+AFs-1+AF0 +AD0APQ 0xFE +ACYAJg data+AFs-2+AF0 +AD0APQA9 0 +ACYAJg data+AFs-3+AF0 +AD0APQA9 0) i +AD0 4+ADs
         j +AD0 4+ADs
         for(+ADs i +ADw len+ADs i+-+AD0-j) +AHs
           w +AD0 (data+AFs-i+-3+AF0APAA8-24) +- (data+AFs-i+-2+AF0APAA8-16) +- (data+AFs-i+-1+AF0APAA8-8) +- (data+AFs-i+AF0)+ADs
@@ -464,7 +455,7 @@
         break+ADs
       case +ACI-utf32be+ACI:
         i +AD0 0+ADs
-        if(len +AD4APQ 4 +ACYAJg data+AFs-3+AF0 +AD0APQ 0xFF) if(data+AFs-2+AF0 +AD0APQ 0xFE +ACYAJg data+AFs-1+AF0 +AD0APQ 0 +ACYAJg data+AFs-0+AF0 +AD0APQ 0) i +AD0 4+ADs
+        if(len +AD4APQ 4 +ACYAJg data+AFs-3+AF0 +AD0APQ 0xFF) if(data+AFs-2+AF0 +AD0APQ 0xFE +ACYAJg data+AFs-1+AF0 +AD0APQA9 0 +ACYAJg data+AFs-0+AF0 +AD0APQA9 0) i +AD0 4+ADs
         j +AD0 4+ADs
         for(+ADs i +ADw len+ADs i+-+AD0-j) +AHs
           w +AD0 (data+AFs-i+AF0APAA8-24) +- (data+AFs-i+-1+AF0APAA8-16) +- (data+AFs-i+-2+AF0APAA8-8) +- (data+AFs-i+-3+AF0)+ADs
@@ -515,8 +506,7 @@
       default: throw new Error(+ACI-Unsupported magic: +ACI +- cp +- +ACI +ACI +- magic+AFs-cp+AF0)+ADs
     +AH0
     else throw new Error(+ACI-Unrecognized CP: +ACI +- cp)+ADs
-    out.length +AD0 k+ADs
-    return out.join(+ACIAIg)+ADs
+    return out.slice(0,k).join(+ACIAIg)+ADs
   +AH0AOw
   var hascp +AD0 function hascp(cp) +AHs return cpt+AFs-cp+AF0 +AHwAfA magic+AFs-cp+AF0AOw +AH0AOw
   cpt.utils +AD0 +AHs decode: decode, encode: encode, hascp: hascp, magic: magic, cache:cache +AH0AOw

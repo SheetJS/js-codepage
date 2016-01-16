@@ -17,7 +17,7 @@ init:
 
 .PHONY: clean
 clean:
-	rm -f make.sh .vocrc *.csv bits/*.js
+	rm -f make.sh .vocrc pages.csv bits/*.js
 
 .PHONY: test mocha
 test mocha: test.js
