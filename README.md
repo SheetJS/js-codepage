@@ -12,17 +12,20 @@ which codepages are used.
 ## Setup
 
 In node:
-
-    var cptable = require('codepage');
+```js
+const cptable = require('codepage');
+```
 
 In the browser:
-
-    <script src="cptable.js"></script>
-    <script src="cputils.js"></script>
+```html
+<script src="cptable.js"></script>
+<script src="cputils.js"></script>
+```
 
 Alternatively, use the full version in the dist folder:
-
-    <script src="cptable.full.js"></script>
+```html
+<script src="cptable.full.js"></script>
+```
 
 The complete set of codepages is large due to some Double Byte Character Set
 encodings.  A much smaller file that just includes SBCS codepages is provided in
@@ -31,13 +34,14 @@ this repo (`sbcs.js`), as well as a file for other projects (`cpexcel.js`)
 If you know which codepages you need, you can include individual scripts for
 each codepage.  The individual files are provided in the `bits/` directory.
 For example, to include only the Mac codepages:
-
-    <script src="bits/10000.js"></script>
-    <script src="bits/10006.js"></script>
-    <script src="bits/10007.js"></script>
-    <script src="bits/10029.js"></script>
-    <script src="bits/10079.js"></script>
-    <script src="bits/10081.js"></script>
+```html
+<script src="bits/10000.js"></script>
+<script src="bits/10006.js"></script>
+<script src="bits/10007.js"></script>
+<script src="bits/10029.js"></script>
+<script src="bits/10079.js"></script>
+<script src="bits/10081.js"></script>
+```
 
 All of the browser scripts define and append to the `cptable` object.  To rename
 the object, edit the `JSVAR` shell variable in `make.sh` and run the script.
@@ -50,18 +54,24 @@ appropriate codepage scripts were loaded.
 The codepages are indexed by number.  To get the unicode character for a given
 codepoint, use the `dec` property:
 
-    var unicode_cp10000_255 = cptable[10000].dec[255]; // ˇ
+```js
+const unicode_cp10000_255 = cptable[10000].dec[255]; // ˇ
+```
 
 To get the codepoint for a given character, use the `enc` property:
 
-    var cp10000_711 = cptable[10000].enc[String.fromCharCode(711)]; // 255
+```js
+const cp10000_711 = cptable[10000].enc[String.fromCharCode(711)]; // 255
+```
 
 There are a few utilities that deal with strings and buffers:
 
-    var 汇总 = cptable.utils.decode(936, [0xbb,0xe3,0xd7,0xdc]);
-    var buf =  cptable.utils.encode(936,  汇总);
-    var sushi= cptable.utils.decode(65001, [0xf0,0x9f,0x8d,0xa3]); // 🍣
-    var sbuf = cptable.utils.encode(65001, sushi);
+```js
+const 汇总 = cptable.utils.decode(936, [0xbb,0xe3,0xd7,0xdc]);
+const buf =  cptable.utils.encode(936,  汇总);
+const sushi= cptable.utils.decode(65001, [0xf0,0x9f,0x8d,0xa3]); // 🍣
+const sbuf = cptable.utils.encode(65001, sushi);
+```
 
 `cptable.utils.encode(CP, data, ofmt)` accepts a String or Array of characters
 and returns a representation controlled by `ofmt`:
@@ -78,16 +88,18 @@ and is suitable as a drop-in replacement when the full codepage tables are not
 needed.
 
 In node:
-
-    var cptable = require('codepage/dist/cpexcel.full');
+```js
+const cptable = require('codepage/dist/cpexcel.full');
+```
 
 ## Rolling your own script
 
 The `make.sh` script in the repo can take a manifest and generate JS source.
 
 Usage:
-
-    bash make.sh path_to_manifest output_file_name JSVAR
+```console
+bash make.sh path_to_manifest output_file_name JSVAR
+```
 
 where
 
