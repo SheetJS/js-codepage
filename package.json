@@ -1,6 +1,6 @@
 {
   "name": "codepage",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -33,7 +33,7 @@
   },
   "config": {
     "blanket": {
-      "pattern": "[cptable.js,cputils.js,cpexcel.js]"
+      "pattern": "[cputils.js]"
     }
   },
   "bugs": { "url": "https://github.com/SheetJS/js-codepage/issues" },

@@ -36,6 +36,7 @@ The fields of the pages.csv manifest are `codepage,url,bytes` (SBCS=1, DBCS=2)
 1256,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1256.TXT,1
 1257,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1257.TXT,1
 1258,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1258.TXT,1
+47451,http://www.unicode.org/Public/MAPPINGS/VENDORS/MISC/ATARIST.TXT,1
 ```
 
 Note that the Windows rendering is used for the Mac code pages.  The primary
@@ -165,9 +166,13 @@ The following codepages are available in .NET on Windows:
 ```>pages.csv
 708,,1
 720,,1
+808,,1
 858,,1
 870,,1
+872,,1
+1010,,1
 1047,,1
+1132,,1
 1140,,1
 1141,,1
 1142,,1
@@ -258,8 +263,6 @@ The following codepages are dependencies for Visual FoxPro:
 620,,1
 895,,1
 ```
-
-The known missing codepages are enumerated in the README.
 
 ## Building Notes
 
@@ -469,6 +472,7 @@ describe('README', function() {
     assert.equal(cp10000_711, 255);
 
     var b1 = [0xbb,0xe3,0xd7,0xdc];
+    var s1 = b1.map(function(x) { return String.fromCharCode(x); }).join("");
     var 汇总 = cptable.utils.decode(936, b1);
     var buf =  cptable.utils.encode(936,  汇总);
     assert.equal(汇总,"汇总");
@@ -570,7 +574,7 @@ describe('entry conditions', function() {
     c(cp,i,'str');
   };
   describe('encode', function() {
-    it('CP  1252 : sbcs', function() { chken(1252,"foobar"); });
+    it('CP  1252 : sbcs', function() { chken(1252,"foo•bþr"); });
     it('CP   708 : sbcs', function() { chken(708,"ت and ث smiley faces");});
     it('CP   936 : dbcs', function() { chken(936, "这是中文字符测试");});
   });
@@ -616,6 +620,10 @@ function testfile(f,cp,type,skip) {
     z = cptable.utils.encode(cp, a);
     if(z.length != d.length) throw new Error(f + " " + JSON.stringify(z) + " != " + JSON.stringify(d) + " : " + z.length + " " + d.length);
     for(var i = 0; i != d.length; ++i) if(d[i] !== z[i]) throw new Error("" + i + " " + d[i] + "!=" + z[i]);
+    if(f.indexOf("cptable.js") == -1) {
+      cptable.utils.encode(cp, d, 'str');
+      cptable.utils.encode(cp, d, 'arr');
+    }
   }
   cptable.utils.cache.encache();
   chk(cp);
@@ -680,6 +688,12 @@ Object.keys(m).forEach(function(t){if(t != 16969) describe(m[t], function() {
       if(t != 65000) cmp(x,z);
       else { assert.equal(y, cptable.utils.decode(t, z)); }
       cptable.utils.cache.encache();
+      cptable.utils.encode(t, y, 'str');
+      cptable.utils.encode(t, y, 'arr');
+      cptable.utils.cache.decache();
+      cptable.utils.encode(t, y, 'str');
+      cptable.utils.encode(t, y, 'arr');
+      cptable.utils.cache.encache();
     }
   : null);
   it("should process README.md." + m[t], fs.existsSync('./misc/README.md.' + m[t]) ?
@@ -721,6 +735,11 @@ describe('failures', function() {
   it('should fail when presented with invalid char codes', function() {
     assert.throws(function(){cptable.utils.cache.decache(); return cptable.utils.encode(20127, [String.fromCharCode(0xAA)]);});
   });
+  it('should fail to propagate UTF8 BOM in UTF7', function() {
+    ["+/v8-abc", "+/v9"].forEach(function(m) { assert.throws(function() {
+      assert.equal(m, cptable.utils.encode(65000, cptable.utils.decode(65000, m)));
+    }); });
+  });
 });
 ```
 
@@ -729,7 +748,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -762,7 +781,7 @@ describe('failures', function() {
   },
   "config": {
     "blanket": {
-      "pattern": "[cptable.js,cputils.js,cpexcel.js]"
+      "pattern": "[cputils.js]"
     }
   },
   "bugs": { "url": "https://github.com/SheetJS/js-codepage/issues" },

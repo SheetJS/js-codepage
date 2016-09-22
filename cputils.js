@@ -1,6 +1,7 @@
 /* cputils.js (C) 2013-present SheetJS -- http://sheetjs.com */
+/* vim: set ft=javascript: */
 /*jshint newcap: false */
-(function(root, factory){
+(function(root, factory) {
   "use strict";
   if(typeof cptable === "undefined") {
     if(typeof require !== "undefined"){
@@ -27,11 +28,11 @@
   var magic_cache = [65001];
   var magic_decode = {};
   var magic_encode = {};
-  var cpecache = {};
   var cpdcache = {};
+  var cpecache = {};
 
   var sfcc = function sfcc(x) { return String.fromCharCode(x); };
-  var cca = function cca(x){ return x.charCodeAt(0); };
+  var cca = function cca(x) { return x.charCodeAt(0); };
 
   var has_buf = (typeof Buffer !== 'undefined');
   if(has_buf) {
@@ -50,12 +51,12 @@
       var EE = make_EE(cpt[cp].enc);
       return function sbcs_e(data, ofmt) {
         var len = data.length;
-        var out, i, j, D, w;
+        var out, i=0, j=0, D=0, w=0;
         if(typeof data === 'string') {
-          out = Buffer(len);
+          out = new Buffer(len);
           for(i = 0; i < len; ++i) out[i] = EE[data.charCodeAt(i)];
         } else if(Buffer.isBuffer(data)) {
-          out = Buffer(2*len);
+          out = new Buffer(2*len);
           j = 0;
           for(i = 0; i < len; ++i) {
             D = data[i];
@@ -70,24 +71,24 @@
           }
           out = out.slice(0,j);
         } else {
-          out = Buffer(len);
+          out = new Buffer(len);
           for(i = 0; i < len; ++i) out[i] = EE[data[i].charCodeAt(0)];
         }
-        if(ofmt === undefined || ofmt === 'buf') return out;
+        if(!ofmt || ofmt === 'buf') return out;
         if(ofmt !== 'arr') return out.toString('binary');
         return [].slice.call(out);
       };
     };
     var sbcs_decode = function make_sbcs_decode(cp) {
       var D = cpt[cp].dec;
-      var DD = new Buffer(131072), d=0, c;
+      var DD = new Buffer(131072), d=0, c="";
       for(d=0;d<D.length;++d) {
         if(!(c=D[d])) continue;
         var w = c.charCodeAt(0);
         DD[2*d] = w&255; DD[2*d+1] = w>>8;
       }
       return function sbcs_d(data) {
-        var len = data.length, i=0, j;
+        var len = data.length, i=0, j=0;
         if(2 * len > mdl) { mdl = 2 * len; mdb = new Buffer(mdl); }
         if(Buffer.isBuffer(data)) {
           for(i = 0; i < len; i++) {
@@ -119,7 +120,7 @@
         EE[2*f] = E[e] & 255; EE[2*f+1] = E[e]>>8;
       }
       return function dbcs_e(data, ofmt) {
-        var len = data.length, out = new Buffer(2*len), i, j, jj, k, D;
+        var len = data.length, out = new Buffer(2*len), i=0, j=0, jj=0, k=0, D=0;
         if(typeof data === 'string') {
           for(i = k = 0; i < len; ++i) {
             j = data.charCodeAt(i)*2;
@@ -146,7 +147,7 @@
             out[k++] = EE[j+1] || EE[j]; if(EE[j+1] > 0) out[k++] = EE[j];
           }
         }
-        if(ofmt === undefined || ofmt === 'buf') return out;
+        if(!ofmt || ofmt === 'buf') return out;
         if(ofmt !== 'arr') return out.toString('binary');
         return [].slice.call(out);
       };
@@ -162,7 +163,7 @@
         DD[j] = w&255; DD[j+1] = w>>8;
       }
       return function dbcs_d(data) {
-        var len = data.length, out = new Buffer(2*len), i, j, k=0;
+        var len = data.length, out = new Buffer(2*len), i=0, j=0, k=0;
         if(Buffer.isBuffer(data)) {
           for(i = 0; i < len; i++) {
             j = 2*data[i];
@@ -186,6 +187,7 @@
       };
     };
     magic_decode[65001] = function utf8_d(data) {
+      if(typeof data === "string") return utf8_d(data.split("").map(cca));
       var len = data.length, w = 0, ww = 0;
       if(4 * len > mdl) { mdl = 4 * len; mdb = new Buffer(mdl); }
       var i = 0;
@@ -205,6 +207,11 @@
       return mdb.slice(0,k).toString('ucs2');
     };
     magic_encode[65001] = function utf8_e(data, ofmt) {
+      if(has_buf && Buffer.isBuffer(data)) {
+        if(!ofmt || ofmt === 'buf') return data;
+        if(ofmt !== 'arr') return data.toString('binary');
+        return [].slice.call(data);
+      }
       var len = data.length, w = 0, ww = 0, j = 0;
       var direct = typeof data === "string";
       if(4 * len > mdl) { mdl = 4 * len; mdb = new Buffer(mdl); }
@@ -227,7 +234,7 @@
           mdb[j++] = 128 + (w&63);
         }
       }
-      if(ofmt === undefined || ofmt === 'buf') return mdb.slice(0,j);
+      if(!ofmt || ofmt === 'buf') return mdb.slice(0,j);
       if(ofmt !== 'arr') return mdb.slice(0,j).toString('binary');
       return [].slice.call(mdb, 0, j);
     };
@@ -236,7 +243,7 @@
   var encache = function encache() {
     if(has_buf) {
       if(cpdcache[sbcs_cache[0]]) return;
-      var i, s;
+      var i=0, s=0;
       for(i = 0; i < sbcs_cache.length; ++i) {
         s = sbcs_cache[i];
         if(cpt[s]) {
@@ -258,7 +265,8 @@
       }
     }
   };
-  var cp_decache = function cp_decache(cp) { cpdcache[cp] = cpecache[cp] = undefined; };
+  var null_enc = function(data, ofmt) { return ""; };
+  var cp_decache = function cp_decache(cp) { delete cpdcache[cp]; delete cpecache[cp]; };
   var decache = function decache() {
     if(has_buf) {
       if(!cpdcache[sbcs_cache[0]]) return;
@@ -266,7 +274,7 @@
       dbcs_cache.forEach(cp_decache);
       magic_cache.forEach(cp_decache);
     }
-    last_enc = last_cp = undefined;
+    last_enc = null_enc; last_cp = 0;
   };
   var cache = {
     encache: encache,
@@ -279,21 +287,20 @@
 
   var BM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
   var SetD = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'(),-./:?";
-  var last_enc, last_cp;
+  var last_enc = null_enc, last_cp = 0;
   var encode = function encode(cp, data, ofmt) {
-    if(cp === last_cp) { return last_enc(data, ofmt); }
-    if(cpecache[cp] !== undefined) { last_enc = cpecache[last_cp=cp]; return last_enc(data, ofmt); }
+    if(cp === last_cp && last_enc) { return last_enc(data, ofmt); }
+    if(cpecache[cp]) { last_enc = cpecache[last_cp=cp]; return last_enc(data, ofmt); }
     if(has_buf && Buffer.isBuffer(data)) data = data.toString('utf8');
     var len = data.length;
-    var out = has_buf ? new Buffer(4*len) : [], w, i, j = 0, c, tt, ww;
-    var C = cpt[cp], E, M;
+    var out = has_buf ? new Buffer(4*len) : [], w=0, i=0, j = 0, ww=0;
+    var C = cpt[cp], E, M = "";
     if(C && (E=C.enc)) for(i = 0; i < len; ++i, ++j) {
       w = E[data[i]];
-      out[j] = w&255;
       if(w > 255) {
         out[j] = w>>8;
         out[++j] = w&255;
-      }
+      } else out[j] = w&255;
     }
     else if((M=magic[cp])) switch(M) {
       case "utf8":
@@ -358,16 +365,16 @@
           out[j+3] = w&255; w >>= 8;
           out[j+2] = w&255; w >>= 8;
           out[j+1] = w&255; w >>= 8;
-          out[j] = w&255; w >>= 8;
+          out[j] = w&255;
           j+=4;
         }
         break;
       case "utf7":
         for(i = 0; i < len; i++) {
-          c = data[i];
+          var c = data[i];
           if(c === "+") { out[j++] = 0x2b; out[j++] = 0x2d; continue; }
           if(SetD.indexOf(c) > -1) { out[j++] = c.charCodeAt(0); continue; }
-          tt = encode(1201, c);
+          var tt = encode(1201, c);
           out[j++] = 0x2b;
           out[j++] = BM.charCodeAt(tt[0]>>2);
           out[j++] = BM.charCodeAt(((tt[0]&0x03)<<4) + ((tt[1]||0)>>4));
@@ -379,31 +386,30 @@
     }
     else throw new Error("Unrecognized CP: " + cp);
     out = out.slice(0,j);
-    if(typeof Buffer === 'undefined') return (ofmt == 'str') ? out.map(sfcc).join("") : out;
-    if(ofmt === undefined || ofmt === 'buf') return out;
+    if(!has_buf) return (ofmt == 'str') ? (out).map(sfcc).join("") : out;
+    if(!ofmt || ofmt === 'buf') return out;
     if(ofmt !== 'arr') return out.toString('binary');
     return [].slice.call(out);
   };
   var decode = function decode(cp, data) {
     var F; if((F=cpdcache[cp])) return F(data);
-    var len = data.length, out = new Array(len), w, i, j = 1, k = 0, ww;
-    var C = cpt[cp], D, M;
+    if(typeof data === "string") return decode(cp, data.split("").map(cca));
+    var len = data.length, out = new Array(len), s="", w=0, i=0, j=1, k=0, ww=0;
+    var C = cpt[cp], D, M="";
     if(C && (D=C.dec)) {
-      if(typeof data === "string") data = data.split("").map(cca);
       for(i = 0; i < len; i+=j) {
         j = 2;
-        w = D[(data[i]<<8)+ data[i+1]];
-        if(!w) {
+        s = D[(data[i]<<8)+ data[i+1]];
+        if(!s) {
           j = 1;
-          w = D[data[i]];
+          s = D[data[i]];
         }
-        if(!w) throw new Error('Unrecognized code: ' + data[i] + ' ' + data[i+j-1] + ' ' + i + ' ' + j + ' ' + D[data[i]]);
-        out[k++] = w;
+        if(!s) throw new Error('Unrecognized code: ' + data[i] + ' ' + data[i+j-1] + ' ' + i + ' ' + j + ' ' + D[data[i]]);
+        out[k++] = s;
       }
     }
     else if((M=magic[cp])) switch(M) {
       case "utf8":
-        i = 0;
         if(len >= 3 && data[0] == 0xEF) if(data[1] == 0xBB && data[2] == 0xBF) i = 3;
         for(; i < len; i+=j) {
           j = 1;
@@ -423,24 +429,21 @@
         for(i = 0; i < len; i++) out[i] = String.fromCharCode(data[i]);
         k = len; break;
       case "utf16le":
-        i = 0;
         if(len >= 2 && data[0] == 0xFF) if(data[1] == 0xFE) i = 2;
         if(has_buf && Buffer.isBuffer(data)) return data.toString(M);
         j = 2;
-        for(; i < len; i+=j) {
+        for(; i+1 < len; i+=j) {
           out[k++] = String.fromCharCode((data[i+1]<<8) + data[i]);
         }
         break;
       case "utf16be":
-        i = 0;
         if(len >= 2 && data[0] == 0xFE) if(data[1] == 0xFF) i = 2;
         j = 2;
-        for(; i < len; i+=j) {
+        for(; i+1 < len; i+=j) {
           out[k++] = String.fromCharCode((data[i]<<8) + data[i+1]);
         }
         break;
       case "utf32le":
-        i = 0;
         if(len >= 4 && data[0] == 0xFF) if(data[1] == 0xFE && data[2] === 0 && data[3] === 0) i = 4;
         j = 4;
         for(; i < len; i+=j) {
@@ -454,7 +457,6 @@
         }
         break;
       case "utf32be":
-        i = 0;
         if(len >= 4 && data[3] == 0xFF) if(data[2] == 0xFE && data[1] === 0 && data[0] === 0) i = 4;
         j = 4;
         for(; i < len; i+=j) {
@@ -468,7 +470,6 @@
         }
         break;
       case "utf7":
-        i = 0;
         if(len >= 4 && data[0] == 0x2B && data[1] == 0x2F && data[2] == 0x76) {
           if(len >= 5 && data[3] == 0x38 && data[4] == 0x2D) i = 5;
           else if(data[3] == 0x38 || data[3] == 0x39 || data[3] == 0x2B || data[3] == 0x2F) i = 4;
@@ -481,9 +482,9 @@
           var dash = 0;
           if(data[i+j] === 0x2d) { ++j; dash=1; }
           var tt = [];
-          var o64;
-          var c1, c2, c3;
-          var e1, e2, e3, e4;
+          var o64 = "";
+          var c1=0, c2=0, c3=0;
+          var e1=0, e2=0, e3=0, e4=0;
           for(var l = 1; l < j - dash;) {
             e1 = BM.indexOf(String.fromCharCode(data[i+l++]));
             e2 = BM.indexOf(String.fromCharCode(data[i+l++]));
@@ -498,9 +499,8 @@
             c3 = (e3 & 3) << 6 | e4;
             if(e4 < 64) tt.push(c3);
           }
-          if((tt.length & 1) === 1) tt.length--;
           o64 = decode(1201, tt);
-          for(l = 0; l < o64.length; ++l) out[k++] = o64[l];
+          for(l = 0; l < o64.length; ++l) out[k++] = o64.charAt(l);
         }
         break;
       default: throw new Error("Unsupported magic: " + cp + " " + magic[cp]);
@@ -508,7 +508,7 @@
     else throw new Error("Unrecognized CP: " + cp);
     return out.slice(0,k).join("");
   };
-  var hascp = function hascp(cp) { return cpt[cp] || magic[cp]; };
+  var hascp = function hascp(cp) { return !!(cpt[cp] || magic[cp]); };
   cpt.utils = { decode: decode, encode: encode, hascp: hascp, magic: magic, cache:cache };
   return cpt;
 }));

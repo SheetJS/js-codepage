@@ -1,6 +1,7 @@
 /+ACo cputils.js (C) 2013-present SheetJS -- http://sheetjs.com +ACo-/
+/+ACo vim: set ft+AD0-javascript: +ACo-/
 /+ACo-jshint newcap: false +ACo-/
-(function(root, factory)+AHs
+(function(root, factory) +AHs
   +ACI-use strict+ACIAOw
   if(typeof cptable +AD0APQA9 +ACI-undefined+ACI) +AHs
     if(typeof require +ACEAPQA9 +ACI-undefined+ACI)+AHs
@@ -27,11 +28,11 @@
   var magic+AF8-cache +AD0 +AFs-65001+AF0AOw
   var magic+AF8-decode +AD0 +AHsAfQA7
   var magic+AF8-encode +AD0 +AHsAfQA7
-  var cpecache +AD0 +AHsAfQA7
   var cpdcache +AD0 +AHsAfQA7
+  var cpecache +AD0 +AHsAfQA7
 
   var sfcc +AD0 function sfcc(x) +AHs return String.fromCharCode(x)+ADs +AH0AOw
-  var cca +AD0 function cca(x)+AHs return x.charCodeAt(0)+ADs +AH0AOw
+  var cca +AD0 function cca(x) +AHs return x.charCodeAt(0)+ADs +AH0AOw
 
   var has+AF8-buf +AD0 (typeof Buffer +ACEAPQA9 'undefined')+ADs
   if(has+AF8-buf) +AHs
@@ -50,12 +51,12 @@
       var EE +AD0 make+AF8-EE(cpt+AFs-cp+AF0.enc)+ADs
       return function sbcs+AF8-e(data, ofmt) +AHs
         var len +AD0 data.length+ADs
-        var out, i, j, D, w+ADs
+        var out, i+AD0-0, j+AD0-0, D+AD0-0, w+AD0-0+ADs
         if(typeof data +AD0APQA9 'string') +AHs
-          out +AD0 Buffer(len)+ADs
+          out +AD0 new Buffer(len)+ADs
           for(i +AD0 0+ADs i +ADw len+ADs +-+-i) out+AFs-i+AF0 +AD0 EE+AFs-data.charCodeAt(i)+AF0AOw
         +AH0 else if(Buffer.isBuffer(data)) +AHs
-          out +AD0 Buffer(2+ACo-len)+ADs
+          out +AD0 new Buffer(2+ACo-len)+ADs
           j +AD0 0+ADs
           for(i +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
             D +AD0 data+AFs-i+AF0AOw
@@ -70,24 +71,24 @@
           +AH0
           out +AD0 out.slice(0,j)+ADs
         +AH0 else +AHs
-          out +AD0 Buffer(len)+ADs
+          out +AD0 new Buffer(len)+ADs
           for(i +AD0 0+ADs i +ADw len+ADs +-+-i) out+AFs-i+AF0 +AD0 EE+AFs-data+AFs-i+AF0.charCodeAt(0)+AF0AOw
         +AH0
-        if(ofmt +AD0APQA9 undefined +AHwAfA ofmt +AD0APQA9 'buf') return out+ADs
+        if(+ACE-ofmt +AHwAfA ofmt +AD0APQA9 'buf') return out+ADs
         if(ofmt +ACEAPQA9 'arr') return out.toString('binary')+ADs
         return +AFsAXQ.slice.call(out)+ADs
       +AH0AOw
     +AH0AOw
     var sbcs+AF8-decode +AD0 function make+AF8-sbcs+AF8-decode(cp) +AHs
       var D +AD0 cpt+AFs-cp+AF0.dec+ADs
-      var DD +AD0 new Buffer(131072), d+AD0-0, c+ADs
+      var DD +AD0 new Buffer(131072), d+AD0-0, c+AD0AIgAiADs
       for(d+AD0-0+ADs-d+ADw-D.length+ADsAKwAr-d) +AHs
         if(+ACE(c+AD0-D+AFs-d+AF0)) continue+ADs
         var w +AD0 c.charCodeAt(0)+ADs
         DD+AFs-2+ACo-d+AF0 +AD0 w+ACY-255+ADs DD+AFs-2+ACo-d+-1+AF0 +AD0 w+AD4APg-8+ADs
       +AH0
       return function sbcs+AF8-d(data) +AHs
-        var len +AD0 data.length, i+AD0-0, j+ADs
+        var len +AD0 data.length, i+AD0-0, j+AD0-0+ADs
         if(2 +ACo len +AD4 mdl) +AHs mdl +AD0 2 +ACo len+ADs mdb +AD0 new Buffer(mdl)+ADs +AH0
         if(Buffer.isBuffer(data)) +AHs
           for(i +AD0 0+ADs i +ADw len+ADs i+-+-) +AHs
@@ -119,7 +120,7 @@
         EE+AFs-2+ACo-f+AF0 +AD0 E+AFs-e+AF0 +ACY 255+ADs EE+AFs-2+ACo-f+-1+AF0 +AD0 E+AFs-e+AF0APgA+-8+ADs
       +AH0
       return function dbcs+AF8-e(data, ofmt) +AHs
-        var len +AD0 data.length, out +AD0 new Buffer(2+ACo-len), i, j, jj, k, D+ADs
+        var len +AD0 data.length, out +AD0 new Buffer(2+ACo-len), i+AD0-0, j+AD0-0, jj+AD0-0, k+AD0-0, D+AD0-0+ADs
         if(typeof data +AD0APQA9 'string') +AHs
           for(i +AD0 k +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
             j +AD0 data.charCodeAt(i)+ACo-2+ADs
@@ -146,7 +147,7 @@
             out+AFs-k+-+-+AF0 +AD0 EE+AFs-j+-1+AF0 +AHwAfA EE+AFs-j+AF0AOw if(EE+AFs-j+-1+AF0 +AD4 0) out+AFs-k+-+-+AF0 +AD0 EE+AFs-j+AF0AOw
           +AH0
         +AH0
-        if(ofmt +AD0APQA9 undefined +AHwAfA ofmt +AD0APQA9 'buf') return out+ADs
+        if(+ACE-ofmt +AHwAfA ofmt +AD0APQA9 'buf') return out+ADs
         if(ofmt +ACEAPQA9 'arr') return out.toString('binary')+ADs
         return +AFsAXQ.slice.call(out)+ADs
       +AH0AOw
@@ -162,7 +163,7 @@
         DD+AFs-j+AF0 +AD0 w+ACY-255+ADs DD+AFs-j+-1+AF0 +AD0 w+AD4APg-8+ADs
       +AH0
       return function dbcs+AF8-d(data) +AHs
-        var len +AD0 data.length, out +AD0 new Buffer(2+ACo-len), i, j, k+AD0-0+ADs
+        var len +AD0 data.length, out +AD0 new Buffer(2+ACo-len), i+AD0-0, j+AD0-0, k+AD0-0+ADs
         if(Buffer.isBuffer(data)) +AHs
           for(i +AD0 0+ADs i +ADw len+ADs i+-+-) +AHs
             j +AD0 2+ACo-data+AFs-i+AF0AOw
@@ -186,6 +187,7 @@
       +AH0AOw
     +AH0AOw
     magic+AF8-decode+AFs-65001+AF0 +AD0 function utf8+AF8-d(data) +AHs
+      if(typeof data +AD0APQA9 +ACI-string+ACI) return utf8+AF8-d(data.split(+ACIAIg).map(cca))+ADs
       var len +AD0 data.length, w +AD0 0, ww +AD0 0+ADs
       if(4 +ACo len +AD4 mdl) +AHs mdl +AD0 4 +ACo len+ADs mdb +AD0 new Buffer(mdl)+ADs +AH0
       var i +AD0 0+ADs
@@ -205,6 +207,11 @@
       return mdb.slice(0,k).toString('ucs2')+ADs
     +AH0AOw
     magic+AF8-encode+AFs-65001+AF0 +AD0 function utf8+AF8-e(data, ofmt) +AHs
+      if(has+AF8-buf +ACYAJg Buffer.isBuffer(data)) +AHs
+        if(+ACE-ofmt +AHwAfA ofmt +AD0APQA9 'buf') return data+ADs
+        if(ofmt +ACEAPQA9 'arr') return data.toString('binary')+ADs
+        return +AFsAXQ.slice.call(data)+ADs
+      +AH0
       var len +AD0 data.length, w +AD0 0, ww +AD0 0, j +AD0 0+ADs
       var direct +AD0 typeof data +AD0APQA9 +ACI-string+ACIAOw
       if(4 +ACo len +AD4 mdl) +AHs mdl +AD0 4 +ACo len+ADs mdb +AD0 new Buffer(mdl)+ADs +AH0
@@ -227,7 +234,7 @@
           mdb+AFs-j+-+-+AF0 +AD0 128 +- (w+ACY-63)+ADs
         +AH0
       +AH0
-      if(ofmt +AD0APQA9 undefined +AHwAfA ofmt +AD0APQA9 'buf') return mdb.slice(0,j)+ADs
+      if(+ACE-ofmt +AHwAfA ofmt +AD0APQA9 'buf') return mdb.slice(0,j)+ADs
       if(ofmt +ACEAPQA9 'arr') return mdb.slice(0,j).toString('binary')+ADs
       return +AFsAXQ.slice.call(mdb, 0, j)+ADs
     +AH0AOw
@@ -236,7 +243,7 @@
   var encache +AD0 function encache() +AHs
     if(has+AF8-buf) +AHs
       if(cpdcache+AFs-sbcs+AF8-cache+AFs-0+AF0AXQ) return+ADs
-      var i, s+ADs
+      var i+AD0-0, s+AD0-0+ADs
       for(i +AD0 0+ADs i +ADw sbcs+AF8-cache.length+ADs +-+-i) +AHs
         s +AD0 sbcs+AF8-cache+AFs-i+AF0AOw
         if(cpt+AFs-s+AF0) +AHs
@@ -258,7 +265,8 @@
       +AH0
     +AH0
   +AH0AOw
-  var cp+AF8-decache +AD0 function cp+AF8-decache(cp) +AHs cpdcache+AFs-cp+AF0 +AD0 cpecache+AFs-cp+AF0 +AD0 undefined+ADs +AH0AOw
+  var null+AF8-enc +AD0 function(data, ofmt) +AHs return +ACIAIgA7 +AH0AOw
+  var cp+AF8-decache +AD0 function cp+AF8-decache(cp) +AHs delete cpdcache+AFs-cp+AF0AOw delete cpecache+AFs-cp+AF0AOw +AH0AOw
   var decache +AD0 function decache() +AHs
     if(has+AF8-buf) +AHs
       if(+ACE-cpdcache+AFs-sbcs+AF8-cache+AFs-0+AF0AXQ) return+ADs
@@ -266,7 +274,7 @@
       dbcs+AF8-cache.forEach(cp+AF8-decache)+ADs
       magic+AF8-cache.forEach(cp+AF8-decache)+ADs
     +AH0
-    last+AF8-enc +AD0 last+AF8-cp +AD0 undefined+ADs
+    last+AF8-enc +AD0 null+AF8-enc+ADs last+AF8-cp +AD0 0+ADs
   +AH0AOw
   var cache +AD0 +AHs
     encache: encache,
@@ -279,21 +287,20 @@
 
   var BM +AD0 +ACI-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-/+ACIAOw
   var SetD +AD0 +ACI-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'(),-./:?+ACIAOw
-  var last+AF8-enc, last+AF8-cp+ADs
+  var last+AF8-enc +AD0 null+AF8-enc, last+AF8-cp +AD0 0+ADs
   var encode +AD0 function encode(cp, data, ofmt) +AHs
-    if(cp +AD0APQA9 last+AF8-cp) +AHs return last+AF8-enc(data, ofmt)+ADs +AH0
-    if(cpecache+AFs-cp+AF0 +ACEAPQA9 undefined) +AHs last+AF8-enc +AD0 cpecache+AFs-last+AF8-cp+AD0-cp+AF0AOw return last+AF8-enc(data, ofmt)+ADs +AH0
+    if(cp +AD0APQA9 last+AF8-cp +ACYAJg last+AF8-enc) +AHs return last+AF8-enc(data, ofmt)+ADs +AH0
+    if(cpecache+AFs-cp+AF0) +AHs last+AF8-enc +AD0 cpecache+AFs-last+AF8-cp+AD0-cp+AF0AOw return last+AF8-enc(data, ofmt)+ADs +AH0
     if(has+AF8-buf +ACYAJg Buffer.isBuffer(data)) data +AD0 data.toString('utf8')+ADs
     var len +AD0 data.length+ADs
-    var out +AD0 has+AF8-buf ? new Buffer(4+ACo-len) : +AFsAXQ, w, i, j +AD0 0, c, tt, ww+ADs
-    var C +AD0 cpt+AFs-cp+AF0, E, M+ADs
+    var out +AD0 has+AF8-buf ? new Buffer(4+ACo-len) : +AFsAXQ, w+AD0-0, i+AD0-0, j +AD0 0, ww+AD0-0+ADs
+    var C +AD0 cpt+AFs-cp+AF0, E, M +AD0 +ACIAIgA7
     if(C +ACYAJg (E+AD0-C.enc)) for(i +AD0 0+ADs i +ADw len+ADs +-+-i, +-+-j) +AHs
       w +AD0 E+AFs-data+AFs-i+AF0AXQA7
-      out+AFs-j+AF0 +AD0 w+ACY-255+ADs
       if(w +AD4 255) +AHs
         out+AFs-j+AF0 +AD0 w+AD4APg-8+ADs
         out+AFsAKwAr-j+AF0 +AD0 w+ACY-255+ADs
-      +AH0
+      +AH0 else out+AFs-j+AF0 +AD0 w+ACY-255+ADs
     +AH0
     else if((M+AD0-magic+AFs-cp+AF0)) switch(M) +AHs
       case +ACI-utf8+ACI:
@@ -358,16 +365,16 @@
           out+AFs-j+-3+AF0 +AD0 w+ACY-255+ADs w +AD4APgA9 8+ADs
           out+AFs-j+-2+AF0 +AD0 w+ACY-255+ADs w +AD4APgA9 8+ADs
           out+AFs-j+-1+AF0 +AD0 w+ACY-255+ADs w +AD4APgA9 8+ADs
-          out+AFs-j+AF0 +AD0 w+ACY-255+ADs w +AD4APgA9 8+ADs
+          out+AFs-j+AF0 +AD0 w+ACY-255+ADs
           j+-+AD0-4+ADs
         +AH0
         break+ADs
       case +ACI-utf7+ACI:
         for(i +AD0 0+ADs i +ADw len+ADs i+-+-) +AHs
-          c +AD0 data+AFs-i+AF0AOw
+          var c +AD0 data+AFs-i+AF0AOw
           if(c +AD0APQA9 +ACIAKwAi) +AHs out+AFs-j+-+-+AF0 +AD0 0x2b+ADs out+AFs-j+-+-+AF0 +AD0 0x2d+ADs continue+ADs +AH0
           if(SetD.indexOf(c) +AD4 -1) +AHs out+AFs-j+-+-+AF0 +AD0 c.charCodeAt(0)+ADs continue+ADs +AH0
-          tt +AD0 encode(1201, c)+ADs
+          var tt +AD0 encode(1201, c)+ADs
           out+AFs-j+-+-+AF0 +AD0 0x2b+ADs
           out+AFs-j+-+-+AF0 +AD0 BM.charCodeAt(tt+AFs-0+AF0APgA+-2)+ADs
           out+AFs-j+-+-+AF0 +AD0 BM.charCodeAt(((tt+AFs-0+AF0AJg-0x03)+ADwAPA-4) +- ((tt+AFs-1+AF0AfAB8-0)+AD4APg-4))+ADs
@@ -379,31 +386,30 @@
     +AH0
     else throw new Error(+ACI-Unrecognized CP: +ACI +- cp)+ADs
     out +AD0 out.slice(0,j)+ADs
-    if(typeof Buffer +AD0APQA9 'undefined') return (ofmt +AD0APQ 'str') ? out.map(sfcc).join(+ACIAIg) : out+ADs
-    if(ofmt +AD0APQA9 undefined +AHwAfA ofmt +AD0APQA9 'buf') return out+ADs
+    if(+ACE-has+AF8-buf) return (ofmt +AD0APQ 'str') ? (out).map(sfcc).join(+ACIAIg) : out+ADs
+    if(+ACE-ofmt +AHwAfA ofmt +AD0APQA9 'buf') return out+ADs
     if(ofmt +ACEAPQA9 'arr') return out.toString('binary')+ADs
     return +AFsAXQ.slice.call(out)+ADs
   +AH0AOw
   var decode +AD0 function decode(cp, data) +AHs
     var F+ADs if((F+AD0-cpdcache+AFs-cp+AF0)) return F(data)+ADs
-    var len +AD0 data.length, out +AD0 new Array(len), w, i, j +AD0 1, k +AD0 0, ww+ADs
-    var C +AD0 cpt+AFs-cp+AF0, D, M+ADs
+    if(typeof data +AD0APQA9 +ACI-string+ACI) return decode(cp, data.split(+ACIAIg).map(cca))+ADs
+    var len +AD0 data.length, out +AD0 new Array(len), s+AD0AIgAi, w+AD0-0, i+AD0-0, j+AD0-1, k+AD0-0, ww+AD0-0+ADs
+    var C +AD0 cpt+AFs-cp+AF0, D, M+AD0AIgAiADs
     if(C +ACYAJg (D+AD0-C.dec)) +AHs
-      if(typeof data +AD0APQA9 +ACI-string+ACI) data +AD0 data.split(+ACIAIg).map(cca)+ADs
       for(i +AD0 0+ADs i +ADw len+ADs i+-+AD0-j) +AHs
         j +AD0 2+ADs
-        w +AD0 D+AFs(data+AFs-i+AF0APAA8-8)+- data+AFs-i+-1+AF0AXQA7
-        if(+ACE-w) +AHs
+        s +AD0 D+AFs(data+AFs-i+AF0APAA8-8)+- data+AFs-i+-1+AF0AXQA7
+        if(+ACE-s) +AHs
           j +AD0 1+ADs
-          w +AD0 D+AFs-data+AFs-i+AF0AXQA7
+          s +AD0 D+AFs-data+AFs-i+AF0AXQA7
         +AH0
-        if(+ACE-w) throw new Error('Unrecognized code: ' +- data+AFs-i+AF0 +- ' ' +- data+AFs-i+-j-1+AF0 +- ' ' +- i +- ' ' +- j +- ' ' +- D+AFs-data+AFs-i+AF0AXQ)+ADs
-        out+AFs-k+-+-+AF0 +AD0 w+ADs
+        if(+ACE-s) throw new Error('Unrecognized code: ' +- data+AFs-i+AF0 +- ' ' +- data+AFs-i+-j-1+AF0 +- ' ' +- i +- ' ' +- j +- ' ' +- D+AFs-data+AFs-i+AF0AXQ)+ADs
+        out+AFs-k+-+-+AF0 +AD0 s+ADs
       +AH0
     +AH0
     else if((M+AD0-magic+AFs-cp+AF0)) switch(M) +AHs
       case +ACI-utf8+ACI:
-        i +AD0 0+ADs
         if(len +AD4APQ 3 +ACYAJg data+AFs-0+AF0 +AD0APQ 0xEF) if(data+AFs-1+AF0 +AD0APQ 0xBB +ACYAJg data+AFs-2+AF0 +AD0APQ 0xBF) i +AD0 3+ADs
         for(+ADs i +ADw len+ADs i+-+AD0-j) +AHs
           j +AD0 1+ADs
@@ -423,24 +429,21 @@
         for(i +AD0 0+ADs i +ADw len+ADs i+-+-) out+AFs-i+AF0 +AD0 String.fromCharCode(data+AFs-i+AF0)+ADs
         k +AD0 len+ADs break+ADs
       case +ACI-utf16le+ACI:
-        i +AD0 0+ADs
         if(len +AD4APQ 2 +ACYAJg data+AFs-0+AF0 +AD0APQ 0xFF) if(data+AFs-1+AF0 +AD0APQ 0xFE) i +AD0 2+ADs
         if(has+AF8-buf +ACYAJg Buffer.isBuffer(data)) return data.toString(M)+ADs
         j +AD0 2+ADs
-        for(+ADs i +ADw len+ADs i+-+AD0-j) +AHs
+        for(+ADs i+-1 +ADw len+ADs i+-+AD0-j) +AHs
           out+AFs-k+-+-+AF0 +AD0 String.fromCharCode((data+AFs-i+-1+AF0APAA8-8) +- data+AFs-i+AF0)+ADs
         +AH0
         break+ADs
       case +ACI-utf16be+ACI:
-        i +AD0 0+ADs
         if(len +AD4APQ 2 +ACYAJg data+AFs-0+AF0 +AD0APQ 0xFE) if(data+AFs-1+AF0 +AD0APQ 0xFF) i +AD0 2+ADs
         j +AD0 2+ADs
-        for(+ADs i +ADw len+ADs i+-+AD0-j) +AHs
+        for(+ADs i+-1 +ADw len+ADs i+-+AD0-j) +AHs
           out+AFs-k+-+-+AF0 +AD0 String.fromCharCode((data+AFs-i+AF0APAA8-8) +- data+AFs-i+-1+AF0)+ADs
         +AH0
         break+ADs
       case +ACI-utf32le+ACI:
-        i +AD0 0+ADs
         if(len +AD4APQ 4 +ACYAJg data+AFs-0+AF0 +AD0APQ 0xFF) if(data+AFs-1+AF0 +AD0APQ 0xFE +ACYAJg data+AFs-2+AF0 +AD0APQA9 0 +ACYAJg data+AFs-3+AF0 +AD0APQA9 0) i +AD0 4+ADs
         j +AD0 4+ADs
         for(+ADs i +ADw len+ADs i+-+AD0-j) +AHs
@@ -454,7 +457,6 @@
         +AH0
         break+ADs
       case +ACI-utf32be+ACI:
-        i +AD0 0+ADs
         if(len +AD4APQ 4 +ACYAJg data+AFs-3+AF0 +AD0APQ 0xFF) if(data+AFs-2+AF0 +AD0APQ 0xFE +ACYAJg data+AFs-1+AF0 +AD0APQA9 0 +ACYAJg data+AFs-0+AF0 +AD0APQA9 0) i +AD0 4+ADs
         j +AD0 4+ADs
         for(+ADs i +ADw len+ADs i+-+AD0-j) +AHs
@@ -468,7 +470,6 @@
         +AH0
         break+ADs
       case +ACI-utf7+ACI:
-        i +AD0 0+ADs
         if(len +AD4APQ 4 +ACYAJg data+AFs-0+AF0 +AD0APQ 0x2B +ACYAJg data+AFs-1+AF0 +AD0APQ 0x2F +ACYAJg data+AFs-2+AF0 +AD0APQ 0x76) +AHs
           if(len +AD4APQ 5 +ACYAJg data+AFs-3+AF0 +AD0APQ 0x38 +ACYAJg data+AFs-4+AF0 +AD0APQ 0x2D) i +AD0 5+ADs
           else if(data+AFs-3+AF0 +AD0APQ 0x38 +AHwAfA data+AFs-3+AF0 +AD0APQ 0x39 +AHwAfA data+AFs-3+AF0 +AD0APQ 0x2B +AHwAfA data+AFs-3+AF0 +AD0APQ 0x2F) i +AD0 4+ADs
@@ -481,9 +482,9 @@
           var dash +AD0 0+ADs
           if(data+AFs-i+-j+AF0 +AD0APQA9 0x2d) +AHs +-+-j+ADs dash+AD0-1+ADs +AH0
           var tt +AD0 +AFsAXQA7
-          var o64+ADs
-          var c1, c2, c3+ADs
-          var e1, e2, e3, e4+ADs
+          var o64 +AD0 +ACIAIgA7
+          var c1+AD0-0, c2+AD0-0, c3+AD0-0+ADs
+          var e1+AD0-0, e2+AD0-0, e3+AD0-0, e4+AD0-0+ADs
           for(var l +AD0 1+ADs l +ADw j - dash+ADs) +AHs
             e1 +AD0 BM.indexOf(String.fromCharCode(data+AFs-i+-l+-+-+AF0))+ADs
             e2 +AD0 BM.indexOf(String.fromCharCode(data+AFs-i+-l+-+-+AF0))+ADs
@@ -498,9 +499,8 @@
             c3 +AD0 (e3 +ACY 3) +ADwAPA 6 +AHw e4+ADs
             if(e4 +ADw 64) tt.push(c3)+ADs
           +AH0
-          if((tt.length +ACY 1) +AD0APQA9 1) tt.length--+ADs
           o64 +AD0 decode(1201, tt)+ADs
-          for(l +AD0 0+ADs l +ADw o64.length+ADs +-+-l) out+AFs-k+-+-+AF0 +AD0 o64+AFs-l+AF0AOw
+          for(l +AD0 0+ADs l +ADw o64.length+ADs +-+-l) out+AFs-k+-+-+AF0 +AD0 o64.charAt(l)+ADs
         +AH0
         break+ADs
       default: throw new Error(+ACI-Unsupported magic: +ACI +- cp +- +ACI +ACI +- magic+AFs-cp+AF0)+ADs
@@ -508,7 +508,7 @@
     else throw new Error(+ACI-Unrecognized CP: +ACI +- cp)+ADs
     return out.slice(0,k).join(+ACIAIg)+ADs
   +AH0AOw
-  var hascp +AD0 function hascp(cp) +AHs return cpt+AFs-cp+AF0 +AHwAfA magic+AFs-cp+AF0AOw +AH0AOw
+  var hascp +AD0 function hascp(cp) +AHs return +ACEAIQ(cpt+AFs-cp+AF0 +AHwAfA magic+AFs-cp+AF0)+ADs +AH0AOw
   cpt.utils +AD0 +AHs decode: decode, encode: encode, hascp: hascp, magic: magic, cache:cache +AH0AOw
   return cpt+ADs
 +AH0))+ADs

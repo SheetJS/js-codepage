@@ -47,27 +47,33 @@ appropriate codepage scripts were loaded.
 
 +ACMAIw Usage
 
-The codepages are indexed by number.  To get the unicode character for a given
+Most codepages are indexed by number.  To get the unicode character for a given
 codepoint, use the +AGA-dec+AGA property:
 
-    var unicode+AF8-cp10000+AF8-255 +AD0 cptable+AFs-10000+AF0.dec+AFs-255+AF0AOw // +Asc
++AGAAYABg-js
+var unicode+AF8-cp10000+AF8-255 +AD0 cptable+AFs-10000+AF0.dec+AFs-255+AF0AOw // +Asc
++AGAAYABg
 
 To get the codepoint for a given character, use the +AGA-enc+AGA property:
 
-    var cp10000+AF8-711 +AD0 cptable+AFs-10000+AF0.enc+AFs-String.fromCharCode(711)+AF0AOw // 255
++AGAAYABg-js
+var cp10000+AF8-711 +AD0 cptable+AFs-10000+AF0.enc+AFs-String.fromCharCode(711)+AF0AOw // 255
++AGAAYABg
 
 There are a few utilities that deal with strings and buffers:
 
-    var +bEdgOw +AD0 cptable.utils.decode(936, +AFs-0xbb,0xe3,0xd7,0xdc+AF0)+ADs
-    var buf +AD0  cptable.utils.encode(936,  +bEdgOw)+ADs
-    var sushi+AD0 cptable.utils.decode(65001, +AFs-0xf0,0x9f,0x8d,0xa3+AF0)+ADs // +2DzfYw
-    var sbuf +AD0 cptable.utils.encode(65001, sushi)+ADs
++AGAAYABg-js
+var +bEdgOw +AD0 cptable.utils.decode(936, +AFs-0xbb,0xe3,0xd7,0xdc+AF0)+ADs
+var buf +AD0  cptable.utils.encode(936,  +bEdgOw)+ADs
+var sushi+AD0 cptable.utils.decode(65001, +AFs-0xf0,0x9f,0x8d,0xa3+AF0)+ADs // +2DzfYw
+var sbuf +AD0 cptable.utils.encode(65001, sushi)+ADs
++AGAAYABg
 
 +AGA-cptable.utils.encode(CP, data, ofmt)+AGA accepts a String or Array of characters
 and returns a representation controlled by +AGA-ofmt+AGA:
 
 - Default output is a Buffer (or Array) of bytes (integers between 0 and 255).
-- If +AGA-ofmt +AD0APQ 'str'+AGA, return a String where +AGA-o.charCodeAt(i)+AGA is the ith byte
+- If +AGA-ofmt +AD0APQ 'str'+AGA, return a String where +AGA-o.charCodeAt(i)+AGA is the +AGA-i+AGA--th byte
 - If +AGA-ofmt +AD0APQ 'arr'+AGA, return an Array of bytes
 
 +ACMAIw Known Excel Codepages
@@ -79,7 +85,9 @@ needed.
 
 In node:
 
-    var cptable +AD0 require('codepage/dist/cpexcel.full')+ADs
++AGAAYABg-js
+var cptable +AD0 require('codepage/dist/cpexcel.full')+ADs
++AGAAYABg
 
 +ACMAIw Rolling your own script
 
@@ -87,7 +95,9 @@ The +AGA-make.sh+AGA script in the repo can take a manifest and generate JS sour
 
 Usage:
 
-    bash make.sh path+AF8-to+AF8-manifest output+AF8-file+AF8-name JSVAR
++AGAAYABg-bash
+bash make.sh path+AF8-to+AF8-manifest output+AF8-file+AF8-name JSVAR
++AGAAYABg
 
 where
 
@@ -119,171 +129,187 @@ the JS source is +AGA-codepage.md+AGA, so building is as simple as +AGA-voc code
 The complete list of hardcoded codepages can be found in the file +AGA-pages.csv+AGA.
 
 Some codepages are easier to implement algorithmically.  Since these are
-hardcoded in utils, there is no corresponding entry (they are +ACI-magic+ACI)
+hardcoded in +AGA-utils+AGA, there is no corresponding entry (they are +ACI-magic+ACI).
 
-+AHw CP+ACM +AHw  Information  +AHw Description +AHw
-+AHw --: +AHw  :----------: +AHw :---------- +AHw
-+AHw   37+AHw  unicode.org  +AHw-IBM EBCDIC US-Canada
-+AHw  437+AHw  unicode.org  +AHw-OEM United States
-+AHw  500+AHw  unicode.org  +AHw-IBM EBCDIC International
-+AHw  620+AHw      NLS      +AHw-Mazovia (Polish) MS-DOS
-+AHw  708+AHw-MakeEncoding.cs+AHw-Arabic (ASMO 708)
-+AHw  720+AHw-MakeEncoding.cs+AHw-Arabic (Transparent ASMO)+ADs Arabic (DOS)
-+AHw  737+AHw  unicode.org  +AHw-OEM Greek (formerly 437G)+ADs Greek (DOS)
-+AHw  775+AHw  unicode.org  +AHw-OEM Baltic+ADs Baltic (DOS)
-+AHw  850+AHw  unicode.org  +AHw-OEM Multilingual Latin 1+ADs Western European (DOS)
-+AHw  852+AHw  unicode.org  +AHw-OEM Latin 2+ADs Central European (DOS)
-+AHw  855+AHw  unicode.org  +AHw-OEM Cyrillic (primarily Russian)
-+AHw  857+AHw  unicode.org  +AHw-OEM Turkish+ADs Turkish (DOS)
-+AHw  858+AHw-MakeEncoding.cs+AHw-OEM Multilingual Latin 1 +- Euro symbol
-+AHw  860+AHw  unicode.org  +AHw-OEM Portuguese+ADs Portuguese (DOS)
-+AHw  861+AHw  unicode.org  +AHw-OEM Icelandic+ADs Icelandic (DOS)
-+AHw  862+AHw  unicode.org  +AHw-OEM Hebrew+ADs Hebrew (DOS)
-+AHw  863+AHw  unicode.org  +AHw-OEM French Canadian+ADs French Canadian (DOS)
-+AHw  864+AHw  unicode.org  +AHw-OEM Arabic+ADs Arabic (864)
-+AHw  865+AHw  unicode.org  +AHw-OEM Nordic+ADs Nordic (DOS)
-+AHw  866+AHw  unicode.org  +AHw-OEM Russian+ADs Cyrillic (DOS)
-+AHw  869+AHw  unicode.org  +AHw-OEM Modern Greek+ADs Greek, Modern (DOS)
-+AHw  870+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Multilingual/ROECE (Latin 2)
-+AHw  874+AHw  unicode.org  +AHw-Windows Thai
-+AHw  875+AHw  unicode.org  +AHw-IBM EBCDIC Greek Modern
-+AHw  895+AHw      NLS      +AHw-Kamenick+AP0 (Czech) MS-DOS
-+AHw  932+AHw  unicode.org  +AHw-Japanese Shift-JIS
-+AHw  936+AHw  unicode.org  +AHw-Simplified Chinese GBK
-+AHw  949+AHw  unicode.org  +AHw-Korean
-+AHw  950+AHw  unicode.org  +AHw-Traditional Chinese Big5
-+AHw 1026+AHw  unicode.org  +AHw-IBM EBCDIC Turkish (Latin 5)
-+AHw 1047+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Latin 1/Open System
-+AHw 1140+AHw-MakeEncoding.cs+AHw-IBM EBCDIC US-Canada (037 +- Euro symbol)
-+AHw 1141+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Germany (20273 +- Euro symbol)
-+AHw 1142+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Denmark-Norway (20277 +- Euro symbol)
-+AHw 1143+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Finland-Sweden (20278 +- Euro symbol)
-+AHw 1144+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Italy (20280 +- Euro symbol)
-+AHw 1145+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Latin America-Spain (20284 +- Euro symbol)
-+AHw 1146+AHw-MakeEncoding.cs+AHw-IBM EBCDIC United Kingdom (20285 +- Euro symbol)
-+AHw 1147+AHw-MakeEncoding.cs+AHw-IBM EBCDIC France (20297 +- Euro symbol)
-+AHw 1148+AHw-MakeEncoding.cs+AHw-IBM EBCDIC International (500 +- Euro symbol)
-+AHw 1149+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Icelandic (20871 +- Euro symbol)
-+AHw 1200+AHw     magic     +AHw-Unicode UTF-16, little endian (BMP of ISO 10646)
-+AHw 1201+AHw     magic     +AHw-Unicode UTF-16, big endian
-+AHw 1250+AHw  unicode.org  +AHw-Windows Central Europe
-+AHw 1251+AHw  unicode.org  +AHw-Windows Cyrillic
-+AHw 1252+AHw  unicode.org  +AHw-Windows Latin I
-+AHw 1253+AHw  unicode.org  +AHw-Windows Greek
-+AHw 1254+AHw  unicode.org  +AHw-Windows Turkish
-+AHw 1255+AHw  unicode.org  +AHw-Windows Hebrew
-+AHw 1256+AHw  unicode.org  +AHw-Windows Arabic
-+AHw 1257+AHw  unicode.org  +AHw-Windows Baltic
-+AHw 1258+AHw  unicode.org  +AHw-Windows Vietnam
-+AHw 1361+AHw-MakeEncoding.cs+AHw-Korean (Johab)
-+AHw-10000+AHw  unicode.org  +AHw-MAC Roman
-+AHw-10001+AHw-MakeEncoding.cs+AHw-Japanese (Mac)
-+AHw-10002+AHw-MakeEncoding.cs+AHw-MAC Traditional Chinese (Big5)
-+AHw-10003+AHw-MakeEncoding.cs+AHw-Korean (Mac)
-+AHw-10004+AHw-MakeEncoding.cs+AHw-Arabic (Mac)
-+AHw-10005+AHw-MakeEncoding.cs+AHw-Hebrew (Mac)
-+AHw-10006+AHw  unicode.org  +AHw-Greek (Mac)
-+AHw-10007+AHw  unicode.org  +AHw-Cyrillic (Mac)
-+AHw-10008+AHw-MakeEncoding.cs+AHw-MAC Simplified Chinese (GB 2312)
-+AHw-10010+AHw-MakeEncoding.cs+AHw-Romanian (Mac)
-+AHw-10017+AHw-MakeEncoding.cs+AHw-Ukrainian (Mac)
-+AHw-10021+AHw-MakeEncoding.cs+AHw-Thai (Mac)
-+AHw-10029+AHw  unicode.org  +AHw-MAC Latin 2 (Central European)
-+AHw-10079+AHw  unicode.org  +AHw-Icelandic (Mac)
-+AHw-10081+AHw  unicode.org  +AHw-Turkish (Mac)
-+AHw-10082+AHw-MakeEncoding.cs+AHw-Croatian (Mac)
-+AHw-12000+AHw     magic     +AHw-Unicode UTF-32, little endian byte order
-+AHw-12001+AHw     magic     +AHw-Unicode UTF-32, big endian byte order
-+AHw-20000+AHw-MakeEncoding.cs+AHw-CNS Taiwan (Chinese Traditional)
-+AHw-20001+AHw-MakeEncoding.cs+AHw-TCA Taiwan
-+AHw-20002+AHw-MakeEncoding.cs+AHw-Eten Taiwan (Chinese Traditional)
-+AHw-20003+AHw-MakeEncoding.cs+AHw-IBM5550 Taiwan
-+AHw-20004+AHw-MakeEncoding.cs+AHw-TeleText Taiwan
-+AHw-20005+AHw-MakeEncoding.cs+AHw-Wang Taiwan
-+AHw-20105+AHw-MakeEncoding.cs+AHw-Western European IA5 (IRV International Alphabet 5) 7-bit
-+AHw-20106+AHw-MakeEncoding.cs+AHw-IA5 German (7-bit)
-+AHw-20107+AHw-MakeEncoding.cs+AHw-IA5 Swedish (7-bit)
-+AHw-20108+AHw-MakeEncoding.cs+AHw-IA5 Norwegian (7-bit)
-+AHw-20127+AHw     magic     +AHw-US-ASCII (7-bit)
-+AHw-20261+AHw-MakeEncoding.cs+AHw-T.61
-+AHw-20269+AHw-MakeEncoding.cs+AHw-ISO 6937 Non-Spacing Accent
-+AHw-20273+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Germany
-+AHw-20277+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Denmark-Norway
-+AHw-20278+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Finland-Sweden
-+AHw-20280+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Italy
-+AHw-20284+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Latin America-Spain
-+AHw-20285+AHw-MakeEncoding.cs+AHw-IBM EBCDIC United Kingdom
-+AHw-20290+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Japanese Katakana Extended
-+AHw-20297+AHw-MakeEncoding.cs+AHw-IBM EBCDIC France
-+AHw-20420+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Arabic
-+AHw-20423+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Greek
-+AHw-20424+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Hebrew
-+AHw-20833+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Korean Extended
-+AHw-20838+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Thai
-+AHw-20866+AHw-MakeEncoding.cs+AHw-Russian Cyrillic (KOI8-R)
-+AHw-20871+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Icelandic
-+AHw-20880+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Cyrillic Russian
-+AHw-20905+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Turkish
-+AHw-20924+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Latin 1/Open System (1047 +- Euro symbol)
-+AHw-20932+AHw-MakeEncoding.cs+AHw-Japanese (JIS 0208-1990 and 0212-1990)
-+AHw-20936+AHw-MakeEncoding.cs+AHw-Simplified Chinese (GB2312-80)
-+AHw-20949+AHw-MakeEncoding.cs+AHw-Korean Wansung
-+AHw-21025+AHw-MakeEncoding.cs+AHw-IBM EBCDIC Cyrillic Serbian-Bulgarian
-+AHw-21027+AHw      NLS      +AHw-Extended/Ext Alpha Lowercase
-+AHw-21866+AHw-MakeEncoding.cs+AHw-Ukrainian Cyrillic (KOI8-U)
-+AHw-28591+AHw  unicode.org  +AHw-ISO 8859-1 Latin 1 (Western European)
-+AHw-28592+AHw  unicode.org  +AHw-ISO 8859-2 Latin 2 (Central European)
-+AHw-28593+AHw  unicode.org  +AHw-ISO 8859-3 Latin 3
-+AHw-28594+AHw  unicode.org  +AHw-ISO 8859-4 Baltic
-+AHw-28595+AHw  unicode.org  +AHw-ISO 8859-5 Cyrillic
-+AHw-28596+AHw  unicode.org  +AHw-ISO 8859-6 Arabic
-+AHw-28597+AHw  unicode.org  +AHw-ISO 8859-7 Greek
-+AHw-28598+AHw  unicode.org  +AHw-ISO 8859-8 Hebrew (ISO-Visual)
-+AHw-28599+AHw  unicode.org  +AHw-ISO 8859-9 Turkish
-+AHw-28600+AHw  unicode.org  +AHw-ISO 8859-10 Latin 6
-+AHw-28601+AHw  unicode.org  +AHw-ISO 8859-11 Latin (Thai)
-+AHw-28603+AHw  unicode.org  +AHw-ISO 8859-13 Latin 7 (Estonian)
-+AHw-28604+AHw  unicode.org  +AHw-ISO 8859-14 Latin 8 (Celtic)
-+AHw-28605+AHw  unicode.org  +AHw-ISO 8859-15 Latin 9
-+AHw-28606+AHw  unicode.org  +AHw-ISO 8859-15 Latin 10
-+AHw-29001+AHw-MakeEncoding.cs+AHw-Europa 3
-+AHw-38598+AHw-MakeEncoding.cs+AHw-ISO 8859-8 Hebrew (ISO-Logical)
-+AHw-50220+AHw-MakeEncoding.cs+AHw-ISO 2022 JIS Japanese with no halfwidth Katakana
-+AHw-50221+AHw-MakeEncoding.cs+AHw-ISO 2022 JIS Japanese with halfwidth Katakana
-+AHw-50222+AHw-MakeEncoding.cs+AHw-ISO 2022 Japanese JIS X 0201-1989 (1 byte Kana-SO/SI)
-+AHw-50225+AHw-MakeEncoding.cs+AHw-ISO 2022 Korean
-+AHw-50227+AHw-MakeEncoding.cs+AHw-ISO 2022 Simplified Chinese
-+AHw-51932+AHw-MakeEncoding.cs+AHw-EUC Japanese
-+AHw-51936+AHw-MakeEncoding.cs+AHw-EUC Simplified Chinese
-+AHw-51949+AHw-MakeEncoding.cs+AHw-EUC Korean
-+AHw-52936+AHw-MakeEncoding.cs+AHw-HZ-GB2312 Simplified Chinese
-+AHw-54936+AHw-MakeEncoding.cs+AHw-GB18030 Simplified Chinese (4 byte)
-+AHw-57002+AHw-MakeEncoding.cs+AHw-ISCII Devanagari
-+AHw-57003+AHw-MakeEncoding.cs+AHw-ISCII Bengali
-+AHw-57004+AHw-MakeEncoding.cs+AHw-ISCII Tamil
-+AHw-57005+AHw-MakeEncoding.cs+AHw-ISCII Telugu
-+AHw-57006+AHw-MakeEncoding.cs+AHw-ISCII Assamese
-+AHw-57007+AHw-MakeEncoding.cs+AHw-ISCII Oriya
-+AHw-57008+AHw-MakeEncoding.cs+AHw-ISCII Kannada
-+AHw-57009+AHw-MakeEncoding.cs+AHw-ISCII Malayalam
-+AHw-57010+AHw-MakeEncoding.cs+AHw-ISCII Gujarati
-+AHw-57011+AHw-MakeEncoding.cs+AHw-ISCII Punjabi
-+AHw-65000+AHw     magic     +AHw-Unicode (UTF-7)
-+AHw-65001+AHw     magic     +AHw-Unicode (UTF-8)
++AHw   CP+ACM   +AHw   Source    +AHw Description                                          +AHw
++AHw---------:+AHw:-----------:+AHw:-----------------------------------------------------+AHw
++AHw +AGA   37+AGA +AHw unicode.org +AHw IBM EBCDIC US-Canada                                 +AHw
++AHw +AGA  437+AGA +AHw unicode.org +AHw OEM United States                                    +AHw
++AHw +AGA  500+AGA +AHw unicode.org +AHw IBM EBCDIC International                             +AHw
++AHw +AGA  620+AGA +AHw     NLS     +AHw Mazovia (Polish) MS-DOS                              +AHw
++AHw +AGA  708+AGA +AHw  Windows 7  +AHw Arabic (ASMO 708)                                    +AHw
++AHw +AGA  720+AGA +AHw  Windows 7  +AHw Arabic (Transparent ASMO)+ADs Arabic (DOS)              +AHw
++AHw +AGA  737+AGA +AHw unicode.org +AHw OEM Greek (formerly 437G)+ADs Greek (DOS)               +AHw
++AHw +AGA  775+AGA +AHw unicode.org +AHw OEM Baltic+ADs Baltic (DOS)                             +AHw
++AHw +AGA  808+AGA +AHw unicode.org +AHw OEM Russian+ADs Cyrillic +- Euro symbol                  +AHw
++AHw +AGA  850+AGA +AHw unicode.org +AHw OEM Multilingual Latin 1+ADs Western European (DOS)     +AHw
++AHw +AGA  852+AGA +AHw unicode.org +AHw OEM Latin 2+ADs Central European (DOS)                  +AHw
++AHw +AGA  855+AGA +AHw unicode.org +AHw OEM Cyrillic (primarily Russian)                     +AHw
++AHw +AGA  857+AGA +AHw unicode.org +AHw OEM Turkish+ADs Turkish (DOS)                           +AHw
++AHw +AGA  858+AGA +AHw  Windows 7  +AHw OEM Multilingual Latin 1 +- Euro symbol               +AHw
++AHw +AGA  860+AGA +AHw unicode.org +AHw OEM Portuguese+ADs Portuguese (DOS)                     +AHw
++AHw +AGA  861+AGA +AHw unicode.org +AHw OEM Icelandic+ADs Icelandic (DOS)                       +AHw
++AHw +AGA  862+AGA +AHw unicode.org +AHw OEM Hebrew+ADs Hebrew (DOS)                             +AHw
++AHw +AGA  863+AGA +AHw unicode.org +AHw OEM French Canadian+ADs French Canadian (DOS)           +AHw
++AHw +AGA  864+AGA +AHw unicode.org +AHw OEM Arabic+ADs Arabic (864)                             +AHw
++AHw +AGA  865+AGA +AHw unicode.org +AHw OEM Nordic+ADs Nordic (DOS)                             +AHw
++AHw +AGA  866+AGA +AHw unicode.org +AHw OEM Russian+ADs Cyrillic (DOS)                          +AHw
++AHw +AGA  869+AGA +AHw unicode.org +AHw OEM Modern Greek+ADs Greek, Modern (DOS)                +AHw
++AHw +AGA  870+AGA +AHw  Windows 7  +AHw IBM EBCDIC Multilingual/ROECE (Latin 2)              +AHw
++AHw +AGA  872+AGA +AHw unicode.org +AHw OEM Cyrillic (primarily Russian) +- Euro Symbol       +AHw
++AHw +AGA  874+AGA +AHw unicode.org +AHw Windows Thai                                         +AHw
++AHw +AGA  875+AGA +AHw unicode.org +AHw IBM EBCDIC Greek Modern                              +AHw
++AHw +AGA  895+AGA +AHw     NLS     +AHw Kamenick+AP0 (Czech) MS-DOS                             +AHw
++AHw +AGA  932+AGA +AHw unicode.org +AHw Japanese Shift-JIS                                   +AHw
++AHw +AGA  936+AGA +AHw unicode.org +AHw Simplified Chinese GBK                               +AHw
++AHw +AGA  949+AGA +AHw unicode.org +AHw Korean                                               +AHw
++AHw +AGA  950+AGA +AHw unicode.org +AHw Traditional Chinese Big5                             +AHw
++AHw +AGA 1010+AGA +AHw     IBM     +AHw IBM EBCDIC French                                    +AHw
++AHw +AGA 1026+AGA +AHw unicode.org +AHw IBM EBCDIC Turkish (Latin 5)                         +AHw
++AHw +AGA 1047+AGA +AHw  Windows 7  +AHw IBM EBCDIC Latin 1/Open System                       +AHw
++AHw +AGA 1132+AGA +AHw     IBM     +AHw IBM EBCDIC Lao (1132 / 1133 / 1341)                  +AHw
++AHw +AGA 1140+AGA +AHw  Windows 7  +AHw IBM EBCDIC US-Canada (037 +- Euro symbol)             +AHw
++AHw +AGA 1141+AGA +AHw  Windows 7  +AHw IBM EBCDIC Germany (20273 +- Euro symbol)             +AHw
++AHw +AGA 1142+AGA +AHw  Windows 7  +AHw IBM EBCDIC Denmark-Norway (20277 +- Euro symbol)      +AHw
++AHw +AGA 1143+AGA +AHw  Windows 7  +AHw IBM EBCDIC Finland-Sweden (20278 +- Euro symbol)      +AHw
++AHw +AGA 1144+AGA +AHw  Windows 7  +AHw IBM EBCDIC Italy (20280 +- Euro symbol)               +AHw
++AHw +AGA 1145+AGA +AHw  Windows 7  +AHw IBM EBCDIC Latin America-Spain (20284 +- Euro symbol) +AHw
++AHw +AGA 1146+AGA +AHw  Windows 7  +AHw IBM EBCDIC United Kingdom (20285 +- Euro symbol)      +AHw
++AHw +AGA 1147+AGA +AHw  Windows 7  +AHw IBM EBCDIC France (20297 +- Euro symbol)              +AHw
++AHw +AGA 1148+AGA +AHw  Windows 7  +AHw IBM EBCDIC International (500 +- Euro symbol)         +AHw
++AHw +AGA 1149+AGA +AHw  Windows 7  +AHw IBM EBCDIC Icelandic (20871 +- Euro symbol)           +AHw
++AHw +AGA 1200+AGA +AHw    magic    +AHw Unicode UTF-16, little endian (BMP of ISO 10646)     +AHw
++AHw +AGA 1201+AGA +AHw    magic    +AHw Unicode UTF-16, big endian                           +AHw
++AHw +AGA 1250+AGA +AHw unicode.org +AHw Windows Central Europe                               +AHw
++AHw +AGA 1251+AGA +AHw unicode.org +AHw Windows Cyrillic                                     +AHw
++AHw +AGA 1252+AGA +AHw unicode.org +AHw Windows Latin I                                      +AHw
++AHw +AGA 1253+AGA +AHw unicode.org +AHw Windows Greek                                        +AHw
++AHw +AGA 1254+AGA +AHw unicode.org +AHw Windows Turkish                                      +AHw
++AHw +AGA 1255+AGA +AHw unicode.org +AHw Windows Hebrew                                       +AHw
++AHw +AGA 1256+AGA +AHw unicode.org +AHw Windows Arabic                                       +AHw
++AHw +AGA 1257+AGA +AHw unicode.org +AHw Windows Baltic                                       +AHw
++AHw +AGA 1258+AGA +AHw unicode.org +AHw Windows Vietnam                                      +AHw
++AHw +AGA 1361+AGA +AHw  Windows 7  +AHw Korean (Johab)                                       +AHw
++AHw +AGA-10000+AGA +AHw unicode.org +AHw MAC Roman                                            +AHw
++AHw +AGA-10001+AGA +AHw  Windows 7  +AHw Japanese (Mac)                                       +AHw
++AHw +AGA-10002+AGA +AHw  Windows 7  +AHw MAC Traditional Chinese (Big5)                       +AHw
++AHw +AGA-10003+AGA +AHw  Windows 7  +AHw Korean (Mac)                                         +AHw
++AHw +AGA-10004+AGA +AHw  Windows 7  +AHw Arabic (Mac)                                         +AHw
++AHw +AGA-10005+AGA +AHw  Windows 7  +AHw Hebrew (Mac)                                         +AHw
++AHw +AGA-10006+AGA +AHw unicode.org +AHw Greek (Mac)                                          +AHw
++AHw +AGA-10007+AGA +AHw unicode.org +AHw Cyrillic (Mac)                                       +AHw
++AHw +AGA-10008+AGA +AHw  Windows 7  +AHw MAC Simplified Chinese (GB 2312)                     +AHw
++AHw +AGA-10010+AGA +AHw  Windows 7  +AHw Romanian (Mac)                                       +AHw
++AHw +AGA-10017+AGA +AHw  Windows 7  +AHw Ukrainian (Mac)                                      +AHw
++AHw +AGA-10021+AGA +AHw  Windows 7  +AHw Thai (Mac)                                           +AHw
++AHw +AGA-10029+AGA +AHw unicode.org +AHw MAC Latin 2 (Central European)                       +AHw
++AHw +AGA-10079+AGA +AHw unicode.org +AHw Icelandic (Mac)                                      +AHw
++AHw +AGA-10081+AGA +AHw unicode.org +AHw Turkish (Mac)                                        +AHw
++AHw +AGA-10082+AGA +AHw  Windows 7  +AHw Croatian (Mac)                                       +AHw
++AHw +AGA-12000+AGA +AHw    magic    +AHw Unicode UTF-32, little endian byte order             +AHw
++AHw +AGA-12001+AGA +AHw    magic    +AHw Unicode UTF-32, big endian byte order                +AHw
++AHw +AGA-20000+AGA +AHw  Windows 7  +AHw CNS Taiwan (Chinese Traditional)                     +AHw
++AHw +AGA-20001+AGA +AHw  Windows 7  +AHw TCA Taiwan                                           +AHw
++AHw +AGA-20002+AGA +AHw  Windows 7  +AHw Eten Taiwan (Chinese Traditional)                    +AHw
++AHw +AGA-20003+AGA +AHw  Windows 7  +AHw IBM5550 Taiwan                                       +AHw
++AHw +AGA-20004+AGA +AHw  Windows 7  +AHw TeleText Taiwan                                      +AHw
++AHw +AGA-20005+AGA +AHw  Windows 7  +AHw Wang Taiwan                                          +AHw
++AHw +AGA-20105+AGA +AHw  Windows 7  +AHw Western European IA5 (IRV International Alphabet 5)  +AHw
++AHw +AGA-20106+AGA +AHw  Windows 7  +AHw IA5 German (7-bit)                                   +AHw
++AHw +AGA-20107+AGA +AHw  Windows 7  +AHw IA5 Swedish (7-bit)                                  +AHw
++AHw +AGA-20108+AGA +AHw  Windows 7  +AHw IA5 Norwegian (7-bit)                                +AHw
++AHw +AGA-20127+AGA +AHw    magic    +AHw US-ASCII (7-bit)                                     +AHw
++AHw +AGA-20261+AGA +AHw  Windows 7  +AHw T.61                                                 +AHw
++AHw +AGA-20269+AGA +AHw  Windows 7  +AHw ISO 6937 Non-Spacing Accent                          +AHw
++AHw +AGA-20273+AGA +AHw  Windows 7  +AHw IBM EBCDIC Germany                                   +AHw
++AHw +AGA-20277+AGA +AHw  Windows 7  +AHw IBM EBCDIC Denmark-Norway                            +AHw
++AHw +AGA-20278+AGA +AHw  Windows 7  +AHw IBM EBCDIC Finland-Sweden                            +AHw
++AHw +AGA-20280+AGA +AHw  Windows 7  +AHw IBM EBCDIC Italy                                     +AHw
++AHw +AGA-20284+AGA +AHw  Windows 7  +AHw IBM EBCDIC Latin America-Spain                       +AHw
++AHw +AGA-20285+AGA +AHw  Windows 7  +AHw IBM EBCDIC United Kingdom                            +AHw
++AHw +AGA-20290+AGA +AHw  Windows 7  +AHw IBM EBCDIC Japanese Katakana Extended                +AHw
++AHw +AGA-20297+AGA +AHw  Windows 7  +AHw IBM EBCDIC France                                    +AHw
++AHw +AGA-20420+AGA +AHw  Windows 7  +AHw IBM EBCDIC Arabic                                    +AHw
++AHw +AGA-20423+AGA +AHw  Windows 7  +AHw IBM EBCDIC Greek                                     +AHw
++AHw +AGA-20424+AGA +AHw  Windows 7  +AHw IBM EBCDIC Hebrew                                    +AHw
++AHw +AGA-20833+AGA +AHw  Windows 7  +AHw IBM EBCDIC Korean Extended                           +AHw
++AHw +AGA-20838+AGA +AHw  Windows 7  +AHw IBM EBCDIC Thai                                      +AHw
++AHw +AGA-20866+AGA +AHw  Windows 7  +AHw Russian Cyrillic (KOI8-R)                            +AHw
++AHw +AGA-20871+AGA +AHw  Windows 7  +AHw IBM EBCDIC Icelandic                                 +AHw
++AHw +AGA-20880+AGA +AHw  Windows 7  +AHw IBM EBCDIC Cyrillic Russian                          +AHw
++AHw +AGA-20905+AGA +AHw  Windows 7  +AHw IBM EBCDIC Turkish                                   +AHw
++AHw +AGA-20924+AGA +AHw  Windows 7  +AHw IBM EBCDIC Latin 1/Open System (1047 +- Euro symbol)  +AHw
++AHw +AGA-20932+AGA +AHw  Windows 7  +AHw Japanese (JIS 0208-1990 and 0212-1990)               +AHw
++AHw +AGA-20936+AGA +AHw  Windows 7  +AHw Simplified Chinese (GB2312-80)                       +AHw
++AHw +AGA-20949+AGA +AHw  Windows 7  +AHw Korean Wansung                                       +AHw
++AHw +AGA-21025+AGA +AHw  Windows 7  +AHw IBM EBCDIC Cyrillic Serbian-Bulgarian                +AHw
++AHw +AGA-21027+AGA +AHw     NLS     +AHw Extended/Ext Alpha Lowercase                         +AHw
++AHw +AGA-21866+AGA +AHw  Windows 7  +AHw Ukrainian Cyrillic (KOI8-U)                          +AHw
++AHw +AGA-28591+AGA +AHw unicode.org +AHw ISO 8859-1 Latin 1 (Western European)                +AHw
++AHw +AGA-28592+AGA +AHw unicode.org +AHw ISO 8859-2 Latin 2 (Central European)                +AHw
++AHw +AGA-28593+AGA +AHw unicode.org +AHw ISO 8859-3 Latin 3                                   +AHw
++AHw +AGA-28594+AGA +AHw unicode.org +AHw ISO 8859-4 Baltic                                    +AHw
++AHw +AGA-28595+AGA +AHw unicode.org +AHw ISO 8859-5 Cyrillic                                  +AHw
++AHw +AGA-28596+AGA +AHw unicode.org +AHw ISO 8859-6 Arabic                                    +AHw
++AHw +AGA-28597+AGA +AHw unicode.org +AHw ISO 8859-7 Greek                                     +AHw
++AHw +AGA-28598+AGA +AHw unicode.org +AHw ISO 8859-8 Hebrew (ISO-Visual)                       +AHw
++AHw +AGA-28599+AGA +AHw unicode.org +AHw ISO 8859-9 Turkish                                   +AHw
++AHw +AGA-28600+AGA +AHw unicode.org +AHw ISO 8859-10 Latin 6                                  +AHw
++AHw +AGA-28601+AGA +AHw unicode.org +AHw ISO 8859-11 Latin (Thai)                             +AHw
++AHw +AGA-28603+AGA +AHw unicode.org +AHw ISO 8859-13 Latin 7 (Estonian)                       +AHw
++AHw +AGA-28604+AGA +AHw unicode.org +AHw ISO 8859-14 Latin 8 (Celtic)                         +AHw
++AHw +AGA-28605+AGA +AHw unicode.org +AHw ISO 8859-15 Latin 9                                  +AHw
++AHw +AGA-28606+AGA +AHw unicode.org +AHw ISO 8859-15 Latin 10                                 +AHw
++AHw +AGA-29001+AGA +AHw  Windows 7  +AHw Europa 3                                             +AHw
++AHw +AGA-38598+AGA +AHw  Windows 7  +AHw ISO 8859-8 Hebrew (ISO-Logical)                      +AHw
++AHw +AGA-47451+AGA +AHw unicode.org +AHw Atari ST/TT                                          +AHw
++AHw +AGA-50220+AGA +AHw  Windows 7  +AHw ISO 2022 JIS Japanese with no halfwidth Katakana     +AHw
++AHw +AGA-50221+AGA +AHw  Windows 7  +AHw ISO 2022 JIS Japanese with halfwidth Katakana        +AHw
++AHw +AGA-50222+AGA +AHw  Windows 7  +AHw ISO 2022 Japanese JIS X 0201-1989 (1 byte Kana-SO/SI)+AHw
++AHw +AGA-50225+AGA +AHw  Windows 7  +AHw ISO 2022 Korean                                      +AHw
++AHw +AGA-50227+AGA +AHw  Windows 7  +AHw ISO 2022 Simplified Chinese                          +AHw
++AHw +AGA-51932+AGA +AHw  Windows 7  +AHw EUC Japanese                                         +AHw
++AHw +AGA-51936+AGA +AHw  Windows 7  +AHw EUC Simplified Chinese                               +AHw
++AHw +AGA-51949+AGA +AHw  Windows 7  +AHw EUC Korean                                           +AHw
++AHw +AGA-52936+AGA +AHw  Windows 7  +AHw HZ-GB2312 Simplified Chinese                         +AHw
++AHw +AGA-54936+AGA +AHw  Windows 7  +AHw GB18030 Simplified Chinese (4 byte)                  +AHw
++AHw +AGA-57002+AGA +AHw  Windows 7  +AHw ISCII Devanagari                                     +AHw
++AHw +AGA-57003+AGA +AHw  Windows 7  +AHw ISCII Bengali                                        +AHw
++AHw +AGA-57004+AGA +AHw  Windows 7  +AHw ISCII Tamil                                          +AHw
++AHw +AGA-57005+AGA +AHw  Windows 7  +AHw ISCII Telugu                                         +AHw
++AHw +AGA-57006+AGA +AHw  Windows 7  +AHw ISCII Assamese                                       +AHw
++AHw +AGA-57007+AGA +AHw  Windows 7  +AHw ISCII Oriya                                          +AHw
++AHw +AGA-57008+AGA +AHw  Windows 7  +AHw ISCII Kannada                                        +AHw
++AHw +AGA-57009+AGA +AHw  Windows 7  +AHw ISCII Malayalam                                      +AHw
++AHw +AGA-57010+AGA +AHw  Windows 7  +AHw ISCII Gujarati                                       +AHw
++AHw +AGA-57011+AGA +AHw  Windows 7  +AHw ISCII Punjabi                                        +AHw
++AHw +AGA-65000+AGA +AHw    magic    +AHw Unicode (UTF-7)                                      +AHw
++AHw +AGA-65001+AGA +AHw    magic    +AHw Unicode (UTF-8)                                      +AHw
 
-Note that MakeEncoding.cs deviates from unicode.org for some codepages.  In the
-case of direct conflicts, unicode.org takes precedence.  In cases where the
-unicode.org listing does not prescribe a value, MakeEncoding.cs value is used.
++AGA-unicode.org+AGA refers to the Unicode Consortium Public Mappings, a database of
+various mappings between unicode characters and respective character sets.  The
+tables are processed by a few scripts in the build process.
 
-NLS refers to the National Language Support files supplied in various versions of
-Windows.  In older versions of Windows (e.g. Windows 98) these files followed the
-pattern +AGA-CP+AF8AIw.NLS+AGA, but newer versions use the pattern +AGA-C+AF8AIw.NLS+AGA.
++AGA-IBM+AGA refers to the IBM coded character set database.  Even though IBM uses a
+different numbering scheme from Windows, the IBM numbers are used when there is
+no conflict.  The tables are manually generated from the symbol PDFs.
+
++AGA-Windows 7+AGA refers to direct inspection of Windows 7 machines using .NET class
++AGA-System.Text.Encoding+AGA.  The enclosed +AGA-MakeEncoding.cs+AGA C+ACM program brute-forces
+code pages.  MakeEncoding.cs deviates from unicode.org in some cases. When they
+map a given code to different characters, unicode.org value is used. When
+unicode.org does not prescribe a value, MakeEncoding.cs value is used.
+
++AGA-NLS+AGA refers to the National Language Support files supplied in various versions
+of Windows.  In older versions of Windows (e.g. Windows 98) these files followed
+the name pattern +AGA-CP+AF8AIw.NLS+AGA, but newer versions use the name pattern +AGA-C+AF8AIw.NLS+AGA.
 
 +ACMAIw Sources
 
 - +AFs-Unicode Consortium Public Mappings+AF0(http://www.unicode.org/Public/MAPPINGS/)
-- +AFs-Code Page Enumeration+AF0(http://msdn.microsoft.com/en-us/library/cc195051.aspx)
-- +AFs-Code Page Identifiers+AF0(http://msdn.microsoft.com/en-us/library/windows/desktop/dd317756.aspx)
+- +AFs-Windows Code Page Enumeration+AF0(http://msdn.microsoft.com/en-us/library/cc195051.aspx)
+- +AFs-Windows Code Page Identifiers+AF0(http://msdn.microsoft.com/en-us/library/windows/desktop/dd317756.aspx)
+- +AFs-IBM Coded Character Sets+AF0(https://www-01.ibm.com/software/globalization/ccsid/ccsid+AF8-registered.html)
 
 +ACMAIw Badges
 

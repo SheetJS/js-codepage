@@ -36,6 +36,7 @@ The fields of the pages.csv manifest are +AGA-codepage,url,bytes+AGA (SBCS+AD0-1
 1256,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1256.TXT,1
 1257,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1257.TXT,1
 1258,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1258.TXT,1
+47451,http://www.unicode.org/Public/MAPPINGS/VENDORS/MISC/ATARIST.TXT,1
 +AGAAYABg
 
 Note that the Windows rendering is used for the Mac code pages.  The primary
@@ -165,9 +166,13 @@ The following codepages are available in .NET on Windows:
 +AGAAYABgAD4-pages.csv
 708,,1
 720,,1
+808,,1
 858,,1
 870,,1
+872,,1
+1010,,1
 1047,,1
+1132,,1
 1140,,1
 1141,,1
 1142,,1
@@ -258,8 +263,6 @@ The following codepages are dependencies for Visual FoxPro:
 620,,1
 895,,1
 +AGAAYABg
-
-The known missing codepages are enumerated in the README.
 
 +ACMAIw Building Notes
 
@@ -469,6 +472,7 @@ describe('README', function() +AHs
     assert.equal(cp10000+AF8-711, 255)+ADs
 
     var b1 +AD0 +AFs-0xbb,0xe3,0xd7,0xdc+AF0AOw
+    var s1 +AD0 b1.map(function(x) +AHs return String.fromCharCode(x)+ADs +AH0).join(+ACIAIg)+ADs
     var +bEdgOw +AD0 cptable.utils.decode(936, b1)+ADs
     var buf +AD0  cptable.utils.encode(936,  +bEdgOw)+ADs
     assert.equal(+bEdgOw,+ACJsR2A7ACI)+ADs
@@ -570,7 +574,7 @@ describe('entry conditions', function() +AHs
     c(cp,i,'str')+ADs
   +AH0AOw
   describe('encode', function() +AHs
-    it('CP  1252 : sbcs', function() +AHs chken(1252,+ACI-foobar+ACI)+ADs +AH0)+ADs
+    it('CP  1252 : sbcs', function() +AHs chken(1252,+ACI-foo+ICI-b+AP4-r+ACI)+ADs +AH0)+ADs
     it('CP   708 : sbcs', function() +AHs chken(708,+ACIGKg and +Bis smiley faces+ACI)+ADsAfQ)+ADs
     it('CP   936 : dbcs', function() +AHs chken(936, +ACKP2WYvTi1lh1tXeyZtS4vVACI)+ADsAfQ)+ADs
   +AH0)+ADs
@@ -616,6 +620,10 @@ function testfile(f,cp,type,skip) +AHs
     z +AD0 cptable.utils.encode(cp, a)+ADs
     if(z.length +ACEAPQ d.length) throw new Error(f +- +ACI +ACI +- JSON.stringify(z) +- +ACI +ACEAPQ +ACI +- JSON.stringify(d) +- +ACI : +ACI +- z.length +- +ACI +ACI +- d.length)+ADs
     for(var i +AD0 0+ADs i +ACEAPQ d.length+ADs +-+-i) if(d+AFs-i+AF0 +ACEAPQA9 z+AFs-i+AF0) throw new Error(+ACIAIg +- i +- +ACI +ACI +- d+AFs-i+AF0 +- +ACIAIQA9ACI +- z+AFs-i+AF0)+ADs
+    if(f.indexOf(+ACI-cptable.js+ACI) +AD0APQ -1) +AHs
+      cptable.utils.encode(cp, d, 'str')+ADs
+      cptable.utils.encode(cp, d, 'arr')+ADs
+    +AH0
   +AH0
   cptable.utils.cache.encache()+ADs
   chk(cp)+ADs
@@ -680,6 +688,12 @@ Object.keys(m).forEach(function(t)+AHs-if(t +ACEAPQ 16969) describe(m+AFs-t+AF0,
       if(t +ACEAPQ 65000) cmp(x,z)+ADs
       else +AHs assert.equal(y, cptable.utils.decode(t, z))+ADs +AH0
       cptable.utils.cache.encache()+ADs
+      cptable.utils.encode(t, y, 'str')+ADs
+      cptable.utils.encode(t, y, 'arr')+ADs
+      cptable.utils.cache.decache()+ADs
+      cptable.utils.encode(t, y, 'str')+ADs
+      cptable.utils.encode(t, y, 'arr')+ADs
+      cptable.utils.cache.encache()+ADs
     +AH0
   : null)+ADs
   it(+ACI-should process README.md.+ACI +- m+AFs-t+AF0, fs.existsSync('./misc/README.md.' +- m+AFs-t+AF0) ?
@@ -721,6 +735,11 @@ describe('failures', function() +AHs
   it('should fail when presented with invalid char codes', function() +AHs
     assert.throws(function()+AHs-cptable.utils.cache.decache()+ADs return cptable.utils.encode(20127, +AFs-String.fromCharCode(0xAA)+AF0)+ADsAfQ)+ADs
   +AH0)+ADs
+  it('should fail to propagate UTF8 BOM in UTF7', function() +AHs
+    +AFsAIgAr-/v8-abc+ACI, +ACIAKw-/v9+ACIAXQ.forEach(function(m) +AHs assert.throws(function() +AHs
+      assert.equal(m, cptable.utils.encode(65000, cptable.utils.decode(65000, m)))+ADs
+    +AH0)+ADs +AH0)+ADs
+  +AH0)+ADs
 +AH0)+ADs
 +AGAAYABg
 
@@ -729,7 +748,7 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.4.0+ACI,
+  +ACI-version+ACI: +ACI-1.5.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
@@ -748,6 +767,7 @@ describe('failures', function() +AHs
   +ACI-dependencies+ACI: +AHs
     +ACI-voc+ACI:+ACIAIg,
     +ACI-concat-stream+ACI:+ACIAIg,
+    +ACI-exit-on-epipe+ACI:+ACIAIg,
     +ACI-commander+ACI:+ACIAIg
   +AH0,
   +ACI-devDependencies+ACI: +AHs
@@ -761,7 +781,7 @@ describe('failures', function() +AHs
   +AH0,
   +ACI-config+ACI: +AHs
     +ACI-blanket+ACI: +AHs
-      +ACI-pattern+ACI: +ACIAWw-cptable.js,cputils.js,cpexcel.js+AF0AIg
+      +ACI-pattern+ACI: +ACIAWw-cputils.js+AF0AIg
     +AH0
   +AH0,
   +ACI-bugs+ACI: +AHs +ACI-url+ACI: +ACI-https://github.com/SheetJS/js-codepage/issues+ACI +AH0,

@@ -20,6 +20,7 @@ describe('README', function() {
     assert.equal(cp10000_711, 255);
 
     var b1 = [0xbb,0xe3,0xd7,0xdc];
+    var s1 = b1.map(function(x) { return String.fromCharCode(x); }).join("");
     var 汇总 = cptable.utils.decode(936, b1);
     var buf =  cptable.utils.encode(936,  汇总);
     assert.equal(汇总,"汇总");
@@ -111,7 +112,7 @@ describe('entry conditions', function() {
     c(cp,i,'str');
   };
   describe('encode', function() {
-    it('CP  1252 : sbcs', function() { chken(1252,"foobar"); });
+    it('CP  1252 : sbcs', function() { chken(1252,"foo•bþr"); });
     it('CP   708 : sbcs', function() { chken(708,"ت and ث smiley faces");});
     it('CP   936 : dbcs', function() { chken(936, "这是中文字符测试");});
   });
@@ -152,6 +153,10 @@ function testfile(f,cp,type,skip) {
     z = cptable.utils.encode(cp, a);
     if(z.length != d.length) throw new Error(f + " " + JSON.stringify(z) + " != " + JSON.stringify(d) + " : " + z.length + " " + d.length);
     for(var i = 0; i != d.length; ++i) if(d[i] !== z[i]) throw new Error("" + i + " " + d[i] + "!=" + z[i]);
+    if(f.indexOf("cptable.js") == -1) {
+      cptable.utils.encode(cp, d, 'str');
+      cptable.utils.encode(cp, d, 'arr');
+    }
   }
   cptable.utils.cache.encache();
   chk(cp);
@@ -206,6 +211,12 @@ Object.keys(m).forEach(function(t){if(t != 16969) describe(m[t], function() {
       if(t != 65000) cmp(x,z);
       else { assert.equal(y, cptable.utils.decode(t, z)); }
       cptable.utils.cache.encache();
+      cptable.utils.encode(t, y, 'str');
+      cptable.utils.encode(t, y, 'arr');
+      cptable.utils.cache.decache();
+      cptable.utils.encode(t, y, 'str');
+      cptable.utils.encode(t, y, 'arr');
+      cptable.utils.cache.encache();
     }
   : null);
   it("should process README.md." + m[t], fs.existsSync('./misc/README.md.' + m[t]) ?
@@ -241,5 +252,10 @@ describe('failures', function() {
   });
   it('should fail when presented with invalid char codes', function() {
     assert.throws(function(){cptable.utils.cache.decache(); return cptable.utils.encode(20127, [String.fromCharCode(0xAA)]);});
+  });
+  it('should fail to propagate UTF8 BOM in UTF7', function() {
+    ["+/v8-abc", "+/v9"].forEach(function(m) { assert.throws(function() {
+      assert.equal(m, cptable.utils.encode(65000, cptable.utils.decode(65000, m)));
+    }); });
   });
 });

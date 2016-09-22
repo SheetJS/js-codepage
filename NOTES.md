@@ -1,15 +1,20 @@
 # Verifying Codepages
 
 After installing every language pack in Windows 7, many codepages are available
-via the .NET System.Text.Encoding class.  The MakeEncoding.cs source included with
-the project generates a full manifest that can be parsed into a mapping table.
+via the .NET System.Text.Encoding class.  The included MakeEncoding.cs program 
+generates a full manifest that can be parsed into a mapping table.
 
 The included `nls2tbl` script extracts data from the various `C_#####.NLS` files
 available in the system or system32 directories in various versions of Windows.
 
 Many codepages are also available in various iconv libraries, but there are some
-differences.  For example, some codepages break ASCII by using the Arabic percent
-sign ٪ U+066A but other libraries assume they preserve the ASCII space.  
+differences.  For example, some codepages use the Arabic percent sign ٪ U+066A
+instead of the standard ASCII "%".
+
+## Extended Characters
+
+No known codepage uses characters from the SMP, so certain code paths are never
+tested.  The coverage will not be 100%
 
 # Missing Codepages
 
