@@ -13,16 +13,22 @@ which codepages are used.
 
 In node:
 
-    var cptable +AD0 require('codepage')+ADs
++AGAAYABg-js
+var cptable +AD0 require('codepage')+ADs
++AGAAYABg
 
 In the browser:
 
-    +ADw-script src+AD0AIg-cptable.js+ACIAPgA8-/script+AD4
-    +ADw-script src+AD0AIg-cputils.js+ACIAPgA8-/script+AD4
++AGAAYABg-html
++ADw-script src+AD0AIg-cptable.js+ACIAPgA8-/script+AD4
++ADw-script src+AD0AIg-cputils.js+ACIAPgA8-/script+AD4
++AGAAYABg
 
 Alternatively, use the full version in the dist folder:
 
-    +ADw-script src+AD0AIg-cptable.full.js+ACIAPgA8-/script+AD4
++AGAAYABg-html
++ADw-script src+AD0AIg-cptable.full.js+ACIAPgA8-/script+AD4
++AGAAYABg
 
 The complete set of codepages is large due to some Double Byte Character Set
 encodings.  A much smaller file that just includes SBCS codepages is provided in
@@ -32,12 +38,14 @@ If you know which codepages you need, you can include individual scripts for
 each codepage.  The individual files are provided in the +AGA-bits/+AGA directory.
 For example, to include only the Mac codepages:
 
-    +ADw-script src+AD0AIg-bits/10000.js+ACIAPgA8-/script+AD4
-    +ADw-script src+AD0AIg-bits/10006.js+ACIAPgA8-/script+AD4
-    +ADw-script src+AD0AIg-bits/10007.js+ACIAPgA8-/script+AD4
-    +ADw-script src+AD0AIg-bits/10029.js+ACIAPgA8-/script+AD4
-    +ADw-script src+AD0AIg-bits/10079.js+ACIAPgA8-/script+AD4
-    +ADw-script src+AD0AIg-bits/10081.js+ACIAPgA8-/script+AD4
++AGAAYABg-html
++ADw-script src+AD0AIg-bits/10000.js+ACIAPgA8-/script+AD4
++ADw-script src+AD0AIg-bits/10006.js+ACIAPgA8-/script+AD4
++ADw-script src+AD0AIg-bits/10007.js+ACIAPgA8-/script+AD4
++ADw-script src+AD0AIg-bits/10029.js+ACIAPgA8-/script+AD4
++ADw-script src+AD0AIg-bits/10079.js+ACIAPgA8-/script+AD4
++ADw-script src+AD0AIg-bits/10081.js+ACIAPgA8-/script+AD4
++AGAAYABg
 
 All of the browser scripts define and append to the +AGA-cptable+AGA object.  To rename
 the object, edit the +AGA-JSVAR+AGA shell variable in +AGA-make.sh+AGA and run the script.
@@ -76,6 +84,9 @@ and returns a representation controlled by +AGA-ofmt+AGA:
 - If +AGA-ofmt +AD0APQ 'str'+AGA, return a String where +AGA-o.charCodeAt(i)+AGA is the +AGA-i+AGA--th byte
 - If +AGA-ofmt +AD0APQ 'arr'+AGA, return an Array of bytes
 
++AGA-cptable.utils.decode(CP, data)+AGA accepts a byte String or Array of numbers or 
+Buffer and returns a JS string.
+
 +ACMAIw Known Excel Codepages
 
 A much smaller script, including only the codepages known to be used in Excel,
@@ -96,7 +107,7 @@ The +AGA-make.sh+AGA script in the repo can take a manifest and generate JS sour
 Usage:
 
 +AGAAYABg-bash
-bash make.sh path+AF8-to+AF8-manifest output+AF8-file+AF8-name JSVAR
++ACQ bash make.sh path+AF8-to+AF8-manifest output+AF8-file+AF8-name JSVAR
 +AGAAYABg
 
 where

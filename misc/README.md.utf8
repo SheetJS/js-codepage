@@ -13,16 +13,22 @@ which codepages are used.
 
 In node:
 
-    var cptable = require('codepage');
+```js
+var cptable = require('codepage');
+```
 
 In the browser:
 
-    <script src="cptable.js"></script>
-    <script src="cputils.js"></script>
+```html
+<script src="cptable.js"></script>
+<script src="cputils.js"></script>
+```
 
 Alternatively, use the full version in the dist folder:
 
-    <script src="cptable.full.js"></script>
+```html
+<script src="cptable.full.js"></script>
+```
 
 The complete set of codepages is large due to some Double Byte Character Set
 encodings.  A much smaller file that just includes SBCS codepages is provided in
@@ -32,12 +38,14 @@ If you know which codepages you need, you can include individual scripts for
 each codepage.  The individual files are provided in the `bits/` directory.
 For example, to include only the Mac codepages:
 
-    <script src="bits/10000.js"></script>
-    <script src="bits/10006.js"></script>
-    <script src="bits/10007.js"></script>
-    <script src="bits/10029.js"></script>
-    <script src="bits/10079.js"></script>
-    <script src="bits/10081.js"></script>
+```html
+<script src="bits/10000.js"></script>
+<script src="bits/10006.js"></script>
+<script src="bits/10007.js"></script>
+<script src="bits/10029.js"></script>
+<script src="bits/10079.js"></script>
+<script src="bits/10081.js"></script>
+```
 
 All of the browser scripts define and append to the `cptable` object.  To rename
 the object, edit the `JSVAR` shell variable in `make.sh` and run the script.
@@ -76,6 +84,9 @@ and returns a representation controlled by `ofmt`:
 - If `ofmt == 'str'`, return a String where `o.charCodeAt(i)` is the `i`-th byte
 - If `ofmt == 'arr'`, return an Array of bytes
 
+`cptable.utils.decode(CP, data)` accepts a byte String or Array of numbers or 
+Buffer and returns a JS string.
+
 ## Known Excel Codepages
 
 A much smaller script, including only the codepages known to be used in Excel,
@@ -96,7 +107,7 @@ The `make.sh` script in the repo can take a manifest and generate JS source.
 Usage:
 
 ```bash
-bash make.sh path_to_manifest output_file_name JSVAR
+$ bash make.sh path_to_manifest output_file_name JSVAR
 ```
 
 where
