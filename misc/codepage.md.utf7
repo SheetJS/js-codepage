@@ -312,14 +312,14 @@ if(argv.length +ADw 2) +AHs
     process.exit(22)+ADs /+ACo EINVAL +ACo-/
 +AH0
 
-var cp +AD0 argv+AFs-1+AF0AOw
-var jsvar +AD0 argv+AFs-2+AF0 +AHwAfA +ACI-cptable+ACIAOw
-var x +AD0 fs.readFileSync(+ACI-codepages/+ACI +- cp +- +ACI.TBL+ACI,+ACI-utf8+ACI)+ADs
-var maxcp +AD0 0+ADs
+var cp/+ACo:string+ACo-/ +AD0 argv+AFs-1+AF0AOw
+var jsvar/+ACo:string+ACo-/ +AD0 argv+AFs-2+AF0 +AHwAfA +ACI-cptable+ACIAOw
+var x/+ACo:string+ACo-/ +AD0 fs.readFileSync(+ACI-codepages/+ACI +- cp +- +ACI.TBL+ACI,+ACI-utf8+ACI)+ADs
+var maxcp +AD0 0, i +AD0 0, ii +AD0 0+ADs
 
-var y +AD0 x.split(+ACIAXA-n+ACI).map(function(z) +AHs
-    var w +AD0 z.split(+ACIAXA-t+ACI)+ADs
-    if(w.length +ADw 2) return w+ADs
+var y/+ACo:Array+ADw-Array+ADw-number+AD4 +AD4AKg-/ +AD0 x.split(+ACIAXA-n+ACI).map(function(z/+ACo:string+ACo-/)/+ACo:Array+ADw-number+AD4AKg-/ +AHs
+    var w/+ACo:Array+ADw-string+AD4AKg-/ +AD0 z.split(+ACIAXA-t+ACI)+ADs
+    if(w.length +ADw 2) return +AFs-Number(w+AFs-0+AF0)+AF0AOw
     return +AFs-Number(w+AFs-0+AF0), Number(w+AFs-1+AF0)+AF0AOw
 +AH0).filter(function(z) +AHs return z.length +AD4 1+ADs +AH0)+ADs
 +AGAAYABg
@@ -328,16 +328,17 @@ The DBCS and SBCS code generation strategies are different.  The maximum code is
 used to distinguish (max 0xFF for SBCS).
 
 +AGAAYABg
-for(var i +AD0 0+ADs i +ACEAPQ y.length+ADs +-+-i) if(y+AFs-i+AF0AWw-0+AF0 +AD4 maxcp) maxcp +AD0 y+AFs-i+AF0AWw-0+AF0AOw
+for(i +AD0 0+ADs i +ACEAPQ y.length+ADs +-+-i) if(y+AFs-i+AF0AWw-0+AF0 +AD4 maxcp) maxcp +AD0 y+AFs-i+AF0AWw-0+AF0AOw
 
-var enc +AD0 +AHsAfQ, dec +AD0 (maxcp +ADw 256 ? +AFsAXQ : +AHsAfQ)+ADs
-for(var i +AD0 0+ADs i +ACEAPQ y.length+ADs +-+-i) +AHs
-    dec+AFs-y+AFs-i+AF0AWw-0+AF0AXQ +AD0 String.fromCharCode(y+AFs-i+AF0AWw-1+AF0)+ADs
+var enc/+ACo:+AHsAWw-key:string+AF0:number+AH0AKg-/ +AD0 +AHsAfQ, dec/+ACo:+AHsAWw-key:string+AF0:string+AH0AfA-Array+ADw-string+AD4AKg-/ +AD0 (maxcp +ADw 256 ? +AFsAXQ : +AHsAfQ)+ADs
+for(i +AD0 0+ADs i +ACEAPQ y.length+ADs +-+-i) +AHs
+    /+ACo:: if(Array.isArray(dec)) +ACo-/ dec+AFs-y+AFs-i+AF0AWw-0+AF0AXQ +AD0 String.fromCharCode(y+AFs-i+AF0AWw-1+AF0)+ADs
     enc+AFs-String.fromCharCode(y+AFs-i+AF0AWw-1+AF0)+AF0 +AD0 y+AFs-i+AF0AWw-0+AF0AOw
 +AH0
 
-var odec, oenc, outstr+ADs
+var odec +AD0 +ACIAIg, outstr +AD0 +ACIAIgA7
 if(maxcp +ADw 256) +AHs
+  /+ACo:: if(Array.isArray(dec)) +AHs +ACo-/
 +AGAAYABg
 
 The unicode character +AGA-0xFFFD+AGA (REPLACEMENT CHARACTER) is used as a placeholder
@@ -348,9 +349,10 @@ For SBCS, the idea is to embed a raw string with the contents of the 256 codes.
 The +AGA-dec+AGA field is merely a split of the string, and +AGA-enc+AGA is an eversion:
 
 +AGAAYABg
-    for(var i +AD0 0+ADs i +ACEAPQ 256+ADs +-+-i) if(typeof dec+AFs-i+AF0 +AD0APQA9 +ACI-undefined+ACI) dec+AFs-i+AF0 +AD0 String.fromCharCode(0xFFFD)+ADs
+    for(i +AD0 0+ADs i +ACEAPQ 256+ADs +-+-i) if(typeof dec+AFs-i+AF0 +AD0APQA9 +ACI-undefined+ACI) dec+AFs-i+AF0 +AD0 String.fromCharCode(0xFFFD)+ADs
     odec +AD0 JSON.stringify(dec.join(+ACIAIg))+ADs
-    outstr +AD0 '(function()+AHs var d +AD0 ' +- odec +- ', D +AD0 +AFsAXQ, e +AD0 +AHsAfQA7 for(var i+AD0-0+ADs-i+ACEAPQ-d.length+ADsAKwAr-i) +AHs if(d.charCodeAt(i) +ACEAPQA9 0xFFFD) e+AFs-d+AFs-i+AF0AXQ +AD0 i+ADs D+AFs-i+AF0 +AD0 d.charAt(i)+ADs +AH0 return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: D +AH0AOw +AH0)()+ADs'+ADs
+    outstr +AD0 '(function()+AHs var d +AD0 ' +- odec +- ', D +AD0 +AFsAXQ, e +AD0 +AHsAfQA7 for(var i+AD0-0+ADs-i+ACEAPQ-d.length+ADsAKwAr-i) +AHs if(d.charCodeAt(i) +ACEAPQA9 0xFFFD) e+AFs-d.charAt(i)+AF0 +AD0 i+ADs D+AFs-i+AF0 +AD0 d.charAt(i)+ADs +AH0 return +AHsAIg-enc+ACI: e, +ACI-dec+ACI: D +AH0AOw +AH0)()+ADs'+ADs
+  /+ACo:: +AH0 +ACo-/
 +AH0 else +AHs
 +AGAAYABg
 
@@ -363,10 +365,13 @@ the complete decoding object (and the encoding object is an eversion):
 
 +AGAAYABg
     var dd +AD0 +AFsAXQA7
-    for(var i in dec) if(dec.hasOwnProperty(i)) +AHs
-        if(typeof dd+AFs-i +AD4APg 8+AF0 +AD0APQA9 +ACI-undefined+ACI) dd+AFs-i +AD4APg 8+AF0 +AD0 +AFsAXQA7
-        dd+AFs-i +AD4APg 8+AF0AWw-i +ACU 256+AF0 +AD0 dec+AFs-i+AF0AOw
+    /+ACo:: if(+ACE-Array.isArray(dec)) +AHs +ACo-/
+    for(i in dec) if(dec.hasOwnProperty(i)) +AHs
+        ii +AD0 +-i+ADs
+        if(typeof dd+AFs-ii +AD4APg 8+AF0 +AD0APQA9 +ACI-undefined+ACI) dd+AFs-ii +AD4APg 8+AF0 +AD0 +AFsAXQA7
+        dd+AFs-ii +AD4APg 8+AF0AWw-ii +ACU 256+AF0 +AD0 dec+AFs-i+AF0AOw
     +AH0
+    /+ACo:: +AH0 +ACo-/
     outstr +AD0 '(function()+AHs var d +AD0 +AFsAXQ, e +AD0 +AHsAfQ, D +AD0 +AFsAXQ, j+ADsAXA-n'+ADs
     for(var i +AD0 0+ADs i +ACEAPQ 256+ADs +-+-i) if(dd+AFs-i+AF0) +AHs
         for(var j +AD0 0+ADs j +ACEAPQ 256+ADs +-+-j) if(typeof dd+AFs-i+AF0AWw-j+AF0 +AD0APQA9 +ACI-undefined+ACI) dd+AFs-i+AF0AWw-j+AF0 +AD0 String.fromCharCode(0xFFFD)+ADs
@@ -748,7 +753,7 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.5.0+ACI,
+  +ACI-version+ACI: +ACI-1.6.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
@@ -802,4 +807,6 @@ node+AF8-modules/
 make.sh
 make.njs
 misc/coverage.html
+codepage+AF8-mini.md
+ctest/sauce+ACo
 +AGAAYABg

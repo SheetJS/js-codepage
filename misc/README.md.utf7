@@ -1,13 +1,8 @@
-+ACM Codepages for JS
++ACM js-codepage
 
 +AFs-Codepages+AF0(https://en.wikipedia.org/wiki/Codepage) are character encodings.  In
 many contexts, single- or double-byte character sets are used in lieu of Unicode
 encodings.  The codepages map between characters and numbers.
-
-+AFs-unicode.org+AF0(http://www.unicode.org/Public/MAPPINGS/) hosts lists of mappings.
-The build script automatically downloads and parses the mappings in order to
-generate the full script.  The +AGA-pages.csv+AGA description in +AGA-codepage.md+AGA controls
-which codepages are used.
 
 +ACMAIw Setup
 
@@ -84,7 +79,7 @@ and returns a representation controlled by +AGA-ofmt+AGA:
 - If +AGA-ofmt +AD0APQ 'str'+AGA, return a String where +AGA-o.charCodeAt(i)+AGA is the +AGA-i+AGA--th byte
 - If +AGA-ofmt +AD0APQ 'arr'+AGA, return an Array of bytes
 
-+AGA-cptable.utils.decode(CP, data)+AGA accepts a byte String or Array of numbers or 
++AGA-cptable.utils.decode(CP, data)+AGA accepts a byte String or Array of numbers or
 Buffer and returns a JS string.
 
 +ACMAIw Known Excel Codepages
@@ -118,7 +113,9 @@ where
 
 The manifest file is expected to be a CSV with 3 columns:
 
-    +ADw-codepage number+AD4,+ADw-source+AD4,+ADw-size+AD4
++AGAAYABg
++ADw-codepage number+AD4,+ADw-source+AD4,+ADw-size+AD4
++AGAAYABg
 
 If a source is specified, it will try to download the specified file and parse.
 The file format is expected to follow the format from the unicode.org site.
@@ -315,6 +312,15 @@ unicode.org does not prescribe a value, MakeEncoding.cs value is used.
 of Windows.  In older versions of Windows (e.g. Windows 98) these files followed
 the name pattern +AGA-CP+AF8AIw.NLS+AGA, but newer versions use the name pattern +AGA-C+AF8AIw.NLS+AGA.
 
++ACMAIw Testing
+
++AGA-make test+AGA will run the nodejs-based test.
+
+To run the in-browser tests, run a local server and go to the +AGA-ctest+AGA directory.
++AGA-make ctestserv+AGA will start a python +AGA-SimpleHTTPServer+AGA server on port 8000.
+
+To update the browser artifacts, run +AGA-make ctest+AGA.
+
 +ACMAIw Sources
 
 - +AFs-Unicode Consortium Public Mappings+AF0(http://www.unicode.org/Public/MAPPINGS/)
@@ -322,8 +328,17 @@ the name pattern +AGA-CP+AF8AIw.NLS+AGA, but newer versions use the name pattern
 - +AFs-Windows Code Page Identifiers+AF0(http://msdn.microsoft.com/en-us/library/windows/desktop/dd317756.aspx)
 - +AFs-IBM Coded Character Sets+AF0(https://www-01.ibm.com/software/globalization/ccsid/ccsid+AF8-registered.html)
 
++ACMAIw License
+
+Please consult the attached LICENSE file for details.  All rights not explicitly
+granted by the Apache 2.0 license are reserved by the Original Author.
+
 +ACMAIw Badges
 
++AFsAIQBb-Sauce Test Status+AF0(https://saucelabs.com/browser-matrix/codepage.svg)+AF0(https://saucelabs.com/u/codepage)
+
 +AFsAIQBb-Build Status+AF0(https://travis-ci.org/SheetJS/js-codepage.svg?branch+AD0-master)+AF0(https://travis-ci.org/SheetJS/js-codepage)
-+AFsAIQBb-Coverage Status+AF0(https://coveralls.io/repos/SheetJS/js-codepage/badge.png)+AF0(https://coveralls.io/r/SheetJS/js-codepage)
+
++AFsAIQBb-Coverage Status+AF0(http://img.shields.io/coveralls/SheetJS/js-codepage/master.svg)+AF0(https://coveralls.io/r/SheetJS/js-codepage?branch+AD0-master)
+
 +AFsAIQBb-Analytics+AF0(https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/js-codepage?pixel)+AF0(https://github.com/SheetJS/js-codepage)

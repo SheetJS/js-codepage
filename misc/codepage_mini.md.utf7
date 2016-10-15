@@ -1,0 +1,18 @@
++ACM Getting Codepages
+
+The fields of the pages.csv manifest are +AGA-codepage,url,bytes+AGA (SBCS+AD0-1, DBCS+AD0-2)
+
++AGAAYABgAD4-pages.csv
+37,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP037.TXT,1
+437,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP437.TXT,1
+500,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP500.TXT,1
+737,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP737.TXT,1
+775,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP775.TXT,1
+850,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP850.TXT,1
+852,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP852.TXT,1
+855,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP855.TXT,1
+857,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP857.TXT,1
+860,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP860.TXT,1
+861,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP861.TXT,1
+862,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP862.TXT,1
+86

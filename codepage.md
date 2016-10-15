@@ -312,14 +312,14 @@ if(argv.length < 2) {
     process.exit(22); /* EINVAL */
 }
 
-var cp = argv[1];
-var jsvar = argv[2] || "cptable";
-var x = fs.readFileSync("codepages/" + cp + ".TBL","utf8");
-var maxcp = 0;
+var cp/*:string*/ = argv[1];
+var jsvar/*:string*/ = argv[2] || "cptable";
+var x/*:string*/ = fs.readFileSync("codepages/" + cp + ".TBL","utf8");
+var maxcp = 0, i = 0, ii = 0;
 
-var y = x.split("\n").map(function(z) {
-    var w = z.split("\t");
-    if(w.length < 2) return w;
+var y/*:Array<Array<number> >*/ = x.split("\n").map(function(z/*:string*/)/*:Array<number>*/ {
+    var w/*:Array<string>*/ = z.split("\t");
+    if(w.length < 2) return [Number(w[0])];
     return [Number(w[0]), Number(w[1])];
 }).filter(function(z) { return z.length > 1; });
 ```
@@ -328,16 +328,17 @@ The DBCS and SBCS code generation strategies are different.  The maximum code is
 used to distinguish (max 0xFF for SBCS).
 
 ```
-for(var i = 0; i != y.length; ++i) if(y[i][0] > maxcp) maxcp = y[i][0];
+for(i = 0; i != y.length; ++i) if(y[i][0] > maxcp) maxcp = y[i][0];
 
-var enc = {}, dec = (maxcp < 256 ? [] : {});
-for(var i = 0; i != y.length; ++i) {
-    dec[y[i][0]] = String.fromCharCode(y[i][1]);
+var enc/*:{[key:string]:number}*/ = {}, dec/*:{[key:string]:string}|Array<string>*/ = (maxcp < 256 ? [] : {});
+for(i = 0; i != y.length; ++i) {
+    /*:: if(Array.isArray(dec)) */ dec[y[i][0]] = String.fromCharCode(y[i][1]);
     enc[String.fromCharCode(y[i][1])] = y[i][0];
 }
 
-var odec, oenc, outstr;
+var odec = "", outstr = "";
 if(maxcp < 256) {
+  /*:: if(Array.isArray(dec)) { */
 ```
 
 The unicode character `0xFFFD` (REPLACEMENT CHARACTER) is used as a placeholder
@@ -348,9 +349,10 @@ For SBCS, the idea is to embed a raw string with the contents of the 256 codes.
 The `dec` field is merely a split of the string, and `enc` is an eversion:
 
 ```
-    for(var i = 0; i != 256; ++i) if(typeof dec[i] === "undefined") dec[i] = String.fromCharCode(0xFFFD);
+    for(i = 0; i != 256; ++i) if(typeof dec[i] === "undefined") dec[i] = String.fromCharCode(0xFFFD);
     odec = JSON.stringify(dec.join(""));
-    outstr = '(function(){ var d = ' + odec + ', D = [], e = {}; for(var i=0;i!=d.length;++i) { if(d.charCodeAt(i) !== 0xFFFD) e[d[i]] = i; D[i] = d.charAt(i); } return {"enc": e, "dec": D }; })();';
+    outstr = '(function(){ var d = ' + odec + ', D = [], e = {}; for(var i=0;i!=d.length;++i) { if(d.charCodeAt(i) !== 0xFFFD) e[d.charAt(i)] = i; D[i] = d.charAt(i); } return {"enc": e, "dec": D }; })();';
+  /*:: } */
 } else {
 ```
 
@@ -363,10 +365,13 @@ the complete decoding object (and the encoding object is an eversion):
 
 ```
     var dd = [];
-    for(var i in dec) if(dec.hasOwnProperty(i)) {
-        if(typeof dd[i >> 8] === "undefined") dd[i >> 8] = [];
-        dd[i >> 8][i % 256] = dec[i];
+    /*:: if(!Array.isArray(dec)) { */
+    for(i in dec) if(dec.hasOwnProperty(i)) {
+        ii = +i;
+        if(typeof dd[ii >> 8] === "undefined") dd[ii >> 8] = [];
+        dd[ii >> 8][ii % 256] = dec[i];
     }
+    /*:: } */
     outstr = '(function(){ var d = [], e = {}, D = [], j;\n';
     for(var i = 0; i != 256; ++i) if(dd[i]) {
         for(var j = 0; j != 256; ++j) if(typeof dd[i][j] === "undefined") dd[i][j] = String.fromCharCode(0xFFFD);
@@ -748,7 +753,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -802,4 +807,6 @@ node_modules/
 make.sh
 make.njs
 misc/coverage.html
+codepage_mini.md
+ctest/sauce*
 ```

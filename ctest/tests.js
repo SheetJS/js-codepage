@@ -1,3 +1,13 @@
+function msieversion()
+{
+	if(typeof window == 'undefined') return Infinity;
+	if(typeof window.navigator == 'undefined') return Infinity;
+	var ua = window.navigator.userAgent
+	var msie = ua.indexOf ( "MSIE " )
+	if(msie < 0) return Infinity;
+	return parseInt (ua.substring (msie+5, ua.indexOf (".", msie )));
+}
+
 describe('README', function() {
   var readme = function() {
     var unicode_cp10000_255 = cptable[10000].dec[255]; // ˇ
@@ -6,13 +16,14 @@ describe('README', function() {
     var cp10000_711 = cptable[10000].enc[String.fromCharCode(711)]; // 255
     assert.equal(cp10000_711, 255);
 
-    var b1 = [0xbb,0xe3,0xd7,0xdc];
-    var 汇总 = cptable.utils.decode(936, b1);
-    var buf =  cptable.utils.encode(936,  汇总);
-    assert.equal(汇总,"汇总");
-    assert.equal(buf.length, 4);
-    for(var i = 0; i != 4; ++i) assert.equal(b1[i], buf[i]);
-// dafuq
+    if(cptable[936] || cptable['936']) {
+      var b1 = [0xbb,0xe3,0xd7,0xdc];
+      var 汇总 = cptable.utils.decode(936, b1);
+      var buf =  cptable.utils.encode(936,  汇总);
+      assert.equal(汇总,"汇总");
+      assert.equal(buf.length, 4);
+      for(var i = 0; i != 4; ++i) assert.equal(b1[i], buf[i]);
+    }
 
     var b2 = [0xf0,0x9f,0x8d,0xa3];
     var sushi= cptable.utils.decode(65001, b2);
@@ -81,9 +92,9 @@ describe('entry conditions', function() {
     c(cp,i,'str');
   };
   describe('encode', function() {
-    it('CP  1252 : sbcs', function() { chken(1252,"foobar"); });
-    it('CP   708 : sbcs', function() { chken(708,"ت and ث smiley faces");});
-    it('CP   936 : dbcs', function() { chken(936, "这是中文字符测试");});
+    it('CP  1252 : sbcs', function() { chken(1252,"foo•bþr"); });
+    if(cptable[708] || cptable['708']) it('CP   708 : sbcs', function() { chken(708,"ت and ث smiley faces");});
+    if(cptable[936] || cptable['936']) it('CP   936 : dbcs', function() { chken(936, "这是中文字符测试");});
   });
   var chkde = function(cp, i) {
     var c = function(cp, i) {
@@ -105,7 +116,7 @@ describe('entry conditions', function() {
   describe('decode', function() {
     it('CP  1252 : sbcs', function() { chkde(1252,[0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72]); }); /* "foobar" */
     if(typeof Buffer !== 'undefined') it('CP   708 : sbcs', function() { chkde(708, new Buffer([0xca, 0x20, 0x61, 0x6e, 0x64, 0x20, 0xcb, 0x20, 0x73, 0x6d, 0x69, 0x6c, 0x65, 0x79, 0x20, 0x66, 0x61, 0x63, 0x65, 0x73])); }); /* ("ت and ث smiley faces") */
-    it('CP   936 : dbcs', function() { chkde(936, [0xd5, 0xe2, 0xca, 0xc7, 0xd6, 0xd0, 0xce, 0xc4, 0xd7, 0xd6, 0xb7, 0xfb, 0xb2, 0xe2, 0xca, 0xd4]);}); /* "这是中文字符测试" */
+    if(cptable[936] || cptable['936']) it('CP   936 : dbcs', function() { chkde(936, [0xd5, 0xe2, 0xca, 0xc7, 0xd6, 0xd0, 0xce, 0xc4, 0xd7, 0xd6, 0xb7, 0xfb, 0xb2, 0xe2, 0xca, 0xd4]);}); /* "这是中文字符测试" */
   });
 });
 var m = cptable.utils.magic;
@@ -113,6 +124,7 @@ function cmp(x,z) {
   assert.equal(x.length, z.length);
   for(var i = 0; i != z.length; ++i) assert.equal(i+"/"+x.length+""+x[i], i+"/"+z.length+""+z[i]);
 }
+/*if(msieversion() >= 8)*/ {
 Object.keys(m).forEach(function(t){if(t != 16969) describe(m[t], function() {
   it("should process README.md." + m[t],
     function() {
@@ -128,6 +140,7 @@ Object.keys(m).forEach(function(t){if(t != 16969) describe(m[t], function() {
       cptable.utils.cache.encache();
     });
 });});
+}
 describe('failures', function() {
   it('should fail to find CP 6969', function() {
     assert.throws(function(){cptable[6969].dec});

@@ -22,11 +22,10 @@
       </tr>
     </table>
     <div id="mocha"></div>
-    <script src="ctest/json2.js"></script>
     <script src="ctest/shim.js"></script>
+    <script src="ctest/json2.js"></script>
     <script src="ctest/assert.js"></script>
     <script src="ctest/mocha.js"></script>
-    <!--<script src="tests/mocha-sauce-client.js"></script>-->
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-36810333-1']);
@@ -41,7 +40,9 @@
     <script>mocha.setup('bdd');</script>
     <script src="cptable.js"></script>
     <script src="cputils.js"></script>
-    <script src="ctest/fixtures.js"></script>
+    <!--[if gt IE 7]><script src="ctest/fixtures.js"></script><![endif]-->
+    <!--[if lte IE 7]><script src="ctest/iefix.js"></script><![endif]-->
+    <!--[if !IE]><!--><script src="ctest/fixtures.js"></script><!--<![endif]-->
     <script src="ctest/tests.js"></script>
     <script>mocha.run();</script>
   </body>

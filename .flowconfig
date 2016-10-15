@@ -17,8 +17,12 @@
 
 [include]
 cputils.flow.js
+.*/bin/.*.njs
 
 [libs]
 misc/flow.js
+misc/flowdeps.js
 
 [options]
+module.file_ext=.js
+module.file_ext=.njs

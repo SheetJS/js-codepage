@@ -295,8 +295,9 @@
     var len = data.length;
     var out = has_buf ? new Buffer(4*len) : [], w=0, i=0, j = 0, ww=0;
     var C = cpt[cp], E, M = "";
+    var isstr = typeof data === 'string';
     if(C && (E=C.enc)) for(i = 0; i < len; ++i, ++j) {
-      w = E[data[i]];
+      w = E[isstr? data.charAt(i) : data[i]];
       if(w > 255) {
         out[j] = w>>8;
         out[++j] = w&255;
@@ -304,16 +305,16 @@
     }
     else if((M=magic[cp])) switch(M) {
       case "utf8":
-        if(has_buf && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
+        if(has_buf && isstr) { out = new Buffer(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i, ++j) {
-          w = data[i].charCodeAt(0);
+          w = isstr ? data.charCodeAt(i) : data[i].charCodeAt(0);
           if(w <= 0x007F) out[j] = w;
           else if(w <= 0x07FF) {
             out[j]   = 192 + (w >> 6);
             out[++j] = 128 + (w&63);
           } else if(w >= 0xD800 && w <= 0xDFFF) {
             w -= 0xD800;
-            ww = data[++i].charCodeAt(0) - 0xDC00 + (w << 10);
+            ww = (isstr ? data.charCodeAt(++i) : data[++i].charCodeAt(0)) - 0xDC00 + (w << 10);
             out[j]   = 240 + ((ww>>>18) & 0x07);
             out[++j] = 144 + ((ww>>>12) & 0x3F);
             out[++j] = 128 + ((ww>>>6) & 0x3F);
@@ -328,7 +329,7 @@
       case "ascii":
         if(has_buf && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i, ++j) {
-          w = data[i].charCodeAt(0);
+          w = isstr ? data.charCodeAt(i) : data[i].charCodeAt(0);
           if(w <= 0x007F) out[j] = w;
           else throw new Error("bad ascii " + w);
         }
@@ -336,21 +337,21 @@
       case "utf16le":
         if(has_buf && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i) {
-          w = data[i].charCodeAt(0);
+          w = isstr ? data.charCodeAt(i) : data[i].charCodeAt(0);
           out[j++] = w&255;
           out[j++] = w>>8;
         }
         break;
       case "utf16be":
         for(i = 0; i < len; ++i) {
-          w = data[i].charCodeAt(0);
+          w = isstr ? data.charCodeAt(i) : data[i].charCodeAt(0);
           out[j++] = w>>8;
           out[j++] = w&255;
         }
         break;
       case "utf32le":
         for(i = 0; i < len; ++i) {
-          w = data[i].charCodeAt(0);
+          w = isstr ? data.charCodeAt(i) : data[i].charCodeAt(0);
           if(w >= 0xD800 && w <= 0xDFFF) w = 0x10000 + ((w - 0xD800) << 10) + (data[++i].charCodeAt(0) - 0xDC00);
           out[j++] = w&255; w >>= 8;
           out[j++] = w&255; w >>= 8;
@@ -360,7 +361,7 @@
         break;
       case "utf32be":
         for(i = 0; i < len; ++i) {
-          w = data[i].charCodeAt(0);
+          w = isstr ? data.charCodeAt(i) : data[i].charCodeAt(0);
           if(w >= 0xD800 && w <= 0xDFFF) w = 0x10000 + ((w - 0xD800) << 10) + (data[++i].charCodeAt(0) - 0xDC00);
           out[j+3] = w&255; w >>= 8;
           out[j+2] = w&255; w >>= 8;
@@ -371,7 +372,7 @@
         break;
       case "utf7":
         for(i = 0; i < len; i++) {
-          var c = data[i];
+          var c = isstr ? data.charAt(i) : data[i].charAt(0);
           if(c === "+") { out[j++] = 0x2b; out[j++] = 0x2d; continue; }
           if(SetD.indexOf(c) > -1) { out[j++] = c.charCodeAt(0); continue; }
           var tt = encode(1201, c);

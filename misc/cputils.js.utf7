@@ -295,8 +295,9 @@
     var len +AD0 data.length+ADs
     var out +AD0 has+AF8-buf ? new Buffer(4+ACo-len) : +AFsAXQ, w+AD0-0, i+AD0-0, j +AD0 0, ww+AD0-0+ADs
     var C +AD0 cpt+AFs-cp+AF0, E, M +AD0 +ACIAIgA7
+    var isstr +AD0 typeof data +AD0APQA9 'string'+ADs
     if(C +ACYAJg (E+AD0-C.enc)) for(i +AD0 0+ADs i +ADw len+ADs +-+-i, +-+-j) +AHs
-      w +AD0 E+AFs-data+AFs-i+AF0AXQA7
+      w +AD0 E+AFs-isstr? data.charAt(i) : data+AFs-i+AF0AXQA7
       if(w +AD4 255) +AHs
         out+AFs-j+AF0 +AD0 w+AD4APg-8+ADs
         out+AFsAKwAr-j+AF0 +AD0 w+ACY-255+ADs
@@ -304,16 +305,16 @@
     +AH0
     else if((M+AD0-magic+AFs-cp+AF0)) switch(M) +AHs
       case +ACI-utf8+ACI:
-        if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 new Buffer(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
+        if(has+AF8-buf +ACYAJg isstr) +AHs out +AD0 new Buffer(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i, +-+-j) +AHs
-          w +AD0 data+AFs-i+AF0.charCodeAt(0)+ADs
+          w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           if(w +ADwAPQ 0x007F) out+AFs-j+AF0 +AD0 w+ADs
           else if(w +ADwAPQ 0x07FF) +AHs
             out+AFs-j+AF0   +AD0 192 +- (w +AD4APg 6)+ADs
             out+AFsAKwAr-j+AF0 +AD0 128 +- (w+ACY-63)+ADs
           +AH0 else if(w +AD4APQ 0xD800 +ACYAJg w +ADwAPQ 0xDFFF) +AHs
             w -+AD0 0xD800+ADs
-            ww +AD0 data+AFsAKwAr-i+AF0.charCodeAt(0) - 0xDC00 +- (w +ADwAPA 10)+ADs
+            ww +AD0 (isstr ? data.charCodeAt(+-+-i) : data+AFsAKwAr-i+AF0.charCodeAt(0)) - 0xDC00 +- (w +ADwAPA 10)+ADs
             out+AFs-j+AF0   +AD0 240 +- ((ww+AD4APgA+-18) +ACY 0x07)+ADs
             out+AFsAKwAr-j+AF0 +AD0 144 +- ((ww+AD4APgA+-12) +ACY 0x3F)+ADs
             out+AFsAKwAr-j+AF0 +AD0 128 +- ((ww+AD4APgA+-6) +ACY 0x3F)+ADs
@@ -328,7 +329,7 @@
       case +ACI-ascii+ACI:
         if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 new Buffer(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i, +-+-j) +AHs
-          w +AD0 data+AFs-i+AF0.charCodeAt(0)+ADs
+          w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           if(w +ADwAPQ 0x007F) out+AFs-j+AF0 +AD0 w+ADs
           else throw new Error(+ACI-bad ascii +ACI +- w)+ADs
         +AH0
@@ -336,21 +337,21 @@
       case +ACI-utf16le+ACI:
         if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 new Buffer(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
-          w +AD0 data+AFs-i+AF0.charCodeAt(0)+ADs
+          w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           out+AFs-j+-+-+AF0 +AD0 w+ACY-255+ADs
           out+AFs-j+-+-+AF0 +AD0 w+AD4APg-8+ADs
         +AH0
         break+ADs
       case +ACI-utf16be+ACI:
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
-          w +AD0 data+AFs-i+AF0.charCodeAt(0)+ADs
+          w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           out+AFs-j+-+-+AF0 +AD0 w+AD4APg-8+ADs
           out+AFs-j+-+-+AF0 +AD0 w+ACY-255+ADs
         +AH0
         break+ADs
       case +ACI-utf32le+ACI:
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
-          w +AD0 data+AFs-i+AF0.charCodeAt(0)+ADs
+          w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           if(w +AD4APQ 0xD800 +ACYAJg w +ADwAPQ 0xDFFF) w +AD0 0x10000 +- ((w - 0xD800) +ADwAPA 10) +- (data+AFsAKwAr-i+AF0.charCodeAt(0) - 0xDC00)+ADs
           out+AFs-j+-+-+AF0 +AD0 w+ACY-255+ADs w +AD4APgA9 8+ADs
           out+AFs-j+-+-+AF0 +AD0 w+ACY-255+ADs w +AD4APgA9 8+ADs
@@ -360,7 +361,7 @@
         break+ADs
       case +ACI-utf32be+ACI:
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
-          w +AD0 data+AFs-i+AF0.charCodeAt(0)+ADs
+          w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           if(w +AD4APQ 0xD800 +ACYAJg w +ADwAPQ 0xDFFF) w +AD0 0x10000 +- ((w - 0xD800) +ADwAPA 10) +- (data+AFsAKwAr-i+AF0.charCodeAt(0) - 0xDC00)+ADs
           out+AFs-j+-3+AF0 +AD0 w+ACY-255+ADs w +AD4APgA9 8+ADs
           out+AFs-j+-2+AF0 +AD0 w+ACY-255+ADs w +AD4APgA9 8+ADs
@@ -371,7 +372,7 @@
         break+ADs
       case +ACI-utf7+ACI:
         for(i +AD0 0+ADs i +ADw len+ADs i+-+-) +AHs
-          var c +AD0 data+AFs-i+AF0AOw
+          var c +AD0 isstr ? data.charAt(i) : data+AFs-i+AF0.charAt(0)+ADs
           if(c +AD0APQA9 +ACIAKwAi) +AHs out+AFs-j+-+-+AF0 +AD0 0x2b+ADs out+AFs-j+-+-+AF0 +AD0 0x2d+ADs continue+ADs +AH0
           if(SetD.indexOf(c) +AD4 -1) +AHs out+AFs-j+-+-+AF0 +AD0 c.charCodeAt(0)+ADs continue+ADs +AH0
           var tt +AD0 encode(1201, c)+ADs

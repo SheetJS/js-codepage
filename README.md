@@ -1,13 +1,8 @@
-# Codepages for JS
+# js-codepage
 
 [Codepages](https://en.wikipedia.org/wiki/Codepage) are character encodings.  In
 many contexts, single- or double-byte character sets are used in lieu of Unicode
 encodings.  The codepages map between characters and numbers.
-
-[unicode.org](http://www.unicode.org/Public/MAPPINGS/) hosts lists of mappings.
-The build script automatically downloads and parses the mappings in order to
-generate the full script.  The `pages.csv` description in `codepage.md` controls
-which codepages are used.
 
 ## Setup
 
@@ -317,6 +312,15 @@ unicode.org does not prescribe a value, MakeEncoding.cs value is used.
 of Windows.  In older versions of Windows (e.g. Windows 98) these files followed
 the name pattern `CP_#.NLS`, but newer versions use the name pattern `C_#.NLS`.
 
+## Testing
+
+`make test` will run the nodejs-based test.
+
+To run the in-browser tests, run a local server and go to the `ctest` directory.
+`make ctestserv` will start a python `SimpleHTTPServer` server on port 8000.
+
+To update the browser artifacts, run `make ctest`.
+
 ## Sources
 
 - [Unicode Consortium Public Mappings](http://www.unicode.org/Public/MAPPINGS/)
@@ -324,8 +328,17 @@ the name pattern `CP_#.NLS`, but newer versions use the name pattern `C_#.NLS`.
 - [Windows Code Page Identifiers](http://msdn.microsoft.com/en-us/library/windows/desktop/dd317756.aspx)
 - [IBM Coded Character Sets](https://www-01.ibm.com/software/globalization/ccsid/ccsid_registered.html)
 
+## License
+
+Please consult the attached LICENSE file for details.  All rights not explicitly
+granted by the Apache 2.0 license are reserved by the Original Author.
+
 ## Badges
 
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/codepage.svg)](https://saucelabs.com/u/codepage)
+
 [![Build Status](https://travis-ci.org/SheetJS/js-codepage.svg?branch=master)](https://travis-ci.org/SheetJS/js-codepage)
-[![Coverage Status](https://coveralls.io/repos/SheetJS/js-codepage/badge.png)](https://coveralls.io/r/SheetJS/js-codepage)
+
+[![Coverage Status](http://img.shields.io/coveralls/SheetJS/js-codepage/master.svg)](https://coveralls.io/r/SheetJS/js-codepage?branch=master)
+
 [![Analytics](https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/js-codepage?pixel)](https://github.com/SheetJS/js-codepage)

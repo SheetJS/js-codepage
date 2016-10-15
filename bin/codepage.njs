@@ -3,7 +3,7 @@
 /* vim: set ts=2 ft=javascript: */
 var codepage = require('../');
 require('exit-on-epipe');
-var fs = require('fs'), program = require('commander');
+var fs = require('fs'), program/*:any*/ = (require('commander')/*:any*/);
 program
 	.version(codepage.version)
 	.usage('[options] <file>')
@@ -23,7 +23,10 @@ program.on('--help', function() {
 program.parse(process.argv);
 
 if(program.list) {
-	Object.keys(codepage).forEach(function(x) { if(+x == x) console.log(x); });
+	var l/*:Array<number>*/ = [];
+	Object.keys(codepage).forEach(function(x) { if(parseInt(x) == +x) l.push(+x); });
+	Object.keys(codepage.utils.magic).forEach(function(x) { if(parseInt(x) == +x && +x != 16969) l.push(+x); });
+	l.sort(function(a,b) { return a-b; }).forEach(function(x) { console.log(x); });
 	process.exit();
 }
 
@@ -45,15 +48,14 @@ else process_text(fs.readFileSync(f));
 function process_text(text) {
 	var dec = codepage.utils.decode(fr, text);
 
-	var bom = {
-		1200:  new Buffer([0xFF, 0xFE]),
-		1201:  new Buffer([0xFE, 0xFF]),
-		12000: new Buffer([0xFF, 0xFE, 0x00, 0x00]),
-		12001: new Buffer([0x00, 0x00, 0xFE, 0xFF]),
-		16969: new Buffer([0x69, 0x69]),
-		65000: new Buffer([0x2B, 0x2F, 0x76, 0x2B]),
-		65001: new Buffer([0xEF, 0xBB, 0xBF])
-	}
+	var bom/*:Array<Buffer>*/ = [];
+	bom[1200] = new Buffer([0xFF, 0xFE]);
+	bom[1201] = new Buffer([0xFE, 0xFF]);
+	bom[12000] = new Buffer([0xFF, 0xFE, 0x00, 0x00]);
+	bom[12001] = new Buffer([0x00, 0x00, 0xFE, 0xFF]);
+	bom[16969] = new Buffer([0x69, 0x69]);
+	bom[65000] = new Buffer([0x2B, 0x2F, 0x76, 0x2B]);
+	bom[65001] = new Buffer([0xEF, 0xBB, 0xBF]);
 
 	var mybom = (program.bom && bom[fr] ? bom[fr] : "");
 	var out = to === 65001 ? dec.toString('utf8') : codepage.utils.encode(to, dec);

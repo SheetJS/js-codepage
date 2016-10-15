@@ -22,9 +22,10 @@
       </tr>
     </table>
     <div id="mocha"></div>
+    <script src="shim.js"></script>
+    <script src="json2.js"></script>
     <script src="assert.js"></script>
     <script src="mocha.js"></script>
-    <script src="../tests/mocha-sauce-client.js"></script>
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-36810333-1']);
@@ -37,8 +38,10 @@
       })();
     </script>
     <script>mocha.setup('bdd');</script>
-    <script src="../dist/sbcs.full.js"></script>
-    <script src="fixtures.js"></script>
+    <script src="dist/sbcs.full.js"></script>
+    <!--[if gt IE 7]><script src="fixtures.js"></script><![endif]-->
+    <!--[if lte IE 7]><script src="iefix.js"></script><![endif]-->
+    <!--[if !IE]><!--><script src="fixtures.js"></script><!--<![endif]-->
     <script src="tests.js"></script>
     <script>mocha.run();</script>
   </body>

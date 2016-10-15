@@ -2,6 +2,10 @@ SHELL=/bin/bash
 VOC=voc
 TARGET=cptable.js
 AUXTARGETS=cputils.js cpexcel.js sbcs.js
+DISTFULL=cpexcel sbcs cptable
+CMDS=bin/codepage.njs
+
+ULIB=$(shell echo $(LIB) | tr a-z A-Z)
 
 ## Main Targets
 
@@ -19,16 +23,17 @@ js: make.sh codepage.md ## Build all output targets
 	bash make.sh
 	make cputils.js
 
-cputils.js: %.js : %.flow.js
+cputils.js: cputils.flow.js
 	node -e 'process.stdout.write(require("fs").readFileSync("$<","utf8").replace(/^[ \t]*\/\*[:#][^*]*\*\/[ \t]*(\n)?/gm,"").replace(/\/\*[:#][^*]*\*\//gm,""))' > $@
 
 .PHONY: clean
 clean: ## Remove targets and build artifaats
 	rm -f make.sh .vocrc pages.csv bits/*.js
 
-.PHONY: dist ## Copy files for distribution
-dist: $(TARGET) $(AUXTARGETS)
+.PHONY: dist
+dist: $(TARGET) $(AUXTARGETS) ## Copy files for distribution
 	cp $(TARGET) $(AUXTARGETS) LICENSE dist/
+	for i in $(DISTFULL); do cat $$i.js cputils.js > dist/$$i.full.js; done
 
 ## Testing
 
@@ -42,17 +47,22 @@ ctest: ## Build browser test (into ctest/ subdirectory)
 
 .PHONY: ctestserv
 ctestserv: ## Start a test server on port 8000
-	@python -mSimpleHTTPServer
+	@cd ctest && python -mSimpleHTTPServer
 
 .PHONY: baseline
 baseline: ## Build test baselines
 	@bash ./misc/make_baseline.sh
+
+.PHONY: clean-baseline
+clean-baseline: ## Remove test baselines
+	@bash ./misc/make_baseline.sh clean
 
 ## Code Checking
 
 .PHONY: lint
 lint: $(TARGET) $(AUXTARGETS) ## Run jshint and jscs checks
 	@jshint --show-non-errors $(TARGET) $(AUXTARGETS)
+	@jshint --show-non-errors $(CMDS)
 	@jshint --show-non-errors package.json
 	@jshint --show-non-errors --extract=always $(HTMLLINT)
 	@jscs $(TARGET) $(AUXTARGETS)
@@ -75,7 +85,6 @@ coveralls: ## Coverage Test + Send to coveralls.io
 prof:
 	cat misc/prof.js test.js > prof.js
 	node --prof prof.js
-
 
 
 .PHONY: help
