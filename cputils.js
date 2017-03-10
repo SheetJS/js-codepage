@@ -5,7 +5,7 @@
   "use strict";
   if(typeof cptable === "undefined") {
     if(typeof require !== "undefined"){
-      var cpt = require('./cpt' + 'able');
+      var cpt = require('./cptable');
       if (typeof module !== 'undefined' && module.exports) module.exports = factory(cpt);
       else root.cptable = factory(cpt);
     } else throw new Error("cptable not found");

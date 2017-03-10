@@ -33,7 +33,7 @@ clean: ## Remove targets and build artifaats
 .PHONY: dist
 dist: $(TARGET) $(AUXTARGETS) ## Copy files for distribution
 	cp $(TARGET) $(AUXTARGETS) LICENSE dist/
-	for i in $(DISTFULL); do cat $$i.js cputils.js > dist/$$i.full.js; done
+	for i in $(DISTFULL); do cat $$i.js cputils.js | sed "s#require('./cptable')#cptable#" > dist/$$i.full.js; done
 
 ## Testing
 

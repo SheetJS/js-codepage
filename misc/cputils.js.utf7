@@ -5,7 +5,7 @@
   +ACI-use strict+ACIAOw
   if(typeof cptable +AD0APQA9 +ACI-undefined+ACI) +AHs
     if(typeof require +ACEAPQA9 +ACI-undefined+ACI)+AHs
-      var cpt +AD0 require('./cpt' +- 'able')+ADs
+      var cpt +AD0 require('./cptable')+ADs
       if (typeof module +ACEAPQA9 'undefined' +ACYAJg module.exports) module.exports +AD0 factory(cpt)+ADs
       else root.cptable +AD0 factory(cpt)+ADs
     +AH0 else throw new Error(+ACI-cptable not found+ACI)+ADs
