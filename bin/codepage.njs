@@ -57,7 +57,7 @@ function process_text(text) {
 	bom[65000] = new Buffer([0x2B, 0x2F, 0x76, 0x2B]);
 	bom[65001] = new Buffer([0xEF, 0xBB, 0xBF]);
 
-	var mybom = (program.bom && bom[fr] ? bom[fr] : "");
+	var mybom = (program.bom && bom[to] ? bom[to] : "");
 	var out = to === 65001 ? dec.toString('utf8') : codepage.utils.encode(to, dec);
 
 	/* if output file is specified */
