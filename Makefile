@@ -1,4 +1,5 @@
 SHELL=/bin/bash
+LIB=codepage
 VOC=voc
 TARGET=cptable.js
 AUXTARGETS=cputils.js cpexcel.js sbcs.js
@@ -6,6 +7,8 @@ DISTFULL=cpexcel sbcs cptable
 CMDS=bin/codepage.njs
 
 ULIB=$(shell echo $(LIB) | tr a-z A-Z)
+FLOWTARGET=cptable.js
+CLOSURE=/usr/local/lib/node_modules/google-closure-compiler/compiler.jar
 
 ## Main Targets
 
@@ -27,7 +30,7 @@ cputils.js: cputils.flow.js
 	node -e 'process.stdout.write(require("fs").readFileSync("$<","utf8").replace(/^[ \t]*\/\*[:#][^*]*\*\/[ \t]*(\n)?/gm,"").replace(/\/\*[:#][^*]*\*\//gm,""))' > $@
 
 .PHONY: clean
-clean: ## Remove targets and build artifaats
+clean: ## Remove targets and build artifacts
 	rm -f make.sh .vocrc pages.csv bits/*.js
 
 .PHONY: dist
@@ -60,12 +63,19 @@ clean-baseline: ## Remove test baselines
 ## Code Checking
 
 .PHONY: lint
-lint: $(TARGET) $(AUXTARGETS) ## Run jshint and jscs checks
+lint: $(TARGET) $(AUXTARGETS) ## Run eslint checks
+	@eslint --ext .js,.njs,.json,.html,.htm $(TARGET) $(AUXTARGETS) $(CMDS) $(HTMLLINT) package.json bower.json
+	if [ -e $(CLOSURE) ]; then java -jar $(CLOSURE) $(REQS) $(FLOWTARGET) --jscomp_warning=reportUnknownTypes >/dev/null; fi
+
+.PHONY: old-lint
+old-lint: $(TARGET) $(AUXTARGETS) ## Run jshint and jscs checks
 	@jshint --show-non-errors $(TARGET) $(AUXTARGETS)
 	@jshint --show-non-errors $(CMDS)
 	@jshint --show-non-errors package.json
 	@jshint --show-non-errors --extract=always $(HTMLLINT)
 	@jscs $(TARGET) $(AUXTARGETS)
+	if [ -e $(CLOSURE) ]; then java -jar $(CLOSURE) $(REQS) $(FLOWTARGET) --jscomp_warning=reportUnknownTypes >/dev/null; fi
+
 
 .PHONY: flow
 flow: lint ## Run flow checker
