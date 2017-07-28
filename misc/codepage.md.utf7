@@ -753,7 +753,7 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.9.0+ACI,
+  +ACI-version+ACI: +ACI-1.10.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
@@ -770,13 +770,13 @@ describe('failures', function() +AHs
   +AF0,
   +ACI-main+ACI: +ACI-cputils.js+ACI,
   +ACI-dependencies+ACI: +AHs
-    +ACI-voc+ACI:+ACIAIg,
-    +ACI-concat-stream+ACI:+ACIAIg,
-    +ACI-exit-on-epipe+ACI:+ACIAIg,
-    +ACI-commander+ACI:+ACIAIg
+    +ACI-voc+ACI:+ACIAfg-1.0.0+ACI,
+    +ACI-concat-stream+ACI:+ACIAfg-1.6.0+ACI,
+    +ACI-exit-on-epipe+ACI:+ACIAfg-1.0.1+ACI,
+    +ACI-commander+ACI:+ACIAfg-2.11.0+ACI
   +AH0,
   +ACI-devDependencies+ACI: +AHs
-    +ACI-mocha+ACI:+ACIAIg
+    +ACI-mocha+ACI:+ACIAfg-2.5.3+ACI
   +AH0,
   +ACI-repository+ACI: +AHs +ACI-type+ACI:+ACI-git+ACI, +ACI-url+ACI:+ACI-git://github.com/SheetJS/js-codepage.git+ACIAfQ,
   +ACI-scripts+ACI: +AHs

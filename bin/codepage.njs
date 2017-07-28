@@ -45,8 +45,8 @@ if(f !== "-" && !fs.existsSync(f)) {
 if(f === "-") process.stdin.pipe(require('concat-stream')(process_text));
 else process_text(fs.readFileSync(f));
 
-function process_text(text) {
-	var dec = codepage.utils.decode(fr, text);
+function process_text(text/*:Buffer*/) {
+	var dec/*:Buffer*/ = codepage.utils.decode(fr, text);
 
 	var bom/*:Array<Buffer>*/ = [];
 	bom[1200] = new Buffer([0xFF, 0xFE]);
@@ -58,7 +58,7 @@ function process_text(text) {
 	bom[65001] = new Buffer([0xEF, 0xBB, 0xBF]);
 
 	var mybom = (program.bom && bom[to] ? bom[to] : "");
-	var out = to === 65001 ? dec.toString('utf8') : codepage.utils.encode(to, dec);
+	var out/*:any*/ = to === 65001 ? dec.toString('utf8') : codepage.utils.encode(to, dec);
 
 	/* if output file is specified */
 	if(o) writefile(o, out, mybom);
@@ -76,12 +76,12 @@ function process_text(text) {
 	}
 }
 
-function logit(out, bom) {
+function logit(out/*:Buffer*/, bom) {
 	process.stdout.write(bom);
 	process.stdout.write(out);
 }
 
-function writefile(o, out, bom) {
+function writefile(o, out/*:Buffer*/, bom) {
 	fs.writeFileSync(o, bom);
 	fs.appendFileSync(o, out);
 }

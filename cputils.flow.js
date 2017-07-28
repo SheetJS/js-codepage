@@ -2,28 +2,21 @@
 /* vim: set ft=javascript: */
 /*jshint newcap: false */
 /*::
-type Data = string | Array<number> | Buffer;
-type StrData = string | Array<string> | Buffer;
-type OutType = Data;
 type Decoder = (data:Data)=>string;
 type Encoder = (data:StrData, ofmt:?string)=>Data;
-type CPIndex = number|string;
-type EMap = {[e:string]:number};
-type DMap = Array<string>;
 type EncoderMap = {[id:CPIndex]:Encoder};
 type DecoderMap = {[id:CPIndex]:Decoder};
-type CPEntry = {enc:EMap, dec:DMap};
 */
 (function(root/*:any*/, factory) {
   "use strict";
   if(typeof cptable === "undefined") {
     if(typeof require !== "undefined"){
-      var cpt = require('./cpt' + 'able');
+      var cpt/*:CPTable*/ = require('./cptable');
       if (typeof module !== 'undefined' && module.exports) module.exports = factory(cpt);
       else root.cptable = factory(cpt);
     } else throw new Error("cptable not found");
   } else cptable = factory(cptable);
-}(this, function(cpt){
+}(this, function(cpt/*:CPTable*/){
   "use strict";
   var magic/*:{[id:CPIndex]:string}*/ = {
     "1200":"utf16le",
@@ -414,7 +407,7 @@ type CPEntry = {enc:EMap, dec:DMap};
     out = out.slice(0,j);
     if(!has_buf) return (ofmt == 'str') ? (out/*:any*/).map(sfcc).join("") : out;
     if(!ofmt || ofmt === 'buf') return out;
-    if(ofmt !== 'arr') return out.toString('binary');
+    if(ofmt !== 'arr') return /*::((*/out/*:: :any) :Buffer)*/.toString('binary');
     return [].slice.call(out);
   };
   var decode = function decode(cp/*:CPIndex*/, data/*:Data*/)/*:string*/ {

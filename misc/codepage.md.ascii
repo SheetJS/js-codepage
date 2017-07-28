@@ -753,7 +753,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -770,13 +770,13 @@ describe('failures', function() {
   ],
   "main": "cputils.js",
   "dependencies": {
-    "voc":"",
-    "concat-stream":"",
-    "exit-on-epipe":"",
-    "commander":""
+    "voc":"~1.0.0",
+    "concat-stream":"~1.6.0",
+    "exit-on-epipe":"~1.0.1",
+    "commander":"~2.11.0"
   },
   "devDependencies": {
-    "mocha":""
+    "mocha":"~2.5.3"
   },
   "repository": { "type":"git", "url":"git://github.com/SheetJS/js-codepage.git"},
   "scripts": {
