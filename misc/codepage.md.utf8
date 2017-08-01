@@ -753,7 +753,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -771,7 +771,6 @@ describe('failures', function() {
   "main": "cputils.js",
   "dependencies": {
     "voc":"~1.0.0",
-    "concat-stream":"~1.6.0",
     "exit-on-epipe":"~1.0.1",
     "commander":"~2.11.0"
   },

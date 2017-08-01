@@ -753,7 +753,7 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.10.0+ACI,
+  +ACI-version+ACI: +ACI-1.10.1+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
@@ -771,7 +771,6 @@ describe('failures', function() +AHs
   +ACI-main+ACI: +ACI-cputils.js+ACI,
   +ACI-dependencies+ACI: +AHs
     +ACI-voc+ACI:+ACIAfg-1.0.0+ACI,
-    +ACI-concat-stream+ACI:+ACIAfg-1.6.0+ACI,
     +ACI-exit-on-epipe+ACI:+ACIAfg-1.0.1+ACI,
     +ACI-commander+ACI:+ACIAfg-2.11.0+ACI
   +AH0,

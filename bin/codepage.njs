@@ -42,7 +42,16 @@ if(f !== "-" && !fs.existsSync(f)) {
 	process.exit(13);
 }
 
-if(f === "-") process.stdin.pipe(require('concat-stream')(process_text));
+function concat(func) {
+	var writable = require('stream').Writable();
+	var buf = [];
+	writable._write = function(chunk, e, cb) { console.error(chunk.length); buf.push(chunk); cb(); };
+	writable._writev = function(chunks, cb) { console.error(chunks.length, chunks.map(x => x.length)); chunks.forEach(function(c) { buf.push(c); cb(); }); };
+	writable.on('finish', function() { console.error(buf.length, "end"); func(Buffer.concat(buf)); });
+	return writable;
+}
+
+if(f === "-") process.stdin.pipe(concat(process_text));
 else process_text(fs.readFileSync(f));
 
 function process_text(text/*:Buffer*/) {
