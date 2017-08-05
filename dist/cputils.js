@@ -6,7 +6,7 @@
   if(typeof cptable === "undefined") {
     if(typeof require !== "undefined"){
       var cpt = require('./cptable');
-      if (typeof module !== 'undefined' && module.exports) module.exports = factory(cpt);
+      if (typeof module !== 'undefined' && module.exports && typeof DO_NOT_EXPORT_CODEPAGE === 'undefined') module.exports = factory(cpt);
       else root.cptable = factory(cpt);
     } else throw new Error("cptable not found");
   } else cptable = factory(cptable);

@@ -427,7 +427,7 @@ awk -F, '+AHs-print +ACQ-1, +ACQ-2, +ACQ-3+AH0' +ACQ-INFILE +AHw while read cp u
     sed 's/+ACIAXA(+AFs-0-9+AF0AKwBc)+ACI:/+AFw-1:/g' +ADw-bits/+ACQ-cp.js.tmp +AD4-bits/+ACQ-cp.js
     rm -f bits/+ACQ-cp.js.tmp
 done
-echo +ACI-if (typeof module +ACEAPQA9 'undefined' +ACYAJg module.exports) module.exports +AD0 +ACQ-JSVAR+ADsAIg +AD4APg +ACQ-OUTFILE.tmp
+echo +ACI-if (typeof module +ACEAPQA9 'undefined' +ACYAJg module.exports +ACYAJg typeof DO+AF8-NOT+AF8-EXPORT+AF8-CODEPAGE +AD0APQA9 'undefined') module.exports +AD0 +ACQ-JSVAR+ADsAIg +AD4APg +ACQ-OUTFILE.tmp
 sed 's/+ACIAXA(+AFs-0-9+AF0AKwBc)+ACI:/+AFw-1:/g' +ADwAJA-OUTFILE.tmp +AD4AJA-OUTFILE
 rm -f +ACQ-OUTFILE.tmp
 +AGAAYABg
@@ -753,7 +753,7 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.10.1+ACI,
+  +ACI-version+ACI: +ACI-1.11.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,

@@ -1,6 +1,6 @@
 {
   "name": "codepage",
-  "version": "1.10.1",
+  "version": "1.11.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],

@@ -48,6 +48,10 @@ the object, edit the `JSVAR` shell variable in `make.sh` and run the script.
 The utilities functions are contained in `cputils.js`, which assumes that the
 appropriate codepage scripts were loaded.
 
+The script will manipulate `module.exports` if available (e.g. in a CommonJS
+`require` context).  This is not always desirable.  To prevent the behavior,
+define `DO_NOT_EXPORT_CODEPAGE`.
+
 ## Usage
 
 Most codepages are indexed by number.  To get the unicode character for a given

@@ -427,7 +427,7 @@ awk -F, '{print $1, $2, $3}' $INFILE | while read cp url cptype; do
     sed 's/"\([0-9]+\)":/\1:/g' <bits/$cp.js.tmp >bits/$cp.js
     rm -f bits/$cp.js.tmp
 done
-echo "if (typeof module !== 'undefined' && module.exports) module.exports = $JSVAR;" >> $OUTFILE.tmp
+echo "if (typeof module !== 'undefined' && module.exports && typeof DO_NOT_EXPORT_CODEPAGE === 'undefined') module.exports = $JSVAR;" >> $OUTFILE.tmp
 sed 's/"\([0-9]+\)":/\1:/g' <$OUTFILE.tmp >$OUTFILE
 rm -f $OUTFILE.tmp
 ```
@@ -753,7 +753,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.10.1",
+  "version": "1.11.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],

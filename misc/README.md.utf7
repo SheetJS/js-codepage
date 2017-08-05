@@ -48,6 +48,10 @@ the object, edit the +AGA-JSVAR+AGA shell variable in +AGA-make.sh+AGA and run t
 The utilities functions are contained in +AGA-cputils.js+AGA, which assumes that the
 appropriate codepage scripts were loaded.
 
+The script will manipulate +AGA-module.exports+AGA if available (e.g. in a CommonJS
++AGA-require+AGA context).  This is not always desirable.  To prevent the behavior,
+define +AGA-DO+AF8-NOT+AF8-EXPORT+AF8-CODEPAGE+AGA.
+
 +ACMAIw Usage
 
 Most codepages are indexed by number.  To get the unicode character for a given
