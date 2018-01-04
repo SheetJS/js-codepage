@@ -1,6 +1,6 @@
 {
   "name": "codepage",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -13,6 +13,7 @@
     "bin",
     "cptable.js",
     "cputils.js",
+    "dist/sbcs.full.js",
     "dist/cpexcel.full.js"
   ],
   "main": "cputils.js",
