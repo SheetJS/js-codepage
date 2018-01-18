@@ -53,6 +53,8 @@
     "LICENSE",
     "README.md",
     "bin",
+    "types/index.d.ts",
+    "types/*.json",
     "cptable.js",
     "cputils.js",
     "dist/sbcs.full.js",
