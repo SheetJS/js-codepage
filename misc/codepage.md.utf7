@@ -1,6 +1,6 @@
 +ACM Getting Codepages
 
-The fields of the pages.csv manifest are +AGA-codepage,url,bytes+AGA (SBCS+AD0-1, DBCS+AD0-2)
+The fields of the +AGA-pages.csv+AGA manifest are +AGA-codepage,url,bytes+AGA (SBCS+AD0-1, DBCS+AD0-2)
 
 +AGAAYABgAD4-pages.csv
 37,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP037.TXT,1
@@ -106,7 +106,7 @@ The following codepages are available in .NET on Windows:
 - 10082 Croatian (Mac)
 - 20000 CNS Taiwan+ADs Chinese Traditional (CNS)
 - 20001 TCA Taiwan
-- 20002 Eten Taiwan+ADs Chinese Traditional (Eten)
+- 20002 ETEN Taiwan+ADs Chinese Traditional (ETEN)
 - 20003 IBM5550 Taiwan
 - 20004 TeleText Taiwan
 - 20005 Wang Taiwan
@@ -143,8 +143,8 @@ The following codepages are available in .NET on Windows:
 - 29001 Europa 3
 - 38598 ISO 8859-8 Hebrew+ADs Hebrew (ISO-Logical)
 - 50220 ISO 2022 Japanese with no halfwidth Katakana+ADs Japanese (JIS)
-- 50221 ISO 2022 Japanese with halfwidth Katakana+ADs Japanese (JIS-Allow 1 byte Kana)
-- 50222 ISO 2022 Japanese JIS X 0201-1989+ADs Japanese (JIS-Allow 1 byte Kana - SO/SI)
+- 50221 ISO 2022 Japanese with halfwidth Katakana+ADs Japanese (JIS Allow 1 byte Kana)
+- 50222 ISO 2022 Japanese JIS X 0201-1989+ADs Japanese (JIS Allow 1 byte Kana - SO/SI)
 - 50225 ISO 2022 Korean
 - 50227 ISO 2022 Simplified Chinese+ADs Chinese Simplified (ISO 2022)
 - 51932 EUC Japanese
@@ -267,7 +267,7 @@ The following codepages are dependencies for Visual FoxPro:
 +ACMAIw Building Notes
 
 The script +AGA-make.sh+AGA (described later) will get these files and massage the data
-(printing code-unicode pairs).  The eventual tables are dropped in the paths
+(printing code-Unicode pairs).  The eventual tables are dropped in the paths
 +AGA./codepages/+ADw-CODEPAGE+AD4.TBL+AGA.  For example, the last 10 lines of +AGA-10000.TBL+AGA are
 
 +AGAAYABgAD4
@@ -283,13 +283,13 @@ The script +AGA-make.sh+AGA (described later) will get these files and massage t
 0xFF	0x02C7
 +AGAAYABg
 
-which implies that code 0xF6 is +AGA-String.fromCharCode(0x02C6)+AGA and vice versa.
+which implies that code +AGA-0xF6+AGA is +AGA-String.fromCharCode(0x02C6)+AGA and vice versa.
 
 +ACMAIw Windows-dependent build step
 
 To build the sources on windows, consult +AGA-dotnet/MakeEncoding.cs+AGA.
 
-After saving the standard output to +AGA-out+AGA, a simple awk script (+AGA-dotnet.sh+AGA) takes care of the rest:
+After saving the standard output to +AGA-out+AGA, a simple script processes the result:
 
 +AGAAYABgAD4-dotnet.sh
 +ACMAIQ-/bin/bash
@@ -325,7 +325,7 @@ var y/+ACo:Array+ADw-Array+ADw-number+AD4 +AD4AKg-/ +AD0 x.split(+ACIAXA-n+ACI).
 +AGAAYABg
 
 The DBCS and SBCS code generation strategies are different.  The maximum code is
-used to distinguish (max 0xFF for SBCS).
+used to distinguish (max +AGA-0xFF+AGA for SBCS).
 
 +AGAAYABg
 for(i +AD0 0+ADs i +ACEAPQ y.length+ADs +-+-i) if(y+AFs-i+AF0AWw-0+AF0 +AD4 maxcp) maxcp +AD0 y+AFs-i+AF0AWw-0+AF0AOw
@@ -341,7 +341,7 @@ if(maxcp +ADw 256) +AHs
   /+ACo:: if(Array.isArray(dec)) +AHs +ACo-/
 +AGAAYABg
 
-The unicode character +AGA-0xFFFD+AGA (REPLACEMENT CHARACTER) is used as a placeholder
+The Unicode character +AGA-0xFFFD+AGA (REPLACEMENT CHARACTER) is used as a placeholder
 for characters that are not specified in the map (for example, +AGA-0xF0+AGA is not in
 code page 10000).
 
@@ -356,7 +356,7 @@ The +AGA-dec+AGA field is merely a split of the string, and +AGA-enc+AGA is an e
 +AH0 else +AHs
 +AGAAYABg
 
-DBCS is similar, except that the space is sliced into 256-byte chunks (strings
+DBCS is similar, except that the space is sliced in chunks of 256 bytes (strings
 are only generated for those high-bytes represented in the codepage).
 
 The strategy is to construct an array-of-arrays so that +AGA-dd+AFs-high+AF0AWw-low+AF0AYA is the
@@ -384,9 +384,9 @@ process.stdout.write(jsvar +- +ACIAWwAi +- cp +- +ACIAXQ +AD0 +ACI +- outstr +- 
 
 +AGAAYABg
 
-+AGA-make.sh+AGA generates the tables used by +AGA-make.njs+AGA.  The raw unicode TXT files
++AGA-make.sh+AGA generates the tables used by +AGA-make.njs+AGA.  The raw Unicode TXT files
 are columnar: +AGA-code unicode +ACM-comments+AGA.  For example, the last 10 lines of the
-text file ROMAN.TXT (for CP 10000) are:
+text file +AGA-ROMAN.TXT+AGA (for CP 10000) are:
 
 +AGAAYABgAD4
 0xF6	0x02C6	+ACM-MODIFIER LETTER CIRCUMFLEX ACCENT
@@ -427,6 +427,7 @@ awk -F, '+AHs-print +ACQ-1, +ACQ-2, +ACQ-3+AH0' +ACQ-INFILE +AHw while read cp u
     sed 's/+ACIAXA(+AFs-0-9+AF0AKwBc)+ACI:/+AFw-1:/g' +ADw-bits/+ACQ-cp.js.tmp +AD4-bits/+ACQ-cp.js
     rm -f bits/+ACQ-cp.js.tmp
 done
+echo +ACI-// eslint-disable-next-line no-undef+ACI +AD4APg +ACQ-OUTFILE.tmp
 echo +ACI-if (typeof module +ACEAPQA9 'undefined' +ACYAJg module.exports +ACYAJg typeof DO+AF8-NOT+AF8-EXPORT+AF8-CODEPAGE +AD0APQA9 'undefined') module.exports +AD0 +ACQ-JSVAR+ADsAIg +AD4APg +ACQ-OUTFILE.tmp
 sed 's/+ACIAXA(+AFs-0-9+AF0AKwBc)+ACI:/+AFw-1:/g' +ADwAJA-OUTFILE.tmp +AD4AJA-OUTFILE
 rm -f +ACQ-OUTFILE.tmp
@@ -434,7 +435,7 @@ rm -f +ACQ-OUTFILE.tmp
 
 +ACMAIw Utilities
 
-The encode and decode functions are kept in a separate script (cputils.js).
+The encode and decode functions are kept in a separate script (+AGA-cputils.js+AGA).
 
 Both encode and decode deal with data represented as:
 
@@ -447,7 +448,7 @@ while the input format is automatically determined.
 
 +ACM Tests
 
-The tests include JS validity tests (requiring or eval'ing code):
+The tests include JS validity tests (requiring or evaluating code):
 
 +AGAAYABgAD4-test.js
 var fs +AD0 require('fs'), assert +AD0 require('assert'), vm +AD0 require('vm')+ADs
@@ -639,7 +640,7 @@ function testfile(f,cp,type,skip) +AHs
 +AH0
 +AGAAYABg
 
-The +AGA-utf8+AGA tests verify utf8 encoding of the actual JS sources:
+The +AGA-utf8+AGA tests verify UTF-8 encoding of the actual JS sources:
 
 +AGAAYABgAD4-test.js
 describe('node natives', function() +AHs
@@ -665,7 +666,7 @@ describe('node natives', function() +AHs
 +AH0)+ADs
 +AGAAYABg
 
-The utf+ACo and ascii tests attempt to test other magic formats:
+The +AGA-utf+ACoAYA and +AGA-ascii+AGA tests attempt to test other magic formats:
 
 +AGAAYABgAD4-test.js
 var m +AD0 cptable.utils.magic+ADs
@@ -753,41 +754,64 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.11.0+ACI,
+  +ACI-version+ACI: +ACI-1.12.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
   +ACI-bin+ACI: +AHs
     +ACI-codepage+ACI: +ACI./bin/codepage.njs+ACI
   +AH0,
-  +ACI-files+ACI: +AFs
-    +ACI-LICENSE+ACI,
-    +ACI-README.md+ACI,
-    +ACI-bin+ACI,
-    +ACI-cptable.js+ACI,
-    +ACI-cputils.js+ACI,
-    +ACI-dist/cpexcel.full.js+ACI
-  +AF0,
   +ACI-main+ACI: +ACI-cputils.js+ACI,
+  +ACI-types+ACI: +ACI-types+ACI,
+  +ACI-browser+ACI: +AHs
+    +ACI-buffer+ACI: +ACI-false+ACI
+  +AH0,
   +ACI-dependencies+ACI: +AHs
-    +ACI-voc+ACI:+ACIAfg-1.0.0+ACI,
-    +ACI-exit-on-epipe+ACI:+ACIAfg-1.0.1+ACI,
-    +ACI-commander+ACI:+ACIAfg-2.11.0+ACI
+    +ACI-commander+ACI: +ACIAfg-2.11.0+ACI,
+    +ACI-exit-on-epipe+ACI: +ACIAfg-1.0.1+ACI,
+    +ACI-voc+ACI: +ACIAfg-1.0.0+ACI
   +AH0,
   +ACI-devDependencies+ACI: +AHs
-    +ACI-mocha+ACI:+ACIAfg-2.5.3+ACI
+    +ACI-mocha+ACI: +ACIAfg-2.5.3+ACI,
+    +ACI-blanket+ACI: +ACIAfg-1.2.3+ACI,
+    +ACIAQA-sheetjs/uglify-js+ACI: +ACIAfg-2.7.3+ACI,
+    +ACIAQA-types/node+ACI: +ACIAXg-8.0.7+ACI,
+    +ACIAQA-types/commander+ACI: +ACIAXg-2.9.0+ACI,
+    +ACI-dtslint+ACI: +ACIAXg-0.1.2+ACI,
+    +ACI-typescript+ACI: +ACI-2.2.0+ACI
   +AH0,
   +ACI-repository+ACI: +AHs +ACI-type+ACI:+ACI-git+ACI, +ACI-url+ACI:+ACI-git://github.com/SheetJS/js-codepage.git+ACIAfQ,
   +ACI-scripts+ACI: +AHs
     +ACI-pretest+ACI: +ACI-git submodule init +ACYAJg git submodule update+ACI,
     +ACI-test+ACI: +ACI-make test+ACI,
-    +ACI-build+ACI: +ACI-make js+ACI
+    +ACI-build+ACI: +ACI-make js+ACI,
+    +ACI-lint+ACI: +ACI-make fullint+ACI,
+    +ACI-dtslint+ACI: +ACI-dtslint types+ACI
   +AH0,
   +ACI-config+ACI: +AHs
     +ACI-blanket+ACI: +AHs
       +ACI-pattern+ACI: +ACIAWw-cputils.js+AF0AIg
     +AH0
   +AH0,
+  +ACI-alex+ACI: +AHs
+    +ACI-allow+ACI: +AFs
+      +ACI-chinese+ACI,
+      +ACI-european+ACI,
+      +ACI-german+ACI,
+      +ACI-japanese+ACI,
+      +ACI-latin+ACI
+    +AF0
+  +AH0,
+  +ACI-homepage+ACI: +ACI-http://sheetjs.com/opensource+ACI,
+  +ACI-files+ACI: +AFs
+    +ACI-LICENSE+ACI,
+    +ACI-README.md+ACI,
+    +ACI-bin+ACI,
+    +ACI-cptable.js+ACI,
+    +ACI-cputils.js+ACI,
+    +ACI-dist/sbcs.full.js+ACI,
+    +ACI-dist/cpexcel.full.js+ACI
+  +AF0,
   +ACI-bugs+ACI: +AHs +ACI-url+ACI: +ACI-https://github.com/SheetJS/js-codepage/issues+ACI +AH0,
   +ACI-license+ACI: +ACI-Apache-2.0+ACI,
   +ACI-engines+ACI: +AHs +ACI-node+ACI: +ACIAPgA9-0.8+ACI +AH0

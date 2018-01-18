@@ -48,13 +48,12 @@ the object, edit the `JSVAR` shell variable in `make.sh` and run the script.
 The utilities functions are contained in `cputils.js`, which assumes that the
 appropriate codepage scripts were loaded.
 
-The script will manipulate `module.exports` if available (e.g. in a CommonJS
-`require` context).  This is not always desirable.  To prevent the behavior,
-define `DO_NOT_EXPORT_CODEPAGE`.
+The script will manipulate `module.exports` if available .  This is not always
+desirable.  To prevent the behavior, define `DO_NOT_EXPORT_CODEPAGE`.
 
 ## Usage
 
-Most codepages are indexed by number.  To get the unicode character for a given
+Most codepages are indexed by number.  To get the Unicode character for a given
 codepoint, use the `dec` property:
 
 ```js
@@ -79,8 +78,8 @@ var sbuf = cptable.utils.encode(65001, sushi);
 `cptable.utils.encode(CP, data, ofmt)` accepts a String or Array of characters
 and returns a representation controlled by `ofmt`:
 
-- Default output is a Buffer (or Array) of bytes (integers between 0 and 255).
-- If `ofmt == 'str'`, return a String where `o.charCodeAt(i)` is the `i`-th byte
+- Default output is a Buffer (or Array) of bytes (integers between 0 and 255)
+- If `ofmt == 'str'`, return a binary String (byte `i` is `o.charCodeAt(i)`)
 - If `ofmt == 'arr'`, return an Array of bytes
 
 `cptable.utils.decode(CP, data)` accepts a byte String or Array of numbers or
@@ -112,7 +111,7 @@ $ bash make.sh path_to_manifest output_file_name JSVAR
 where
 
 - `JSVAR` is the name of the exported variable (generally `cptable`)
-- `output_file_name` is the output file (e.g. `cpexcel.js`, `cptable.js`)
+- `output_file_name` is the output file (`cpexcel.js`, `cptable.js`, ...)
 - `path_to_manifest` is the path to the manifest file.
 
 The manifest file is expected to be a CSV with 3 columns:
@@ -138,10 +137,10 @@ the JS source is `codepage.md`, so building is as simple as `voc codepage.md`.
 
 ## Generated Codepages
 
-The complete list of hardcoded codepages can be found in the file `pages.csv`.
+The complete list of codepages can be found in the file `pages.csv`.
 
-Some codepages are easier to implement algorithmically.  Since these are
-hardcoded in `utils`, there is no corresponding entry (they are "magic").
+Some codepages are easier to implement algorithmically.  Since those character
+tables are not generated, there is no corresponding entry (they are "magic").
 
 |   CP#   |   Source    | Description                                          |
 |--------:|:-----------:|:-----------------------------------------------------|
@@ -222,7 +221,7 @@ hardcoded in `utils`, there is no corresponding entry (they are "magic").
 | `12001` |    magic    | Unicode UTF-32, big endian byte order                |
 | `20000` |  Windows 7  | CNS Taiwan (Chinese Traditional)                     |
 | `20001` |  Windows 7  | TCA Taiwan                                           |
-| `20002` |  Windows 7  | Eten Taiwan (Chinese Traditional)                    |
+| `20002` |  Windows 7  | ETEN Taiwan (Chinese Traditional)                    |
 | `20003` |  Windows 7  | IBM5550 Taiwan                                       |
 | `20004` |  Windows 7  | TeleText Taiwan                                      |
 | `20005` |  Windows 7  | Wang Taiwan                                          |
@@ -299,21 +298,21 @@ hardcoded in `utils`, there is no corresponding entry (they are "magic").
 | `65001` |    magic    | Unicode (UTF-8)                                      |
 
 `unicode.org` refers to the Unicode Consortium Public Mappings, a database of
-various mappings between unicode characters and respective character sets.  The
+various mappings between Unicode characters and respective character sets.  The
 tables are processed by a few scripts in the build process.
 
 `IBM` refers to the IBM coded character set database.  Even though IBM uses a
 different numbering scheme from Windows, the IBM numbers are used when there is
-no conflict.  The tables are manually generated from the symbol PDFs.
+no conflict.  The tables are manually generated from the symbol manifests.
 
 `Windows 7` refers to direct inspection of Windows 7 machines using .NET class
 `System.Text.Encoding`.  The enclosed `MakeEncoding.cs` C# program brute-forces
-code pages.  MakeEncoding.cs deviates from unicode.org in some cases. When they
+code pages. `MakeEncoding.cs` deviates from unicode.org in some cases. When they
 map a given code to different characters, unicode.org value is used. When
-unicode.org does not prescribe a value, MakeEncoding.cs value is used.
+unicode.org does not prescribe a value, `MakeEncoding.cs` value is used.
 
 `NLS` refers to the National Language Support files supplied in various versions
-of Windows.  In older versions of Windows (e.g. Windows 98) these files followed
+of Windows.  In older versions of Windows (like Windows 98) these files followed
 the name pattern `CP_#.NLS`, but newer versions use the name pattern `C_#.NLS`.
 
 ## Testing

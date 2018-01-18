@@ -2,6 +2,8 @@
 /+ACo vim: set ft+AD0-javascript: +ACo-/
 /+ACo-jshint newcap: false +ACo-/
 (function(root, factory) +AHs
+  /+ACo-jshint ignore:start +ACo-/
+  /+ACo-eslint-disable +ACo-/
   +ACI-use strict+ACIAOw
   if(typeof cptable +AD0APQA9 +ACI-undefined+ACI) +AHs
     if(typeof require +ACEAPQA9 +ACI-undefined+ACI)+AHs
@@ -10,8 +12,11 @@
       else root.cptable +AD0 factory(cpt)+ADs
     +AH0 else throw new Error(+ACI-cptable not found+ACI)+ADs
   +AH0 else cptable +AD0 factory(cptable)+ADs
+  /+ACo-eslint-enable +ACo-/
+  /+ACo-jshint ignore:end +ACo-/
 +AH0(this, function(cpt)+AHs
   +ACI-use strict+ACIAOw
+  /+ACo-global module, Buffer +ACo-/
   var magic +AD0 +AHs
     +ACI-1200+ACI:+ACI-utf16le+ACI,
     +ACI-1201+ACI:+ACI-utf16be+ACI,
@@ -265,7 +270,7 @@
       +AH0
     +AH0
   +AH0AOw
-  var null+AF8-enc +AD0 function(data, ofmt) +AHs return +ACIAIgA7 +AH0AOw
+  var null+AF8-enc +AD0 function(data, ofmt) +AHs void ofmt+ADs return +ACIAIgA7 +AH0AOw
   var cp+AF8-decache +AD0 function cp+AF8-decache(cp) +AHs delete cpdcache+AFs-cp+AF0AOw delete cpecache+AFs-cp+AF0AOw +AH0AOw
   var decache +AD0 function decache() +AHs
     if(has+AF8-buf) +AHs
@@ -479,6 +484,7 @@
           if(data+AFs-i+AF0 +ACEAPQA9 0x2b) +AHs j+AD0-1+ADs out+AFs-k+-+-+AF0 +AD0 String.fromCharCode(data+AFs-i+AF0)+ADs continue+ADs +AH0
           j+AD0-1+ADs
           if(data+AFs-i+-1+AF0 +AD0APQA9 0x2d) +AHs j +AD0 2+ADs out+AFs-k+-+-+AF0 +AD0 +ACIAKwAiADs continue+ADs +AH0
+          // eslint-disable-next-line no-useless-escape
           while(String.fromCharCode(data+AFs-i+-j+AF0).match(/+AFs-A-Za-z0-9+-+AFw-/+AF0-/)) j+-+-+ADs
           var dash +AD0 0+ADs
           if(data+AFs-i+-j+AF0 +AD0APQA9 0x2d) +AHs +-+-j+ADs dash+AD0-1+ADs +AH0

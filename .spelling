@@ -1,0 +1,36 @@
+# codepage.js (C) 2013-present SheetJS -- http://sheetjs.com
+SheetJS
+js-codepage
+codepage
+encoding
+
+# Encoding-related terms
+Big5
+GB2312
+GB2312-80
+Johab
+Kamenický
+KOI8
+Mazovia
+Shift-JIS
+T.61
+UTF-16
+UTF-32
+UTF-7
+UTF-8
+Wansung
+halfwidth
+
+# Third-party
+FoxPro
+nodejs
+unicode.org
+
+# Other terms
+codepages
+codepoint
+codepoints
+encodings
+endian
+repo
+runtime

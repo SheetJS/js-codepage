@@ -12,6 +12,7 @@
 .*/prof.js
 .*/cputils.js
 .*/cptable.js
+.*/cpexcel.js
 .*/sbcs.js
 .*/dbcs.js
 

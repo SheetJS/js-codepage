@@ -1,6 +1,6 @@
 # Getting Codepages
 
-The fields of the pages.csv manifest are `codepage,url,bytes` (SBCS=1, DBCS=2)
+The fields of the `pages.csv` manifest are `codepage,url,bytes` (SBCS=1, DBCS=2)
 
 ```>pages.csv
 37,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP037.TXT,1
@@ -106,7 +106,7 @@ The following codepages are available in .NET on Windows:
 - 10082 Croatian (Mac)
 - 20000 CNS Taiwan; Chinese Traditional (CNS)
 - 20001 TCA Taiwan
-- 20002 Eten Taiwan; Chinese Traditional (Eten)
+- 20002 ETEN Taiwan; Chinese Traditional (ETEN)
 - 20003 IBM5550 Taiwan
 - 20004 TeleText Taiwan
 - 20005 Wang Taiwan
@@ -143,8 +143,8 @@ The following codepages are available in .NET on Windows:
 - 29001 Europa 3
 - 38598 ISO 8859-8 Hebrew; Hebrew (ISO-Logical)
 - 50220 ISO 2022 Japanese with no halfwidth Katakana; Japanese (JIS)
-- 50221 ISO 2022 Japanese with halfwidth Katakana; Japanese (JIS-Allow 1 byte Kana)
-- 50222 ISO 2022 Japanese JIS X 0201-1989; Japanese (JIS-Allow 1 byte Kana - SO/SI)
+- 50221 ISO 2022 Japanese with halfwidth Katakana; Japanese (JIS Allow 1 byte Kana)
+- 50222 ISO 2022 Japanese JIS X 0201-1989; Japanese (JIS Allow 1 byte Kana - SO/SI)
 - 50225 ISO 2022 Korean
 - 50227 ISO 2022 Simplified Chinese; Chinese Simplified (ISO 2022)
 - 51932 EUC Japanese
@@ -267,7 +267,7 @@ The following codepages are dependencies for Visual FoxPro:
 ## Building Notes
 
 The script `make.sh` (described later) will get these files and massage the data
-(printing code-unicode pairs).  The eventual tables are dropped in the paths
+(printing code-Unicode pairs).  The eventual tables are dropped in the paths
 `./codepages/<CODEPAGE>.TBL`.  For example, the last 10 lines of `10000.TBL` are
 
 ```>
@@ -283,13 +283,13 @@ The script `make.sh` (described later) will get these files and massage the data
 0xFF	0x02C7
 ```
 
-which implies that code 0xF6 is `String.fromCharCode(0x02C6)` and vice versa.
+which implies that code `0xF6` is `String.fromCharCode(0x02C6)` and vice versa.
 
 ## Windows-dependent build step
 
 To build the sources on windows, consult `dotnet/MakeEncoding.cs`.
 
-After saving the standard output to `out`, a simple awk script (`dotnet.sh`) takes care of the rest:
+After saving the standard output to `out`, a simple script processes the result:
 
 ```>dotnet.sh
 #!/bin/bash
@@ -325,7 +325,7 @@ var y/*:Array<Array<number> >*/ = x.split("\n").map(function(z/*:string*/)/*:Arr
 ```
 
 The DBCS and SBCS code generation strategies are different.  The maximum code is
-used to distinguish (max 0xFF for SBCS).
+used to distinguish (max `0xFF` for SBCS).
 
 ```
 for(i = 0; i != y.length; ++i) if(y[i][0] > maxcp) maxcp = y[i][0];
@@ -341,7 +341,7 @@ if(maxcp < 256) {
   /*:: if(Array.isArray(dec)) { */
 ```
 
-The unicode character `0xFFFD` (REPLACEMENT CHARACTER) is used as a placeholder
+The Unicode character `0xFFFD` (REPLACEMENT CHARACTER) is used as a placeholder
 for characters that are not specified in the map (for example, `0xF0` is not in
 code page 10000).
 
@@ -356,7 +356,7 @@ The `dec` field is merely a split of the string, and `enc` is an eversion:
 } else {
 ```
 
-DBCS is similar, except that the space is sliced into 256-byte chunks (strings
+DBCS is similar, except that the space is sliced in chunks of 256 bytes (strings
 are only generated for those high-bytes represented in the codepage).
 
 The strategy is to construct an array-of-arrays so that `dd[high][low]` is the
@@ -384,9 +384,9 @@ process.stdout.write(jsvar + "[" + cp + "] = " + outstr + "\n");
 
 ```
 
-`make.sh` generates the tables used by `make.njs`.  The raw unicode TXT files
+`make.sh` generates the tables used by `make.njs`.  The raw Unicode TXT files
 are columnar: `code unicode #comments`.  For example, the last 10 lines of the
-text file ROMAN.TXT (for CP 10000) are:
+text file `ROMAN.TXT` (for CP 10000) are:
 
 ```>
 0xF6	0x02C6	#MODIFIER LETTER CIRCUMFLEX ACCENT
@@ -427,6 +427,7 @@ awk -F, '{print $1, $2, $3}' $INFILE | while read cp url cptype; do
     sed 's/"\([0-9]+\)":/\1:/g' <bits/$cp.js.tmp >bits/$cp.js
     rm -f bits/$cp.js.tmp
 done
+echo "// eslint-disable-next-line no-undef" >> $OUTFILE.tmp
 echo "if (typeof module !== 'undefined' && module.exports && typeof DO_NOT_EXPORT_CODEPAGE === 'undefined') module.exports = $JSVAR;" >> $OUTFILE.tmp
 sed 's/"\([0-9]+\)":/\1:/g' <$OUTFILE.tmp >$OUTFILE
 rm -f $OUTFILE.tmp
@@ -434,7 +435,7 @@ rm -f $OUTFILE.tmp
 
 ## Utilities
 
-The encode and decode functions are kept in a separate script (cputils.js).
+The encode and decode functions are kept in a separate script (`cputils.js`).
 
 Both encode and decode deal with data represented as:
 
@@ -447,7 +448,7 @@ while the input format is automatically determined.
 
 # Tests
 
-The tests include JS validity tests (requiring or eval'ing code):
+The tests include JS validity tests (requiring or evaluating code):
 
 ```>test.js
 var fs = require('fs'), assert = require('assert'), vm = require('vm');
@@ -639,7 +640,7 @@ function testfile(f,cp,type,skip) {
 }
 ```
 
-The `utf8` tests verify utf8 encoding of the actual JS sources:
+The `utf8` tests verify UTF-8 encoding of the actual JS sources:
 
 ```>test.js
 describe('node natives', function() {
@@ -665,7 +666,7 @@ describe('node natives', function() {
 });
 ```
 
-The utf* and ascii tests attempt to test other magic formats:
+The `utf*` and `ascii` tests attempt to test other magic formats:
 
 ```>test.js
 var m = cptable.utils.magic;
@@ -753,41 +754,64 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
   "bin": {
     "codepage": "./bin/codepage.njs"
   },
-  "files": [
-    "LICENSE",
-    "README.md",
-    "bin",
-    "cptable.js",
-    "cputils.js",
-    "dist/cpexcel.full.js"
-  ],
   "main": "cputils.js",
+  "types": "types",
+  "browser": {
+    "buffer": "false"
+  },
   "dependencies": {
-    "voc":"~1.0.0",
-    "exit-on-epipe":"~1.0.1",
-    "commander":"~2.11.0"
+    "commander": "~2.11.0",
+    "exit-on-epipe": "~1.0.1",
+    "voc": "~1.0.0"
   },
   "devDependencies": {
-    "mocha":"~2.5.3"
+    "mocha": "~2.5.3",
+    "blanket": "~1.2.3",
+    "@sheetjs/uglify-js": "~2.7.3",
+    "@types/node": "^8.0.7",
+    "@types/commander": "^2.9.0",
+    "dtslint": "^0.1.2",
+    "typescript": "2.2.0"
   },
   "repository": { "type":"git", "url":"git://github.com/SheetJS/js-codepage.git"},
   "scripts": {
     "pretest": "git submodule init && git submodule update",
     "test": "make test",
-    "build": "make js"
+    "build": "make js",
+    "lint": "make fullint",
+    "dtslint": "dtslint types"
   },
   "config": {
     "blanket": {
       "pattern": "[cputils.js]"
     }
   },
+  "alex": {
+    "allow": [
+      "chinese",
+      "european",
+      "german",
+      "japanese",
+      "latin"
+    ]
+  },
+  "homepage": "http://sheetjs.com/opensource",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "bin",
+    "cptable.js",
+    "cputils.js",
+    "dist/sbcs.full.js",
+    "dist/cpexcel.full.js"
+  ],
   "bugs": { "url": "https://github.com/SheetJS/js-codepage/issues" },
   "license": "Apache-2.0",
   "engines": { "node": ">=0.8" }

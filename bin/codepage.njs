@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* js-codepage (C) 2014-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2 ft=javascript: */
+/* eslint-env node */
 var codepage = require('../');
 require('exit-on-epipe');
 var fs = require('fs'), program/*:any*/ = (require('commander')/*:any*/);
@@ -24,8 +25,8 @@ program.parse(process.argv);
 
 if(program.list) {
 	var l/*:Array<number>*/ = [];
-	Object.keys(codepage).forEach(function(x) { if(parseInt(x) == +x) l.push(+x); });
-	Object.keys(codepage.utils.magic).forEach(function(x) { if(parseInt(x) == +x && +x != 16969) l.push(+x); });
+	Object.keys(codepage).forEach(function(x) { if(parseInt(x, 10) == +x) l.push(+x); });
+	Object.keys(codepage.utils.magic).forEach(function(x) { if(parseInt(x, 10) == +x && +x != 16969) l.push(+x); });
 	l.sort(function(a,b) { return a-b; }).forEach(function(x) { console.log(x); });
 	process.exit();
 }
@@ -43,11 +44,12 @@ if(f !== "-" && !fs.existsSync(f)) {
 }
 
 function concat(func) {
+	// $FlowIgnore
 	var writable = require('stream').Writable();
 	var buf = [];
-	writable._write = function(chunk, e, cb) { console.error(chunk.length); buf.push(chunk); cb(); };
-	writable._writev = function(chunks, cb) { console.error(chunks.length, chunks.map(x => x.length)); chunks.forEach(function(c) { buf.push(c); cb(); }); };
-	writable.on('finish', function() { console.error(buf.length, "end"); func(Buffer.concat(buf)); });
+	writable._write = function(chunk, e, cb) { buf.push(chunk); cb(); };
+	writable._writev = function(chunks, cb) { chunks.forEach(function(c) { buf.push(c.chunk); cb(); }); };
+	writable.on('finish', function() { func(Buffer.concat(buf)); });
 	return writable;
 }
 
@@ -55,7 +57,7 @@ if(f === "-") process.stdin.pipe(concat(process_text));
 else process_text(fs.readFileSync(f));
 
 function process_text(text/*:Buffer*/) {
-	var dec/*:Buffer*/ = codepage.utils.decode(fr, text);
+	var dec/*:Buffer*/ = (codepage.utils.decode(fr, text)/*:any*/);
 
 	var bom/*:Array<Buffer>*/ = [];
 	bom[1200] = new Buffer([0xFF, 0xFE]);

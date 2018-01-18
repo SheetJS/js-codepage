@@ -12,7 +12,7 @@ type CPIndex = number|string;
 type CPTable = {
 	[key: CPIndex]:CPEntry;
 	utils:{
-		decode:any;
+		decode(cp:CPIndex, data:OutType): string;
 		encode(cp:CPIndex, data:StrData, ofmt:?string):OutType;
 		hascp(cp:number):boolean;
 		magic:any;

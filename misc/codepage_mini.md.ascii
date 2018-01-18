@@ -1,6 +1,6 @@
 # Getting Codepages
 
-The fields of the pages.csv manifest are `codepage,url,bytes` (SBCS=1, DBCS=2)
+The fields of the `pages.csv` manifest are `codepage,url,bytes` (SBCS=1, DBCS=2)
 
 ```>pages.csv
 37,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP037.TXT,1
@@ -15,4 +15,3 @@ The fields of the pages.csv manifest are `codepage,url,bytes` (SBCS=1, DBCS=2)
 860,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP860.TXT,1
 861,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP861.TXT,1
 862,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP862.TXT,1
-86

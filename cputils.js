@@ -2,6 +2,8 @@
 /* vim: set ft=javascript: */
 /*jshint newcap: false */
 (function(root, factory) {
+  /*jshint ignore:start */
+  /*eslint-disable */
   "use strict";
   if(typeof cptable === "undefined") {
     if(typeof require !== "undefined"){
@@ -10,8 +12,11 @@
       else root.cptable = factory(cpt);
     } else throw new Error("cptable not found");
   } else cptable = factory(cptable);
+  /*eslint-enable */
+  /*jshint ignore:end */
 }(this, function(cpt){
   "use strict";
+  /*global module, Buffer */
   var magic = {
     "1200":"utf16le",
     "1201":"utf16be",
@@ -265,7 +270,7 @@
       }
     }
   };
-  var null_enc = function(data, ofmt) { return ""; };
+  var null_enc = function(data, ofmt) { void ofmt; return ""; };
   var cp_decache = function cp_decache(cp) { delete cpdcache[cp]; delete cpecache[cp]; };
   var decache = function decache() {
     if(has_buf) {
@@ -479,6 +484,7 @@
           if(data[i] !== 0x2b) { j=1; out[k++] = String.fromCharCode(data[i]); continue; }
           j=1;
           if(data[i+1] === 0x2d) { j = 2; out[k++] = "+"; continue; }
+          // eslint-disable-next-line no-useless-escape
           while(String.fromCharCode(data[i+j]).match(/[A-Za-z0-9+\/]/)) j++;
           var dash = 0;
           if(data[i+j] === 0x2d) { ++j; dash=1; }

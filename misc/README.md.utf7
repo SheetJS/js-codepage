@@ -48,13 +48,12 @@ the object, edit the +AGA-JSVAR+AGA shell variable in +AGA-make.sh+AGA and run t
 The utilities functions are contained in +AGA-cputils.js+AGA, which assumes that the
 appropriate codepage scripts were loaded.
 
-The script will manipulate +AGA-module.exports+AGA if available (e.g. in a CommonJS
-+AGA-require+AGA context).  This is not always desirable.  To prevent the behavior,
-define +AGA-DO+AF8-NOT+AF8-EXPORT+AF8-CODEPAGE+AGA.
+The script will manipulate +AGA-module.exports+AGA if available .  This is not always
+desirable.  To prevent the behavior, define +AGA-DO+AF8-NOT+AF8-EXPORT+AF8-CODEPAGE+AGA.
 
 +ACMAIw Usage
 
-Most codepages are indexed by number.  To get the unicode character for a given
+Most codepages are indexed by number.  To get the Unicode character for a given
 codepoint, use the +AGA-dec+AGA property:
 
 +AGAAYABg-js
@@ -79,8 +78,8 @@ var sbuf +AD0 cptable.utils.encode(65001, sushi)+ADs
 +AGA-cptable.utils.encode(CP, data, ofmt)+AGA accepts a String or Array of characters
 and returns a representation controlled by +AGA-ofmt+AGA:
 
-- Default output is a Buffer (or Array) of bytes (integers between 0 and 255).
-- If +AGA-ofmt +AD0APQ 'str'+AGA, return a String where +AGA-o.charCodeAt(i)+AGA is the +AGA-i+AGA--th byte
+- Default output is a Buffer (or Array) of bytes (integers between 0 and 255)
+- If +AGA-ofmt +AD0APQ 'str'+AGA, return a binary String (byte +AGA-i+AGA is +AGA-o.charCodeAt(i)+AGA)
 - If +AGA-ofmt +AD0APQ 'arr'+AGA, return an Array of bytes
 
 +AGA-cptable.utils.decode(CP, data)+AGA accepts a byte String or Array of numbers or
@@ -112,7 +111,7 @@ Usage:
 where
 
 - +AGA-JSVAR+AGA is the name of the exported variable (generally +AGA-cptable+AGA)
-- +AGA-output+AF8-file+AF8-name+AGA is the output file (e.g. +AGA-cpexcel.js+AGA, +AGA-cptable.js+AGA)
+- +AGA-output+AF8-file+AF8-name+AGA is the output file (+AGA-cpexcel.js+AGA, +AGA-cptable.js+AGA, ...)
 - +AGA-path+AF8-to+AF8-manifest+AGA is the path to the manifest file.
 
 The manifest file is expected to be a CSV with 3 columns:
@@ -138,10 +137,10 @@ the JS source is +AGA-codepage.md+AGA, so building is as simple as +AGA-voc code
 
 +ACMAIw Generated Codepages
 
-The complete list of hardcoded codepages can be found in the file +AGA-pages.csv+AGA.
+The complete list of codepages can be found in the file +AGA-pages.csv+AGA.
 
-Some codepages are easier to implement algorithmically.  Since these are
-hardcoded in +AGA-utils+AGA, there is no corresponding entry (they are +ACI-magic+ACI).
+Some codepages are easier to implement algorithmically.  Since those character
+tables are not generated, there is no corresponding entry (they are +ACI-magic+ACI).
 
 +AHw   CP+ACM   +AHw   Source    +AHw Description                                          +AHw
 +AHw---------:+AHw:-----------:+AHw:-----------------------------------------------------+AHw
@@ -222,7 +221,7 @@ hardcoded in +AGA-utils+AGA, there is no corresponding entry (they are +ACI-magi
 +AHw +AGA-12001+AGA +AHw    magic    +AHw Unicode UTF-32, big endian byte order                +AHw
 +AHw +AGA-20000+AGA +AHw  Windows 7  +AHw CNS Taiwan (Chinese Traditional)                     +AHw
 +AHw +AGA-20001+AGA +AHw  Windows 7  +AHw TCA Taiwan                                           +AHw
-+AHw +AGA-20002+AGA +AHw  Windows 7  +AHw Eten Taiwan (Chinese Traditional)                    +AHw
++AHw +AGA-20002+AGA +AHw  Windows 7  +AHw ETEN Taiwan (Chinese Traditional)                    +AHw
 +AHw +AGA-20003+AGA +AHw  Windows 7  +AHw IBM5550 Taiwan                                       +AHw
 +AHw +AGA-20004+AGA +AHw  Windows 7  +AHw TeleText Taiwan                                      +AHw
 +AHw +AGA-20005+AGA +AHw  Windows 7  +AHw Wang Taiwan                                          +AHw
@@ -299,21 +298,21 @@ hardcoded in +AGA-utils+AGA, there is no corresponding entry (they are +ACI-magi
 +AHw +AGA-65001+AGA +AHw    magic    +AHw Unicode (UTF-8)                                      +AHw
 
 +AGA-unicode.org+AGA refers to the Unicode Consortium Public Mappings, a database of
-various mappings between unicode characters and respective character sets.  The
+various mappings between Unicode characters and respective character sets.  The
 tables are processed by a few scripts in the build process.
 
 +AGA-IBM+AGA refers to the IBM coded character set database.  Even though IBM uses a
 different numbering scheme from Windows, the IBM numbers are used when there is
-no conflict.  The tables are manually generated from the symbol PDFs.
+no conflict.  The tables are manually generated from the symbol manifests.
 
 +AGA-Windows 7+AGA refers to direct inspection of Windows 7 machines using .NET class
 +AGA-System.Text.Encoding+AGA.  The enclosed +AGA-MakeEncoding.cs+AGA C+ACM program brute-forces
-code pages.  MakeEncoding.cs deviates from unicode.org in some cases. When they
+code pages. +AGA-MakeEncoding.cs+AGA deviates from unicode.org in some cases. When they
 map a given code to different characters, unicode.org value is used. When
-unicode.org does not prescribe a value, MakeEncoding.cs value is used.
+unicode.org does not prescribe a value, +AGA-MakeEncoding.cs+AGA value is used.
 
 +AGA-NLS+AGA refers to the National Language Support files supplied in various versions
-of Windows.  In older versions of Windows (e.g. Windows 98) these files followed
+of Windows.  In older versions of Windows (like Windows 98) these files followed
 the name pattern +AGA-CP+AF8AIw.NLS+AGA, but newer versions use the name pattern +AGA-C+AF8AIw.NLS+AGA.
 
 +ACMAIw Testing
