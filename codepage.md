@@ -754,7 +754,7 @@ describe('failures', function() {
 ```json>package.json
 {
   "name": "codepage",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [ "codepage", "iconv", "convert", "strings" ],
@@ -767,11 +767,11 @@ describe('failures', function() {
     "buffer": "false"
   },
   "dependencies": {
-    "commander": "~2.11.0",
-    "exit-on-epipe": "~1.0.1",
-    "voc": "~1.0.0"
+    "commander": "~2.13.1",
+    "exit-on-epipe": "~1.0.1"
   },
   "devDependencies": {
+    "voc": "~1.1.0",
     "mocha": "~2.5.3",
     "blanket": "~1.2.3",
     "@sheetjs/uglify-js": "~2.7.3",
@@ -807,6 +807,8 @@ describe('failures', function() {
     "LICENSE",
     "README.md",
     "bin",
+    "types/index.d.ts",
+    "types/*.json",
     "cptable.js",
     "cputils.js",
     "dist/sbcs.full.js",
