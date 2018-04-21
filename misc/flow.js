@@ -10,19 +10,20 @@ type OutType = Data;
 type CPIndex = number|string;
 
 type CPTable = {
-	[key: CPIndex]:CPEntry;
+	[key:CPIndex]:CPEntry;
 	utils:{
-		decode(cp:CPIndex, data:OutType): string;
+		decode(cp:CPIndex, data:OutType):string;
 		encode(cp:CPIndex, data:StrData, ofmt:?string):OutType;
 		hascp(cp:number):boolean;
 		magic:any;
 		cache:any;
 	};
+	version:string
 };
 
-declare var cptable: CPTable;
+declare var cptable:CPTable;
 
 declare module './cptable' {
-	declare var exports: CPTable;
+	declare module.exports:CPTable;
 }
 */
