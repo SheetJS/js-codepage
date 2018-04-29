@@ -48,9 +48,14 @@ type DecoderMap = {[id:CPIndex]:Decoder};
 
   var has_buf/*:boolean*/ = (typeof Buffer !== 'undefined');
   if(has_buf) {
-    var mdl = 1024, mdb = new Buffer(mdl);
+    // $FlowIgnore
+    if(!Buffer.from) Buffer.from = function(buf, enc) { return (enc) ? new Buffer(buf, enc) : new Buffer(buf); };
+    // $FlowIgnore
+    if(!Buffer.allocUnsafe) Buffer.allocUnsafe = function(n) { return new Buffer(n); };
+
+    var mdl = 1024, mdb = Buffer.allocUnsafe(mdl);
     var make_EE = function make_EE(E/*:EMap*/)/*:Buffer*/{
-      var EE = new Buffer(65536);
+      var EE = Buffer.allocUnsafe(65536);
       for(var i = 0; i < 65536;++i) EE[i] = 0;
       var keys/*:Array<string>*/ = Object.keys(E), len = keys.length;
       for(var ee = 0, e = keys[ee]; ee < len; ++ee) {
@@ -65,10 +70,10 @@ type DecoderMap = {[id:CPIndex]:Decoder};
         var len = data.length;
         var out/*:Buffer*/, i=0, j=0, D=0, w=0;
         if(typeof data === 'string') {
-          out = new Buffer(len);
+          out = Buffer.allocUnsafe(len);
           for(i = 0; i < len; ++i) out[i] = EE[data.charCodeAt(i)];
         } else if(/*:: data instanceof Buffer && */Buffer.isBuffer(data)) {
-          out = new Buffer(2*len);
+          out = Buffer.allocUnsafe(2*len);
           j = 0;
           for(i = 0; i < len; ++i) {
             D = data[i];
@@ -83,7 +88,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
           }
           out = out.slice(0,j);
         } else {
-          out = new Buffer(len);
+          out = Buffer.allocUnsafe(len);
           for(i = 0; i < len; ++i) out[i] = EE[/*::(*/data[i]/*:: :any)*/.charCodeAt(0)];
         }
         if(!ofmt || ofmt === 'buf') return out;
@@ -93,7 +98,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
     };
     var sbcs_decode = function make_sbcs_decode(cp/*:CPIndex*/)/*:Decoder*/ {
       var D/*:DMap*/ = cpt[cp].dec;
-      var DD = new Buffer(131072), d=0, c="";
+      var DD = Buffer.allocUnsafe(131072), d=0, c="";
       for(d=0;d<D.length;++d) {
         if(!(c=D[d])) continue;
         var w = c.charCodeAt(0);
@@ -101,7 +106,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
       }
       return function sbcs_d(data/*:Data*/)/*:string*/ {
         var len = data.length, i=0, j=0;
-        if(2 * len > mdl) { mdl = 2 * len; mdb = new Buffer(mdl); }
+        if(2 * len > mdl) { mdl = 2 * len; mdb = Buffer.allocUnsafe(mdl); }
         if(/*::data instanceof Buffer && */Buffer.isBuffer(data)) {
           for(i = 0; i < len; i++) {
             j = 2*data[i];
@@ -123,7 +128,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
     };
     var dbcs_encode = function make_dbcs_encode(cp/*:CPIndex*/)/*:Encoder*/ {
       var E/*:EMap*/ = cpt[cp].enc;
-      var EE = new Buffer(131072);
+      var EE = Buffer.allocUnsafe(131072);
       for(var i = 0; i < 131072; ++i) EE[i] = 0;
       var keys = Object.keys(E);
       for(var ee = 0, e = keys[ee]; ee < keys.length; ++ee) {
@@ -132,7 +137,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
         EE[2*f] = E[e] & 255; EE[2*f+1] = E[e]>>8;
       }
       return function dbcs_e(data/*:StrData*/, ofmt/*:?string*/)/*:any*/ {
-        var len = data.length, out = new Buffer(2*len), i=0, j=0, jj=0, k=0, D=0;
+        var len = data.length, out = Buffer.allocUnsafe(2*len), i=0, j=0, jj=0, k=0, D=0;
         if(typeof data === 'string') {
           for(i = k = 0; i < len; ++i) {
             j = data.charCodeAt(i)*2;
@@ -166,7 +171,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
     };
     var dbcs_decode = function make_dbcs_decode(cp/*:CPIndex*/)/*:Decoder*/ {
       var D/*:DMap*/ = cpt[cp].dec;
-      var DD = new Buffer(131072), d=0, c, w=0, j=0, i=0;
+      var DD = Buffer.allocUnsafe(131072), d=0, c, w=0, j=0, i=0;
       for(i = 0; i < 65536; ++i) { DD[2*i] = 0xFF; DD[2*i+1] = 0xFD;}
       for(d = 0; d < D.length; ++d) {
         if(!(c=D[d])) continue;
@@ -175,7 +180,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
         DD[j] = w&255; DD[j+1] = w>>8;
       }
       return function dbcs_d(data/*:Data*/)/*:string*/ {
-        var len = data.length, out = new Buffer(2*len), i=0, j=0, k=0;
+        var len = data.length, out = Buffer.allocUnsafe(2*len), i=0, j=0, k=0;
         if(/*::data instanceof Buffer && */Buffer.isBuffer(data)) {
           for(i = 0; i < len; i++) {
             j = 2*data[i];
@@ -201,7 +206,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
     magic_decode[65001] = function utf8_d(data/*:Data*/)/*:string*/ {
       if(typeof data === "string") return utf8_d(data.split("").map(cca));
       var len = data.length, w = 0, ww = 0;
-      if(4 * len > mdl) { mdl = 4 * len; mdb = new Buffer(mdl); }
+      if(4 * len > mdl) { mdl = 4 * len; mdb = Buffer.allocUnsafe(mdl); }
       var i = 0;
       if(len >= 3 && data[0] == 0xEF) if(data[1] == 0xBB && data[2] == 0xBF) i = 3;
       for(var j = 1, k = 0, D = 0; i < len; i+=j) {
@@ -230,7 +235,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
 */
       var len = data.length, w = 0, ww = 0, j = 0;
       var direct = typeof data === "string";
-      if(4 * len > mdl) { mdl = 4 * len; mdb = new Buffer(mdl); }
+      if(4 * len > mdl) { mdl = 4 * len; mdb = Buffer.allocUnsafe(mdl); }
       for(var i = 0; i < len; ++i) {
         w = direct /*::&& typeof data === "string" */? data.charCodeAt(i) : data[i].charCodeAt(0);
         if(w <= 0x007F) mdb[j++] = w;
@@ -313,7 +318,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
       if(data instanceof Buffer) throw "";
 */
     var len = data.length;
-    var out = has_buf ? new Buffer(4*len) : [], w=0, i=0, j = 0, ww=0;
+    var out = has_buf ? Buffer.allocUnsafe(4*len) : [], w=0, i=0, j = 0, ww=0;
     var C/*:CPEntry*/ = cpt[cp], E/*:EMap*/, M/*:string*/ = "";
     var isstr = typeof data === 'string';
     if(C && (E=C.enc)) for(i = 0; i < len; ++i, ++j) {
@@ -325,7 +330,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
     }
     else if((M=magic[cp])) switch(M) {
       case "utf8":
-        if(has_buf && isstr/*:: && typeof data == 'string' */) { out = new Buffer(data, M); j = out.length; break; }
+        if(has_buf && isstr/*:: && typeof data == 'string' */) { out = Buffer.from(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i, ++j) {
           w = isstr/*:: && typeof data == 'string' */ ? data.charCodeAt(i) : data[i].charCodeAt(0);
           if(w <= 0x007F) out[j] = w;
@@ -347,7 +352,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
         }
         break;
       case "ascii":
-        if(has_buf && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
+        if(has_buf && typeof data === "string") { out = Buffer.from(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i, ++j) {
           w = isstr/*:: && typeof data == 'string' */ ? data.charCodeAt(i) : data[i].charCodeAt(0);
           if(w <= 0x007F) out[j] = w;
@@ -355,7 +360,7 @@ type DecoderMap = {[id:CPIndex]:Decoder};
         }
         break;
       case "utf16le":
-        if(has_buf && typeof data === "string") { out = new Buffer(data, M); j = out.length; break; }
+        if(has_buf && typeof data === "string") { out = Buffer.from(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i) {
           w = isstr/*:: && typeof data == 'string' */ ? data.charCodeAt(i) : data[i].charCodeAt(0);
           out[j++] = w&255;

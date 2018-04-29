@@ -41,9 +41,14 @@
 
   var has+AF8-buf +AD0 (typeof Buffer +ACEAPQA9 'undefined')+ADs
   if(has+AF8-buf) +AHs
-    var mdl +AD0 1024, mdb +AD0 new Buffer(mdl)+ADs
+    // +ACQ-FlowIgnore
+    if(+ACE-Buffer.from) Buffer.from +AD0 function(buf, enc) +AHs return (enc) ? new Buffer(buf, enc) : new Buffer(buf)+ADs +AH0AOw
+    // +ACQ-FlowIgnore
+    if(+ACE-Buffer.allocUnsafe) Buffer.allocUnsafe +AD0 function(n) +AHs return new Buffer(n)+ADs +AH0AOw
+
+    var mdl +AD0 1024, mdb +AD0 Buffer.allocUnsafe(mdl)+ADs
     var make+AF8-EE +AD0 function make+AF8-EE(E)+AHs
-      var EE +AD0 new Buffer(65536)+ADs
+      var EE +AD0 Buffer.allocUnsafe(65536)+ADs
       for(var i +AD0 0+ADs i +ADw 65536+ADsAKwAr-i) EE+AFs-i+AF0 +AD0 0+ADs
       var keys +AD0 Object.keys(E), len +AD0 keys.length+ADs
       for(var ee +AD0 0, e +AD0 keys+AFs-ee+AF0AOw ee +ADw len+ADs +-+-ee) +AHs
@@ -58,10 +63,10 @@
         var len +AD0 data.length+ADs
         var out, i+AD0-0, j+AD0-0, D+AD0-0, w+AD0-0+ADs
         if(typeof data +AD0APQA9 'string') +AHs
-          out +AD0 new Buffer(len)+ADs
+          out +AD0 Buffer.allocUnsafe(len)+ADs
           for(i +AD0 0+ADs i +ADw len+ADs +-+-i) out+AFs-i+AF0 +AD0 EE+AFs-data.charCodeAt(i)+AF0AOw
         +AH0 else if(Buffer.isBuffer(data)) +AHs
-          out +AD0 new Buffer(2+ACo-len)+ADs
+          out +AD0 Buffer.allocUnsafe(2+ACo-len)+ADs
           j +AD0 0+ADs
           for(i +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
             D +AD0 data+AFs-i+AF0AOw
@@ -76,7 +81,7 @@
           +AH0
           out +AD0 out.slice(0,j)+ADs
         +AH0 else +AHs
-          out +AD0 new Buffer(len)+ADs
+          out +AD0 Buffer.allocUnsafe(len)+ADs
           for(i +AD0 0+ADs i +ADw len+ADs +-+-i) out+AFs-i+AF0 +AD0 EE+AFs-data+AFs-i+AF0.charCodeAt(0)+AF0AOw
         +AH0
         if(+ACE-ofmt +AHwAfA ofmt +AD0APQA9 'buf') return out+ADs
@@ -86,7 +91,7 @@
     +AH0AOw
     var sbcs+AF8-decode +AD0 function make+AF8-sbcs+AF8-decode(cp) +AHs
       var D +AD0 cpt+AFs-cp+AF0.dec+ADs
-      var DD +AD0 new Buffer(131072), d+AD0-0, c+AD0AIgAiADs
+      var DD +AD0 Buffer.allocUnsafe(131072), d+AD0-0, c+AD0AIgAiADs
       for(d+AD0-0+ADs-d+ADw-D.length+ADsAKwAr-d) +AHs
         if(+ACE(c+AD0-D+AFs-d+AF0)) continue+ADs
         var w +AD0 c.charCodeAt(0)+ADs
@@ -94,7 +99,7 @@
       +AH0
       return function sbcs+AF8-d(data) +AHs
         var len +AD0 data.length, i+AD0-0, j+AD0-0+ADs
-        if(2 +ACo len +AD4 mdl) +AHs mdl +AD0 2 +ACo len+ADs mdb +AD0 new Buffer(mdl)+ADs +AH0
+        if(2 +ACo len +AD4 mdl) +AHs mdl +AD0 2 +ACo len+ADs mdb +AD0 Buffer.allocUnsafe(mdl)+ADs +AH0
         if(Buffer.isBuffer(data)) +AHs
           for(i +AD0 0+ADs i +ADw len+ADs i+-+-) +AHs
             j +AD0 2+ACo-data+AFs-i+AF0AOw
@@ -116,7 +121,7 @@
     +AH0AOw
     var dbcs+AF8-encode +AD0 function make+AF8-dbcs+AF8-encode(cp) +AHs
       var E +AD0 cpt+AFs-cp+AF0.enc+ADs
-      var EE +AD0 new Buffer(131072)+ADs
+      var EE +AD0 Buffer.allocUnsafe(131072)+ADs
       for(var i +AD0 0+ADs i +ADw 131072+ADs +-+-i) EE+AFs-i+AF0 +AD0 0+ADs
       var keys +AD0 Object.keys(E)+ADs
       for(var ee +AD0 0, e +AD0 keys+AFs-ee+AF0AOw ee +ADw keys.length+ADs +-+-ee) +AHs
@@ -125,7 +130,7 @@
         EE+AFs-2+ACo-f+AF0 +AD0 E+AFs-e+AF0 +ACY 255+ADs EE+AFs-2+ACo-f+-1+AF0 +AD0 E+AFs-e+AF0APgA+-8+ADs
       +AH0
       return function dbcs+AF8-e(data, ofmt) +AHs
-        var len +AD0 data.length, out +AD0 new Buffer(2+ACo-len), i+AD0-0, j+AD0-0, jj+AD0-0, k+AD0-0, D+AD0-0+ADs
+        var len +AD0 data.length, out +AD0 Buffer.allocUnsafe(2+ACo-len), i+AD0-0, j+AD0-0, jj+AD0-0, k+AD0-0, D+AD0-0+ADs
         if(typeof data +AD0APQA9 'string') +AHs
           for(i +AD0 k +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
             j +AD0 data.charCodeAt(i)+ACo-2+ADs
@@ -159,7 +164,7 @@
     +AH0AOw
     var dbcs+AF8-decode +AD0 function make+AF8-dbcs+AF8-decode(cp) +AHs
       var D +AD0 cpt+AFs-cp+AF0.dec+ADs
-      var DD +AD0 new Buffer(131072), d+AD0-0, c, w+AD0-0, j+AD0-0, i+AD0-0+ADs
+      var DD +AD0 Buffer.allocUnsafe(131072), d+AD0-0, c, w+AD0-0, j+AD0-0, i+AD0-0+ADs
       for(i +AD0 0+ADs i +ADw 65536+ADs +-+-i) +AHs DD+AFs-2+ACo-i+AF0 +AD0 0xFF+ADs DD+AFs-2+ACo-i+-1+AF0 +AD0 0xFD+ADsAfQ
       for(d +AD0 0+ADs d +ADw D.length+ADs +-+-d) +AHs
         if(+ACE(c+AD0-D+AFs-d+AF0)) continue+ADs
@@ -168,7 +173,7 @@
         DD+AFs-j+AF0 +AD0 w+ACY-255+ADs DD+AFs-j+-1+AF0 +AD0 w+AD4APg-8+ADs
       +AH0
       return function dbcs+AF8-d(data) +AHs
-        var len +AD0 data.length, out +AD0 new Buffer(2+ACo-len), i+AD0-0, j+AD0-0, k+AD0-0+ADs
+        var len +AD0 data.length, out +AD0 Buffer.allocUnsafe(2+ACo-len), i+AD0-0, j+AD0-0, k+AD0-0+ADs
         if(Buffer.isBuffer(data)) +AHs
           for(i +AD0 0+ADs i +ADw len+ADs i+-+-) +AHs
             j +AD0 2+ACo-data+AFs-i+AF0AOw
@@ -194,7 +199,7 @@
     magic+AF8-decode+AFs-65001+AF0 +AD0 function utf8+AF8-d(data) +AHs
       if(typeof data +AD0APQA9 +ACI-string+ACI) return utf8+AF8-d(data.split(+ACIAIg).map(cca))+ADs
       var len +AD0 data.length, w +AD0 0, ww +AD0 0+ADs
-      if(4 +ACo len +AD4 mdl) +AHs mdl +AD0 4 +ACo len+ADs mdb +AD0 new Buffer(mdl)+ADs +AH0
+      if(4 +ACo len +AD4 mdl) +AHs mdl +AD0 4 +ACo len+ADs mdb +AD0 Buffer.allocUnsafe(mdl)+ADs +AH0
       var i +AD0 0+ADs
       if(len +AD4APQ 3 +ACYAJg data+AFs-0+AF0 +AD0APQ 0xEF) if(data+AFs-1+AF0 +AD0APQ 0xBB +ACYAJg data+AFs-2+AF0 +AD0APQ 0xBF) i +AD0 3+ADs
       for(var j +AD0 1, k +AD0 0, D +AD0 0+ADs i +ADw len+ADs i+-+AD0-j) +AHs
@@ -219,7 +224,7 @@
       +AH0
       var len +AD0 data.length, w +AD0 0, ww +AD0 0, j +AD0 0+ADs
       var direct +AD0 typeof data +AD0APQA9 +ACI-string+ACIAOw
-      if(4 +ACo len +AD4 mdl) +AHs mdl +AD0 4 +ACo len+ADs mdb +AD0 new Buffer(mdl)+ADs +AH0
+      if(4 +ACo len +AD4 mdl) +AHs mdl +AD0 4 +ACo len+ADs mdb +AD0 Buffer.allocUnsafe(mdl)+ADs +AH0
       for(var i +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
         w +AD0 direct ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
         if(w +ADwAPQ 0x007F) mdb+AFs-j+-+-+AF0 +AD0 w+ADs
@@ -298,7 +303,7 @@
     if(cpecache+AFs-cp+AF0) +AHs last+AF8-enc +AD0 cpecache+AFs-last+AF8-cp+AD0-cp+AF0AOw return last+AF8-enc(data, ofmt)+ADs +AH0
     if(has+AF8-buf +ACYAJg Buffer.isBuffer(data)) data +AD0 data.toString('utf8')+ADs
     var len +AD0 data.length+ADs
-    var out +AD0 has+AF8-buf ? new Buffer(4+ACo-len) : +AFsAXQ, w+AD0-0, i+AD0-0, j +AD0 0, ww+AD0-0+ADs
+    var out +AD0 has+AF8-buf ? Buffer.allocUnsafe(4+ACo-len) : +AFsAXQ, w+AD0-0, i+AD0-0, j +AD0 0, ww+AD0-0+ADs
     var C +AD0 cpt+AFs-cp+AF0, E, M +AD0 +ACIAIgA7
     var isstr +AD0 typeof data +AD0APQA9 'string'+ADs
     if(C +ACYAJg (E+AD0-C.enc)) for(i +AD0 0+ADs i +ADw len+ADs +-+-i, +-+-j) +AHs
@@ -310,7 +315,7 @@
     +AH0
     else if((M+AD0-magic+AFs-cp+AF0)) switch(M) +AHs
       case +ACI-utf8+ACI:
-        if(has+AF8-buf +ACYAJg isstr) +AHs out +AD0 new Buffer(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
+        if(has+AF8-buf +ACYAJg isstr) +AHs out +AD0 Buffer.from(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i, +-+-j) +AHs
           w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           if(w +ADwAPQ 0x007F) out+AFs-j+AF0 +AD0 w+ADs
@@ -332,7 +337,7 @@
         +AH0
         break+ADs
       case +ACI-ascii+ACI:
-        if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 new Buffer(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
+        if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 Buffer.from(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i, +-+-j) +AHs
           w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           if(w +ADwAPQ 0x007F) out+AFs-j+AF0 +AD0 w+ADs
@@ -340,7 +345,7 @@
         +AH0
         break+ADs
       case +ACI-utf16le+ACI:
-        if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 new Buffer(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
+        if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 Buffer.from(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
           w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           out+AFs-j+-+-+AF0 +AD0 w+ACY-255+ADs

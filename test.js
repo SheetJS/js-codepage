@@ -97,7 +97,7 @@ describe('entry conditions', function() {
       var arr = cptable.utils.encode(cp,i.split(""),e);
       assert.deepEqual(str,arr);
       if(typeof Buffer === 'undefined') return;
-      var buf = cptable.utils.encode(cp,new Buffer(i),e);
+      var buf = cptable.utils.encode(cp,Buffer.from(i),e);
       assert.deepEqual(str,buf);
     };
     cptable.utils.cache.encache();
@@ -125,7 +125,7 @@ describe('entry conditions', function() {
       var arr = cptable.utils.decode(cp,s.join?s.join(""):s);
       assert.deepEqual(str,arr);
       if(typeof Buffer === 'undefined') return;
-      var buf = cptable.utils.decode(cp,new Buffer(i));
+      var buf = cptable.utils.decode(cp,Buffer.from(i));
       assert.deepEqual(str,buf);
     };
     cptable.utils.cache.encache();
@@ -135,7 +135,7 @@ describe('entry conditions', function() {
   };
   describe('decode', function() {
     it('CP  1252 : sbcs', function() { chkde(1252,[0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72]); }); /* "foobar" */
-    if(typeof Buffer !== 'undefined') it('CP   708 : sbcs', function() { chkde(708, new Buffer([0xca, 0x20, 0x61, 0x6e, 0x64, 0x20, 0xcb, 0x20, 0x73, 0x6d, 0x69, 0x6c, 0x65, 0x79, 0x20, 0x66, 0x61, 0x63, 0x65, 0x73])); }); /* ("ت and ث smiley faces") */
+    if(typeof Buffer !== 'undefined') it('CP   708 : sbcs', function() { chkde(708, Buffer.from([0xca, 0x20, 0x61, 0x6e, 0x64, 0x20, 0xcb, 0x20, 0x73, 0x6d, 0x69, 0x6c, 0x65, 0x79, 0x20, 0x66, 0x61, 0x63, 0x65, 0x73])); }); /* ("ت and ث smiley faces") */
     it('CP   936 : dbcs', function() { chkde(936, [0xd5, 0xe2, 0xca, 0xc7, 0xd6, 0xd0, 0xce, 0xc4, 0xd7, 0xd6, 0xb7, 0xfb, 0xb2, 0xe2, 0xca, 0xd4]);}); /* "这是中文字符测试" */
   });
 });

@@ -565,7 +565,7 @@ describe('entry conditions', function() +AHs
       var arr +AD0 cptable.utils.encode(cp,i.split(+ACIAIg),e)+ADs
       assert.deepEqual(str,arr)+ADs
       if(typeof Buffer +AD0APQA9 'undefined') return+ADs
-      var buf +AD0 cptable.utils.encode(cp,new Buffer(i),e)+ADs
+      var buf +AD0 cptable.utils.encode(cp,Buffer.from(i),e)+ADs
       assert.deepEqual(str,buf)+ADs
     +AH0AOw
     cptable.utils.cache.encache()+ADs
@@ -593,7 +593,7 @@ describe('entry conditions', function() +AHs
       var arr +AD0 cptable.utils.decode(cp,s.join?s.join(+ACIAIg):s)+ADs
       assert.deepEqual(str,arr)+ADs
       if(typeof Buffer +AD0APQA9 'undefined') return+ADs
-      var buf +AD0 cptable.utils.decode(cp,new Buffer(i))+ADs
+      var buf +AD0 cptable.utils.decode(cp,Buffer.from(i))+ADs
       assert.deepEqual(str,buf)+ADs
     +AH0AOw
     cptable.utils.cache.encache()+ADs
@@ -603,7 +603,7 @@ describe('entry conditions', function() +AHs
   +AH0AOw
   describe('decode', function() +AHs
     it('CP  1252 : sbcs', function() +AHs chkde(1252,+AFs-0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72+AF0)+ADs +AH0)+ADs /+ACo +ACI-foobar+ACI +ACo-/
-    if(typeof Buffer +ACEAPQA9 'undefined') it('CP   708 : sbcs', function() +AHs chkde(708, new Buffer(+AFs-0xca, 0x20, 0x61, 0x6e, 0x64, 0x20, 0xcb, 0x20, 0x73, 0x6d, 0x69, 0x6c, 0x65, 0x79, 0x20, 0x66, 0x61, 0x63, 0x65, 0x73+AF0))+ADs +AH0)+ADs /+ACo (+ACIGKg and +Bis smiley faces+ACI) +ACo-/
+    if(typeof Buffer +ACEAPQA9 'undefined') it('CP   708 : sbcs', function() +AHs chkde(708, Buffer.from(+AFs-0xca, 0x20, 0x61, 0x6e, 0x64, 0x20, 0xcb, 0x20, 0x73, 0x6d, 0x69, 0x6c, 0x65, 0x79, 0x20, 0x66, 0x61, 0x63, 0x65, 0x73+AF0))+ADs +AH0)+ADs /+ACo (+ACIGKg and +Bis smiley faces+ACI) +ACo-/
     it('CP   936 : dbcs', function() +AHs chkde(936, +AFs-0xd5, 0xe2, 0xca, 0xc7, 0xd6, 0xd0, 0xce, 0xc4, 0xd7, 0xd6, 0xb7, 0xfb, 0xb2, 0xe2, 0xca, 0xd4+AF0)+ADsAfQ)+ADs /+ACo +ACKP2WYvTi1lh1tXeyZtS4vVACI +ACo-/
   +AH0)+ADs
 +AH0)+ADs
@@ -754,7 +754,7 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.12.0+ACI,
+  +ACI-version+ACI: +ACI-1.13.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
@@ -767,16 +767,16 @@ describe('failures', function() +AHs
     +ACI-buffer+ACI: +ACI-false+ACI
   +AH0,
   +ACI-dependencies+ACI: +AHs
-    +ACI-commander+ACI: +ACIAfg-2.11.0+ACI,
-    +ACI-exit-on-epipe+ACI: +ACIAfg-1.0.1+ACI,
-    +ACI-voc+ACI: +ACIAfg-1.0.0+ACI
+    +ACI-commander+ACI: +ACIAfg-2.14.1+ACI,
+    +ACI-exit-on-epipe+ACI: +ACIAfg-1.0.1+ACI
   +AH0,
   +ACI-devDependencies+ACI: +AHs
+    +ACI-voc+ACI: +ACIAfg-1.1.0+ACI,
     +ACI-mocha+ACI: +ACIAfg-2.5.3+ACI,
     +ACI-blanket+ACI: +ACIAfg-1.2.3+ACI,
     +ACIAQA-sheetjs/uglify-js+ACI: +ACIAfg-2.7.3+ACI,
     +ACIAQA-types/node+ACI: +ACIAXg-8.0.7+ACI,
-    +ACIAQA-types/commander+ACI: +ACIAXg-2.9.0+ACI,
+    +ACIAQA-types/commander+ACI: +ACIAXg-2.12.0+ACI,
     +ACI-dtslint+ACI: +ACIAXg-0.1.2+ACI,
     +ACI-typescript+ACI: +ACI-2.2.0+ACI
   +AH0,
@@ -807,6 +807,8 @@ describe('failures', function() +AHs
     +ACI-LICENSE+ACI,
     +ACI-README.md+ACI,
     +ACI-bin+ACI,
+    +ACI-types/index.d.ts+ACI,
+    +ACI-types/+ACo.json+ACI,
     +ACI-cptable.js+ACI,
     +ACI-cputils.js+ACI,
     +ACI-dist/sbcs.full.js+ACI,
