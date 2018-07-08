@@ -40,9 +40,11 @@
   var cca = function cca(x) { return x.charCodeAt(0); };
 
   var has_buf = (typeof Buffer !== 'undefined');
+  var Buffer_from = function(){};
   if(has_buf) {
-    // $FlowIgnore
-    if(!Buffer.from) Buffer.from = function(buf, enc) { return (enc) ? new Buffer(buf, enc) : new Buffer(buf); };
+    var nbfs = !Buffer.from;
+    if(!nbfs) try { Buffer.from("foo", "utf8"); } catch(e) { nbfs = true; }
+    Buffer_from = nbfs ? function(buf, enc) { return (enc) ? new Buffer(buf, enc) : new Buffer(buf); } : Buffer.from.bind(Buffer);
     // $FlowIgnore
     if(!Buffer.allocUnsafe) Buffer.allocUnsafe = function(n) { return new Buffer(n); };
 
@@ -315,7 +317,7 @@
     }
     else if((M=magic[cp])) switch(M) {
       case "utf8":
-        if(has_buf && isstr) { out = Buffer.from(data, M); j = out.length; break; }
+        if(has_buf && isstr) { out = Buffer_from(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i, ++j) {
           w = isstr ? data.charCodeAt(i) : data[i].charCodeAt(0);
           if(w <= 0x007F) out[j] = w;
@@ -337,7 +339,7 @@
         }
         break;
       case "ascii":
-        if(has_buf && typeof data === "string") { out = Buffer.from(data, M); j = out.length; break; }
+        if(has_buf && typeof data === "string") { out = Buffer_from(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i, ++j) {
           w = isstr ? data.charCodeAt(i) : data[i].charCodeAt(0);
           if(w <= 0x007F) out[j] = w;
@@ -345,7 +347,7 @@
         }
         break;
       case "utf16le":
-        if(has_buf && typeof data === "string") { out = Buffer.from(data, M); j = out.length; break; }
+        if(has_buf && typeof data === "string") { out = Buffer_from(data, M); j = out.length; break; }
         for(i = 0; i < len; ++i) {
           w = isstr ? data.charCodeAt(i) : data[i].charCodeAt(0);
           out[j++] = w&255;

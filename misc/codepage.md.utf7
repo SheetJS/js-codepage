@@ -448,11 +448,28 @@ while the input format is automatically determined.
 
 +ACM Tests
 
-The tests include JS validity tests (requiring or evaluating code):
-
 +AGAAYABgAD4-test.js
 var fs +AD0 require('fs'), assert +AD0 require('assert'), vm +AD0 require('vm')+ADs
 var cptable, sbcs+ADs
+
++AGAAYABg
+
+Due to a bug in +AGA-Buffer.from+AGA in node +AGA-4.0 - 4.4+AGA, a special check is needed:
+
++AGAAYABgAD4-test.js
+var Buffer+AF8-from +AD0 function()+AHsAfQA7
+
+if(typeof Buffer +ACEAPQA9 'undefined') +AHs
+  var nbfs +AD0 +ACE-Buffer.from+ADs
+  if(+ACE-nbfs) try +AHs Buffer.from(+ACI-foo+ACI, +ACI-utf8+ACI)+ADs +AH0 catch(e) +AHs nbfs +AD0 true+ADs +AH0
+  Buffer+AF8-from +AD0 nbfs ? function(buf, enc) +AHs return (enc) ? new Buffer(buf, enc) : new Buffer(buf)+ADs +AH0 : Buffer.from.bind(Buffer)+ADs
++AH0
+
++AGAAYABg
+
+The tests include JS validity tests (requiring or evaluating code):
+
++AGAAYABgAD4-test.js
 describe('source', function() +AHs
   it('should load node', function() +AHs cptable +AD0 require('./')+ADs +AH0)+ADs
   it('should load sbcs', function() +AHs sbcs +AD0 require('./sbcs')+ADs +AH0)+ADs
@@ -565,7 +582,7 @@ describe('entry conditions', function() +AHs
       var arr +AD0 cptable.utils.encode(cp,i.split(+ACIAIg),e)+ADs
       assert.deepEqual(str,arr)+ADs
       if(typeof Buffer +AD0APQA9 'undefined') return+ADs
-      var buf +AD0 cptable.utils.encode(cp,Buffer.from(i),e)+ADs
+      var buf +AD0 cptable.utils.encode(cp,Buffer+AF8-from(i),e)+ADs
       assert.deepEqual(str,buf)+ADs
     +AH0AOw
     cptable.utils.cache.encache()+ADs
@@ -593,7 +610,7 @@ describe('entry conditions', function() +AHs
       var arr +AD0 cptable.utils.decode(cp,s.join?s.join(+ACIAIg):s)+ADs
       assert.deepEqual(str,arr)+ADs
       if(typeof Buffer +AD0APQA9 'undefined') return+ADs
-      var buf +AD0 cptable.utils.decode(cp,Buffer.from(i))+ADs
+      var buf +AD0 cptable.utils.decode(cp,Buffer+AF8-from(i))+ADs
       assert.deepEqual(str,buf)+ADs
     +AH0AOw
     cptable.utils.cache.encache()+ADs
@@ -603,7 +620,7 @@ describe('entry conditions', function() +AHs
   +AH0AOw
   describe('decode', function() +AHs
     it('CP  1252 : sbcs', function() +AHs chkde(1252,+AFs-0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72+AF0)+ADs +AH0)+ADs /+ACo +ACI-foobar+ACI +ACo-/
-    if(typeof Buffer +ACEAPQA9 'undefined') it('CP   708 : sbcs', function() +AHs chkde(708, Buffer.from(+AFs-0xca, 0x20, 0x61, 0x6e, 0x64, 0x20, 0xcb, 0x20, 0x73, 0x6d, 0x69, 0x6c, 0x65, 0x79, 0x20, 0x66, 0x61, 0x63, 0x65, 0x73+AF0))+ADs +AH0)+ADs /+ACo (+ACIGKg and +Bis smiley faces+ACI) +ACo-/
+    if(typeof Buffer +ACEAPQA9 'undefined') it('CP   708 : sbcs', function() +AHs chkde(708, Buffer+AF8-from(+AFs-0xca, 0x20, 0x61, 0x6e, 0x64, 0x20, 0xcb, 0x20, 0x73, 0x6d, 0x69, 0x6c, 0x65, 0x79, 0x20, 0x66, 0x61, 0x63, 0x65, 0x73+AF0))+ADs +AH0)+ADs /+ACo (+ACIGKg and +Bis smiley faces+ACI) +ACo-/
     it('CP   936 : dbcs', function() +AHs chkde(936, +AFs-0xd5, 0xe2, 0xca, 0xc7, 0xd6, 0xd0, 0xce, 0xc4, 0xd7, 0xd6, 0xb7, 0xfb, 0xb2, 0xe2, 0xca, 0xd4+AF0)+ADsAfQ)+ADs /+ACo +ACKP2WYvTi1lh1tXeyZtS4vVACI +ACo-/
   +AH0)+ADs
 +AH0)+ADs
@@ -754,7 +771,7 @@ describe('failures', function() +AHs
 +AGAAYABg-json+AD4-package.json
 +AHs
   +ACI-name+ACI: +ACI-codepage+ACI,
-  +ACI-version+ACI: +ACI-1.13.0+ACI,
+  +ACI-version+ACI: +ACI-1.14.0+ACI,
   +ACI-author+ACI: +ACI-SheetJS+ACI,
   +ACI-description+ACI: +ACI-pure-JS library to handle codepages+ACI,
   +ACI-keywords+ACI: +AFs +ACI-codepage+ACI, +ACI-iconv+ACI, +ACI-convert+ACI, +ACI-strings+ACI +AF0,
@@ -807,6 +824,7 @@ describe('failures', function() +AHs
     +ACI-LICENSE+ACI,
     +ACI-README.md+ACI,
     +ACI-bin+ACI,
+    +ACI-bits/+ACo.js+ACI,
     +ACI-types/index.d.ts+ACI,
     +ACI-types/+ACo.json+ACI,
     +ACI-cptable.js+ACI,
@@ -825,10 +843,12 @@ describe('failures', function() +AHs
 +AGAAYABg
 
 +AGAAYABgAD4.gitignore
+node+AF8-modules
+package-lock.json
++ACo.tgz
 .gitignore
 codepages/
 .vocrc
-node+AF8-modules/
 make.sh
 make.njs
 misc/coverage.html

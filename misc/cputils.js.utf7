@@ -40,9 +40,11 @@
   var cca +AD0 function cca(x) +AHs return x.charCodeAt(0)+ADs +AH0AOw
 
   var has+AF8-buf +AD0 (typeof Buffer +ACEAPQA9 'undefined')+ADs
+	var Buffer+AF8-from +AD0 function()+AHsAfQA7
   if(has+AF8-buf) +AHs
-    // +ACQ-FlowIgnore
-    if(+ACE-Buffer.from) Buffer.from +AD0 function(buf, enc) +AHs return (enc) ? new Buffer(buf, enc) : new Buffer(buf)+ADs +AH0AOw
+		var nbfs +AD0 +ACE-Buffer.from+ADs
+		if(+ACE-nbfs) try +AHs Buffer.from(+ACI-foo+ACI, +ACI-utf8+ACI)+ADs +AH0 catch(e) +AHs nbfs +AD0 true+ADs +AH0
+		Buffer+AF8-from +AD0 nbfs ? function(buf, enc) +AHs return (enc) ? new Buffer(buf, enc) : new Buffer(buf)+ADs +AH0 : Buffer.from.bind(Buffer)+ADs
     // +ACQ-FlowIgnore
     if(+ACE-Buffer.allocUnsafe) Buffer.allocUnsafe +AD0 function(n) +AHs return new Buffer(n)+ADs +AH0AOw
 
@@ -315,7 +317,7 @@
     +AH0
     else if((M+AD0-magic+AFs-cp+AF0)) switch(M) +AHs
       case +ACI-utf8+ACI:
-        if(has+AF8-buf +ACYAJg isstr) +AHs out +AD0 Buffer.from(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
+        if(has+AF8-buf +ACYAJg isstr) +AHs out +AD0 Buffer+AF8-from(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i, +-+-j) +AHs
           w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           if(w +ADwAPQ 0x007F) out+AFs-j+AF0 +AD0 w+ADs
@@ -337,7 +339,7 @@
         +AH0
         break+ADs
       case +ACI-ascii+ACI:
-        if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 Buffer.from(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
+        if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 Buffer+AF8-from(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i, +-+-j) +AHs
           w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           if(w +ADwAPQ 0x007F) out+AFs-j+AF0 +AD0 w+ADs
@@ -345,7 +347,7 @@
         +AH0
         break+ADs
       case +ACI-utf16le+ACI:
-        if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 Buffer.from(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
+        if(has+AF8-buf +ACYAJg typeof data +AD0APQA9 +ACI-string+ACI) +AHs out +AD0 Buffer+AF8-from(data, M)+ADs j +AD0 out.length+ADs break+ADs +AH0
         for(i +AD0 0+ADs i +ADw len+ADs +-+-i) +AHs
           w +AD0 isstr ? data.charCodeAt(i) : data+AFs-i+AF0.charCodeAt(0)+ADs
           out+AFs-j+-+-+AF0 +AD0 w+ACY-255+ADs
