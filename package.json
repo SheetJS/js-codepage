@@ -3,18 +3,16 @@
   "version": "1.14.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
-  "keywords": [ "codepage", "iconv", "convert", "strings" ],
-  "bin": {
-    "codepage": "./bin/codepage.njs"
-  },
+  "keywords": [
+    "codepage",
+    "iconv",
+    "convert",
+    "strings"
+  ],
   "main": "cputils.js",
   "types": "types",
   "browser": {
     "buffer": "false"
-  },
-  "dependencies": {
-    "commander": "~2.14.1",
-    "exit-on-epipe": "~1.0.1"
   },
   "devDependencies": {
     "voc": "~1.1.0",
@@ -26,7 +24,10 @@
     "dtslint": "^0.1.2",
     "typescript": "2.2.0"
   },
-  "repository": { "type":"git", "url":"git://github.com/SheetJS/js-codepage.git"},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SheetJS/js-codepage.git"
+  },
   "scripts": {
     "pretest": "git submodule init && git submodule update",
     "test": "make test",
@@ -61,7 +62,11 @@
     "dist/sbcs.full.js",
     "dist/cpexcel.full.js"
   ],
-  "bugs": { "url": "https://github.com/SheetJS/js-codepage/issues" },
+  "bugs": {
+    "url": "https://github.com/SheetJS/js-codepage/issues"
+  },
   "license": "Apache-2.0",
-  "engines": { "node": ">=0.8" }
+  "engines": {
+    "node": ">=0.8"
+  }
 }
