@@ -1,0 +1,16 @@
+{
+  "name": "codepage-cli",
+  "version": "1.0.5",
+  "description": "CLI for js-codepage",
+  "main": "index.js",
+  "bin": {
+    "codepage-cli": "./bin/codepage.njs"
+  },
+  "author": "Garrett Luu",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "codepage": "^1.14.0",
+    "commander": "^5.1.0",
+    "exit-on-epipe": "^1.0.1"
+  }
+}
