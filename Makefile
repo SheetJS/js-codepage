@@ -3,8 +3,11 @@ LIB=codepage
 VOC=voc
 TARGET=cptable.js
 AUXTARGETS=cputils.js cpexcel.js sbcs.js
-DISTFULL=cpexcel sbcs cptable
-CMDS=bin/codepage.njs
+DISTFULL_A=cpexcel sbcs
+DISTFULL_B=cptable
+CMDS=
+#DISTBITS=iso2022.js
+DISTBITS=
 
 ULIB=$(shell echo $(LIB) | tr a-z A-Z)
 FLOWTARGET=cptable.js
@@ -16,14 +19,16 @@ CLOSURE=/usr/local/lib/node_modules/google-closure-compiler/compiler.jar
 all: voc ## Build library and auxiliary scripts
 
 .PHONY: voc
-voc test.js: codepage.md
-	$(VOC) codepage.md
+voc: codepage.md
+	@make js
+	#$(VOC) codepage.md
 
 .PHONY: js
 js: make.sh codepage.md ## Build all output targets
 	bash make.sh <(awk -F, '$$3=="1"' pages.csv) sbcs.js cptable
 	bash make.sh excel.csv cpexcel.js cptable
-	bash make.sh
+	bash make.sh pages.csv cptable.js cptable
+	#node iso2022/make_iso2022.njs > iso2022.js
 	make cputils.js
 
 cputils.js: cputils.flow.js
@@ -31,17 +36,18 @@ cputils.js: cputils.flow.js
 
 .PHONY: clean
 clean: ## Remove targets and build artifacts
-	rm -f make.sh .vocrc pages.csv bits/*.js
+	rm -f bits/*.js
 
 .PHONY: dist
 dist: $(TARGET) $(AUXTARGETS) ## Copy files for distribution
 	cp $(TARGET) $(AUXTARGETS) LICENSE dist/
-	for i in $(DISTFULL); do cat $$i.js cputils.js | sed "s#require('./cptable')#cptable#" > dist/$$i.full.js; done
+	for i in $(DISTFULL_A); do cat $$i.js cputils.js | sed "s#require('./cptable')#cptable#" > dist/$$i.full.js; done
+	for i in $(DISTFULL_B); do cat $$i.js $(DISTBITS) cputils.js | sed "s#require('./cptable')#cptable#" > dist/$$i.full.js; done
 
 ## Testing
 
 .PHONY: test mocha
-test mocha: test.js $(TARGET) baseline ## Run test suite
+test mocha: $(TARGET) baseline ## Run test suite
 	mocha -R spec -t 20000
 
 .PHONY: ctest
@@ -67,7 +73,7 @@ fullint: lint old-lint tslint flow mdlint ## Run all checks
 
 .PHONY: lint
 lint: $(TARGET) $(AUXTARGETS) ## Run eslint checks
-	@eslint --ext .js,.njs,.json,.html,.htm $(TARGET) $(AUXTARGETS) $(CMDS) $(HTMLLINT) package.json bower.json
+	@eslint --ext .js,.njs,.json,.html,.htm $(TARGET) $(AUXTARGETS) $(CMDS) $(HTMLLINT) package.json
 	if [ -e $(CLOSURE) ]; then java -jar $(CLOSURE) $(REQS) $(FLOWTARGET) --jscomp_warning=reportUnknownTypes >/dev/null; fi
 
 .PHONY: old-lint

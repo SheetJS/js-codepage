@@ -26,7 +26,7 @@ Alternatively, use the full version in the dist folder:
 ```
 
 The complete set of codepages is large due to some Double Byte Character Set
-encodings.  A much smaller file that just includes SBCS codepages is provided in
+encodings.  A much smaller file that only includes SBCS codepages is provided in
 this repo (`sbcs.js`), as well as a file for other projects (`cpexcel.js`)
 
 If you know which codepages you need, you can include individual scripts for
@@ -133,7 +133,7 @@ to produce a complete script like `cpexcel.full.js`.
 ## Building the complete script
 
 This script uses [voc](npm.im/voc).  The script to build the codepage tables and
-the JS source is `codepage.md`, so building is as simple as `voc codepage.md`.
+the JS source is `codepage.md`, so building involves `voc codepage.md`.
 
 ## Generated Codepages
 
@@ -274,11 +274,11 @@ tables are not generated, there is no corresponding entry (they are "magic").
 | `29001` |  Windows 7  | Europa 3                                             |
 | `38598` |  Windows 7  | ISO 8859-8 Hebrew (ISO-Logical)                      |
 | `47451` | unicode.org | Atari ST/TT                                          |
-| `50220` |  Windows 7  | ISO 2022 JIS Japanese with no halfwidth Katakana     |
-| `50221` |  Windows 7  | ISO 2022 JIS Japanese with halfwidth Katakana        |
-| `50222` |  Windows 7  | ISO 2022 Japanese JIS X 0201-1989 (1 byte Kana-SO/SI)|
-| `50225` |  Windows 7  | ISO 2022 Korean                                      |
-| `50227` |  Windows 7  | ISO 2022 Simplified Chinese                          |
+| `50220` |    magic    | ISO 2022 JIS Japanese with no halfwidth Katakana     |
+| `50221` |    magic    | ISO 2022 JIS Japanese with halfwidth Katakana        |
+| `50222` |    magic    | ISO 2022 Japanese JIS X 0201-1989 (1 byte Kana-SO/SI)|
+| `50225` |    magic    | ISO 2022 Korean                                      |
+| `50227` |    magic    | ISO 2022 Simplified Chinese                          |
 | `51932` |  Windows 7  | EUC Japanese                                         |
 | `51936` |  Windows 7  | EUC Simplified Chinese                               |
 | `51949` |  Windows 7  | EUC Korean                                           |
@@ -330,6 +330,9 @@ To update the browser artifacts, run `make ctest`.
 - [Windows Code Page Enumeration](http://msdn.microsoft.com/en-us/library/cc195051.aspx)
 - [Windows Code Page Identifiers](http://msdn.microsoft.com/en-us/library/windows/desktop/dd317756.aspx)
 - [IBM Coded Character Sets](https://www-01.ibm.com/software/globalization/ccsid/ccsid_registered.html)
+- [ISO/IEC 2022 / ECMA-35](https://www.ecma-international.org/publications/files/ECMA-ST/Ecma-035.pdf)
+- [International Register of Coded Character Sets To Be Used With Escape Sequences](https://www.itscj.ipsj.or.jp/itscj_english/iso-ir/ISO-IR.pdf)
+- [Japanese Character Encoding for Internet Messages](https://tools.ietf.org/html/rfc1468)
 
 ## License
 

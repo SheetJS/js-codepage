@@ -1,4 +1,4 @@
-/* cputils.js (C) 2013-present SheetJS -- http://sheetjs.com */
+/*! cputils.js (C) 2013-present SheetJS -- http://sheetjs.com */
 /* vim: set ft=javascript: */
 /*jshint newcap: false */
 (function(root, factory) {

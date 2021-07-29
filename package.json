@@ -1,6 +1,6 @@
 {
   "name": "codepage",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "author": "SheetJS",
   "description": "pure-JS library to handle codepages",
   "keywords": [
@@ -49,7 +49,7 @@
       "latin"
     ]
   },
-  "homepage": "http://sheetjs.com/opensource",
+  "homepage": "https://sheetjs.com/",
   "files": [
     "LICENSE",
     "README.md",

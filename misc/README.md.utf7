@@ -26,7 +26,7 @@ Alternatively, use the full version in the dist folder:
 +AGAAYABg
 
 The complete set of codepages is large due to some Double Byte Character Set
-encodings.  A much smaller file that just includes SBCS codepages is provided in
+encodings.  A much smaller file that only includes SBCS codepages is provided in
 this repo (+AGA-sbcs.js+AGA), as well as a file for other projects (+AGA-cpexcel.js+AGA)
 
 If you know which codepages you need, you can include individual scripts for
@@ -133,7 +133,7 @@ to produce a complete script like +AGA-cpexcel.full.js+AGA.
 +ACMAIw Building the complete script
 
 This script uses +AFs-voc+AF0(npm.im/voc).  The script to build the codepage tables and
-the JS source is +AGA-codepage.md+AGA, so building is as simple as +AGA-voc codepage.md+AGA.
+the JS source is +AGA-codepage.md+AGA, so building involves +AGA-voc codepage.md+AGA.
 
 +ACMAIw Generated Codepages
 
@@ -274,11 +274,11 @@ tables are not generated, there is no corresponding entry (they are +ACI-magic+A
 +AHw +AGA-29001+AGA +AHw  Windows 7  +AHw Europa 3                                             +AHw
 +AHw +AGA-38598+AGA +AHw  Windows 7  +AHw ISO 8859-8 Hebrew (ISO-Logical)                      +AHw
 +AHw +AGA-47451+AGA +AHw unicode.org +AHw Atari ST/TT                                          +AHw
-+AHw +AGA-50220+AGA +AHw  Windows 7  +AHw ISO 2022 JIS Japanese with no halfwidth Katakana     +AHw
-+AHw +AGA-50221+AGA +AHw  Windows 7  +AHw ISO 2022 JIS Japanese with halfwidth Katakana        +AHw
-+AHw +AGA-50222+AGA +AHw  Windows 7  +AHw ISO 2022 Japanese JIS X 0201-1989 (1 byte Kana-SO/SI)+AHw
-+AHw +AGA-50225+AGA +AHw  Windows 7  +AHw ISO 2022 Korean                                      +AHw
-+AHw +AGA-50227+AGA +AHw  Windows 7  +AHw ISO 2022 Simplified Chinese                          +AHw
++AHw +AGA-50220+AGA +AHw    magic    +AHw ISO 2022 JIS Japanese with no halfwidth Katakana     +AHw
++AHw +AGA-50221+AGA +AHw    magic    +AHw ISO 2022 JIS Japanese with halfwidth Katakana        +AHw
++AHw +AGA-50222+AGA +AHw    magic    +AHw ISO 2022 Japanese JIS X 0201-1989 (1 byte Kana-SO/SI)+AHw
++AHw +AGA-50225+AGA +AHw    magic    +AHw ISO 2022 Korean                                      +AHw
++AHw +AGA-50227+AGA +AHw    magic    +AHw ISO 2022 Simplified Chinese                          +AHw
 +AHw +AGA-51932+AGA +AHw  Windows 7  +AHw EUC Japanese                                         +AHw
 +AHw +AGA-51936+AGA +AHw  Windows 7  +AHw EUC Simplified Chinese                               +AHw
 +AHw +AGA-51949+AGA +AHw  Windows 7  +AHw EUC Korean                                           +AHw
@@ -330,6 +330,9 @@ To update the browser artifacts, run +AGA-make ctest+AGA.
 - +AFs-Windows Code Page Enumeration+AF0(http://msdn.microsoft.com/en-us/library/cc195051.aspx)
 - +AFs-Windows Code Page Identifiers+AF0(http://msdn.microsoft.com/en-us/library/windows/desktop/dd317756.aspx)
 - +AFs-IBM Coded Character Sets+AF0(https://www-01.ibm.com/software/globalization/ccsid/ccsid+AF8-registered.html)
+- +AFs-ISO/IEC 2022 / ECMA-35+AF0(https://www.ecma-international.org/publications/files/ECMA-ST/Ecma-035.pdf)
+- +AFs-International Register of Coded Character Sets To Be Used With Escape Sequences+AF0(https://www.itscj.ipsj.or.jp/itscj+AF8-english/iso-ir/ISO-IR.pdf)
+- +AFs-Japanese Character Encoding for Internet Messages+AF0(https://tools.ietf.org/html/rfc1468)
 
 +ACMAIw License
 

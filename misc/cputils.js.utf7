@@ -1,4 +1,4 @@
-/+ACo cputils.js (C) 2013-present SheetJS -- http://sheetjs.com +ACo-/
+/+ACoAIQ cputils.js (C) 2013-present SheetJS -- http://sheetjs.com +ACo-/
 /+ACo vim: set ft+AD0-javascript: +ACo-/
 /+ACo-jshint newcap: false +ACo-/
 (function(root, factory) +AHs
@@ -40,11 +40,11 @@
   var cca +AD0 function cca(x) +AHs return x.charCodeAt(0)+ADs +AH0AOw
 
   var has+AF8-buf +AD0 (typeof Buffer +ACEAPQA9 'undefined')+ADs
-	var Buffer+AF8-from +AD0 function()+AHsAfQA7
+  var Buffer+AF8-from +AD0 function()+AHsAfQA7
   if(has+AF8-buf) +AHs
-		var nbfs +AD0 +ACE-Buffer.from+ADs
-		if(+ACE-nbfs) try +AHs Buffer.from(+ACI-foo+ACI, +ACI-utf8+ACI)+ADs +AH0 catch(e) +AHs nbfs +AD0 true+ADs +AH0
-		Buffer+AF8-from +AD0 nbfs ? function(buf, enc) +AHs return (enc) ? new Buffer(buf, enc) : new Buffer(buf)+ADs +AH0 : Buffer.from.bind(Buffer)+ADs
+    var nbfs +AD0 +ACE-Buffer.from+ADs
+    if(+ACE-nbfs) try +AHs Buffer.from(+ACI-foo+ACI, +ACI-utf8+ACI)+ADs +AH0 catch(e) +AHs nbfs +AD0 true+ADs +AH0
+    Buffer+AF8-from +AD0 nbfs ? function(buf, enc) +AHs return (enc) ? new Buffer(buf, enc) : new Buffer(buf)+ADs +AH0 : Buffer.from.bind(Buffer)+ADs
     // +ACQ-FlowIgnore
     if(+ACE-Buffer.allocUnsafe) Buffer.allocUnsafe +AD0 function(n) +AHs return new Buffer(n)+ADs +AH0AOw
 

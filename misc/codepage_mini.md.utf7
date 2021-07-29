@@ -2,16 +2,22 @@
 
 The fields of the +AGA-pages.csv+AGA manifest are +AGA-codepage,url,bytes+AGA (SBCS+AD0-1, DBCS+AD0-2)
 
-+AGAAYABgAD4-pages.csv
-37,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP037.TXT,1
-437,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP437.TXT,1
-500,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/EBCDIC/CP500.TXT,1
-737,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP737.TXT,1
-775,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP775.TXT,1
-850,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP850.TXT,1
-852,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP852.TXT,1
-855,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP855.TXT,1
-857,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP857.TXT,1
-860,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP860.TXT,1
-861,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP861.TXT,1
-862,http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP862.TXT,1
+Note that the Windows rendering is used for the Mac code pages.  The primary
+difference is the use of the private +AGA-0xF8FF+AGA code (which renders as an Apple
+logo on macs but as garbage on other operating systems).  It may be desirable
+to fall back to the behavior, in which case the files are under APPLE and not
+MICSFT.  This affects codepages 10000, 10006, 10007, 10029, 10079, 10081
+
+The numbering scheme for the +AGA-ISO-8859-X+AGA series is +AGA-28590 +- X+AGA:
+
++ACMAIw Generated Codepages
+
+The following codepages are available in .NET on Windows:
+
+- 708   Arabic (ASMO 708)
+- 720   Arabic (Transparent ASMO)+ADs Arabic (DOS)
+- 858   OEM Multilingual Latin 1 +- Euro symbol
+- 870   IBM EBCDIC Multilingual/ROECE (Latin 2)+ADs IBM EBCDIC Multilingual Latin 2
+- 1047  IBM EBCDIC Latin 1/Open System
+- 1140  IBM EBCDIC US-Canada (037 +- Euro symbol)+ADs IBM EBCDIC (US-Canada-Euro)
+- 1141  IBM EBCDIC Germany (20273 +- Euro sym
