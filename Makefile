@@ -5,6 +5,7 @@ TARGET=cptable.js
 AUXTARGETS=cputils.js cpexcel.js sbcs.js
 DISTFULL_A=cpexcel sbcs
 DISTFULL_B=cptable
+DISTFULL_M=cpexcel
 CMDS=
 #DISTBITS=iso2022.js
 DISTBITS=
@@ -28,6 +29,7 @@ js: make.sh codepage.md ## Build all output targets
 	bash make.sh <(awk -F, '$$3=="1"' pages.csv) sbcs.js cptable
 	bash make.sh excel.csv cpexcel.js cptable
 	bash make.sh pages.csv cptable.js cptable
+	bash make_esm.sh excel.csv cpexcel.mjs
 	#node iso2022/make_iso2022.njs > iso2022.js
 	make cputils.js
 
@@ -43,12 +45,13 @@ dist: $(TARGET) $(AUXTARGETS) ## Copy files for distribution
 	cp $(TARGET) $(AUXTARGETS) LICENSE dist/
 	for i in $(DISTFULL_A); do cat $$i.js cputils.js | sed "s#require('./cptable')#cptable#" > dist/$$i.full.js; done
 	for i in $(DISTFULL_B); do cat $$i.js $(DISTBITS) cputils.js | sed "s#require('./cptable')#cptable#" > dist/$$i.full.js; done
+	for i in $(DISTFULL_M); do cat $$i.mjs cputils.mjs | sed "s#require('./cptable')#cptable#" > dist/$$i.full.mjs; done
 
 ## Testing
 
 .PHONY: test mocha
 test mocha: $(TARGET) baseline ## Run test suite
-	mocha -R spec -t 20000
+	./node_modules/.bin/mocha -R spec -t 20000
 
 .PHONY: ctest
 ctest: ## Build browser test (into ctest/ subdirectory)
